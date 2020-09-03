@@ -1,0 +1,43 @@
+
+body {
+    font-family: 'Roboto Condensed', sans-serif;
+    padding: 20px 40px; 
+    background-color: whitesmoke;
+  }
+
+  input{
+    font-family: 'Roboto Condensed', sans-serif;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .card{
+    margin:1rem;
+    padding: 1rem;
+    background-color: white;
+    text-align: start;
+  }
+
+  table{
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th{
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }

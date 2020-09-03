@@ -1,0 +1,22 @@
+.card{
+    .card-header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+    .card-body{
+        ul{
+            list-style: none;
+            margin-bottom: 1rem;
+            li{
+                text-align: start;
+                padding: 5px;
+                span{
+                    margin-left: 5px;
+                    font-weight: bold;
+                }
+            }
+        }
+        
+    }
+}
