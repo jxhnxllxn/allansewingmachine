@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import { Link } from 'react-router-dom';
 import FormInput from '../../../components/form-input/form-input'
 
 const Product = () => {
@@ -23,6 +22,7 @@ const Product = () => {
                     <h3>Manage products</h3>
                     <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" />
                 </div>
+                <button className="addButton">Add Product</button>
                 <table>
                     <tbody>
                     <tr>

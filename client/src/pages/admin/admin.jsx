@@ -14,14 +14,12 @@ import Help from "./help/help";
 import './admin.scss';
 
 
-const Admin = ({match,history}) => {
-    console.log(history)
-
+const Admin = ({match}) => {
     return (
         <div className="admin">
             <SideNav />
             <Switch>
-                <Route path={`${match.path}/dashboard`} component={Dashboard} exact />
+                <Route path={`${match.path}/`} component={Dashboard} exact />
                 <Route path={`${match.path}/notification`} component={Notification} exact/>
                 <Route path={`${match.path}/product`} component={Product} exact/>
                 <Route path={`${match.path}/collection`} component={Collection} exact/>

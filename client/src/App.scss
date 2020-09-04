@@ -2,7 +2,7 @@
 body {
     font-family: 'Roboto Condensed', sans-serif;
     padding: 20px 40px; 
-    background-color: whitesmoke;
+    background-color: #f0f2f5;
   }
 
   input{
@@ -23,21 +23,28 @@ body {
   .card{
     margin:1rem;
     padding: 1rem;
-    background-color: white;
+    background-color: #FFFFFF;
     text-align: start;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
   }
 
   table{
     border-collapse: collapse;
     width: 100%;
   }
+  tbody{
+    Loading{
+      transform: translate(-50%,-50%);
+    }
+  }
 
   td, th{
-    border: 1px solid #dddddd;
+    border: 1px solid #E8E4C9;
     text-align: left;
     padding: 8px;
   }
 
   tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #E8E4C9;
   }

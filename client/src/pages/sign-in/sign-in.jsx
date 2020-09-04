@@ -28,7 +28,7 @@ import './sign-in.scss';
         }
 
         if(isAuthenticated && isAdmin === 'admin' && !loading){
-            return <Redirect to={{pathname:"/admin/dashboard"}}/>
+            return <Redirect to={{pathname:"/admin"}}/>
         }
         if (isAuthenticated && isAdmin === 'user' && !loading) {
             return <Redirect to="/cart"/>

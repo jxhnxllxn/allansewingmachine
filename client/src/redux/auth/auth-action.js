@@ -71,16 +71,16 @@ export const login = (email,password) => async dispatch => {
         dispatch(loadUser());
 
     } catch (err) {
-        const errors = err.response.data.error.split(',');
-        console.log(errors)
-        if(errors){
-           errors.forEach(error => dispatch(setAlert(error,'danger')))
-        }
-        dispatch({
-            type: AuthActionTypes.LOGIN_FAIL
-        });
-        dispatch(logout());
+        // const errors = err.response.data.error.split(',');
         console.log(err)
+        // if(errors){
+        //    errors.forEach(error => dispatch(setAlert(error,'danger')))
+        // }
+        // dispatch({
+        //     type: AuthActionTypes.LOGIN_FAIL
+        // });
+        // dispatch(logout());
+        // console.log(err)
     }
 }
 

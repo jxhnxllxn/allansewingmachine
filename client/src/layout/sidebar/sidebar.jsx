@@ -11,7 +11,7 @@ const sidebar = ({logout,isAdmin,isAuthenticated}) => {
         <div className="profile_info">
             <img src={require('../../../src/assets/img/brand.png')} className="profile_image" alt="" />
         </div>
-        <NavLink to="/admin/dashboard" className="option">Dashboard</NavLink>
+        <NavLink exact to="/admin" className="option">Dashboard</NavLink>
         <NavLink to="/admin/orders" className="option">Orders</NavLink>
         <NavLink to="/admin/collection" className="option">Collection</NavLink>
 
