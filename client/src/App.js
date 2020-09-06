@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 //redux
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import {store,persistore} from "./redux/store";
 import { loadUser } from "./redux/auth/auth-action";
 import AdminRoute from "./components/routing/AdminRoute";
 
@@ -33,6 +34,7 @@ const App = () => {
   return (
   <Provider store={store}>
     <Router>
+    <PersistGate persistor={persistore}>
     <Fragment>
     <Header/>
         <Alert />
@@ -46,6 +48,7 @@ const App = () => {
         </Switch>
           
     </Fragment>
+    </PersistGate>
     </Router>
   </Provider>
 )};

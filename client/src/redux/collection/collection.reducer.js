@@ -17,7 +17,7 @@ export default function(state = initialState, action){
         case CollectionActionTypes.ADD_SUCCESS:
             return {
                 ...state,
-                collections:payload,
+                collections:[...state.collections, payload.data],
                 loading:false
             }
         case CollectionActionTypes.ADD_FAIL:

@@ -10,33 +10,39 @@ import './collection.scss'
 
 const Collection = ({addCollection,getCollections,collection:{collections,loading}}) => {
 
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        setData(getCollections())
-      }, []);
-
-    const tableData = collections.map(col => (
-        <tr key={col._id}>
-            <td>{col.collectionName}</td>
-            <td>{col.collectionPhoto}</td>
-            <td>view | delete</td>
-        </tr>
-    ))
+    const [modalData, setModalData] = useState(null);
 
     const [state,setState] = useState({
         searchInput:'',
         collectionName:'',
+        confirmAction:'',
         collectionFile:null,
-    })
+    });
 
-
+    useEffect(() => {
+        getCollections()
+      }, []);
+      
     const modalRef = useRef();
-    const openModal = () => {
+    const openModal = (data) => {
+        setModalData(data);
         modalRef.current.openModal()
     }
+    const closeModal = () => {
+        modalRef.current.closeModal()
+    }
+  
+    const tableData = collections.map(col => (
+        <tr key={col._id}>
+            <td>{col.collectionName}</td>       
+            <td>{col.collectionPhoto}</td>
+            {/* <td><img src={require(`../../../../src/assets/img/${col.collectionPhoto}`)} alt={col.collectionPhoto}/></td> */}
+            <td>view | <button onClick={() => openModal(col)}>Delete</button></td>
+        </tr>
+    ));
 
-    const {searchInput,collectionName,collectionFile} = state;
+
+    const {searchInput,collectionName,collectionFile,confirmAction} = state;
     const onChange = e => setState({...state,[e.target.name]:e.target.value});
     const onChangeFile = e => setState({...state,[e.target.name]:e.target.files[0]});
 
@@ -44,10 +50,8 @@ const Collection = ({addCollection,getCollections,collection:{collections,loadin
         let data = new FormData();
         data.append('file',collectionFile);
         data.set('collectionName',collectionName);
-        console.log(data)
-
         e.preventDefault();
-           addCollection(data);
+        addCollection(data);
     
     }
 
@@ -58,7 +62,7 @@ const Collection = ({addCollection,getCollections,collection:{collections,loadin
                 <form action="" encType="multipart/form-data" onSubmit={e => onSubmit(e)}>
                     <FormInput  type="text" name="collectionName" value={collectionName} onChange={e => onChange(e)} label="Collection Name" required/>
                     <FormInput type="file" name="collectionFile" onChange={e => onChangeFile(e)}  required />
-                    <CustomButton type="submit" value="Submit">Add</CustomButton>
+                    <CustomButton buttonType="primary" type="submit">Add</CustomButton>
                 </form>      
             </div>
 
@@ -67,7 +71,7 @@ const Collection = ({addCollection,getCollections,collection:{collections,loadin
                     <h3>Manage collection</h3>
                     <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" />
                 </div>
-                <button className="addButton" onClick={openModal}>Add Collection</button>
+                <CustomButton buttonType="primary" onClick={openModal}>Add Collection</CustomButton>
                 
                 {loading ? <Loading /> : 
                     <table>
@@ -84,12 +88,24 @@ const Collection = ({addCollection,getCollections,collection:{collections,loadin
                         
                     </table>
                 }
-
                 <Modal ref={modalRef}>
-                   <h2>Add Collection</h2>
-                   <form>
-                        <h2>hello</h2>
-                   </form>
+    
+                {modalData && <Fragment>
+                    <h2>Are you sure you want to delete {modalData.collectionName} collection?</h2>
+                    <br/>
+                    <p>This action cannot be undone. This will permanently delete the {modalData.collectionName} collection, and all product under the collection.</p>
+                    <br/>
+                    <p>Please type <b>rdg/{modalData.collectionName}</b></p>
+                    <form>
+                        <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/>
+                        <div className="form-ation">
+                            <CustomButton buttonType="danger" disabled={Boolean(confirmAction !== `rdg/${modalData.collectionName}`)}>Delete</CustomButton>
+                            <CustomButton buttonType="default" onClick={closeModal}>Cancel</CustomButton>
+                        </div>
+                    </form>
+                    
+                </Fragment>}
+                   
                </Modal> 
 
             </div>
