@@ -9,5 +9,5 @@ export const CollectionActionTypes = {
     UPDATE_FAIL:'UPDATE_FAIL',
     DELETE_SUCCESS:'DELETE_SUCCESS',
     DELETE_FAIL:'DELETE_FAIL',
-
+    CLEAR_ERRORS:'CLEAR_ERRORS'
 }

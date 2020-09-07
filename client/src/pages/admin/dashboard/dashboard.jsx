@@ -73,7 +73,7 @@ const Dashboard = () => {
 
             <div className="card">
                 <div className="table-header">
-                    <h3>Manage orders</h3>
+                    <h2>Manage orders</h2>
                     <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" />
                 </div>
                 <table>

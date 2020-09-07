@@ -2,6 +2,7 @@ const path = require('path');
 const errorResponse = require('../../utils/errorResponse.util');
 const asyncHandler = require('../../middlewares/async.middleware');
 const Collection = require('../../models/product/Collection.model');
+const fs = require('fs')
 
 // @desc    get all Collection
 // @route   GET /api/v1/Collection
@@ -48,20 +49,28 @@ exports.updateCollection = asyncHandler (async (req,res,next)=>{
 });
 
 // @desc    delete Collection
-// @route   DELETE /api/v1/Collection/:id
+// @route   DELETE /api/v1/collection/:id
 // @access  Private
 exports.deleteCollection = asyncHandler (async (req,res,next)=>{
     const collection = await Collection.findById(req.params.id);
+    console.log(collection)
     
     if(!collection){
         return next(new errorResponse(`Collection not found with ID of ${req.params.id}`,404));
     }
-    
+
+    fs.unlink(`${process.env.FILE_UPLOAD_PATH}/${collection.collectionPhoto}`, async err => {
+      if (err) {
+        console.error(err);
+        return next(new errorResponse(`Problem with file deletion`, 500));
+      }
+  
     collection.remove();
 
     res
         .status(200)
         .json({success:true,data:collection});
+    });
 
 });
 

@@ -26,6 +26,14 @@ export default function(state = initialState, action){
                 ...payload,
                 loading:false
             }
+        case CollectionActionTypes.DELETE_SUCCESS:
+            return {
+                ...state,
+                collections: state.collections.filter(collection => collection._id !== payload.data._id),
+                loading:false
+            }
+        case CollectionActionTypes.CLEAR_ERRORS:
+            return{}
         default:
             return state
     }

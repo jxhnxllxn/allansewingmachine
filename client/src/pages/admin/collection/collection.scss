@@ -1,3 +1,15 @@
+.admin-collection{  
+    display: grid;
+    grid-template-columns:[full-start] minmax(2rem,1fr) [center-start] repeat(6, [col-start] minmax(min-content,14rem)[col-end]) [center-end] minmax(2rem,1fr) [full-start] ;
+    .add-collection{
+        grid-column: full-start / full-end;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+    }
+    .table-collection{
+        grid-column: full-start / full-end;
+    }
+}
 .card{
     display: flex;
     flex-direction: column;
@@ -9,6 +21,10 @@
     
 }
 .collectionPhoto{
-    height: 3rem;
-    width: 3rem;
+    height: 4rem;
+    width: 6rem;
+}
+.floatRight{
+    display: flex;
+    justify-content: flex-end;
 }

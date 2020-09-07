@@ -77,7 +77,7 @@ import { Redirect, Link } from 'react-router-dom';
             required
             autoComplete={'autocomplete'}
           />
-          <CustomButton type='submit'>Sign Up</CustomButton>
+          <CustomButton buttonType="primary" type='submit'>Sign Up</CustomButton>
         </form>
         
         <span className="signIn">Already have an account sign in <Link style={{textDecoration:'underline'}} to='/signin'>here</Link></span>

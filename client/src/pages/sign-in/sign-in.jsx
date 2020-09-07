@@ -42,7 +42,7 @@ import './sign-in.scss';
                 <form onSubmit={e => onSubmit(e)}>
                     <FormInput type="email" name="email" value={email} onChange={e => onChange(e)} label="email" required/>
                     <FormInput type="password" autoComplete={'autocomplete'} name="password" value={password} onChange={e => onChange(e)} label="password" required/>
-                    {loading ? (<Loading />):(<CustomButton type="submit" value="Submit">Sign In</CustomButton>)}
+                    {loading ? (<Loading />):(<CustomButton type="submit" buttonType="primary" value="Submit">Sign In</CustomButton>)}
                 </form>
 
                 <span className="signUp">Don't have account register <Link style={{textDecoration:'underline'}} to='/signup'>here</Link></span>
