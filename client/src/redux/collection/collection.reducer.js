@@ -32,8 +32,6 @@ export default function(state = initialState, action){
                 collections: state.collections.filter(collection => collection._id !== payload.data._id),
                 loading:false
             }
-        case CollectionActionTypes.CLEAR_ERRORS:
-            return{}
         default:
             return state
     }

@@ -21,6 +21,7 @@ body {
   }
 
   .card{
+    position: relative;
     margin:1rem;
     padding: 1rem;
     background-color: #FFFFFF;
@@ -51,4 +52,18 @@ body {
 
   .flex{
     display: flex;
+  }
+
+  #myProgress {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    width: 100%;
+    background-color: grey;
+  }
+  
+  #myBar {
+    width: 1%;
+    height: 7px;
+    background-color: green;
   }

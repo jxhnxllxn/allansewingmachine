@@ -16,7 +16,6 @@ import Admin from "./pages/admin/admin";
 import NotFound from "./pages/notfound/notfound";
 import CollectionItem from "./components/collection-item/collection-item";
 import Header from "./layout/header/header";
-import Alert from "./shared/alert/alert";
 
 
 import './App.scss';
@@ -37,7 +36,6 @@ const App = () => {
     <PersistGate persistor={persistore}>
     <Fragment>
     <Header/>
-        <Alert />
         <Switch>
           <Route exact path='/' component={CollectionItem}/>
           <Route path='/shop' component={Shop}/>

@@ -64,13 +64,14 @@ exports.deleteCollection = asyncHandler (async (req,res,next)=>{
         console.error(err);
         return next(new errorResponse(`Problem with file deletion`, 500));
       }
-  
+    });
+
+    
     collection.remove();
 
     res
         .status(200)
         .json({success:true,data:collection});
-    });
 
 });
 
@@ -96,16 +97,6 @@ exports.createCollection = asyncHandler(async (req, res, next) => {
             new errorResponse('No files were uploaded', 404)
         );
     }
-    
-    // Make sure user is collection owner
-    // if (collection.user.toString() !== req.user.id && req.user.role !== 'admin') {
-    //   return next(
-    //     new errorResponse(
-    //       `User ${req.params.id} is not authorized to update this collection`,
-    //       401
-    //     )
-    //   );
-    // }
   
     const file = req.files['file'];
     // Make sure the image is a photo
@@ -132,7 +123,9 @@ exports.createCollection = asyncHandler(async (req, res, next) => {
         return next(new errorResponse(`Problem with file upload`, 500));
       }
 
-      const collect = await Collection.create({ collectionName:req.body.collectionName,collectionPhoto:file.name});
+    });
+
+    const collect = await Collection.create({ collectionName:req.body.collectionName,collectionPhoto:file.name});
       console.log(collect)
       // await Collection.findByIdAndUpdate(req.params.id, { photo: file.name });
   
@@ -141,5 +134,4 @@ exports.createCollection = asyncHandler(async (req, res, next) => {
         data: collect
         // data: file.name
       });
-    });
 });  

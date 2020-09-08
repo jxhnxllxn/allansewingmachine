@@ -1,0 +1,32 @@
+.alertContainer{
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 20rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    .alert{
+        z-index: 1;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+        color: #ffffff;
+        display: inline-block;
+        padding: 8px;
+        margin: 8px;
+        border-radius: 5px;
+        text-align: center;
+            -webkit-animation: slide-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+                    animation: slide-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        
+    }
+    .alert-danger{
+        // background-color: #be0029;
+        background-color: rgba(#be0029, .9);
+    }
+    .alert-success{
+        // background-color: #be0029;
+        background-color: rgba(green, .9);
+    }
+}
