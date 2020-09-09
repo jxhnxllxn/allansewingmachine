@@ -1,4 +1,4 @@
-import { CollectionActionTypes } from "./collection.types";
+import { CollectionActionTypes } from "./collection-types";
 
 const initialState = {
     loading:true,

@@ -1,9 +1,14 @@
-.sk-chase {
+.loadingContainer{
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+  .sk-chase {
     width: 40px;
     height: 40px;
     position: relative;
     animation: sk-chase 2.5s infinite linear both;
-  }
+  } 
+}
   
   .sk-chase-dot {
     width: 100%;

@@ -9,7 +9,7 @@ export const loadUser = () => async dispatch => {
     }
     
     try {
-        const res = await axios.get('/auth/me');
+        const res = await axios.get('/api/auth/me');
         dispatch({
             type:AuthActionTypes.USER_LOADED,
             payload:res.data,
@@ -32,7 +32,7 @@ export const register = ({name,email,password}) => async dispatch => {
     const body = JSON.stringify({name,email,password});
 
     try {
-        const res = await axios.post('/auth/register',body,config);
+        const res = await axios.post('/api/auth/register',body,config);
 
         dispatch({
             type: AuthActionTypes.REGISTER_SUCCESS,
@@ -62,7 +62,7 @@ export const login = (email,password) => async dispatch => {
     const body = JSON.stringify({email,password});
 
     try {
-        const res = await axios.post('/auth/login',body,config);
+        const res = await axios.post('/api/auth/login',body,config);
 
         dispatch({  
             type: AuthActionTypes.LOGIN_SUCCESS,
@@ -86,6 +86,6 @@ export const login = (email,password) => async dispatch => {
 
 //logout
 export const logout = () => async dispatch => {
-    await axios.get('/auth/logout');
+    await axios.get('/api/auth/logout');
     dispatch({type: AuthActionTypes.LOGOUT})
 }

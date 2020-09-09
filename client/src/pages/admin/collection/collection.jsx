@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, Fragment } from 'react'
 import {connect} from 'react-redux'
-import { addCollection, getCollections, deleteCollection } from "../../../redux/collection/collection.action"; 
+import { addCollection, getCollections, deleteCollection } from "../../../redux/collection/collection-action"; 
 import PropTypes from "prop-types"
 import Loading from "../../../shared/loading/loading";
 import FormInput from '../../../components/form-input/form-input'
@@ -11,6 +11,7 @@ import './collection.scss'
 const Collection = ({collection:{collections,loading},addCollection,getCollections,deleteCollection}) => {
 
     const [modalData, setModalData] = useState(null);
+    
 
     const [state,setState] = useState({
         searchInput:'',
@@ -38,7 +39,7 @@ const Collection = ({collection:{collections,loading},addCollection,getCollectio
         <tr key={col._id}>
             <td>{col.collectionName}</td>       
             <td>{col.collectionPhoto}</td>
-            {/* <td><img className="collectionPhoto" src={require(`../../../../../public/uploads/${col.collectionPhoto}`)} alt={col.collectionPhoto}/></td> */}
+            {/* <td><img className="collectionPhoto" src={`../../../../../public/uploads/${col.collectionPhoto}`} alt={col.collectionPhoto}/></td> */}
             <td>view | <button onClick={() => openModal(col)}>Delete</button></td>
         </tr>
     ));
@@ -49,12 +50,14 @@ const Collection = ({collection:{collections,loading},addCollection,getCollectio
     const onChangeFile = e => setState({...state,[e.target.name]:e.target.files[0]});
 
     const handleAddCollection = async e => {
+                
         // console.log(e)
         e.preventDefault();
         let fd = new FormData();
         fd.append('file',collectionFile);
         fd.set('collectionName',collectionName);
         addCollection(fd);
+        
     }
     const handleDeleteCollection = async e => {
         e.preventDefault();
@@ -68,7 +71,7 @@ const Collection = ({collection:{collections,loading},addCollection,getCollectio
                 
                 <div className="card">
                     <div id="myProgress">
-                        <div id="myBar"></div>
+                        <div id="myBar" style={{width:"20%"}}></div>
                     </div>
 
                     <h3>Add collection</h3>          
@@ -95,7 +98,7 @@ const Collection = ({collection:{collections,loading},addCollection,getCollectio
                     <CustomButton buttonType="primary" onClick={openModal}>Add Collection</CustomButton>
                 </div>
                 
-                {loading ? <Loading /> : 
+                {!loading ?  
                     <table>
                         <thead>
                             <tr>
@@ -108,7 +111,7 @@ const Collection = ({collection:{collections,loading},addCollection,getCollectio
                             {tableData}
                         </tbody>
                         
-                    </table>
+                    </table> : <Loading></Loading>
                 }
                 <Modal ref={modalRef}>
     
