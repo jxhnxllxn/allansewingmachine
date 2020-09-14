@@ -2,19 +2,53 @@ import axios from "axios";
 import { setAlert } from "../alert/alert-action";
 import { ProductActionTypes } from "./product-types";
 
+export const getProductsBySell = (dataToSubmit) => {
+    const request = axios.get('/api/product?select=productName,description,images,price&sort=-sold&limit=10')
+            .then(res => res.data);
+            return {
+                type: ProductActionTypes.GET_PRODUCT_BY_SELL,
+                payload: request
+            }
+}
+
+export const getProductsByArrival = (dataToSubmit) => {
+    const request = axios.get('/api/product?select=productName,description,images,price&sort=-createdAt&limit=10')
+            .then(res => res.data);
+            return {
+                type: ProductActionTypes.GET_PRODUCT_BY_ARRIVAL,
+                payload: request
+            }
+}
+
+export const getProductsToShop = (skip,limit,filter = [], previosState = []) => {
+    const data = {
+        limit,
+        skip,
+        filter,
+    }
+    const request = axios.get('/api/product?select=productName,description,images,price&sort=-createdAt&limit=10')
+            .then(res => res.data);
+            return {
+                type: ProductActionTypes.GET_PRODUCTS_TO_SHOP,
+                payload: request
+            }
+}
+
+
+
 
 export const getProducts = () => async dispatch => {
     axios
         .get('/api/product')
         .then(res => {
             dispatch({
-                type:ProductActionTypes.GET_COLLECTIONS_SUCCESS,
+                type:ProductActionTypes.GET_PRODUCTS_SUCCESS,
                 payload:res.data,
             })
         })
         .catch(err => {
             dispatch({
-                type: ProductActionTypes.GET_COLLECTIONS_FAIL,
+                type: ProductActionTypes.GET_PRODUCTS_FAIL,
                 payload: err.response.data
             });
         })
@@ -55,9 +89,7 @@ export const deleteProduct = (data) => dispatch => {
             dispatch({
                 type: ProductActionTypes.DELETE_SUCCESS,
                 payload: res.data,
-            }),
-            // dispatch(setAlert('Succefully uploaded','success'))
-            
+            })
         )
         .catch(err =>
             dispatch({
@@ -65,4 +97,19 @@ export const deleteProduct = (data) => dispatch => {
                 payload: err.response.data
             })
         )
-} 
+}
+
+export const getCategories = () => {
+    const request = axios.get('/api/category?select=categoryName')
+        .then(res => res.data);
+    return {
+        type: ProductActionTypes.GET_CATEGORIES,
+        payload: request
+    }
+        
+}
+
+
+export const failedAction = (data) => dispatch => {
+    // data.forEach(error => dispatch(setAlert(error,'danger',5000)))
+}

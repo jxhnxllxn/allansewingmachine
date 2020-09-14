@@ -51,16 +51,16 @@ exports.getCategory = asyncHandler(async (req,res,next) => {
 // @access  Private
 
 exports.addCategory = asyncHandler(async (req,res,next) => {
-    req.body.collections = req.params.collectionId;
+    // req.body.collections = req.params.collectionId;
 
-    const collection = await Collection.findById(req.params.collectionId);
+    // const collection = await Collection.findById(req.params.collectionId);
 
-    if(!collection){
-        return next(
-            new errorResponse(`No Collection with the id of ${req.params.id}`),
-            404
-        );
-    }
+    // if(!collection){
+    //     return next(
+    //         new errorResponse(`No Collection with the id of ${req.params.id}`),
+    //         404
+    //     );
+    // }
 
     const category = await Category.create(req.body);
 

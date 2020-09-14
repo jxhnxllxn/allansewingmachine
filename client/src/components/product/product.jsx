@@ -1,26 +1,54 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import MyButton from '../utils/button/button'
 import "./product.scss"
 
-const product = () => {
+const renderCardImage = (images) => {
+  if(images.length > 0){
+    return images[0].url
+  }else{
+    return '/images/slide2.jpg'
+  }
+}
+
+const product = (props) => {
   return (
-    <div className="product-card">
-      <div className="product-tumb">
-        <img src="https://i.imgur.com/xdbHo4E.png" alt="" />
-      </div>
-      <div className="product-details">
-        <span className="product-catagory">Women,bag</span>
-        <h4><Link to="#">Women leather bag</Link></h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, possimus nostrum!</p>
-        <div className="product-bottom-details">
-          <div className="product-price"><small>$96.00</small>$230.99</div>
-          <div className="product-links">
-            <Link to="#"><i className="fa fa-heart"></i></Link>
-            <Link to="#"><i className="fa fa-shopping-cart"></i></Link>
-          </div>
+    <div className={`card ${props.grid}`}>
+        <div className="image" style={{background:`url(${renderCardImage(props.images)})`}}>
         </div>
-      </div>
-	</div>
+
+        <div className="action_container">
+            <div className="tags">
+              <h3 className="category">{props.category.categoryName} </h3>
+              <h2 className="name">{props.productName}</h2>
+              <div className="price">Php {props.price}.00</div>
+            </div>
+        </div>
+        {
+          props.grid ? 
+            <div className="description">
+                {props.description}
+            </div>
+          :null
+        }
+        <div className="actions">
+            <div className="button_wrapp">
+              <MyButton 
+                type="default"
+                altClass="card_link"
+                title="View product"
+                linkTo={`/product/${props._id}`}
+              />
+            </div>
+            <div className="button_wrapp">
+                <MyButton 
+                  type="bag_link"
+                  runAction={()=>{
+                    console.log('add to cart')
+                  }}
+                />
+            </div>
+        </div>
+    </div>
   )
 }
 

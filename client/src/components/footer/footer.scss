@@ -1,0 +1,30 @@
+.footer{
+    background-color: #121212;
+    color: #f1f1f1;
+    .container {
+        display: flex;
+        flex-direction: column;
+        .logo{
+            align-self: center;
+        }
+        .wrapper{
+            display: flex;
+            justify-content: space-around;
+            padding: 2rem;
+            .left{
+                div > *{
+                    display: flex;
+                    margin: 5px 0;
+                    align-items: center;
+                    .icon{
+                        font-size: 18px;
+                        margin-right: 1rem;
+                    }
+                    .nfo{
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}

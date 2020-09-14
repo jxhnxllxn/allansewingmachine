@@ -1,99 +1,162 @@
 import React, { Fragment, useState } from 'react';
-import { connect } from "react-redux";
-import FormInput from '../../components/form-input/form-input';
-import CustomButton from '../../components/custom-button/custom-button';
-
-import { setAlert } from "../../redux/alert/alert-action";
+import { Link } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/auth-action";
-import PropTypes from 'prop-types'
-
+import MyButton from '../../components/utils/button/button';
+import FormField from '../../components/utils/form-field/form-field';
+import {update,generateData,isFormValid} from '../../components/utils/form-action/form-action';
 import './sign-up.scss';
-import { Redirect, Link } from 'react-router-dom';
 
 
-  const SignUp = ({auth:{isAuthenticated,loading,isAdmin},setAlert,register}) => {
-  const [formData, setformData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword:''
-  });
-  const { name, email, password, confirmPassword } = formData;
-  const onChange = e => setformData({...formData,[e.target.name]:e.target.value});
+  const SignUp = ({history}) => {
+    const dispatch = useDispatch()
+    const [formField, setFormField] = useState({
+        formError: false,
+        formSuccess:'',
+        formData:{
+            name:{
+                element:'input',
+                label:'Full name',
+                value:'',
+                config:{
+                    name:'name_input',
+                    type:'text',
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
+            },
+            email:{
+                element:'input',
+                label:'Email',
+                value:'',
+                config:{
+                    name:'email_input',
+                    type:'email',
+                },
+                validation:{
+                    required:true,
+                    email:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
+            },
+            password:{
+                element:'input',
+                label:'Password',
+                value:'',
+                config:{
+                    name:'password_input',
+                    type:'password',
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
+            },
+            confirmPassword:{
+                element:'input',
+                label:'Confirm password',
+                value:'',
+                config:{
+                    name:'confirm_password_input',
+                    type:'password',
+                },
+                validation:{
+                    required:true,
+                    confirm: 'password'
+                },
+                valid:false,
+                touched:false,
+                validationMessage:''
+            }
+        }
+    })
 
-  const onSubmit = async e => {
-    e.preventDefault();
-    if(password !== confirmPassword){
-      setAlert('password not match', 'danger')
-    }else{
-      register({name,email,password});
-  }
-  }
+    const updateForm = (element) => {
+        const newFormData = update(element,formField.formData,'register');
+        setFormField({
+            formError:false,
+            formData: newFormData,
+        })
+    }
 
-  if(isAuthenticated && isAdmin === 'admin' && !loading){
-    return <Redirect to="/admin"/>
-  }
-  if (isAuthenticated && isAdmin === 'user' && !loading) {
-      return <Redirect to="/cart"/>
-  }
+    const submitForm = async e => {
+        e.preventDefault();
+        let dataToSubmit = generateData(formField.formData,'register');
+        let formIsValid = isFormValid(formField.formData,'register');
+
+        if(formIsValid){
+            dispatch(register(dataToSubmit))
+                .then(res => {
+                if(res.payload.success){
+                    if(res.payload.isAdmin){
+                        history.push('/admin')
+                    }else{
+                        history.push('/cart')
+                    }
+                }else{
+                    setFormField({...formField,formError:true})
+                }
+                })
+                .catch(err => {
+                    console.log(err.res.data.error)
+                    setFormField({...formField,formError:true})
+                })
+        }else{
+            setFormField({...formField,formError:true})
+        }
+    }
+
 
   return (
     <Fragment>
       <div className='sign-up card'>
         <h2 className='title'>I do not have a account</h2>
         <span>Sign up with your email and password</span>
-        <form className='sign-up-form' onSubmit={e => onSubmit(e)}>
-          <FormInput
-            type='text'
-            name='name'
-            value={name}
-            onChange={e => onChange(e)}
-            label='Name'
-            required
-          />
-          <FormInput
-            type='email'
-            name='email'
-            value={email}
-            onChange={e => onChange(e)}
-            label='Email'
-            required
-          />
-          <FormInput
-            type='password'
-            name='password'
-            value={password}
-            onChange={e => onChange(e)}
-            label='Password'
-            required
-            autoComplete={'autocomplete'}
-          />
-          <FormInput
-            type='password'
-            name='confirmPassword'
-            value={confirmPassword}
-            onChange={e => onChange(e)}
-            label='Confirm Password'
-            required
-            autoComplete={'autocomplete'}
-          />
-          <CustomButton buttonType="primary" type='submit'>Sign Up</CustomButton>
+        <form onSubmit={e => submitForm(e)}>
+            <FormField
+                id={'name'}
+                formData={formField.formData.name}
+                change={(element) => updateForm(element)}
+            />
+            <FormField
+                id={'email'}
+                formData={formField.formData.email}
+                change={(element) => updateForm(element)}
+            />
+            <FormField
+                id={'password'}
+                formData={formField.formData.password}
+                change={(element) => updateForm(element)}
+            />
+            <FormField
+                id={'confirmPassword'}
+                formData={formField.formData.confirmPassword}
+                change={(element) => updateForm(element)}
+            />
+
+            <MyButton onClick={submitForm} type="primary" title="Sign In" value="Submit" />
         </form>
-        
+
+        {formField.formError ?
+          <div className="error_label">
+              Please check your data
+          </div> : null
+        }
+
+
+
         <span className="signIn">Already have an account sign in <Link style={{textDecoration:'underline'}} to='/signin'>here</Link></span>
       </div>
     </Fragment>
   )
 }
 
-SignUp.propTypes = {
-  setAlert: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-
-export default connect(mapStateToProps,{setAlert,register})(SignUp);
+export default SignUp;

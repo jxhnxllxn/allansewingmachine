@@ -5,8 +5,12 @@ const errorHandler = (err, req, res, next) => {
     let error = { ...err };
 
     error.message = err.message
-    console.log(err);
+    // console.log(err);
     
+    if(err.name === "Unauthorized"){
+        const message = 'Unauthorizied to this route$';
+        error = new ErrorResponse(message,401);
+    }
 
     //Mongoose bad Object ID
     if(err.name === "CastError"){

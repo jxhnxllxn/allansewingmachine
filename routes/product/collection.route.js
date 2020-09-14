@@ -12,15 +12,10 @@ const {
 const Collection = require('../../models/product/Collection.model')
 const advanceResults = require('../../middlewares/advaceResult.middleware');
 
-// Includes other resources routers
-const categoryRouter = require('../../routes/product/category.route');
 
 const router = express.Router();
 
 const {protect,authorize} = require('../../middlewares/auth.middleware');
-
-//Re-routes other resource routers
-router.use('/:collectionId/category',categoryRouter)
 
 router
   .route('/:id/photo')
@@ -28,7 +23,7 @@ router
 
 router
   .route('/')
-  .get(advanceResults(Collection,'categories'), getCollections)
+  .get(advanceResults(Collection,['categories']), getCollections)
   .post(protect,authorize('admin'),createCollection);
 
 router

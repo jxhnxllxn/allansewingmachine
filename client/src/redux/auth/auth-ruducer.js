@@ -3,9 +3,9 @@ import { AuthActionTypes } from "./auth-types";
 const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: false,
-    loading:true,
-    isAdmin:'null',
-    user:null,
+    isAdmin:false,
+    data:null,
+    loading:true
 }
 
 export default function(state = initialState, action){
@@ -14,10 +14,8 @@ export default function(state = initialState, action){
         case AuthActionTypes.USER_LOADED:
             return{
                 ...state,
-                isAdmin:payload.data.role,
-                user:payload.data,
-                isAuthenticated:true,
-                loading:false,
+                ...payload,
+                loading:false
             }
 
         case AuthActionTypes.LOGIN_SUCCESS:
@@ -26,8 +24,7 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 ...payload,
-                isAuthenticated:true,
-                loading:false,
+                loading:false
             }
 
         case AuthActionTypes.REGISTER_FAIL:
@@ -39,8 +36,9 @@ export default function(state = initialState, action){
                 ...state,
                 token:null,
                 isAuthenticated:false,
-                loading:false,
-                user:null,
+                data:null,
+                isAdmin:null,
+                loading:false
             }
     
         default:

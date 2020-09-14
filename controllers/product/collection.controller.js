@@ -5,7 +5,7 @@ const Collection = require('../../models/product/Collection.model');
 const fs = require('fs')
 
 // @desc    get all Collection
-// @route   GET /api/v1/Collection
+// @route   GET /api/Collection
 // @access  Private
 exports.getCollections = asyncHandler (async (req,res,next)=>{
 
@@ -16,7 +16,7 @@ exports.getCollections = asyncHandler (async (req,res,next)=>{
 });
 
 // @desc    get single Collection
-// @route   GET /api/v1/Collection/:id
+// @route   GET /api/Collection/:id
 // @access  Private
 exports.getCollection = asyncHandler (async (req, res, next)=>{
     const collection = await Collection.findById(req.params.id).populate('categories');
@@ -31,7 +31,7 @@ exports.getCollection = asyncHandler (async (req, res, next)=>{
 });
 
 // @desc    update Collection
-// @route   PUT /api/v1/Collection/:id
+// @route   PUT /api/Collection/:id
 // @access  Private
 exports.updateCollection = asyncHandler (async (req,res,next)=>{
 
@@ -48,13 +48,49 @@ exports.updateCollection = asyncHandler (async (req,res,next)=>{
 
 });
 
+// exports.updateCollectionPhoto = asyncHandler(async(req,res,next) => {
+//   const collection = await Collection.findById(req.params.id);
+//   if (!req.files || Object.keys(req.files).length === 0) {
+//         return next(
+//             new errorResponse('No files were uploaded', 404)
+//         );
+//     }
+  
+//     const file = req.files['file'];
+//     // Make sure the image is a photo
+//     if (!file.mimetype.startsWith('image')) {
+//       return next(new errorResponse(`Please upload an image file`, 400));
+//     }
+  
+//     // Check filesize
+//     if (file.size > process.env.MAX_FILE_UPLOAD) {
+//       return next(
+//         new errorResponse(
+//           `Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`,
+//           400
+//         )
+//       );
+//     }
+  
+//     // Create custom filename
+//     file.name = `photo_${new Date().getTime().toString()}${path.parse(file.name).ext}`;
+  
+//     file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
+//       if (err) {
+//         console.error(err);
+//         return next(new errorResponse(`Problem with updating photo`, 500));
+//       }
+
+//     });
+
+// });
+
 // @desc    delete Collection
-// @route   DELETE /api/v1/collection/:id
+// @route   DELETE /api/collection/:id
 // @access  Private
 exports.deleteCollection = asyncHandler (async (req,res,next)=>{
     const collection = await Collection.findById(req.params.id);
-    console.log(collection)
-    
+  
     if(!collection){
         return next(new errorResponse(`Collection not found with ID of ${req.params.id}`,404));
     }
@@ -64,21 +100,21 @@ exports.deleteCollection = asyncHandler (async (req,res,next)=>{
         console.error(err);
         return next(new errorResponse(`Problem with file deletion`, 500));
       }
+      
+      collection.remove();
+
+      res
+          .status(200)
+          .json({success:true,data:collection});
+
     });
-
-    
-    collection.remove();
-
-    res
-        .status(200)
-        .json({success:true,data:collection});
 
 });
 
 
 
 // @desc    create Collection
-// @route   POST /api/v1/Collection
+// @route   POST /api/Collection
 // @access  Private
 // exports.createCollection = asyncHandler (async (req,res,next)=>{
 //   const collect = await Collection.create(req.body);
@@ -88,7 +124,7 @@ exports.deleteCollection = asyncHandler (async (req,res,next)=>{
 // });
 
 // @desc      Upload photo for collection
-// @route     PUT /api/v1/collection/:id/photo
+// @route     PUT /api/collection/:id/photo
 // @access    Private
 exports.createCollection = asyncHandler(async (req, res, next) => {
 
@@ -122,10 +158,7 @@ exports.createCollection = asyncHandler(async (req, res, next) => {
         console.error(err);
         return next(new errorResponse(`Problem with file upload`, 500));
       }
-
-    });
-
-    const collect = await Collection.create({ collectionName:req.body.collectionName,collectionPhoto:file.name});
+      const collect = await Collection.create({ collectionName:req.body.collectionName,collectionPhoto:file.name});
       console.log(collect)
       // await Collection.findByIdAndUpdate(req.params.id, { photo: file.name });
   
@@ -134,4 +167,7 @@ exports.createCollection = asyncHandler(async (req, res, next) => {
         data: collect
         // data: file.name
       });
+
+    });
+    
 });  

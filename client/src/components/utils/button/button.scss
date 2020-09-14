@@ -1,0 +1,39 @@
+
+.my_link{
+    margin: 10px auto;
+    .link_default {
+        align-self: flex-start;
+        text-transform: uppercase;
+        padding: 10px;
+        display: table;
+        background: #e1ddc3;
+        margin-top: 10px;
+        transition: ease-out .3s;
+        &:hover{
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+        }
+    }
+    .button_primary{
+        min-width: 165px;
+        width: auto;
+        height: 40px;
+        letter-spacing: 0.5px;
+        line-height: 40px;
+        padding: 0 5px 0 5px;
+        margin: 5px;
+        font-size: 18px;
+        color: white;
+        font-family: 'Roboto Condensed', sans-serif;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        outline: none;
+        transition: ease-out .3s;
+        background-color: #2471A3 ;
+      
+        &:hover {
+          box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+        }
+      
+      }
+}

@@ -1,13 +1,15 @@
 const express = require('express');
 
 const {getProducts, getProduct, addProduct, updateProduct, deleteProduct} = require('../../controllers/product/product.controller');
+const advanceResults = require('../../middlewares/advaceResult.middleware');
+const Product = require('../../models/product/Product.model')
 
 const router = express.Router({mergeParams:true});
 
 const {protect,authorize} = require('../../middlewares/auth.middleware');
 
 router.route('/')
-    .get(getProducts)
+    .get(advanceResults(Product,['collections','category']),getProducts)
     .post(protect,authorize('admin'),addProduct)
 
 router.route('/:id')

@@ -4,23 +4,13 @@ const categorySchema = new mongoose.Schema({
    
    categoryName:{
        type:String,
-       required:[true,'Product Category name is required']
-   },
-   categoryImage:{
-       type:String,
-       required:[true,'Product  Category Image is required']
-   },
-   createdAt:{
-       type:Date,
-       default:Date.now
-   },
-   collections:{
-       type: mongoose.Schema.ObjectId,
-       ref :'Collection',
-       required:true,
+       required:[true,'Product Category name is required'],
+       unique: [1,'Prouduct name must be unique'],
    }
 },
 //virtual 
+{timestamps:true},
+
 {
     toJSON:{virtuals:true},
     toObject:{virtuals:true}

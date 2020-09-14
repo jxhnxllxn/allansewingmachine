@@ -5,7 +5,9 @@ const collectionSchema = new mongoose.Schema({
     
     collectionName:{
        type:String,
-       required:[true,'Collection name is required']
+       required:[true,'Collection name is required'],
+       unique: [1,'Prouduct name must be unique'],
+       maxlength: 100
     },
     
     collectionPhoto:{

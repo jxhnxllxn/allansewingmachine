@@ -12,20 +12,19 @@ const Category = require('../../models/product/Category.model');
 const advanceResults = require('../../middlewares/advaceResult.middleware');
 
 // Includes other resources routers
-const productRouter = require('../../routes/product/product.route');
+// const productRouter = require('../../routes/product/product.route');
 
 const router = express.Router({mergeParams:true});
 const {protect,authorize} = require('../../middlewares/auth.middleware');
 
 //Re-routes other resource routers
-router.use('/:categoryId/product',productRouter)
+// router.use('/:categoryId/product',productRouter)
+
+// router.use('/:collectionId/category',categoryRouter)
 
 router
   .route('/')
-  .get(advanceResults(Category,{
-    //middleware populate
-    path:'collections',
-    select:'collectionName'}),getCategories)
+  .get(advanceResults(Category,['collections']),getCategories)
   .post(protect,authorize('admin'),addCategory);
 
 router

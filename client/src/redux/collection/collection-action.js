@@ -2,8 +2,6 @@ import axios from "axios";
 import { setAlert } from "../alert/alert-action";
 import { CollectionActionTypes } from "./collection-types"; 
 
-
-
 export const getCollections = () => async dispatch => {
     axios
         .get('/api/collection')
@@ -22,30 +20,11 @@ export const getCollections = () => async dispatch => {
 }
 
 export const addCollection = (data) => async dispatch => {
-
-    const config = {
-        headers: {
-            'Content-Type':'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => (parseInt(Math.round((progressEvent.loaded))))
-    }
-
-    axios
-        .post('/api/collection',data,config)
-        .then(res => {
-            dispatch({
-                type: CollectionActionTypes.ADD_SUCCESS,
-                payload: res.data
-            })
-        })
-        .catch(err => {
-            const errors = err.response.data.error.split(',');
-            console.log(errors)
-            if(errors){
-                errors.forEach(error => dispatch(setAlert(error,'danger')))
-            }
-        })
-    
+    dispatch(setAlert('File Uploaded','success'));
+    dispatch({
+        type: CollectionActionTypes.ADD_SUCCESS,
+        payload: data,
+    });
 }
 
 
@@ -57,8 +36,7 @@ export const deleteCollection = (data) => dispatch => {
                 type: CollectionActionTypes.DELETE_SUCCESS,
                 payload: res.data,
             }),
-            // dispatch(setAlert('Succefully uploaded','success'))
-            
+            dispatch(setAlert('Succefully deleted','danger'))
         )
         .catch(err =>
             dispatch({
@@ -67,3 +45,7 @@ export const deleteCollection = (data) => dispatch => {
             })
         )
 } 
+
+export const failedAction = (data) => dispatch => {
+        data.forEach(error => dispatch(setAlert(error,'danger',5000)))
+}

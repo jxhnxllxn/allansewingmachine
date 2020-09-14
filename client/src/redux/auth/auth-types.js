@@ -5,6 +5,7 @@ export const AuthActionTypes = {
     LOGIN_FAIL:'LOGIN_FAIL',
     USER_LOADED:'USER_LOADED',
     AUTH_ERROR:'AUTH_ERROR',
-    LOGOUT:'LOGOUT'
+    LOGOUT:'LOGOUT',
+    AUTH_USER:'AUTH_USER'
 
 }

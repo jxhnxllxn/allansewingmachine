@@ -2,13 +2,15 @@ import React, {useState, useEffect, useRef, Fragment} from 'react'
 import {connect} from 'react-redux'
 import { getProducts, deleteProduct } from "../../../redux/product/product-action"; 
 import PropTypes from "prop-types"
-import Loading from "../../../shared/loading/loading";
+import Loading from "../../../components/loading/loading";
 
 import FormInput from '../../../components/form-input/form-input'
 import CustomButton from '../../../components/custom-button/custom-button'
-import Modal from '../../../shared/modal/modal'
+import Modal from '../../../components/modal/modal'
+import { withRouter } from 'react-router-dom';
+// import { Redirect, withRouter } from 'react-router-dom';
 
-const Product = ({product:{products,loading},getProducts,deleteProduct}) => {
+const Product = ({product:{products,loading},getProducts,deleteProduct,match,history}) => {
     const [modalData, setModalData] = useState(null);
 
     const [data, setData] = useState({
@@ -60,7 +62,7 @@ const Product = ({product:{products,loading},getProducts,deleteProduct}) => {
                     <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" />
                 </div>
                 <div className="floatRight">
-                    <CustomButton buttonType="primary" type="submit">Add Product</CustomButton>
+                    <CustomButton onClick={() => history.push(`${match.url}/add`)} buttonType="primary" type="submit">Add Product</CustomButton>
                 </div>
                 {!loading ? 
                 <table>
@@ -115,4 +117,4 @@ const mapStateToProps = state => ({
 })
 
 
-export default connect(mapStateToProps,{getProducts,deleteProduct})(Product)
+export default withRouter(connect(mapStateToProps,{getProducts,deleteProduct})(Product))

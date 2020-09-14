@@ -34,7 +34,7 @@ const advanceResults = (model,populate) => async (req, res, next) => {
         const sortBy = req.query.select.split(',').join(' ');
         query = query.sort(sortBy);
     }else{
-        query = query.sort('-createAt')
+        query = query.sort('-createdAt')
     }
 
     //pagination
@@ -47,7 +47,9 @@ const advanceResults = (model,populate) => async (req, res, next) => {
     query = query.skip(startIndex).limit(limit);
 
     if(populate){
-        query = query.populate(populate);
+        
+        populate.map(pop => query.populate(pop))
+        // query = ;
     }
 
     //execute query

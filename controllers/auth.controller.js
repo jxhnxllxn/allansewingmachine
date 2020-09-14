@@ -4,12 +4,27 @@ const asyncHandler = require('../middlewares/async.middleware');
 const sendMail = require('../utils/sendEmail.util');
 const User = require('../models/User.model');
 
+// @desc    Get current logged in user
+// @route   POST /api/auth/me
+// @access  Private
+exports.getMe = asyncHandler(async(req,res,next)=>{
+    const user = await User.findById(req.user.id).select('-password');
+
+    res
+        .status(200)
+        .json({
+            success:true,
+            isAuthenticated:true,
+            isAdmin:user.role === 'admin' ? true:false,
+            data:user
+        });
+});
 
 // @desc    Create User
 // @route   POST /api/auth/register
 // @access  Public
 exports.register = asyncHandler(async (req,res,next) => {
-    const {name, email, password, role} = req.body;
+    const {name, email, password } = req.body;
 
     //create user
     const user = await User.create({
@@ -69,20 +84,7 @@ exports.logout = asyncHandler(async(req,res,next)=>{
         });
 });
 
-// @desc    Get current logged in user
-// @route   POST /api/auth/me
-// @access  Private
-exports.getMe = asyncHandler(async(req,res,next)=>{
-    const user = await User.findById(req.user.id).select('-password');
 
-    res
-        .status(200)
-        .json({
-            success:true,
-            data:user,
-            isAdmin:user.role
-        });
-});
 
 // @desc    Update user detail
 // @route   GET /api/auth/updatedetail
@@ -224,9 +226,10 @@ const sendTokenResponse = (user,statusCode,res) => {
         .status(statusCode)
         .cookie('token',token,options)
         .json({
-            user,
-            isAdmin:user.role,
             success:true,
+            isAuthenticated:true,
+            isAdmin:user.role === 'admin' ? true:false,
+            data:user,
             token
         });
 }

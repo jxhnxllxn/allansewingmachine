@@ -1,37 +1,87 @@
 import React, { useState } from 'react'
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from "react-redux";
-import  PropTypes  from "prop-types";
+import { Link } from 'react-router-dom';
+import { useDispatch } from "react-redux";
 import { login} from "../../redux/auth/auth-action";
-import FormInput from "../../components/form-input/form-input";
-import CustomButton from "../../components/custom-button/custom-button";
-import Loading from "../../shared/loading/loading";
+import MyButton from '../../components/utils/button/button';
+import FormField from '../../components/utils/form-field/form-field';
+import {update,generateData,isFormValid} from '../../components/utils/form-action/form-action';
+// import Loading from "../../components/loading/loading";
+
 import './sign-in.scss';
 
 
-    const SignIn = ({auth:{isAuthenticated,isAdmin,loading},login}) => {
+    const SignIn = ({history}) => {
+        const dispatch = useDispatch()
+        const [formField, setFormField] = useState({
+            formError: false,
+            formSuccess:false,
+            formData:{
+                email:{
+                    element:'input',
+                    label:'Email',
+                    value:'',
+                    config:{
+                        name:'email_input',
+                        type:'email',
+                    },
+                    validation:{
+                        required:true,
+                        email:true,
+                    },
+                    valid:false,
+                    touched:false,
+                    validationMessage:''
+                },
+                password:{
+                    element:'input',
+                    label:'Password',
+                    value:'',
+                    config:{
+                        name:'password_input',
+                        type:'password',
+                    },
+                    validation:{
+                        required:true,
+                    },
+                    valid:false,
+                    touched:false,
+                    validationMessage:''
+                }
+            }
+        })
 
-        const [formData, setformData] = useState({
-            email:'',
-            password:'',
-        });
-
-        const {email,password} = formData;
-
-        const onChange = e => setformData({...formData,[e.target.name]:e.target.value});
-
-        const onSubmit = async e => {
-            setformData({...formData,isLoading:true})
+        const updateForm = (element) => {
+            const newFormData = update(element,formField.formData,'login');
+            setFormField({
+                formError:false,
+                formData: newFormData,
+            })
+        }
+        const submitForm = e => {
             e.preventDefault();
-            login(email,password);
+            let dataToSubmit = generateData(formField.formData,'login');
+            let formIsValid = isFormValid(formField.formData,'login');
+            // setErrors(true)
 
-        }
-
-        if(isAuthenticated && isAdmin === 'admin' && !loading){
-            return <Redirect to={{pathname:"/admin"}}/>
-        }
-        if (isAuthenticated && isAdmin === 'user' && !loading) {
-            return <Redirect to="/cart"/>
+            if(formIsValid){
+                dispatch(login(dataToSubmit)).then(res => {
+                  if(res.payload.success){
+                      if(res.payload.isAdmin){
+                        history.push('/admin')
+                      }else{
+                        history.push('/cart')
+                      }
+                  }else{
+                    setFormField({...formField,formError:true})
+                  }
+                })
+                .catch(err => {
+                    console.log(err.response.data.error)
+                    setFormField({...formField,formError:true})
+                })
+            }else{
+                setFormField({...formField,formError:true})
+            }
         }
 
         return (
@@ -39,25 +89,30 @@ import './sign-in.scss';
                 <h2>I already have an account</h2>
                 <span>Sign in with your email and password</span>
 
-                <form onSubmit={e => onSubmit(e)}>
-                    <FormInput type="email" name="email" value={email} onChange={e => onChange(e)} label="email" required/>
-                    <FormInput type="password" autoComplete={'autocomplete'} name="password" value={password} onChange={e => onChange(e)} label="password" required/>
-                    {loading ? (<Loading />):(<CustomButton type="submit" buttonType="primary" value="Submit">Sign In</CustomButton>)}
+                <form onSubmit={e => submitForm(e)}>
+                    <FormField
+                        id={'email'}
+                        formData={formField.formData.email}
+                        change={(element) => updateForm(element)}
+                    />
+                    <FormField
+                        id={'password'}
+                        formData={formField.formData.password}
+                        change={(element) => updateForm(element)}
+                    />
+
+                    <MyButton onClick={submitForm} type="primary" title="Sign In" value="Submit" />
                 </form>
+                
+                {formField.formError ?
+                    <div className="error_label">
+                        Please check your data
+                    </div> : null
+                }
 
                 <span className="signUp">Don't have account register <Link style={{textDecoration:'underline'}} to='/signup'>here</Link></span>
             </div>
         )
     }
 
-
-SignIn.propTypes = {
-    login: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
-}
-
-const mapStateToProps = state => ({
-    auth: state.auth
-});
-
-export default connect(mapStateToProps,{ login })(SignIn);
+export default SignIn;

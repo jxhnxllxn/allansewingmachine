@@ -1,69 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    font-family: 'Roboto Condensed', sans-serif;
-    padding: 20px 40px; 
-    background-color: #f0f2f5;
-  }
+  font-family: 'Roboto Condensed', sans-serif;
+  background-color: #f0f2f5;
+}
 
-  input{
-    font-family: 'Roboto Condensed', sans-serif;
-  }
-  
-  a {
-    text-decoration: none;
-    color: black;
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+.page_container{
+  padding:30px 20px;
+}
+.container{
+  padding: 20px 40px
+}
 
-  .card{
-    position: relative;
-    margin:1rem;
-    padding: 1rem;
-    background-color: #FFFFFF;
-    text-align: start;
-    border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-  }
+input{
+  font-family: 'Roboto Condensed', sans-serif;
+}
+.main_loader {
+  text-align: center;
+  margin-top: 100px;
+}
 
-  table{
-    border-collapse: collapse;
-    width: 100%;
-  }
-  tbody{
-    Loading{
-      transform: translate(-50%,-50%);
-    }
-  }
 
-  td, th{
-    border: 1px solid #E8E4C9;
-    text-align: left;
-    padding: 8px;
-  }
+a {
+text-decoration: none;
+color:inherit;
+}  
 
-  tr:nth-child(even) {
-    background-color: #E8E4C9;
-  }
+.card{
+position: relative;
+margin:1rem;
+padding: 2rem 1rem 1rem 1rem;
+background-color: #FFFFFF;
+text-align: start;
+border-radius: 2px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+overflow: hidden;
+}
 
-  .flex{
-    display: flex;
-  }
+table{
+border-collapse: collapse;
+width: 100%;
+}
+tbody{
+Loading{
+transform: translate(-50%,-50%);
+}
+}
 
-  #myProgress {
-    position: absolute;
-    left: 0;
-    bottom: 0px;
-    width: 100%;
-    background-color: grey;
-  }
-  
-  #myBar {
-    width: 1%;
-    height: 7px;
-    background-color: green;
-  }
+td, th{
+border: 1px solid #E8E4C9;
+text-align: left;
+padding: 8px;
+}
+
+tr:nth-child(even) {
+background-color: #E8E4C9;
+}
+
+.flex{
+display: flex;
+}
+
+.tag{
+background: #82828287;
+color: #ffffff;
+padding: 0px 20px;
+text-transform: uppercase;
+display: table;
+}
+
+.tag.title {
+font-size: 50px;
+font-weight: 700;
+}
+
+.tag.low_title {
+font-size: 30px;
+font-weight: 300;
+margin-top: 10px;
+}
+
+.title {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 25px;
+  margin-bottom: 50px;
+}
+
+
