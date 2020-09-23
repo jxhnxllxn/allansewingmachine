@@ -1,15 +1,21 @@
+.grid_bars{
+  display: flex;
+  width: 100%;
+  .image{
+    margin-right: 1rem;
+    width: 500px;
+  }
+}
+
 .image {
-  height: 211px;
+  height: 200px;
   border: none;
-  background-size: cover;
   background-repeat: no-repeat;
 }
+
 .action_container{
   .tags{
-    display: flex;
-    flex-direction: column;
     margin: 5px 0;
-
   }
 }
 .actions{

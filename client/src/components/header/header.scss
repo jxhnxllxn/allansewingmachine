@@ -1,11 +1,16 @@
 .header {
-    height: 70px;
+    height: 80px;
     width: 100%;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
     font-size: 18px;
-    // background: w;
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    background-color: rgba(#f0f2f5, .8);
+    padding: 0 50px;
+
   
     .logo {
       height: 120%;

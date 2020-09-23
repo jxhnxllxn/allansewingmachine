@@ -127,47 +127,11 @@ exports.deleteCollection = asyncHandler (async (req,res,next)=>{
 // @route     PUT /api/collection/:id/photo
 // @access    Private
 exports.createCollection = asyncHandler(async (req, res, next) => {
+  
+  const collection = await Collection.create(req.body);
 
-    if (!req.files || Object.keys(req.files).length === 0) {
-        return next(
-            new errorResponse('No files were uploaded', 404)
-        );
-    }
-  
-    const file = req.files['file'];
-    // Make sure the image is a photo
-    if (!file.mimetype.startsWith('image')) {
-      return next(new errorResponse(`Please upload an image file`, 400));
-    }
-  
-    // Check filesize
-    if (file.size > process.env.MAX_FILE_UPLOAD) {
-      return next(
-        new errorResponse(
-          `Please upload an image less than ${process.env.MAX_FILE_UPLOAD}`,
-          400
-        )
-      );
-    }
-  
-    // Create custom filename
-    file.name = `photo_${new Date().getTime().toString()}${path.parse(file.name).ext}`;
-  
-    file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
-      if (err) {
-        console.error(err);
-        return next(new errorResponse(`Problem with file upload`, 500));
-      }
-      const collect = await Collection.create({ collectionName:req.body.collectionName,collectionPhoto:file.name});
-      console.log(collect)
-      // await Collection.findByIdAndUpdate(req.params.id, { photo: file.name });
-  
-      res.status(200).json({
-        success: true,
-        data: collect
-        // data: file.name
-      });
-
-    });
-    
+  res.status(200).json({
+      success:true,
+      data:collection
+  })
 });  

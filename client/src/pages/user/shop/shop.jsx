@@ -15,26 +15,12 @@ const Shop = () => {
     }, []);
 
     const collections = useSelector(state => state.collection.collections)
-    // const loading = useSelector(state => state.collection.loading)
-
-
-    // const data = collections && !loading ? collections : [];
-
-    // const colletionData =  data.map(({_id,collectionPhoto,...otherProps}) => (
-    //     <Collection key={_id} {...otherProps}></Collection>
-    // ))
-
-
         return (
             <div className="shop_wrapper">
-
                 <CardBlock 
                     list={collections} 
                     title="Shop"
                 />
-            {/* {
-                colletionData
-            } */}
             </div>
             
         )

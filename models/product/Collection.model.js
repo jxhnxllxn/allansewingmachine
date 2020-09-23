@@ -3,16 +3,16 @@ const mongoose = require('mongoose');
 const collectionSchema = new mongoose.Schema({
 
     
-    collectionName:{
+    name:{
        type:String,
        required:[true,'Collection name is required'],
        unique: [1,'Prouduct name must be unique'],
        maxlength: 100
     },
     
-    collectionPhoto:{
-        type:String,
-        default:'no-photo.jpg'
+    images:{
+        type: Array,
+        default:[]
     },
     
     createdAt:{

@@ -18,7 +18,7 @@ const Footer = () => {
                     <div className="left">
                         <h2>Contact information</h2>
                         <div className="business_nfo">
-                            <div className="tag">
+                            <div >
                                 <FontAwesomeIcon
                                     icon={faCompass}
                                     className="icon"
@@ -28,7 +28,7 @@ const Footer = () => {
                                     <div>0736 Purok V. Brgy. Namunga, Rosario, Batangas</div>
                                 </div>
                             </div>
-                            <div className="tag">
+                            <div >
                                 <FontAwesomeIcon
                                     icon={faPhone}
                                     className="icon"
@@ -38,7 +38,7 @@ const Footer = () => {
                                     <div>(043) 3211441 / 09175067645 / 09228189301 / 09478904024</div>
                                 </div>
                             </div>
-                            <div className="tag">
+                            <div >
                                 <FontAwesomeIcon
                                     icon={faClock}
                                     className="icon"
@@ -48,7 +48,7 @@ const Footer = () => {
                                     <div>Mon-Sat 8:00 AM - 5:00 AM</div>
                                 </div>
                             </div>
-                            <div className="tag">
+                            <div >
                                 <FontAwesomeIcon
                                     icon={faEnvelope}
                                     className="icon"

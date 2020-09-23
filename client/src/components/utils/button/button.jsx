@@ -28,11 +28,21 @@ const MyButton = props => {
                     <FontAwesomeIcon icon={faShoppingBag} className="icon" />
                     </div> 
                 break;
+            case "submit":
+                template = 
+                <button className="button_primary" type="submit"
+                >
+                    {props.title}
+                </button> 
+
+                break
             case "primary":
                 template = 
-                <button 
+                <button
                     className="button_primary"
-                    {...props.addStyle}
+                     onClick={()=>{
+                        props.runAction();
+                    }}
                 >
                     {props.title}
                 </button>

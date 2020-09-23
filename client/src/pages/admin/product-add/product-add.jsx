@@ -1,105 +1,346 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { addProduct, failedAction } from "../../../redux/product/product-action"; 
-import FormInput from '../../../components/form-input/form-input';
-import ProgressBar from '../../../components/progress-bar/progress-bar'
-import CustomButton from '../../../components/custom-button/custom-button'
-import './product-add.scss';
+import React from 'react'
+import { useDispatch} from 'react-redux'
+import { getCategories, getCollections, addProduct } from "../../../redux/product/product-action";
+import { useState } from 'react';
+import FormField from '../../../components/utils/form-field/form-field';
+import {update,generateData,isFormValid,populateOptionFields, resetFields} from '../../../components/utils/form-action/form-action';
+import MyButton from '../../../components/utils/button/button';
+import { useEffect } from 'react';
+import FileUpload from '../../../components/utils/file-upload/file-upload';
 
-const ProductAdd = ({addProduct,failedAction}) => {
-    const [uploadPercentage, setUploadPercentage] = useState(0);
-    const [data, setData] = useState({
-        productName:'',
-        productFile:null,
-        price:'',
-        stock:'',
-        category:''
-    })
+const ProductAdd = () => {
+
+    const updateFields = (newFormData) => {
+        setFormField({
+            formData: newFormData
+        })
+    }
     
-    const handleChange = e => setData({...data,[e.target.name]:e.target.value});
-    const handleChangeFile = e => setData({...data,[e.target.name]:e.target.files[0]});
+    useEffect(() => {
+        const formData = formField.formData;
+        dispatch(getCollections()).then(res =>{
+            const newFormData = populateOptionFields(formData,res.payload.data,'collections' );
+            // populateOptionFields(formData,categories,'categories');
+            updateFields(newFormData);
+        })
 
-    const {productName,productFile,price,stock,category} = data;
+        dispatch(getCategories()).then(res =>{
+            const newFormData = populateOptionFields(formData,res.payload.data,'category' );
+            // populateOptionFields(formData,categories,'categories');
+            updateFields(newFormData);
+        })
+    }, [])
 
-    const handleAddProduct = async e => {
-        e.preventDefault();
-        let fd = new FormData();
-        fd.append('file',productFile);
-        // fd.set('collectionName',collectionName);
+    const dispatch = useDispatch()
 
-        const config = {
-            headers: {
-                'Content-Type':'multipart/form-data'
+    const [formField, setFormField] = useState({
+        formError: false,
+        formSuccess:false,
+        formData:{
+            name:{
+                element:'input',
+                label:'Product name',
+                value:'',
+                config:{
+                    name:'productName_input',
+                    type:'text',
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
             },
-            onUploadProgress: progressEvent => {
-                setUploadPercentage(
-                  parseInt(
-                    Math.round((progressEvent.loaded * 100) / progressEvent.total)
-                  )
-                );
-                // Clear percentage
-                setTimeout(() => setUploadPercentage(0), 3000);
-              }
+            description:{
+                element:'textarea',
+                label:'Product description',
+                value:'',
+                config:{
+                    name:'description_input',
+                    type:'text',
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
+            },
+            price:{
+                element:'input',
+                label:'Product price',
+                value:'',
+                config:{
+                    name:'price_input',
+                    type:'number',
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
+            },
+            unit:{
+                element:'input',
+                label:'Product unit',
+                value:'',
+                config:{
+                    name:'unit_input',
+                    type:'text',
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
+            },
+            category:{
+                element:'select',
+                value:'',
+                label:'Category',
+                config:{
+                    name:'category_input',
+                    options:[]
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
+            },
+            collections:{
+                element:'select',
+                value:'',
+                label:'Collection',
+                config:{
+                    name:'collection_input',
+                    options:[]
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
+            },
+            shipping:{
+                element:'select',
+                value:'',
+                label:'Shipping',
+                config:{
+                    name:'shipping_input',
+                    options:[
+                        {key:true,value:'Yes'},
+                        {key:false,value:'No'}
+                    ]
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
+            },
+            available:{
+                element:'select',
+                value:'',
+                label:'Available',
+                config:{
+                    name:'available_input',
+                    options:[
+                        {key:true,value:'Yes'},
+                        {key:false,value:'No'}
+                    ]
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
+            },
+            publish:{
+                element:'select',
+                value:'',
+                label:'Publish',
+                config:{
+                    name:'publish_input',
+                    options:[
+                        {key:true,value:'Public'},
+                        {key:false,value:'Hidden'}
+                    ]
+                },
+                validation:{
+                    required:true,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:true
+            },
+            images:{
+                value:[],
+                validation:{
+                    required:false,
+                },
+                valid:false,
+                touched:false,
+                validationMessage:'',
+                showlabel:false
+            }
         }
+    });
+    
 
-        axios
-            .post('/api/product',fd,config)
-            .then(res => {
-                addProduct(res.data);
+    const updateForm = (element) => {
+        const newFormData = update(element,formField.formData,'product');
+        setFormField({
+            formError:false,
+            formData: newFormData,
+        })
+    }
+
+    const resetFieldHandler = () => {
+        const newFormData = resetFields(formField.formData,'product')
+        setFormField({
+            formData:newFormData,
+            formSuccess:true
+        });
+        setTimeout(()=>{
+            setFormField({
+                ...formField,
+                formSuccess:true
             })
-            .catch(err => {
-                const errors = err.response.data.error.split(',')
-                failedAction(errors)
+        },3000)
+    }
+
+    const submitForm = e => {
+        e.preventDefault();
+        let dataToSubmit = generateData(formField.formData,'product');
+        let formIsValid = isFormValid(formField.formData,'product');
+        // setErrors(true)
+
+        if(formIsValid){
+            dispatch(addProduct(dataToSubmit)).then(res =>{
+                if(res.payload.success){
+                    resetFieldHandler();
+                }else{
+                    setFormField({
+                        ...formField,
+                        formError:true
+                    })
+                }
             })
-        
-        
-        setData({...data,productName:"",price:"",stock:"",productFile:null})
-            
+        }else{
+            setFormField({...formField,formError:true})
+        }
+    }
+
+    const imagesHandler = (images) => {
+        const newFormData = {
+            ...formField.formData
+        }
+        newFormData['images'].value = images;
+        newFormData['images'].valid = true;
+
+        setFormField({
+            ...formField,
+            formData: newFormData
+        })
     }
 
     return (
-        <div className="product-add">
-            <div className="card">
-                {uploadPercentage > 0 ? <ProgressBar percentage={uploadPercentage}/> : null}
-                <h3>Add product</h3>
-                <form onSubmit={handleAddProduct}>
-                {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
-                            
-                    <FormInput label="Product Name" type="text" name="productName" value={productName} onChange={e => handleChange(e)}  required/>
-                    <FormInput type="file" name="productFile" onChange={e => handleChangeFile(e)}  required />
-                    <FormInput label="Price" type="number" name="price" value={price} onChange={e => handleChange(e)} required/>
-                    <FormInput type="number" name="stock" onChange={e => handleChange(e)} value={stock}  label="Stock" required/>
-                    <FormInput type="select" label="Select Category" name="category" value={category} handleChange={e => handleChange(e)}>
-                        {/* <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option> */}
-                    </FormInput>
-                    <select>
-  <option value="grapefruit">Grapefruit</option>
-  <option value="lime">Lime</option>
-  <option selected value="coconut">Coconut</option>
-  <option value="mango">Mango</option>
-</select>
-                    <div className="floatRight">
-                        <CustomButton buttonType="primary" type="submit">Add</CustomButton> 
-                    </div>
-                </form>
-            </div>
+        <div className="card">
+            <h1>Product Add</h1>
+            <form onSubmit={(e) => submitForm(e)}>
+
+                <FileUpload 
+                    imagesHandler={(images)=> imagesHandler(images)}
+                    reset={formField.formSuccess}
+                />
+                <FormField
+                    id={'name'}
+                    formData={formField.formData.name}
+                    change={(element) => updateForm(element)}
+                />
+                <FormField
+                    id={'description'}
+                    formData={formField.formData.description}
+                    change={(element) => updateForm(element)}
+                />
+                <FormField
+                    id={'price'}
+                    formData={formField.formData.price}
+                    change={(element) => updateForm(element)}
+                />
+                <FormField
+                    id={'unit'}
+                    formData={formField.formData.unit}
+                    change={(element) => updateForm(element)}
+                />
+                
+                <div className="form_devider"></div>
+                <FormField
+                    id={'category'}
+                    formData={formField.formData.category}
+                    change={(element) => updateForm(element)}
+                />
+                <FormField
+                    id={'collections'}
+                    formData={formField.formData.collections}
+                    change={(element) => updateForm(element)}
+                />
+                
+                <div className="form_devider"></div>
+                <FormField
+                    id={'shipping'}
+                    formData={formField.formData.shipping}
+                    change={(element) => updateForm(element)}
+                />
+                <FormField
+                    id={'available'}
+                    formData={formField.formData.available}
+                    change={(element) => updateForm(element)}
+                />
+                <FormField
+                    id={'publish'}
+                    formData={formField.formData.publish}
+                    change={(element) => updateForm(element)}
+                />
+
+                <MyButton onClick={submitForm} type="primary" title="Add product" value="Submit" />
+
+
+                
+            </form>
+
+            {formField.formSuccess ? 
+                <div className="form_success">
+                    Success
+                </div>
+            :null
+            }
+            
+            {formField.formError ?
+                <div className="error_label">
+                    Please check your data
+                </div> : null
+            }
+
         </div>
     )
 }
 
-
-ProductAdd.propTypes = {
-    addProduct: PropTypes.func.isRequired,
-    failedAction: PropTypes.func.isRequired,
-}
-
-// const mapStateToProps = state => {
-    
-// }
-
-export default connect(null,failedAction,addProduct)(ProductAdd)
+export default ProductAdd

@@ -106,7 +106,7 @@ import './sign-up.scss';
                 }
                 })
                 .catch(err => {
-                    console.log(err.res.data.error)
+                    console.log(err)
                     setFormField({...formField,formError:true})
                 })
         }else{
@@ -118,7 +118,7 @@ import './sign-up.scss';
   return (
     <Fragment>
       <div className='sign-up card'>
-        <h2 className='title'>I do not have a account</h2>
+        <h2>Do not have a account?</h2>
         <span>Sign up with your email and password</span>
         <form onSubmit={e => submitForm(e)}>
             <FormField
@@ -141,8 +141,7 @@ import './sign-up.scss';
                 formData={formField.formData.confirmPassword}
                 change={(element) => updateForm(element)}
             />
-
-            <MyButton onClick={submitForm} type="primary" title="Sign In" value="Submit" />
+            <MyButton runAction={e => submitForm(e)} type="submit" title="Sign Up" value="Submit" />
         </form>
 
         {formField.formError ?

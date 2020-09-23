@@ -16,16 +16,14 @@ const CollapseRadio = (props) => {
     })
 
     useEffect(() => {
-        const open = () =>{
-            if(props.initState){
-                setState({
-                    ...state,
-                    open: props.initState
-                })
-            }
+        if(props.initState){
+            setState({
+                ...state,
+                open: props.initState
+            })
         }
-        open()
-    },[]);
+            
+    },[props.initState]);
 
     const handleClick = () => {
         setState({...state,open:!state.open})

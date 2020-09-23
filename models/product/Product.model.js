@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const productSchema = new mongoose.Schema({
    
-   productName:{
+   name:{
        type:String,
        required:[true,'Product Name is required'],
        unique: [1,'Prouduct name must be unique'],
@@ -18,14 +18,14 @@ const productSchema = new mongoose.Schema({
        required:[true, 'unit is required']
    },
    price:{
-       type:String,
+       type:Number,
        required:[true,'Price is required'],
        maxlength:255
    },
-   prevPrice:{
-       type:String,
-       required:[true,'Prev Price is required']
-   },
+//    prevPrice:{
+//        type:String,
+//        required:[true,'Prev Price is required']
+//    },
    category:{
        type: mongoose.Schema.ObjectId,
        ref :'Category',

@@ -7,12 +7,14 @@ const {
     forgotPassword,
     resetPassword,
     updateDetails,
-    updatePassword
+    updatePassword,
+    uploadimage,
+    deleteimage
     } = require('../controllers/auth.controller');
 
 const router = express.Router();
 
-const {protect} = require('../middlewares/auth.middleware')
+const {protect, authorize} = require('../middlewares/auth.middleware')
 
 
 router.post('/register',register);
@@ -20,7 +22,8 @@ router.post('/login',login);
 router.get('/me',protect,getMe);
 router.get('/logout',logout);
 
-
+router.post('/uploadimage',protect,authorize('admin'),uploadimage);
+router.post('/deleteimage',protect,authorize('admin'),deleteimage)
 router.post('/forgotpassword',forgotPassword);
 router.put('/resetpassword/:resettoken',resetPassword);
 router.put('/updatedetail/',protect,updateDetails);

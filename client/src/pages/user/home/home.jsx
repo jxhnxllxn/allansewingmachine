@@ -5,6 +5,7 @@ import CardBlock from '../../../components/utils/card-block/card-block';
 
 import {store} from "../../../redux/store";
 import { getProductsByArrival,getProductsBySell} from "../../../redux/product/product-action";
+import './home.scss'
 
 const Home = () => {
 

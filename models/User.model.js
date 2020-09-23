@@ -17,10 +17,39 @@ const UserSchema = new mongoose.Schema({
             'Please add a valid email'
         ],
     },
+    address:{
+        city:{
+            type:String,
+            default:''
+        },
+        country:{
+            type:String,
+            default:''
+        },
+        state:{
+            type:String,
+            default:''
+        },
+        street:{
+            type:String,
+            default:''
+        },
+        unit:{
+            type:String,
+            default:''
+        },
+        zipcode:{
+            type:String,
+            default:''
+        }
+    },
+    contact:{
+        type:String,
+    },
     role: {
-    type: String,
-    enum: ['user'],
-    default: 'user'
+        type: String,
+        enum: ['user'],
+        default: 'user'
     },
     password: {
         type: String,
@@ -28,6 +57,20 @@ const UserSchema = new mongoose.Schema({
         minlength: [6,'Password minimum length is 6'],
         select: false
     },
+    // orders:{
+    //     add_info:{},
+    //     order:[{
+    //         name:{
+    //             type:String,
+    //         },
+    //         quantity:{
+    //             type:Number,
+    //         },
+    //     }],
+    //     total:{type:Number,},
+    //     payment_method:{type:String,},
+    //     shipping:{type:String,},
+    // },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
     createdAt: {
@@ -74,7 +117,7 @@ UserSchema.methods.getResetPasswordToken = function(){
     return resetToken;
 }
 
-//Reverse populate with virtual
+// Reverse populate with virtual
 UserSchema.virtual('orders',{
     ref:'Order',
     localField:'_id',

@@ -6,23 +6,37 @@ const orderSchema = new mongoose.Schema({
         ref:'User',
         required:true
     },
-    overAllTotal:{
+    total:{
+        required:[true, 'Make some orders'],
         type:Number,
+    },
+    additionalInfo:{
+        type:String,
+    },
+    shipping:{
+        type:String,
+    },
+    paymentOption:{
+        type:String,
+    },
+    paymentId:{
+        type:String,
     },
     product:[{
         name:{
             type:String,
-            required:[true,'Order name is required']
+            required:[true,'Product not available']
         },
         quantity:{
             type:Number,
-            required:[true,'Order quantity is required']
-        },
-        total:{
-            type:Number,
-            required:[true,'Order quantity is required']
-        },
-    }]
+            required:[true,'Make some orders']
+        }
+    }],
+    status:{
+        type: String,
+        enum: ['pending','canceled','doned'],
+        default: 'pending'
+    }
 });
 
 module.exports = mongoose.model('Order',orderSchema);

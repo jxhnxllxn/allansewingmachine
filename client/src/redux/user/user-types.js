@@ -1,5 +1,0 @@
-export const UserActionTypes = {
-    SET_CURRENT_USER: 'SET_CURRENT_USER',
-    GET_ERRORS: "GET_ERRORS",
-    USER_LOADING: "USER_LOADING"
-}

@@ -3,6 +3,9 @@ const errorResponse = require('../utils/errorResponse.util');
 const asyncHandler = require('../middlewares/async.middleware');
 const sendMail = require('../utils/sendEmail.util');
 const User = require('../models/User.model');
+const cloudinary = require('cloudinary');
+const fs = require('fs');
+
 
 // @desc    Get current logged in user
 // @route   POST /api/auth/me
@@ -24,14 +27,19 @@ exports.getMe = asyncHandler(async(req,res,next)=>{
 // @route   POST /api/auth/register
 // @access  Public
 exports.register = asyncHandler(async (req,res,next) => {
-    const {name, email, password } = req.body;
-
-    //create user
     const user = await User.create({
-        name,
-        email,
-        password,
-        role
+        name: req.body.name,
+        email: req.body.email,
+        contact: req.body.contact,
+        address:{
+            unit:req.body.unit,
+            street:req.body.street,
+            country:req.body.country,
+            state:req.body.state,
+            zipcode:req.body.zipcode,
+            city:req.body.city
+        },
+        password: req.body.password
     });
 
     sendTokenResponse(user,200,res);
@@ -92,7 +100,16 @@ exports.logout = asyncHandler(async(req,res,next)=>{
 exports.updateDetails = asyncHandler(async (req,res,next) => {
     const fieldsToUpdate = {
         name: req.body.name,
-        email: req.body.email
+        email: req.body.email,
+        contact: req.body.contact,
+        address:{
+            unit:req.body.unit,
+            street:req.body.street,
+            country:req.body.country,
+            state:req.body.state,
+            zipcode:req.body.zipcode,
+            city:req.body.city
+        } 
     }
 
     const user = await User.findByIdAndUpdate(req.user.id,fieldsToUpdate,{
@@ -232,4 +249,56 @@ const sendTokenResponse = (user,statusCode,res) => {
             data:user,
             token
         });
+}
+
+
+exports.uploadimage = (req,res) => {
+    try {
+        if(!req.files || Object.keys(req.files).length === 0)
+            return res.status(400).json({success:false,data:'No files were uploaded.'})
+
+        const file = req.files.file;
+        if(file.size > 1024*1024){
+            removeTmp(file.tempFilePath)
+            return res.status(400).json({success:false,data:'Size too large make it lower than 1mb'})
+        } //1mb max
+            
+        
+        if(file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png'){
+            removeTmp(file.tempFilePath)
+            return res.status(400).json({success:false,data:'Not an image'})
+        }
+
+        cloudinary.v2.uploader.upload(file.tempFilePath,{folder:'vetshop'},async(err,result)=>{
+            if(err) throw err;
+            removeTmp(file.tempFilePath)
+            res.json({public_id:result.public_id,url:result.secure_url})
+        })
+
+        
+    } catch (err) {
+        return res.status(500).json({success:false, data:err.message})
+    }
+};
+
+
+exports.deleteimage = (req,res) => {
+    try {
+        const {public_id} = req.body;
+        if(!public_id) return res.status(400).json({success:false,data:'No image selected'})
+
+        cloudinary.v2.uploader.destroy(public_id,async(err,result) => {
+            if(err) throw err;
+            res.json({success:true,data:'Image deleted'})
+        })
+
+    } catch (err) {
+        return res.status(500).json({success:false,data:err.message})   
+    }
+}
+
+const removeTmp = (path) =>  {
+    fs.unlink(path,err=>{
+        if(err) throw err;
+    })
 }

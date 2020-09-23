@@ -4,19 +4,23 @@
   box-sizing: border-box;
 }
 
+
 body {
   font-family: 'Roboto Condensed', sans-serif;
   background-color: #f0f2f5;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
 }
 
-.page_container{
-  padding:30px 20px;
+.page_layout{
+  padding:15px 0;
+  margin-top: 70px;
 }
 .container{
-  padding: 20px 40px
+  padding: 20px 50px;
 }
 
-input{
+input, textarea, select{
   font-family: 'Roboto Condensed', sans-serif;
 }
 .main_loader {

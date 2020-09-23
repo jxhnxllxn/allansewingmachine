@@ -1,58 +1,51 @@
-import React from 'react'
-import { Component } from 'react'
-import { connect } from 'react-redux'
-import { auth } from "../redux/auth/auth-action";
+import React, { Fragment, useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import Loading from '../components/loading/loading'
+import { selectCurrentUser, selectIsAdmin, selectIsAuth} from '../redux/auth/auth-selector';
 
-export default function(ComposedClass,reload){
-    class AuthenticationCheck extends Component {
+export default function(ComposedClass,reload,adminRoute){
 
-        state = {
-            loading:true
-        }
 
-        componentDidMount(){
-            this.props.dispatch(auth()).then(res => {
-                    let user = this.props.user;
-                    if(!user.isAuthenticated){
-                        if(reload === true){
-                            this.props.history.push('/signin')
-                        }
-                    }else{
-                       if(user.isAdmin){
-                            if(reload === false){
-                                this.props.history.push('/admin')
-                            }
-                       }else{
-                            if(reload === false){
-                                this.props.history.push('/user/dashboard')
-                            }
-                       }
+    const AuthenticationCheck = (props) => {
+        const isAdmin = useSelector(state => selectIsAdmin(state));
+        const isAuthenticated = useSelector(state => selectIsAuth(state));
+        const currentUser = useSelector(state => selectCurrentUser(state))
+    
+        const [state, setState] = useState({
+            loading:true,
+        });
+
+        useEffect(() => {
+            if(!isAuthenticated){
+                if(reload === true){
+                    props.history.push('/signin')
+                }
+            }else{
+               if(adminRoute && !isAdmin){
+                    props.history.push('/user/dashboard')
+               }else{
+                    if(reload === false && isAdmin){
+                        props.history.push('/admin')
+                    }else if(reload === false && !isAdmin){
+                        props.history.push('/user/dasboard')
                     }
-                    this.setState({loading:false})
-                })
-        }
-
-        render(){
-            if(this.state.loading){
-                return(
-                    <div className="main_loader">
-                        <Loading />
-                    </div>
-                )
-               
+               }
             }
+            setState({loading:false})
+        }, [])
+
+
             return (
-                <ComposedClass {...this.props} user={this.props.user}/>
+                <Fragment>
+                    {state.loading ? 
+                        <div className="main_loader">
+                            <Loading />
+                        </div>   
+                    :
+                        <ComposedClass {...props} user={currentUser}/>
+                    }
+                </Fragment>
             )
-        }
     }
-    function mapStateToProps(state){
-        return{
-            user: state.auth
-        }
-    }
-
-    return connect(mapStateToProps)(AuthenticationCheck)
+    return AuthenticationCheck;
 }
-

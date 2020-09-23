@@ -9,11 +9,13 @@ $main-color: black;
 
 .formBlock {
   position: relative;
-  margin: 1.5rem 0;
+  margin: 2rem 0;
   .error_label{
+    position: absolute;
+    bottom: -21px;
     color: #F44336;
     display:block;
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bolder;
     padding: 5px;
   }
@@ -22,7 +24,7 @@ $main-color: black;
     background: none;
     background-color: white;
     color: $sub-color;
-    font-size: 18px;
+    font-size: 15px;
     padding: 10px 10px 10px 5px;
     display: block;
     width: 100%;

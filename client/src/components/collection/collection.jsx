@@ -3,12 +3,20 @@ import { withRouter } from 'react-router-dom';
 import './collection.scss'
 
 const Collection = (props) => {
+    const renderCardImage = (images) => {
+        if(images.length > 0){
+          return images[0].url
+        }else{
+          return '/images/slide2.jpg'
+        }
+      }
+      
     
     return(
-        <div className="collection" onClick={() => props.history.push(`${props.match.url}/${props.collectionName}`)}>
-            <div className="background-image" style={{backgroundImage:`url('/images/slide2.jpg')`}}/>
+        <div className="collection_wrapper" onClick={() => props.history.push(`${props.match.url}/${props._id}`)}>
+            <div className="background_image" style={{background:`url(${renderCardImage(props.images)})`,backgroundSize: 'cover'}}/>
             <div className="content">
-                <h1 className="title">{props.collectionName} Shop</h1>
+                <h1 className="title">{props.name} Shop</h1>
             </div>
         </div> 
     )

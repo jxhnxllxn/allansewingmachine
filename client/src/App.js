@@ -1,11 +1,11 @@
-import React, { Fragment} from 'react';
+import React, { Fragment, useEffect} from 'react';
 import { BrowserRouter as Router} from "react-router-dom";
 
 //redux
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import {store,persistore} from "./redux/store";
-// import { loadUser } from "./redux/auth/auth-action";
+import { auth } from "./redux/auth/auth-action";
 import Routes from './routes';
 
 import './App.scss';
@@ -16,9 +16,9 @@ if(localStorage.token){
 }
 
 const App = () => {
-  // useEffect(() => {
-  //   store.dispatch(loadUser());
-  // }, []);
+  useEffect(() => {
+    store.dispatch(auth());
+  }, []);
 
   return (
   <Provider store={store}>

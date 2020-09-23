@@ -13,14 +13,12 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
         }
     }
-    .button_primary{
-        min-width: 165px;
-        width: auto;
-        height: 40px;
+    .button_primary, .add_to_cart_link{
+        text-align: center;
+        align-self: baseline;
         letter-spacing: 0.5px;
         line-height: 40px;
-        padding: 0 5px 0 5px;
-        margin: 5px;
+        padding: 0px 5px;
         font-size: 18px;
         color: white;
         font-family: 'Roboto Condensed', sans-serif;
@@ -34,6 +32,6 @@
         &:hover {
           box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
         }
-      
-      }
+    }
+ 
 }

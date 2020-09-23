@@ -7,7 +7,7 @@ import Collection from "./collection/collection";
 import Product from "./product/product";
 import ProductAdd from "./product-add/product-add";
 import Notification from "./notification/notification";
-import Orders from "./orders/orders";
+import Category from "./category/category";
 import Order from "./order/order"
 import Help from "./help/help";
 
@@ -25,7 +25,7 @@ const Admin = ({match}) => {
                 <Route path={`${match.path}/product`} component={Product} exact/>
                 <Route path={`${match.path}/product/add`} component={ProductAdd} exact/>
                 <Route path={`${match.path}/collection`} component={Collection} exact/>
-                <Route path={`${match.path}/orders`} component={Orders} exact/>
+                <Route path={`${match.path}/category`} component={Category} exact/>
                 <Route path={`${match.path}/orders/:id`} component={Order} exact/>
                 <Route path={`${match.path}/help`} component={Help} exact/>
             </Switch>

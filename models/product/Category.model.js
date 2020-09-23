@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const categorySchema = new mongoose.Schema({
    
-   categoryName:{
+   name:{
        type:String,
        required:[true,'Product Category name is required'],
        unique: [1,'Prouduct name must be unique'],

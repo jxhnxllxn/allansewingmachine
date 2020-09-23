@@ -69,14 +69,13 @@ import './sign-in.scss';
                       if(res.payload.isAdmin){
                         history.push('/admin')
                       }else{
-                        history.push('/cart')
+                        history.push('/user/dashboard')
                       }
                   }else{
                     setFormField({...formField,formError:true})
                   }
                 })
                 .catch(err => {
-                    console.log(err.response.data.error)
                     setFormField({...formField,formError:true})
                 })
             }else{
@@ -86,7 +85,7 @@ import './sign-in.scss';
 
         return (
             <div className="sign-in card">
-                <h2>I already have an account</h2>
+                <h2>Already have an account?</h2>
                 <span>Sign in with your email and password</span>
 
                 <form onSubmit={e => submitForm(e)}>
@@ -101,7 +100,7 @@ import './sign-in.scss';
                         change={(element) => updateForm(element)}
                     />
 
-                    <MyButton onClick={submitForm} type="primary" title="Sign In" value="Submit" />
+                    <MyButton runAction={e => submitForm(e)} type="submit" title="Sign In" value="Submit" />
                 </form>
                 
                 {formField.formError ?

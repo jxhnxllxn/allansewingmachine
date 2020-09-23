@@ -57,20 +57,15 @@ exports.getOrder = asyncHandler(async (req,res,next) => {
 
 exports.addOrder = asyncHandler(async (req,res,next) => {
     req.body.user = req.user.id;
-
     //to be continued
     // let order = await Order.findById(req.params.id);
-
-
     const order = await Order.create(req.body);
-    
     //Make sure user is ordered owner
-    if(order.user.toString() !== req.user.id && req.user.role !== 'admin'){
+    if(order.user.toString() !== req.user.id && req.user.role === 'admin'){
         return next(
             new errorResponse(`User ${req.params.id} is not authorized to add this order`,401)
         );
     }
-
      res.status(200).json({
          success:true,
          data:order

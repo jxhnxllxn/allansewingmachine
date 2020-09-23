@@ -3,18 +3,24 @@ import { addItemToCart, removeItemFromCart } from './cart-utils';
 
 const INITIAL_STATE = {
   hidden: true,
+  settingHidden:true,
   cartItems: []
 };
 
 const cartReducer = (state = INITIAL_STATE, action) => {
-
-    const {type,payload} = action;
-
+  const {type,payload} = action;
   switch (type) {
     case CartActionTypes.TOGGLE_CART_HIDDEN:
       return {
         ...state,
-        hidden: !state.hidden
+        hidden: !state.hidden,
+        settingHidden:true
+      };
+    case CartActionTypes.TOGGLE_SETTING_HIDDEN:
+      return {
+        ...state,
+        settingHidden: !state.settingHidden,
+        hidden:true,
       };
     case CartActionTypes.ADD_ITEM:
       return {
@@ -30,7 +36,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: state.cartItems.filter(
-          cartItem => cartItem.id !== payload.id
+          cartItem => cartItem._id !== payload._id
         )
       };
     default:

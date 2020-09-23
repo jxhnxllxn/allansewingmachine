@@ -1,0 +1,26 @@
+.shop_collection_wrapper{
+    grid-column: center-start/center-end;
+    .shop_wrapper{
+        display: flex;
+        .left{
+            width: 250px;
+        }
+        .right{
+            width: 100%;
+        }
+    }
+}
+
+.shop_options {
+    border-bottom: 1px solid #e8e8e8;
+    margin: 0px 20px 20px 20px;
+    .grid_btn {
+        float: right;
+        padding: 10px 10px;
+        font-size: 20px;
+        color: #c6c6c6;
+    }
+    .grid_btn.active {
+        color: #727272;
+    }
+}

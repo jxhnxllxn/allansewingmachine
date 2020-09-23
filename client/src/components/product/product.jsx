@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch } from 'react-redux';
+import {addItem} from '../../redux/cart/cart-action'
 import MyButton from '../utils/button/button'
 import "./product.scss"
 
@@ -10,23 +12,24 @@ const renderCardImage = (images) => {
   }
 }
 
-const product = (props) => {
+const Product = (props) => {
+  const dispatch = useDispatch()
+  
   return (
-    <div className={`card ${props.grid}`}>
-        <div className="image" style={{background:`url(${renderCardImage(props.images)})`}}>
+    <div className={`card ${props.grid}`} >
+        <div className="image" style={{background:`url(${renderCardImage(props.images)})`,backgroundSize:'cover'}}>
         </div>
 
         <div className="action_container">
             <div className="tags">
               <h3 className="category">{props.category.categoryName} </h3>
-              <h2 className="name">{props.productName}</h2>
+              <h2 className="name">{props.name}</h2>
               <div className="price">Php {props.price}.00</div>
             </div>
-        </div>
         {
           props.grid ? 
             <div className="description">
-                {props.description}
+                {props.description} Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit nostrum possimus, molestiae sapiente error aliquam accusantium quia corrupti ex alias veritatis ducimus. Iusto, cupiditate voluptate dignissimos iure corporis laudantium.
             </div>
           :null
         }
@@ -43,13 +46,23 @@ const product = (props) => {
                 <MyButton 
                   type="bag_link"
                   runAction={()=>{
-                    console.log('add to cart')
+                    dispatch(addItem({
+                      _id:props._id,
+                      name:props.name,
+                      images:props.images,
+                      price:props.price,
+                      collection:props.collections.name,
+                      category:props.category.name
+                    }))
+
                   }}
                 />
             </div>
+        </div>
+        
         </div>
     </div>
   )
 }
 
-export default product
+export default Product

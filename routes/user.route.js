@@ -4,7 +4,10 @@ const {
     getUser,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    uploadimage,
+    checkoutCreateUser,
+    checkoutUpdateUser
 } = require('../controllers/user.controller')
 
 
@@ -18,13 +21,7 @@ router.use(protect);
 router.use(authorize('admin'))
 
 router.route('/')
-    .get(
-        advanceResults(User,{
-            path:'orders',
-            select:'product'
-        }),
-        getUsers
-    )   
+    .get(advanceResults(User,['product']),getUsers)   
     .post(createUser);
 
 router.route('/:id')
@@ -32,6 +29,11 @@ router.route('/:id')
     .put(updateUser)
     .delete(deleteUser);
 
-router
+router.route('/checkoutCreateUser')
+    .post(checkoutCreateUser);
+
+
+router.route('/checkoutUpdateUser')
+    .post(checkoutUpdateUser)
 
 module.exports = router;

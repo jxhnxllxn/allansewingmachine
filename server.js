@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
+const cloudinary = require('cloudinary');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 const xss = require('xss-clean');
@@ -40,13 +41,21 @@ app.use(express.json({ extended: false }));
 //Cooki Parser
 app.use(cookieParser());
 
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+})
+
 // Dev logging middleware;
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
 
 //File uploading
-app.use(fileUpload());
+app.use(fileUpload({
+    useTempFiles:true
+}));
 
 //Mongo Sanitize security
 app.use(mongoSanitize());
@@ -84,7 +93,7 @@ app.use('/api/collection',collection);
 app.use('/api/category',category);
 app.use('/api/product',product);
 app.use('/api/order',order);
-app.use('/api/admin',user);
+app.use('/api/user',user);
 
 
 // middlewares

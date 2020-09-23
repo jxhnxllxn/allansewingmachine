@@ -5,7 +5,10 @@ const initialState = {
     productBySell:[],
     productByArrival:[],
     products:[],
-    categories:[]
+    categories:[],
+    collections:[],
+    toShop:[],
+    toShopSize:null
 }
 
 export default function(state = initialState, action){
@@ -35,6 +38,18 @@ export default function(state = initialState, action){
                 products:[...state.products, payload.data],
                 loading:false
             }
+        case ProductActionTypes.GET_PRODUCT_DETAIL:
+            return {
+                ...state,
+                productDetail:payload.data,
+                loading:false
+            }
+        case ProductActionTypes.CLEAR_PRODUCT_DETAIL:
+            return {
+                ...state,
+                productDetail:payload.data,
+                loading:false
+            }
         case ProductActionTypes.ADD_FAIL:
             return {
                 ...state,
@@ -51,6 +66,22 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 categories: payload.data
+            }
+        case ProductActionTypes.GET_COLLECTIONS:
+            return{
+                ...state,
+                collections: payload.data
+            }
+        case ProductActionTypes.GET_PRODUCTS_TO_SHOP:
+            return{
+                ...state,
+                toShop:payload.articles,
+                toShopSize:payload.size
+            }
+        case ProductActionTypes.ADD_PRODUCT:
+            return{
+                ...state,
+                addProduct:payload.data,
             }
         default:
             return state

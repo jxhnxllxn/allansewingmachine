@@ -1,6 +1,6 @@
 import React ,{useState} from 'react';
 import {Link} from 'react-router-dom';
-import FormInput from '../../../components/form-input/form-input';
+import FormField from '../../../components/utils/form-field/form-field';
 import './dashboard.scss';
 
 
@@ -74,7 +74,10 @@ const Dashboard = () => {
             <div className="card">
                 <div className="table-header">
                     <h2>Manage orders</h2>
-                    <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" />
+                    {/* <FormField
+                        id={'search'}
+                        onChange={e => onChange(e)}
+                    /> */}
                 </div>
                 <table>
                     <tbody>

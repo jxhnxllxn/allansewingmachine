@@ -4,39 +4,40 @@ import { AuthActionTypes } from "./auth-types";
 import setAuthToken from "../../utils/setAuthToken"; 
 
 
-export const auth = () => {
-    if(localStorage.token){
-        setAuthToken(localStorage.token);
-    }
-    
-    const request = axios.get('./api/auth/me')
-        .then(res => res.data)
-        .catch(err => err.data);
-
-    return{
-        type:AuthActionTypes.USER_LOADED,
-        payload: request
-    }
-}
-// load user
-// export const loadUser = () => async dispatch => {
+// export const auth = () => {
 //     if(localStorage.token){
 //         setAuthToken(localStorage.token);
 //     }
     
-//     try {
-//         const res = await axios.get('/api/auth/me');
-//         dispatch({
-//             type:AuthActionTypes.USER_LOADED,
-//             payload:res.data,
-//         });
+//     const request = axios.get('/api/auth/me')
+//         .then(res => res.data)
+//         .catch(err => err.data);
 
-//     } catch (err) {
-//         dispatch({
-//             type:AuthActionTypes.AUTH_ERROR
-//         })
+//     return{
+//         type:AuthActionTypes.USER_LOADED,
+//         payload: request
 //     }
 // }
+// load user
+export const auth = () => async dispatch => {
+    console.log('runned')
+    if(localStorage.token){
+        setAuthToken(localStorage.token);
+    }
+    
+    try {
+        const res = await axios.get('/api/auth/me');
+        dispatch({
+            type:AuthActionTypes.USER_LOADED,
+            payload:res.data,
+        });
+
+    } catch (err) {
+        dispatch({
+            type:AuthActionTypes.AUTH_ERROR
+        })
+    }
+}
 
 //register
 export const register = (dataToSubmit) => {
@@ -79,3 +80,26 @@ export const logout = () => async dispatch => {
     dispatch({type: AuthActionTypes.LOGOUT})
 
 }
+
+
+export const checkoutCreateUser = dataToSubmit => {
+    const request = axios
+        .post('/api/auth/register',dataToSubmit)
+        .then(res => res.data)
+        return {
+            type: AuthActionTypes.CHECKOUT_CREATE_USER,
+            payload: request
+        }
+  }
+  
+  export const checkoutUpdateUser = dataToSubmit => {
+  
+    const request = axios
+        .put('/api/auth/updatedetail',dataToSubmit)
+        .then(res => res.data)
+        return {
+            type: AuthActionTypes.CHECKOUT_UPDATE_USER,
+            payload: request
+        }
+    
+  }

@@ -18,16 +18,13 @@ const CollapseCheckBox = (props) => {
     })
 
     useEffect(() => {
-        const open = () =>{
-            if(props.initState){
-                setState({
-                    ...state,
-                    open: props.initState
-                })
-            }
+        if(props.initState){
+            setState({
+                ...state,
+                open: props.initState
+            })
         }
-        open()
-    },[]);
+    },[props.initState]);
 
     const handleClick = () => {
         setState({...state, open:!state.open})
@@ -70,7 +67,7 @@ const CollapseCheckBox = (props) => {
         props.list ?
             props.list.map((value)=>(
                <ListItem key={value._id} style={{padding:'10px 0'}}>
-                    <ListItemText primary={value.categoryName} />
+                    <ListItemText primary={value.name} />
                     <ListItemSecondaryAction>
                         <Checkbox  
                             color='primary'

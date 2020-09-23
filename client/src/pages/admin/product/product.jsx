@@ -1,16 +1,19 @@
 import React, {useState, useEffect, useRef, Fragment} from 'react'
-import {connect} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { getProducts, deleteProduct } from "../../../redux/product/product-action"; 
-import PropTypes from "prop-types"
 import Loading from "../../../components/loading/loading";
-
-import FormInput from '../../../components/form-input/form-input'
 import CustomButton from '../../../components/custom-button/custom-button'
 import Modal from '../../../components/modal/modal'
 import { withRouter } from 'react-router-dom';
 // import { Redirect, withRouter } from 'react-router-dom';
+import './product';
+import FormField from '../../../components/utils/form-field/form-field';
 
-const Product = ({product:{products,loading},getProducts,deleteProduct,match,history}) => {
+const Product = (props) => {
+    const products = useSelector(state => state.product.products);
+    const loading = useSelector(state => state.product.loading);
+    const dispatch = useDispatch();
+
     const [modalData, setModalData] = useState(null);
 
     const [data, setData] = useState({
@@ -21,7 +24,7 @@ const Product = ({product:{products,loading},getProducts,deleteProduct,match,his
     const {searchInput,confirmAction} = data;
 
     useEffect(() => {
-        getProducts()
+        dispatch(getProducts())
     }, [getProducts])
 
     const onChange = e => setData({...data,[e.target.name]:e.target.value});
@@ -34,23 +37,31 @@ const Product = ({product:{products,loading},getProducts,deleteProduct,match,his
     const closeModal = () => {
         modalRef.current.closeModal()
     }
+    const renderImage = (images) => {
+        if(images.length > 0){
+          return images[0].url
+        }else{
+          return '/images/slide2.jpg'
+        }
+      }
 
     const productData = products && !loading ? products : [];
   
     const tableData = productData.map(col => (
         <tr key={col._id}>
-            <td>{col.productName}</td>       
-            <td>{col.productPhoto}</td>
-            <td></td>
+            <td>{col.name}</td> 
+            <td><img className="collectionPhoto" src={`${renderImage(col.images)}`} alt='product_image'/></td>      
+            <td>{col.collections.name}</td>
+            <td>{col.category.name}</td>
             <td>{col.price}</td>
-            {/* <td><img className="productPhoto" src={`../../../../../public/uploads/${col.productPhoto}`} alt={col.productPhoto}/></td> */}
+            <td>{col.collections.name}</td>
             <td>view | <button onClick={() => openModal(col)}>Delete</button></td>
         </tr>
     ));
 
     const handleDeleteProduct = async e => {
         e.preventDefault();
-        deleteProduct(modalData._id);
+        dispatch(deleteProduct(modalData._id));
         modalRef.current.closeModal();
     }
 
@@ -59,10 +70,14 @@ const Product = ({product:{products,loading},getProducts,deleteProduct,match,his
             <div className="card">
                 <div className="table-header">
                     <h3>Manage products</h3>
-                    <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" />
+                    {/* <FormField
+                        id={'unit'}
+                        
+                    /> */}
+                    {/* <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" /> */}
                 </div>
                 <div className="floatRight">
-                    <CustomButton onClick={() => history.push(`${match.url}/add`)} buttonType="primary" type="submit">Add Product</CustomButton>
+                    <CustomButton onClick={() => props.history.push(`${props.match.url}/add`)} buttonType="primary" type="submit">Add Product</CustomButton>
                 </div>
                 {!loading ? 
                 <table>
@@ -82,15 +97,15 @@ const Product = ({product:{products,loading},getProducts,deleteProduct,match,his
                     
                     <Modal ref={modalRef}>    
                         {modalData && <Fragment>
-                            <h2>Are you sure you want to delete {modalData.productName} product?</h2>
+                            <h2>Are you sure you want to delete {modalData.name} product?</h2>
                             <br/>
-                            <p>This action cannot be undone. This will permanently delete the {modalData.productName} product.</p>
+                            <p>This action cannot be undone. This will permanently delete the {modalData.name} product.</p>
                             <br/>
-                            <p>Please type <b>rdg/{modalData.productName}</b></p>
+                            <p>Please type <b>rdg/{modalData.name}</b></p>
                                 <form onSubmit={handleDeleteProduct}>
-                                    <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/>
+                                    {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
                                     <div className="form-ation">
-                                        <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.productName}`)}>Delete</CustomButton>
+                                        <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.name}`)}>Delete</CustomButton>
                                         <CustomButton buttonType="default" onClick={closeModal}>Cancel</CustomButton>
                                     </div>
                                 </form>
@@ -108,13 +123,5 @@ const Product = ({product:{products,loading},getProducts,deleteProduct,match,his
     )
 
 }
-Product.propTypes = {
-    getProducts: PropTypes.func.isRequired,
-    product: PropTypes.object.isRequired,
-}
-const mapStateToProps = state => ({
-    product: state.product
-})
 
-
-export default withRouter(connect(mapStateToProps,{getProducts,deleteProduct})(Product))
+export default withRouter(Product);

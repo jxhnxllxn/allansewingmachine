@@ -1,9 +1,41 @@
 import axios from "axios";
-import { setAlert } from "../alert/alert-action";
+// import { setAlert } from "../alert/alert-action";
 import { ProductActionTypes } from "./product-types";
 
-export const getProductsBySell = (dataToSubmit) => {
-    const request = axios.get('/api/product?select=productName,description,images,price&sort=-sold&limit=10')
+// api secret
+// Oz_rD2QLe7_lm3sTs2sY5R0_8iA
+
+// api key
+// 495551122347166
+
+// cloud name
+// dgia0xiqo
+
+// environment var 
+// cloudinary://495551122347166:Oz_rD2QLe7_lm3sTs2sY5R0_8iA@dgia0xiqo
+
+
+export const getProductDetail = (id) => {
+    const request = axios
+        .get(`/api/product/${id}`)
+        .then(res => res.data);
+
+        return {
+            type:ProductActionTypes.GET_PRODUCT_DETAIL,
+            payload:request,
+        }
+        
+}
+
+export const clearProductDetail = () => {
+    return{
+        type:ProductActionTypes.CLEAR_PRODUCT_DETAIL,
+        payload:[]
+    }
+}
+
+export const getProductsBySell = () => {
+    const request = axios.get('/api/product?select=name,description,images,price&sort=-sold&limit=8')
             .then(res => res.data);
             return {
                 type: ProductActionTypes.GET_PRODUCT_BY_SELL,
@@ -11,8 +43,8 @@ export const getProductsBySell = (dataToSubmit) => {
             }
 }
 
-export const getProductsByArrival = (dataToSubmit) => {
-    const request = axios.get('/api/product?select=productName,description,images,price&sort=-createdAt&limit=10')
+export const getProductsByArrival = () => {
+    const request = axios.get('/api/product?select=name,description,images,price&sort=-createdAt&limit=8')
             .then(res => res.data);
             return {
                 type: ProductActionTypes.GET_PRODUCT_BY_ARRIVAL,
@@ -20,18 +52,46 @@ export const getProductsByArrival = (dataToSubmit) => {
             }
 }
 
-export const getProductsToShop = (skip,limit,filter = [], previosState = []) => {
+export const getProductsToShop = (skip,limit,filters =[], previousState=[]) => {
     const data = {
         limit,
         skip,
-        filter,
+        filters
     }
-    const request = axios.get('/api/product?select=productName,description,images,price&sort=-createdAt&limit=10')
-            .then(res => res.data);
-            return {
-                type: ProductActionTypes.GET_PRODUCTS_TO_SHOP,
+    const request = axios.post(`/api/product/shop`,data)
+            .then(res => {
+                let newState = [
+                    ...previousState,
+                    ...res.data.articles
+                ];
+                return {
+                    size: res.data.size,
+                    articles: newState
+                }
+            });
+
+
+            return{
+                type:ProductActionTypes.GET_PRODUCTS_TO_SHOP,
                 payload: request
             }
+}
+
+
+export const addProduct = (dataToSubmit)  => {
+
+    const request = axios
+        .post('/api/product',dataToSubmit)
+        .then(res => res.data)
+        // .catch(err => {
+        //     err.response.data.error.split(',');
+        // });
+
+        return {
+            type: ProductActionTypes.ADD_PRODUCT,
+            payload: request
+        }
+    
 }
 
 
@@ -54,33 +114,6 @@ export const getProducts = () => async dispatch => {
         })
 }
 
-export const addProduct = (data) => async dispatch => {
-
-    const config = {
-        headers: {
-            'Content-Type':'multipart/form-data'
-        },
-        onUploadProgress: progressEvent => (parseInt(Math.round((progressEvent.loaded))))
-    }
-
-    axios
-        .post('/api/product',data,config)
-        .then(res => {
-            dispatch({
-                type: ProductActionTypes.ADD_SUCCESS,
-                payload: res.data
-            })
-        })
-        .catch(err => {
-            const errors = err.response.data.error.split(',');
-            console.log(errors)
-            if(errors){
-                errors.forEach(error => dispatch(setAlert(error,'danger')))
-            }
-        })
-    
-}
-
 
 export const deleteProduct = (data) => dispatch => {
     axios
@@ -100,7 +133,7 @@ export const deleteProduct = (data) => dispatch => {
 }
 
 export const getCategories = () => {
-    const request = axios.get('/api/category?select=categoryName')
+    const request = axios.get('/api/category?select=name')
         .then(res => res.data);
     return {
         type: ProductActionTypes.GET_CATEGORIES,
@@ -108,6 +141,17 @@ export const getCategories = () => {
     }
         
 }
+
+export const getCollections = () => {
+    const request = axios.get('/api/collection?select=name')
+        .then(res => res.data);
+    return {
+        type: ProductActionTypes.GET_COLLECTIONS,
+        payload: request
+    }
+        
+}
+
 
 
 export const failedAction = (data) => dispatch => {

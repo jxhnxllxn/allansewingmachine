@@ -5,20 +5,24 @@ import alert from "./alert/alert-reducer";
 import auth from "./auth/auth-ruducer";
 import cart from "./cart/cart-reducer"
 import collection from "./collection/collection-reducer"
+import category from "./category/category-reducer"
 import product from "./product/product-reducer" 
+import order from "./order/order-reducer"
 
 const persistConfig = {
     key: 'root',
     storage,
-    whitelist:['auth','cart']
+    whitelist:['cart','auth']
 }
 
 const rootReducer = combineReducers({
     alert,
     auth,
     collection,
+    category,
     product,
-    cart
+    cart,
+    order
 })
 
 export default persistReducer(persistConfig, rootReducer);

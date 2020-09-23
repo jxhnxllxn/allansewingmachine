@@ -19,12 +19,20 @@ export const getCollections = () => async dispatch => {
         })
 }
 
-export const addCollection = (data) => async dispatch => {
-    dispatch(setAlert('File Uploaded','success'));
-    dispatch({
-        type: CollectionActionTypes.ADD_SUCCESS,
-        payload: data,
-    });
+export const addCollection = (dataToSubmit)  => {
+
+    const request = axios
+        .post('/api/collection',dataToSubmit)
+        .then(res => res.data)
+        // .catch(err => {
+        //     err.response.data.error.split(',');
+        // });
+
+        return {
+            type: CollectionActionTypes.ADD_COLLECTION,
+            payload: request
+        }
+    
 }
 
 

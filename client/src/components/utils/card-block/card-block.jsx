@@ -4,11 +4,10 @@ import Collection from '../../collection/collection'
 import './card-block.scss'
 
 const CardBlock = (props) => {
-
     const renderCard= () => (
         props.list ?
             props.list.map((card,i)=>
-               props.title === 'Shop' ? <Collection key={i}  {...card}/> : <Product key={i} {...card}/> 
+               props.title === 'Shop' ? <Collection key={i} {...card}/> : <Product key={i} {...card}/> 
             )
         :null
     )
@@ -27,7 +26,9 @@ const CardBlock = (props) => {
                     width:'100%',
                     display:'grid',
                     gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-                    gridGap: '1rem'
+                    gridGap: '1rem',
+                    justifyContent:'center',
+                    alignItems:'center'
                 }}>
 
                     {renderCard(props.list)}

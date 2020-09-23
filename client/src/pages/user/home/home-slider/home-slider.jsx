@@ -37,7 +37,7 @@ const HomeSlider = () => {
         slidesToShow: 1,
         slideToScroll: 1,
         onLazyLoad:true,
-        autoplaySpeed:3000,
+        autoplaySpeed:5000,
         autoplay:true,
     }
 
@@ -45,7 +45,7 @@ const HomeSlider = () => {
         slides ?
             slides.map((item,i)=>(
                 <div key={i}>
-                    <div className="feature_image"
+                    <div className="featured_image"
                         style={{
                             background:`url(${item.img})`,
                             height:'65vh',
