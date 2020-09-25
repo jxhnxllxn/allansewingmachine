@@ -11,7 +11,7 @@ import SignUp from "./pages/sign-up/sign-up";
 import Cart from "./pages/user/dashboard/cart/cart"
 import Checkout from "./pages/user/dashboard/checkout/checkout";
 import Admin from "./pages/admin/admin";
-import UserDashboard from "./pages/user/dashboard/dashboard"
+// import UserDashboard from "./pages/user/dashboard/dashboard"
 import Layout from "./hoc/layout"
 
 import NotFound from "./pages/notfound/notfound";
@@ -32,7 +32,7 @@ const Routes = () => {
             <Route path='/signin' component={Auth(SignIn,false)}/>
             <Route path='/signup' component={Auth(SignUp,false)}/>
             <Route path="/admin" component={Auth(Admin,true,true)}/> 
-            <Route path="/user/dashboard" component={Auth(UserDashboard,true)}/> 
+            {/* <Route path="/user/dashboard" component={Auth(UserDashboard,true)}/>  */}
             <Route path="*" component={NotFound} />
         </Switch>
         </Layout>

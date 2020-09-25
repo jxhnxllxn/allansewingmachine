@@ -7,7 +7,7 @@ import Modal from '../../../components/modal/modal'
 import { withRouter } from 'react-router-dom';
 // import { Redirect, withRouter } from 'react-router-dom';
 import './product';
-import FormField from '../../../components/utils/form-field/form-field';
+// import FormField from '../../../components/utils/form-field/form-field';
 
 const Product = (props) => {
     const products = useSelector(state => state.product.products);
@@ -21,13 +21,13 @@ const Product = (props) => {
         confirmAction:''
     })
     
-    const {searchInput,confirmAction} = data;
+    const {confirmAction} = data;
 
     useEffect(() => {
         dispatch(getProducts())
-    }, [getProducts])
+    }, [])
 
-    const onChange = e => setData({...data,[e.target.name]:e.target.value});
+    // const onChange = e => setData({...data,[e.target.name]:e.target.value});
 
     const modalRef = useRef();
     const openModal = (data) => {

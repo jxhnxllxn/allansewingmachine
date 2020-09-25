@@ -1,23 +1,20 @@
 import React ,{useState} from 'react';
 import {Link} from 'react-router-dom';
-import FormField from '../../../components/utils/form-field/form-field';
 import './dashboard.scss';
 
 
 const Dashboard = () => {
     
-    const [data, setData] = useState({
-        searchInput:''
-    })
+    // const [data, setData] = useState({
+    //     searchInput:''
+    // })
 
     // const modalRef = useRef();
 
     // const openModal = () => {
     //     modalRef.current.openModal()
     // }
-
-    const {searchInput} = data;
-    const onChange = e => setData({[e.target.name]:e.target.value});
+    // const onChange = e => setData({[e.target.name]:e.target.value});
 
     return (
         <div>

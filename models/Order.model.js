@@ -30,6 +30,14 @@ const orderSchema = new mongoose.Schema({
         quantity:{
             type:Number,
             required:[true,'Make some orders']
+        },
+        available:{
+            type:Number,
+            required:[true,'Make some orders']
+        },
+        sold:{
+            type:Number,
+            required:[true,'Make some orders']
         }
     }],
     status:{

@@ -68,16 +68,16 @@ export const login = (dataToSubmit) => {
 
 //logout
 export const logout = () => async dispatch => {
-    // const request = axios.get('/api/auth/logout')
-    // .then(response => response.data);
+    const request = axios.get('/api/auth/logout')
+    .then(response => response.data);
 
-    // return {
-    //     type: AuthActionTypes.LOGOUT,
-    //     payload: request
-    // }
+    return {
+        type: AuthActionTypes.LOGOUT,
+        payload: request
+    }
 
-    await axios.get('/api/auth/logout');
-    dispatch({type: AuthActionTypes.LOGOUT})
+    // await axios.get('/api/auth/logout');
+    // dispatch({type: AuthActionTypes.LOGOUT})
 
 }
 

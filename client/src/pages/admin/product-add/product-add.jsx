@@ -153,15 +153,12 @@ const ProductAdd = () => {
                 showlabel:true
             },
             available:{
-                element:'select',
+                element:'input',
                 value:'',
-                label:'Available',
+                label:'Stock',
                 config:{
                     name:'available_input',
-                    options:[
-                        {key:true,value:'Yes'},
-                        {key:false,value:'No'}
-                    ]
+                    type:'Number',
                 },
                 validation:{
                     required:true,
@@ -320,7 +317,7 @@ const ProductAdd = () => {
                     change={(element) => updateForm(element)}
                 />
 
-                <MyButton onClick={submitForm} type="primary" title="Add product" value="Submit" />
+                <MyButton onClick={submitForm} type="submit" title="Add product" value="Submit" />
 
 
                 

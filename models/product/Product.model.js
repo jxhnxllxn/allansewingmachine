@@ -41,8 +41,9 @@ const productSchema = new mongoose.Schema({
        type: Boolean
    },
    available:{
-       required:true,
-       type:Boolean,
+       type:Number,
+       maxlength:100,
+       default:0
    },
    sold:{
        type:Number,

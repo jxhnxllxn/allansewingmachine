@@ -24,22 +24,14 @@ export const validate = (element,formData = []) => {
 }
 
 export const update = (element,formData,formName) => {
-
-
     const newFormData = {
         ...formData
     }
-
     let newElement = {};
-
     newElement = {
         ...newFormData[element.id]
     }
-
-    
-
     newElement.value = element.event.target.value;
-
     if(element.blur){
         let validData = validate(newElement,formData);
         newElement.valid = validData[0];
@@ -69,8 +61,6 @@ export const isFormValid = (formData,formName) => {
     
     for(let key in formData){
         formIsValid = formData[key].valid && formIsValid
-        
-    console.log(formData[key])
     }
 
     return formIsValid;

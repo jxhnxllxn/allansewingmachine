@@ -1,6 +1,9 @@
 const errorResponse = require('../utils/errorResponse.util');
 const asyncHandler = require('../middlewares/async.middleware');
 const Order = require('../models/Order.model');
+const Product = require('../models/product/Product.model');
+
+const async = require('async');
 
 // @desc    get all Orders
 // @route   GET /api/v1/orders
@@ -55,22 +58,54 @@ exports.getOrder = asyncHandler(async (req,res,next) => {
 // @route   GET /api/v1/order/:orderId/orders
 // @access  Private
 
-exports.addOrder = asyncHandler(async (req,res,next) => {
+exports.addOrder =  (req,res,next) => {
     req.body.user = req.user.id;
-    //to be continued
-    // let order = await Order.findById(req.params.id);
-    const order = await Order.create(req.body);
-    //Make sure user is ordered owner
-    if(order.user.toString() !== req.user.id && req.user.role === 'admin'){
-        return next(
-            new errorResponse(`User ${req.params.id} is not authorized to add this order`,401)
-        );
+    let orderDetail = {
+        user:req.user._id,
+        paymentId: req.body.paymentData.paymentID,
+        product: req.body.orderDetail.orders,
+        additionalInfo: req.body.orderDetail.additionalInfo,
+        shipping: req.body.orderDetail.shipping,
+        total:req.body.orderDetail.total
     }
-     res.status(200).json({
-         success:true,
-         data:order
-     })
- });
+    // let order = await Order.findById(req.params.id);
+    // //Make sure user is ordered owner
+    // if(order.user.toString() !== req.user.id && req.user.role === 'admin'){
+    //     return next(
+    //         new errorResponse(`User ${req.params.id} is not authorized to add this order`,401)
+    //     );
+    // }
+
+    //to be continued
+    Order.create(orderDetail,(err,order)=>{
+        if(err) return res.json({success:false,data:err});
+        let products = [];
+        order.product.forEach(item=>{
+            products.push({id:item._id,quantity:item.quantity,available:item.available})
+         })
+      
+        async.eachSeries(products,(item,callback)=>{
+            Product.updateMany(
+                {_id: item.id},
+                { 
+                    $inc:{
+                        "sold": item.quantity,
+                        "available": -item.quantity
+                    },
+                },
+                {new:false},
+                callback
+            )
+        },(err)=>{
+            if(err) return res.json({success:false,data:err});
+            // sendEmail(user.email,user.name,null,"purchase",transactionData)
+            res.status(200).json({
+                success:true,
+            })
+        })
+    });
+    
+ };
 
 // @desc   Update Order
 // @route   GET /api/v1/order/:orderId/orders
@@ -128,7 +163,6 @@ exports.deleteOrder = asyncHandler(async (req,res,next) => {
         );
     }
 
-
     await order.remove();
     
      res.status(200).json({
@@ -136,5 +170,3 @@ exports.deleteOrder = asyncHandler(async (req,res,next) => {
          data:order
      })
  });
-
-

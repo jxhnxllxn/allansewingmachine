@@ -128,7 +128,7 @@ const Category = () => {
                             formData={formField.formData.name}
                             change={(element) => updateForm(element)}
                         />
-                            <MyButton onClick={(e) => submitForm(e)} type="primary" title="Add Category" value="Submit" /> 
+                            <MyButton onClick={(e) => submitForm(e)} type="submit" title="Add Category" value="Submit" /> 
                         
                     </form>      
                 </div>

@@ -52,7 +52,9 @@ const Product = (props) => {
                       images:props.images,
                       price:props.price,
                       collection:props.collections.name,
-                      category:props.category.name
+                      category:props.category.name,
+                      sold:props.sold,
+                      available:props.available,
                     }))
 
                   }}

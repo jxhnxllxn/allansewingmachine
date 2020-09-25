@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrder } from "../../../../redux/order/order-action";
-import {update,generateData,isFormValid, resetFields} from '../../../../components/utils/form-action/form-action';
+import {update,generateData} from '../../../../components/utils/form-action/form-action';
 import Paypal from '../../../../components/utils/paypal/paypal';
 import MyButton from '../../../../components/utils/button/button'
 import FormField from '../../../../components/utils/form-field/form-field'
@@ -14,15 +14,13 @@ const Checkout = () => {
   const cartItems = useSelector(state => selectCartItems(state));
   const total = useSelector(state => selectCartTotal(state))
     const dispatch = useDispatch();
+
     const [formField, setFormField] = useState({
         formError: false,
         formSuccess:false,
         formData:{  
                 orders:{
                   value:cartItems,
-                },
-                total:{
-                  value:0
                 },
                 additionalInfo:{
                   element:'textarea',
@@ -31,7 +29,14 @@ const Checkout = () => {
                   config:{
                       name:'input_additional_Info',
                       type:'text',
-                  }
+                  },
+                  validation:{
+                    required:false,
+                  },
+                  valid:true,
+                  touched:true,
+                  validationMessage:'',
+                  showlabel:true  
                 },
                 shipping:{
                   element:'radio',
@@ -60,6 +65,9 @@ const Checkout = () => {
                       ]
                   }
                 },
+                total:{
+                  value:total
+                },
         }
     })
 
@@ -72,30 +80,35 @@ const Checkout = () => {
         })
     }
 
-    const resetFieldHandler = () => {
-        const newFormData = resetFields(formField.formData,'product')
-        setFormField({
-            formData:newFormData,
-            formSuccess:true
-        });
-        setTimeout(()=>{
-            setFormField({
-                ...formField,
-                formSuccess:true
-            })
-        },3000)
+    
+    const addFee = () => {
+      const t = formField.formData.shipping.value === "flat_rate" ? total + 200 : total;
+      return t;
     }
+
+    // const resetFieldHandler = () => {
+    //     const newFormData = resetFields(formField.formData,'product')
+    //     setFormField({
+    //         formData:newFormData,
+    //         formSuccess:true
+    //     });
+    //     setTimeout(()=>{
+    //         setFormField({
+    //             ...formField,
+    //             formSuccess:true
+    //         })
+    //     },3000)
+    // }
 
     const submitForm = e => {
         e.preventDefault();
         let dataToSubmit = generateData(formField.formData,'checkout');
-        let formIsValid = isFormValid(formField.formData,'checkout');
+        // let formIsValid = isFormValid(formField.formData,'checkout');
       
-        dispatch(addOrder(dataToSubmit)).then(res => {
-          console.log(res)
-        })
-        
-        
+        console.log(dataToSubmit)
+        // dispatch(addOrder(dataToSubmit)).then(res => {
+        //   console.log(res)
+        // })   
         
     }
 
@@ -144,23 +157,37 @@ const Checkout = () => {
       }
     }
 
-    const transactionError = () => {
+    const transactionError = (data) => {
+      console.log(data)
 
     }
-    const transactionCanceled = () => {
+    const transactionCanceled = (data) => {
+      console.log(data)
 
     }
-    const transactionSuccess = () => {
-      // run submitForm combined with the of paypal 
-      // payment ID
+    const transactionSuccess = (data) => {
+      let dataToSubmit = generateData(formField.formData,'checkout');
+      // let formIsValid = isFormValid(formField.formData,'checkout');
+     
+      // console.log(dataToSubmit);
+      dispatch(addOrder({
+        orderDetail: dataToSubmit,
+        paymentData: data
+      })).then(res => {
+        if(res.payload.success){
+          setFormField({
+            ...formField,
+            formSuccess:true,
+          })
+        }else{
+          setFormField({
+            ...formField,
+            formSuccess:false,
+          })
+        }
+      })
+      
     }
-
-    const addFee = () => {
-      let t = formField.formData.shipping.value === "flat_rate" ? 200 + total : total;
-      return t;
-    }
-    console.log(addFee())
-
 
     return (
       <div className="checkout_wrapper">
@@ -267,10 +294,10 @@ const Checkout = () => {
         {
           formField.formData.paymentOptions.value === 'paypal' ? 
           <Paypal
-            toPay={formField.formData.total}
-            transactionError={(data)=>transactionError()}
-            transactionCanceled={(data)=>transactionCanceled()}
-            onSuccess={(data)=>transactionSuccess(data)}
+            toPay={addFee()}
+            transactionError={(data)=>transactionError(data)}
+            transactionCanceled={(data)=>transactionCanceled(data)}
+            transactionSuccess={(data)=>transactionSuccess(data)}
           />
           :
           <MyButton runAction={e => submitForm(e)} type="submit" title="Place order" value="Submit" />          

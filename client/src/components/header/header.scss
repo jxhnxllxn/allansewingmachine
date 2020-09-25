@@ -1,4 +1,5 @@
 .header {
+    position: fixed;
     height: 80px;
     width: 100%;
     display: flex;
@@ -10,6 +11,7 @@
     left: 0;
     background-color: rgba(#f0f2f5, .8);
     padding: 0 50px;
+    z-index: 202;
 
   
     .logo {
@@ -33,7 +35,6 @@
         transition: ease-in 3s;
       }
       .active {
-        
         &::after{
           content: "";
           display: block;
@@ -42,4 +43,5 @@
         }
       }
     }
-  }
+}
+

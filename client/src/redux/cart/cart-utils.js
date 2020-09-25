@@ -29,3 +29,13 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
       : cartItem
   );
 };
+
+
+export const updateQuantity = (cartItems, cartItemToUpdate, quantity) => {
+  return cartItems.map(cartItem =>
+    cartItem._id === cartItemToUpdate._id
+      ? { ...cartItem, quantity: parseInt(quantity) }
+      : cartItem
+  );
+
+};

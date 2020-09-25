@@ -45,6 +45,7 @@ const UserSchema = new mongoose.Schema({
     },
     contact:{
         type:String,
+        default:''
     },
     role: {
         type: String,
