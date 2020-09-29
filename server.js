@@ -48,13 +48,15 @@ cloudinary.config({
 })
 
 
-// default
-if(process.env.NODE_ENV === 'production'){
-    const path = require('path');
-    app.get('/*',(req,res)=>{
-        res.sendFile(path.resolve(__dirname,'../client','build','index.html'))
-    })
-}
+
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+  
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+  }
 
 // Dev logging middleware;
 if (process.env.NODE_ENV === 'development') {
@@ -95,7 +97,7 @@ app.get('/', (req,res) => res.send('CONNECTED'));
 
 //set static folder
 // app.use(express.static(path.join(__dirname,'public')));
-app.use(express.static('client/build'))
+// app.use(express.static('client/build'))
 
 
 //Mount routers
