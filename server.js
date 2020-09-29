@@ -93,7 +93,9 @@ app.use(cors());
 app.get('/', (req,res) => res.send('CONNECTED'));
 
 //set static folder
-app.use(express.static(path.join(__dirname,'public')));
+// app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static('client/build'))
+
 
 //Mount routers
 app.use('/api/auth',auth);
