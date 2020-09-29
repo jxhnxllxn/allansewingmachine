@@ -11,8 +11,7 @@ const fs = require('fs');
 // @route   POST /api/auth/me
 // @access  Private
 exports.getMe = asyncHandler(async(req,res,next)=>{
-    const user = await User.findById(req.user.id).select('-password');
-
+    const user = await User.findById(req.user.id).select('-password').populate('orders')
     res
         .status(200)
         .json({

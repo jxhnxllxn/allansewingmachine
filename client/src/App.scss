@@ -21,6 +21,7 @@ body {
 }
 
 input, textarea, select{
+  background-color: transparent;
   font-family: 'Roboto Condensed', sans-serif;
 }
 .main_loader {
@@ -43,6 +44,18 @@ text-align: start;
 border-radius: 2px;
 box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
 overflow: hidden;
+border-radius: 5px;
+}
+
+.disabledCard{
+  background-color: rgba(whitesmoke, .8);
+  border: 1px solid whitesmoke;
+  position: relative;
+  margin:1rem;
+  padding: 2rem 1rem 1rem 1rem;
+  text-align: start;
+  overflow: hidden;
+  border-radius: 5px;
 }
 
 table{
@@ -58,7 +71,7 @@ transform: translate(-50%,-50%);
 td, th{
 border: 1px solid #E8E4C9;
 text-align: left;
-padding: 8px;
+// padding: 8px;
 }
 
 tr:nth-child(even) {
@@ -94,5 +107,3 @@ margin-top: 10px;
   font-size: 25px;
   margin-bottom: 50px;
 }
-
-

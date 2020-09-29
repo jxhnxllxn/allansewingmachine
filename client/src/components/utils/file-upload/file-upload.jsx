@@ -27,7 +27,6 @@ const FileUpload = (props) => {
 
         axios.post('/api/auth/uploadimage',formData,config)
         .then(res => {
-            console.log(res.data)
             setState({
                 ...state,
                 uploading:false,

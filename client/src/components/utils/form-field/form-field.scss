@@ -2,7 +2,7 @@ $sub-color: grey;
 $main-color: black;
 
 @mixin shrinkLabel {
-  top: -14px;
+  top: -10px;
   font-size: 12px;
   color: $main-color;
 }
@@ -22,7 +22,7 @@ $main-color: black;
 
   .form_input {
     background: none;
-    background-color: white;
+    background-color: transparent;
     color: $sub-color;
     font-size: 15px;
     padding: 10px 10px 10px 5px;
@@ -31,7 +31,6 @@ $main-color: black;
     border: none;
     border-radius: 0;
     border-bottom: 1px solid $sub-color;
-    // margin: 25px 0;
 
     &:focus {
       outline: none;
@@ -53,7 +52,7 @@ $main-color: black;
     position: absolute;
     pointer-events: none;
     left: 5px;
-    top: 17px;
+    top: 15px;
     transition: 300ms ease all;
     backface-visibility: hidden;
 

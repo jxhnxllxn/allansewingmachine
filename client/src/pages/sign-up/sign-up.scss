@@ -1,9 +1,8 @@
-.sign-up {
+.sign_up_wrapper {
+  grid-column: center-start/center-end;
+  justify-self: center;
+  width: 380px;
   display: flex;
   flex-direction: column;
-  width: 380px;
-
-  .signIn{
-    margin-top: 2rem;
-  }
+   margin-top: 2rem;
 }

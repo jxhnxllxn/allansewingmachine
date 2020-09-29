@@ -97,21 +97,13 @@ export const addProduct = (dataToSubmit)  => {
 
 
 
-export const getProducts = () => async dispatch => {
-    axios
-        .get('/api/product')
-        .then(res => {
-            dispatch({
-                type:ProductActionTypes.GET_PRODUCTS_SUCCESS,
-                payload:res.data,
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: ProductActionTypes.GET_PRODUCTS_FAIL,
-                payload: err.response.data
-            });
-        })
+export const getProducts = () => {
+    const request = 
+        axios.get('/api/product').then(res => res.data);
+    return {
+        type: ProductActionTypes.GET_PRODUCTS_SUCCESS,
+        payload: request
+    }
 }
 
 

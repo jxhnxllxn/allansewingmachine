@@ -1,7 +1,68 @@
-import React from 'react'
+import React, { Fragment, useState } from 'react'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import Loading from '../../../components/loading/loading'
+import { getSingleOrder } from '../../../redux/order/order-action'
 import './order.scss'
 
-const OrderDetail = () => {
+const OrderDetail = (props) => {
+    const dispatch = useDispatch();
+
+    const [order, setOrder] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        dispatch(getSingleOrder(props.match.params.id)).then(res => {
+            setOrder(res.payload.data)
+            setLoading(false)
+        })
+        return () => {
+            setOrder([])
+        }
+    }, [])
+
+    console.log(order)
+
+    const table = () => (
+        loading ? 
+        <Loading />
+        :
+        <Fragment>
+            <ul>
+                <li>Name: <span>{order.user.name}</span> </li>
+                <li>Code: <span>{order.paymentId}</span></li>
+                <li>Status: <span>{order.status}</span> </li>
+                <li>Email: <span>{order.user.email}</span> </li>
+                <li>Phone: <span>{order.user.contact}</span> </li>
+                <li>Address: <span>{`${order.user.address.unit} ${order.user.address.street} ${order.user.address.city} ${order.user.address.state}`}</span></li>
+                <li>Shipping: <span>Cash on delivery</span> </li>
+                <li>Date : <span>{order.createdAt}</span></li>
+            </ul>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                    {
+                        order.product.map(col => (
+                        <tr key={col._id}>
+                        <td>{col.name}</td>       
+                        <td>{col.quantity}</td>
+                        <td>{col.price}</td> 
+                        <td>{col.quantity*col.price}</td>        
+                        </tr>
+                    ))
+                    }
+                </tbody>    
+            </table>
+        </Fragment>
+        
+    )
+
+
     return (
         <div>
             <div className="card">
@@ -14,51 +75,7 @@ const OrderDetail = () => {
                     </div>
                 </div>
                 <div className="card-body">
-                    <ul>
-                        <li>Name: <span>John Allen de Chavez</span> </li>
-                        <li>Code: <span>XXXX-xxXX</span></li>
-                        <li>Status: <span>pending</span> </li>
-                        <li>Email: <span>john@yahoo.com</span> </li>
-                        <li>Phone: <span>09902020200</span> </li>
-                        <li>Address: <span>San Felipe Padre Garcia</span></li>
-                        <li>Shipping: <span>Cash on delivery</span> </li>
-                        <li>Date : <span>jan 1,2020</span></li>
-                    </ul>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Product Name</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                                <th>Total</th>
-                            </tr>
-                            <tr>
-                                <td>Dog Food Name</td>
-                                <td>23 sock</td>
-                                <td>1000</td>
-                                <td>23000</td>
-                            </tr>
-                            <tr>
-                                <td>Dog Food Name</td>
-                                <td>23 sock</td>
-                                <td>1000</td>
-                                <td>23000</td>
-                            </tr>
-                            <tr>
-                                <td>Dog Food Name</td>
-                                <td>23 sock</td>
-                                <td>1000</td>
-                                <td>23000</td>
-                            </tr>
-                            <tr>
-                                <th>###</th>
-                                <th>###</th>
-                                <th>Total Amount:</th>
-                                <th>88000</th>
-                            </tr>
-                        </tbody>
-                    </table>
-
+                    {table()}
                 </div>
             </div>
         </div>

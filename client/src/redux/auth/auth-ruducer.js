@@ -19,6 +19,7 @@ export default function(state = initialState, action){
             }
         case AuthActionTypes.LOGIN_SUCCESS:
         case AuthActionTypes.REGISTER_SUCCESS:
+        case AuthActionTypes.CHECKOUT_CREATE_USER:
             localStorage.setItem('token',payload.token);
             return{
                 ...state,
@@ -36,17 +37,15 @@ export default function(state = initialState, action){
                 token:null,
                 isAuthenticated:false,
                 data: null,
-                isAdmin:null,
+                isAdmin:false,
                 loading:false
             }
 
         case AuthActionTypes.CHECKOUT_UPDATE_USER:
-        case AuthActionTypes.CHECKOUT_CREATE_USER:
             return{
                 ...state,
                 data:payload.data
-            }
-        
+            }       
 
         default:
             return state

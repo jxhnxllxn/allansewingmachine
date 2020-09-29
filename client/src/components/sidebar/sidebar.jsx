@@ -12,11 +12,9 @@ const Sidebar = () => {
             <img src={require('../../../src/assets/img/brand.png')} className="profile_image" alt="" />
         </div>
         <NavLink exact to="/admin" className="option">Dashboard</NavLink>
+        <NavLink to="/admin/product" className="option">Product</NavLink>
         <NavLink to="/admin/collection" className="option">Collection</NavLink>
         <NavLink to="/admin/category" className="option">Category</NavLink>
-        <NavLink to="/admin/product" className="option">Product</NavLink>
-        <NavLink to="/admin/notification" className="option">Notification</NavLink>
-        <NavLink to="/admin/help" className="option">Help</NavLink>
         <Link to="/" className="option" onClick={() => dispatch(logout())}>Logout</Link>
     </div>
     )

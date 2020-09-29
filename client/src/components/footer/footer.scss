@@ -6,12 +6,16 @@
         flex-direction: column;
         .logo{
             align-self: center;
+            font-size: 2.5rem;
         }
         .wrapper{
             display: flex;
             justify-content: space-around;
-            padding: 2rem;
+            flex-wrap: wrap;
+            padding: 3rem 0;
             .left{
+                
+                padding: 3rem 0;
                 div > *{
                     display: flex;
                     margin: 5px 0;

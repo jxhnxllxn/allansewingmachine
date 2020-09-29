@@ -105,12 +105,13 @@ const FormField = ({formData, change, id, addStyle}) => {
                                         value={item.value}
                                         onChange={(event)=>change({event,id})}
                                     />
+                                    
+                                {showError()}
                                 </div>
-                                
+
                             ))
                         }
                         
-                        {showError()}
                     </div>
                     
                 )

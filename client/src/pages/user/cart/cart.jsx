@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import CartItem from '../../../../components/cart-item/cart-item';
-import {selectCartItems,selectCartTotal} from '../../../../redux/cart/cart-selectors';
-import MyButton from '../../../../components/utils/button/button';
+import CartItem from '../../../components/cart-item/cart-item';
+import {selectCartItems,selectCartTotal} from '../../../redux/cart/cart-selectors';
+import MyButton from '../../../components/utils/button/button';
 import './cart.scss'
   
 
@@ -11,6 +11,7 @@ const Cart = (props) => {
     const total = useSelector(state => selectCartTotal(state));
     
     return (
+        cartItems.length? 
         <div className='checkout-page'>
             <div className='checkout-header'>
             <div className='header-block'>
@@ -35,6 +36,10 @@ const Cart = (props) => {
             <div className='total'>TOTAL: Php {total}.00 <br/><MyButton type="primary" title="Checkout" runAction={()=>props.history.push('/cart/checkout')}/></div>
             <div className="checkot_button"></div>
            
+        </div>
+        : <div className="no_result checkout-page">
+            Your cart is empty
+            <MyButton title="shop now" type="default" linkTo="/shop"/>
         </div>
     )
 }

@@ -16,7 +16,7 @@ const Product = (props) => {
   const dispatch = useDispatch()
   
   return (
-    <div className={`card ${props.grid}`} >
+    <div className={`product_wrapper card ${props.grid}`}>
         <div className="image" style={{background:`url(${renderCardImage(props.images)})`,backgroundSize:'cover'}}>
         </div>
 

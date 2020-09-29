@@ -28,7 +28,7 @@ const CartDropdown = ({history}) => {
             <MyButton className="cart_dropdown_button"  type="primary" 
                 runAction={() => {
                     dispatch(toggleCartHidden());
-                    history.push('/cart');
+                    history.push('/user/cart');
                     }
                 }  
                 title="Go to Cart" />

@@ -2,25 +2,18 @@ import axios from "axios";
 import { setAlert } from "../alert/alert-action";
 import { CategoryActionTypes } from "./category-types"; 
 
-export const getCategories = () => async dispatch => {
-    axios
+export const getCategories = () => {
+    const request = axios
         .get('/api/category')
-        .then(res => {
-            dispatch({
-                type:CategoryActionTypes.GET_CATEGORIES,
-                payload:res.data,
-            })
-        })
-        .catch(err => {
-            dispatch({
-                type: CategoryActionTypes.GET_CATEGORIES_FAIL,
-                payload: err.response.data
-            });
-        })
+        .then(res => res.data)
+
+        return {
+            type: CategoryActionTypes.GET_CATEGORIES,
+            payload: request
+        }
 }
 
 export const addCategory = (dataToSubmit)  => {
-
     const request = axios
         .post('/api/category',dataToSubmit)
         .then(res => res.data)

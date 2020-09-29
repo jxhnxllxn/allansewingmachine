@@ -1,10 +1,4 @@
 import React from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faCompass} from '@fortawesome/free-solid-svg-icons';
-import {faPhone} from '@fortawesome/free-solid-svg-icons';
-import {faClock} from '@fortawesome/free-solid-svg-icons';
-import {faEnvelope} from '@fortawesome/free-solid-svg-icons';
-
 import './footer.scss'
 
 const Footer = () => {
@@ -19,40 +13,42 @@ const Footer = () => {
                         <h2>Contact information</h2>
                         <div className="business_nfo">
                             <div >
-                                <FontAwesomeIcon
-                                    icon={faCompass}
-                                    className="icon"
-                                />
+                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-location" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                <path d="M21 3l-6.5 18a0.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a0.55 .55 0 0 1 0 -1l18 -6.5" />
+                            </svg>
                                 <div className="nfo">
                                     <div>Address</div>
                                     <div>0736 Purok V. Brgy. Namunga, Rosario, Batangas</div>
                                 </div>
                             </div>
                             <div >
-                                <FontAwesomeIcon
-                                    icon={faPhone}
-                                    className="icon"
-                                />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-phone" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                                </svg>
                                 <div className="nfo">
                                     <div>Phone</div>
                                     <div>(043) 3211441 / 09175067645 / 09228189301 / 09478904024</div>
                                 </div>
                             </div>
                             <div >
-                                <FontAwesomeIcon
-                                    icon={faClock}
-                                    className="icon"
-                                />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-clock" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <circle cx="12" cy="12" r="9" />
+                                    <polyline points="12 7 12 12 15 15" />
+                                </svg>
                                 <div className="nfo">
                                     <div>Open hours</div>
                                     <div>Mon-Sat 8:00 AM - 5:00 AM</div>
                                 </div>
                             </div>
                             <div >
-                                <FontAwesomeIcon
-                                    icon={faEnvelope}
-                                    className="icon"
-                                />
+                                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-mail" width="36" height="36" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <rect x="3" y="5" width="18" height="14" rx="2" />
+                                    <polyline points="3 7 12 13 21 7" />
+                                </svg>
                                 <div className="nfo">
                                     <div>Email</div>
                                     <div>rdgagri-venturescompany@yahoo.com</div>
@@ -69,7 +65,13 @@ const Footer = () => {
                         </div>
                     </div>      
                 </div>
+                    <div className="credits">
+                        <h4>&copy; RDG Agri-Ventures Company</h4>
+                        <h5>Powered by John Allen</h5>
+                    </div>
+                    
             </div>
+
         </footer>
     )
 }

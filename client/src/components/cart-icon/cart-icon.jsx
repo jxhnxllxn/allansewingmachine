@@ -11,7 +11,7 @@ const CartIcon = () => {
   return (
     <div className='cart-icon' onClick={() => dispatch(toggleCartHidden())}>
       <ShoppingIcon className='shopping-icon' />
-      <span className='item-count'>{itemCount}</span>
+      <span className='item-count'>{itemCount > 0 ? itemCount : null}</span>
     </div>
   )
 }

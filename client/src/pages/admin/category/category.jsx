@@ -11,13 +11,21 @@ import './category.scss'
 import { useDispatch, useSelector } from 'react-redux';
 
 const Category = () => {
+    const [categories, setCategories] = useState({
+        categories:[],
+        loading:true
+    })
 
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getCategories());
+        dispatch(getCategories()).then(res => {
+            setCategories({
+                categories:res.payload.data,
+                loading:false
+            })
+        })
     }, []);
 
-    const categories = useSelector(state => state.category.categories);
     const loading = useSelector(state => state.category.loading);
 
     const [modalData, setModalData] = useState(null);
@@ -100,14 +108,15 @@ const Category = () => {
         modalRef.current.closeModal()
     }
 
-    const data = categories && !loading ? categories : [];
-  
-    const tableData = data.map(col => (
-        <tr key={col._id}>
-            <td>{col.name}</td>
-            <td><button onClick={() => openModal(col)}>Delete</button></td>
-        </tr>
-    ));
+    const tableData = categories &&
+            categories.categories.map(col => (
+                <tr key={col._id}>
+                    <td>{col.name}</td>
+                    <td><button onClick={() => openModal(col)}>Delete</button></td>
+                </tr>
+            ));
+
+
 
     
     const handleDeleteCategory = async e => {
@@ -118,10 +127,9 @@ const Category = () => {
 
     return (
         <div className="admin-category">
-            <div className="add-category">
-                
-                <div className="card">
-                    <h2>Add category</h2>          
+
+            <div className="card table-category">
+            <h2>Add category</h2>          
                     <form onSubmit={(e) => submitForm(e)}>
                         <FormField
                             id={'name'}
@@ -131,17 +139,12 @@ const Category = () => {
                             <MyButton onClick={(e) => submitForm(e)} type="submit" title="Add Category" value="Submit" /> 
                         
                     </form>      
-                </div>
-            </div>
-
-
-            <div className="card table-category">
                 <div className="table-header">
                     <h2>Manage category</h2>
                     {/* <FormInput type="text" name="search" value={searchInput} onChange={e => updateForm(e)} label="Search" /> */}
                 </div>
     
-                {!loading ?  
+                {!categories.loading ?  
                     <table>
                         <thead>
                             <tr>
@@ -153,7 +156,7 @@ const Category = () => {
                             {tableData}
                         </tbody>
                         
-                    </table> : <Loading></Loading>
+                    </table> : <Loading />
                 }
                 <Modal ref={modalRef}>
     

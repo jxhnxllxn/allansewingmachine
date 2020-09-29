@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/auth/auth-action";
@@ -116,9 +116,9 @@ import './sign-up.scss';
 
 
   return (
-    <Fragment>
-      <div className='sign-up card'>
-        <h2>Do not have a account?</h2>
+    <div className='sign_up_wrapper'>
+      <div className="card">
+      <h2>Do not have a account?</h2>
         <span>Sign up with your email and password</span>
         <form onSubmit={e => submitForm(e)}>
             <FormField
@@ -153,9 +153,10 @@ import './sign-up.scss';
 
 
         <span className="signIn">Already have an account sign in <Link style={{textDecoration:'underline'}} to='/signin'>here</Link></span>
+
       </div>
-    </Fragment>
-  )
+    </div>
+)
 }
 
 export default SignUp;

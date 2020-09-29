@@ -12,8 +12,13 @@
       padding-right: 15px;
   
       img {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
+        display: block;
+        object-fit: cover;
+        border: 1px solid #ddd;
+        opacity: 0.7;
+        border-radius: 5px;
       }
     }
     .name,.quantity,.price {

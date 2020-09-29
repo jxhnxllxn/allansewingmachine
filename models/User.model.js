@@ -11,7 +11,7 @@ const UserSchema = new mongoose.Schema({
     email:{
         type:String,
         required:[true,'Please add email'],
-        unique:true,
+        unique:[true,'Email already taken'],
         match:[
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
             'Please add a valid email'
@@ -58,32 +58,16 @@ const UserSchema = new mongoose.Schema({
         minlength: [6,'Password minimum length is 6'],
         select: false
     },
-    // orders:{
-    //     add_info:{},
-    //     order:[{
-    //         name:{
-    //             type:String,
-    //         },
-    //         quantity:{
-    //             type:Number,
-    //         },
-    //     }],
-    //     total:{type:Number,},
-    //     payment_method:{type:String,},
-    //     shipping:{type:String,},
-    // },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
 },
 //virtual 
 {
     toJSON:{virtuals:true},
     toObject:{virtuals:true}
-});
+},
+{timestamps:true}
+);
 
 //Encypt password
 UserSchema.pre('save', async function(next){
@@ -94,6 +78,14 @@ UserSchema.pre('save', async function(next){
     const salt = await bcyrpt.genSalt(10);
     this.password = await bcyrpt.hash(this.password,salt);
 });
+
+UserSchema.post('save', function(error, doc, next) {
+    if (error.name === 'MongoError' && error.code === 11000) {
+      next(new Error('Email already taken.'));
+    } else {
+      next();
+    }
+  });
 
 //Sign JWT and return
 UserSchema.methods.getSignedJwtToken = function(){

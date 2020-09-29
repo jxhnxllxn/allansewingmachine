@@ -12,7 +12,7 @@ const SettingDropdown = () => {
     return(
         <div className="setting_dropdown">
             <ul>
-                <li><Link to='/setting' onClick={() => dispatch(closeAllMenu())}>Setting</Link></li>
+                <li><Link to='/user/dashboard' onClick={() => dispatch(closeAllMenu())}>Setting</Link></li>
                 <li><Link onClick={() => dispatch(logout())} to='/'>Sign out</Link></li>
             </ul>
         </div>

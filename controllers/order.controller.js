@@ -5,43 +5,70 @@ const Product = require('../models/product/Product.model');
 
 const async = require('async');
 
-// @desc    get all Orders
-// @route   GET /api/v1/orders
-// @route   GET /api/v1/order/:orderId/orders
-// @access  Private
+exports.searchIndex = asyncHandler(async (req,res,next) => {
+    
+    const result = await Order.find(
+        { "$or": [
+            { "name": {  $regex : new RegExp(req.params.i,'i')} }, 
+            { "status": {  $regex : new RegExp(req.params.i,'i') }},   
+            { "total": {  $regex : new RegExp(req.params.i,'i') }},   
 
-exports.getOrders = asyncHandler(async (req,res,next) => {
-    let query;
-
-    if(req.params.orderId){
-        query = Order.find({ order:req.params.orderId })
-        // console.log({orderOwne:req.params.orderId});
-    }else{
-        query = Order.find().populate({
-            path:'order',
-            select:'orderName'
-        });
-    }
-
-    const orders = await query;
+            ]
+        },
+         {
+            __v:0
+        }
+    )
 
     res.status(200).json({
         success:true,
-        count:orders.length,
-        data:orders
+        count:result.length,
+        data:result
+    })  
+
+});
+
+// @desc    get all Orders
+// @route   GET /api/orders
+// @route   GET /api/order/:orderId/orders
+// @access  Private
+
+exports.dashboardAdmin = asyncHandler(async (req,res,next) => {
+    const pending = await Order.find({ status:'pending'}).countDocuments()
+    const canceled = await Order.find({ status:'canceled'}).countDocuments()
+    const processed = await Order.find({ status:'processed'}).countDocuments()
+    const all = await Order.find().countDocuments()
+
+    res.status(200).json({
+        success:true,
+        count:{
+            pending:pending,
+            canceled:canceled,
+            processed:processed,
+            all:all
+        }
     })
+});
+
+
+exports.getOrders = asyncHandler (async (req,res,next)=>{
+
+    res
+        .status(200)
+        .json(res.advanceResults);
+   
 });
 
 
 
 // @desc    get single Orders
-// @route   GET /api/v1/orders/:id
+// @route   GET /api/orders/:id
 // @access  Private
 
 exports.getOrder = asyncHandler(async (req,res,next) => {
    const order = await Order.findById(req.params.id).populate({
-       path:'order',
-       select:'name email'
+       path:'user',
+       select:'name email address contact'
    });
 
    if(!order){
@@ -54,14 +81,33 @@ exports.getOrder = asyncHandler(async (req,res,next) => {
 });
 
 
+exports.getOrderHistory = asyncHandler(async (req,res,next) => {
+    const order = await Order.find(
+        {user:req.user._id})
+
+
+    if(!order){
+        return next(new errorResponse(`No order with the id of ${req.user._id}`),404);
+    }
+     res.status(200).json({
+         success:true,
+         data:order
+     })
+ });
+ 
+ 
+
+
 // @desc    Add Orders
-// @route   GET /api/v1/order/:orderId/orders
+// @route   GET /api/order/:orderId/orders
 // @access  Private
 
 exports.addOrder =  (req,res,next) => {
     req.body.user = req.user.id;
+    console.log(req.user)
     let orderDetail = {
         user:req.user._id,
+        name:req.user.name,
         paymentId: req.body.paymentData.paymentID,
         product: req.body.orderDetail.orders,
         additionalInfo: req.body.orderDetail.additionalInfo,
@@ -108,7 +154,7 @@ exports.addOrder =  (req,res,next) => {
  };
 
 // @desc   Update Order
-// @route   GET /api/v1/order/:orderId/orders
+// @route   GET /api/order/:orderId/orders
 // @access  Private
 
 exports.updateOrder = asyncHandler(async (req,res,next) => {
@@ -142,7 +188,7 @@ exports.updateOrder = asyncHandler(async (req,res,next) => {
  
  
 // @desc    Delete Order
-// @route   GET /api/v1/order/:orderId/orders
+// @route   GET /api/order/:orderId/orders
 // @access  Private
 
 exports.deleteOrder = asyncHandler(async (req,res,next) => {
@@ -170,3 +216,6 @@ exports.deleteOrder = asyncHandler(async (req,res,next) => {
          data:order
      })
  });
+
+
+ 

@@ -1,5 +1,6 @@
 .page_layout{
     display: grid;
+    min-height: 100vh;
     grid-template-columns:[full-start] minmax(4rem,1fr) [center-start] repeat(6, [col-start] minmax(min-content,14rem)[col-end]) [center-end] minmax(4rem,1fr) [full-start] ;
 }
 
@@ -10,5 +11,5 @@
     bottom: 0;    
     right: 0; 
     background-color: transparent;
-    z-index: 200;
+    z-index: 101;
 }

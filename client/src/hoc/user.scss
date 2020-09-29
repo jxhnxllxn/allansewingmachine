@@ -1,0 +1,23 @@
+.user_layout{
+    grid-column: center-start / center-end;
+    .user_container {
+        display:flex;
+        margin-bottom: 50px;
+        min-height: 700px;
+        .user_left_nav {
+            border-right: 1px solid #f8f8f8; 
+            .links a {
+                display: block;
+                border-bottom: 1px solid #dddddd;
+                font-size: 20px;
+                font-weight: 300;
+                padding: 10px 0px;
+                width: 280px;
+            }
+        }
+        .user_right {
+            flex-grow: 1;
+            padding: 0 0 0 29px;
+        }
+    }
+}

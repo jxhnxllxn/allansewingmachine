@@ -6,9 +6,48 @@ const orderSchema = new mongoose.Schema({
         ref:'User',
         required:true
     },
+    name:{
+        type:String,
+        required:[true, 'Sorry something goes wrong'],
+        
+    },
+    // email:{
+    //     type:String,
+    //     required:[true, 'Sorry something goes wrong']
+    // },
+    // address:{
+    //     city:{
+    //         type:String,
+    //         default:''
+    //     },
+    //     country:{
+    //         type:String,
+    //         default:''
+    //     },
+    //     state:{
+    //         type:String,
+    //         default:''
+    //     },
+    //     street:{
+    //         type:String,
+    //         default:''
+    //     },
+    //     unit:{
+    //         type:String,
+    //         default:''
+    //     },
+    //     zipcode:{
+    //         type:String,
+    //         default:''
+    //     }
+    // },
+    // contact:{
+    //     type:String,
+    //     required:[true, 'Sorry something goes wrong']
+    // },
     total:{
         required:[true, 'Make some orders'],
-        type:Number,
+        type:String
     },
     additionalInfo:{
         type:String,
@@ -23,28 +62,34 @@ const orderSchema = new mongoose.Schema({
         type:String,
     },
     product:[{
+        _id:{
+            type:String,
+            required:[true,'Product not available']
+        },
         name:{
             type:String,
             required:[true,'Product not available']
         },
         quantity:{
             type:Number,
+            default:0,
             required:[true,'Make some orders']
         },
-        available:{
+        price:{
             type:Number,
+            default:0,
             required:[true,'Make some orders']
         },
-        sold:{
-            type:Number,
-            required:[true,'Make some orders']
-        }
+        
     }],
     status:{
         type: String,
         enum: ['pending','canceled','doned'],
-        default: 'pending'
+        default: 'pending',
+        
     }
-});
+},
+{timestamps:true}
+);
 
 module.exports = mongoose.model('Order',orderSchema);

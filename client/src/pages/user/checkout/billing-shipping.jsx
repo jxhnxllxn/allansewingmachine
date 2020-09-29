@@ -1,14 +1,12 @@
 import React, { Fragment, useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { checkoutCreateUser, checkoutUpdateUser } from "../../../../redux/auth/auth-action";
-import {selectIsAuth,selectCurrentUser} from '../../../../redux/auth/auth-selector'
-import {update,generateData,isFormValid,resetFields} from '../../../../components/utils/form-action/form-action';
-import MyButton from '../../../../components/utils/button/button'
-import FormField from '../../../../components/utils/form-field/form-field'
-
-const BillingShipping = () => {
-    
+import { checkoutCreateUser, checkoutUpdateUser } from "../../../redux/auth/auth-action";
+import {selectIsAuth,selectCurrentUser} from '../../../redux/auth/auth-selector'
+import {update,generateData,isFormValid,resetFields, populateFields} from '../../../components/utils/form-action/form-action';
+import MyButton from '../../../components/utils/button/button'
+import FormField from '../../../components/utils/form-field/form-field'
+const BillingShipping = (props) => {    
     const currentUser = useSelector(state => selectCurrentUser(state));
     const isAuthenticated = useSelector(state => selectIsAuth(state));
     const dispatch = useDispatch();
@@ -20,170 +18,198 @@ const BillingShipping = () => {
             name:{
                 element:'input',
                 label:'Full Name',
-                value: isAuthenticated ? currentUser.name : '',
+                value: '',
                 config:{
                     name:'name_input',
                     type:'text',
                 },
                 validation:{
-                    required:true,
+                    required: true
                 },
-                valid:false,
-                touched:false,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             contact:{
                 element:'input',
                 label:'Contact No.',
-                value:isAuthenticated ? currentUser.contact : '',
+                value: '',
                 config:{
                     name:'contact_input',
                     type:'text',
                 },
                 validation:{
-                    required:true,
+                    required: true
                 },
-                valid:false,
-                touched:false,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             unit:{
                 element:'input',
                 label:'Unit/House no.',
-                value:isAuthenticated ? currentUser.address.unit : '',
+                value: '',
                 config:{
                     name:'unit_input',
                     type:'text',
                 },
                 validation:{
-                    required:true,
+                    required: true
                 },
-                valid:false,
-                touched:false,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             street:{
                 element:'input',
                 label:'Street',
-                value:isAuthenticated ? currentUser.address.street : '',
+                value:'',
                 config:{
                     name:'street_input',
                     type:'text',
                 },
                 validation:{
-                    required:true,
+                    required: true
                 },
-                valid:false,
-                touched:false,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             city:{
                 element:'input',
                 label:'City',
-                value:isAuthenticated ? currentUser.address.city : '',
+                value:'',
                 config:{
                     name:'city_input',
                     type:'text',
                 },
                 validation:{
-                    required:true,
+                    required: true
                 },
-                valid:false,
-                touched:false,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             state:{
                 element:'input',
                 label:'State / Province',
-                value:isAuthenticated ? currentUser.address.state : '',
+                value:'',
                 config:{
                     name:'state_input',
                     type:'text',
                 },
                 validation:{
-                    required:true,
+                    required: true
                 },
-                valid:false,
-                touched:false,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             zipcode:{
                 element:'input',
                 label:'Postal/Zip code',
-                value:isAuthenticated ? currentUser.address.zipcode : '',
+                value:'',
                 config:{
                     name:'zipcode_input',
                     type:'text',
                 },
                 validation:{
-                    required:true,
+                    required: true
                 },
-                valid:false,
-                touched:false,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             country:{
                 element:'input',
                 label:'Country',
-                value: 'Philippines only',
+                value: '',
                 config:{
                     name:'country_input',
                     type:'text',
                     disabled:true,
                 },
-                valid:true,
-                touched:true,
+                validation:{
+                    required: true
+                },
+                valid: false,
+                touched: false,
                 validationMessage:''
-            },
+              },
             email:{
                 element:'input',
                 label:'Email',
-                value:isAuthenticated ? currentUser.email : '',
+                value:'',
                 config:{
                     name:'email_input',
                     type:'email',
                 },
                 validation:{
-                    required:true,
-                    email:true,
+                    required: true,
+                    email:true
                 },
-                valid:isAuthenticated,
-                touched:isAuthenticated,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             password:{
                 element:'input',
                 label:'Password',
-                value:'1',
+                value:'',
                 config:{
                     name:'password_input',
                     type:'password',
                 },
                 validation:{
-                    required:!isAuthenticated,
+                    required: false
                 },
-                valid:isAuthenticated,
-                touched:isAuthenticated,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
             confirmPassword:{
                 element:'input',
                 label:'Confirm password',
-                value:'1',
+                value:'',
                 config:{
                     name:'confirm_password_input',
                     type:'password',
                 },
                 validation:{
-                    required:!isAuthenticated,
+                    required: false,
                     confirm: 'password'
                 },
-                valid:isAuthenticated,
-                touched:isAuthenticated,
+                valid: false,
+                touched: false,
                 validationMessage:''
             },
         }
     })
+
+    console.log(currentUser)
+    
+
+    useEffect(() => {
+        if(isAuthenticated){
+            const user = {
+                city:currentUser.address.city,
+                country:currentUser.address.country,
+                state:currentUser.address.state,
+                street:currentUser.address.street,
+                unit:currentUser.address.unit,
+                zipcode:currentUser.address.zipcode,
+                contact:currentUser.contact,
+                email:currentUser.email,
+                name:currentUser.name,
+            }
+            const newFormData = populateFields(formField.formData,user);
+            setFormField({
+                ...formField,
+                formData: newFormData
+            })
+        }
+        
+    }, [])
 
     const updateForm = (element) => {
         const newFormData = update(element,formField.formData,'billing');
@@ -205,16 +231,13 @@ const BillingShipping = () => {
                 ...formField,
                 formSuccess:true
             })
-        },3000)
+        },5000)
     }
 
     const submitForm = e => {
         e.preventDefault();
         let dataToSubmit = generateData(formField.formData,'billing');
         let formIsValid = isFormValid(formField.formData,'billing');
-        console.log(formIsValid)
-        // setErrors(true)
-
         if(formIsValid){
             if(isAuthenticated){
                 dispatch(checkoutUpdateUser(dataToSubmit)).then(res =>{ 
@@ -223,6 +246,13 @@ const BillingShipping = () => {
                         ...formField,
                         formSuccess:true
                     });
+
+                    setTimeout(() => {
+                        setFormField({
+                            ...formField,
+                            formSuccess:false,
+                        });
+                    }, 5000);
                   }else{
                     setFormField({
                         ...formField,
@@ -230,28 +260,54 @@ const BillingShipping = () => {
                         formErrorMessage:res.payload.error
                     })
                   }
-                }).catch(err => console.log(err.error))
-            }else{
-                dispatch(checkoutCreateUser(dataToSubmit)).then(res =>{
-                  if(res.payload.success){
+                })
+                
+                .catch(err => {
                     setFormField({
                         ...formField,
-                        formSuccess:true,
-                        formErrorMessage:res.payload.error
-                    });
-                  }else{
-                    setFormField({
-                        ...formField,
-                        formError:true
+                        formError:true,
+                        formErrorMessage:err.response.data.error
                     })
-                  }
-                }).catch(err => console.log(err.error))
+                })
+                
+            }else{
+                dispatch(checkoutCreateUser(dataToSubmit))
+
+                    .then(res => {
+                    if(res.payload.success){
+                        setFormField({
+                            ...formField,
+                            formSuccess:true,
+                        });
+
+                        setTimeout(() => {
+                            setFormField({
+                                ...formField,
+                                formSuccess:false,
+                            });
+                        }, 5000);
+                    }else{
+                        setFormField({
+                            ...formField,
+                            formError:true,
+                            formErrorMessage:res.payload.error
+                        })
+                    }
+                    })
+
+                    .catch(err => {
+                        setFormField({
+                            ...formField,
+                            formError:true,
+                            formErrorMessage:err.response.data.error
+                        })
+                    })
             }
         }else{
-            console.log(dataToSubmit,'failed')
             setFormField({...formField,formError:true})
         }
     }
+
 
 
     return (
@@ -325,9 +381,15 @@ const BillingShipping = () => {
                     
                     <MyButton runAction={e => submitForm(e)} type="submit" title={isAuthenticated ? "Update detail":"Create account"} value="Submit" />
 
+                    {formField.formSuccess ?
+                        <div className="success_label">
+                            <h1>Successfull</h1>
+                        </div> : null
+                    }
+
                     {formField.formError ?
                         <div className="error_label">
-                            {console.log(formField.formErrorMessage)}
+                            <h1>{formField.formErrorMessage}</h1>
                         </div> : null
                     }
             

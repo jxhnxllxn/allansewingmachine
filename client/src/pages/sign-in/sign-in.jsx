@@ -84,32 +84,34 @@ import './sign-in.scss';
         }
 
         return (
-            <div className="sign-in card">
-                <h2>Already have an account?</h2>
-                <span>Sign in with your email and password</span>
+            <div className="sign_in_wrapper">
+                <div className="card">
+                    <h2>Already have an account?</h2>
+                    <span>Sign in with your email and password</span>
 
-                <form onSubmit={e => submitForm(e)}>
-                    <FormField
-                        id={'email'}
-                        formData={formField.formData.email}
-                        change={(element) => updateForm(element)}
-                    />
-                    <FormField
-                        id={'password'}
-                        formData={formField.formData.password}
-                        change={(element) => updateForm(element)}
-                    />
+                    <form onSubmit={e => submitForm(e)}>
+                        <FormField
+                            id={'email'}
+                            formData={formField.formData.email}
+                            change={(element) => updateForm(element)}
+                        />
+                        <FormField
+                            id={'password'}
+                            formData={formField.formData.password}
+                            change={(element) => updateForm(element)}
+                        />
 
-                    <MyButton runAction={e => submitForm(e)} type="submit" title="Sign In" value="Submit" />
-                </form>
-                
-                {formField.formError ?
-                    <div className="error_label">
-                        Please check your data
-                    </div> : null
-                }
+                        <MyButton runAction={e => submitForm(e)} type="submit" title="Sign In" value="Submit" />
+                    </form>
+                    
+                    {formField.formError ?
+                        <div className="error_label">
+                            Please check your data
+                        </div> : null
+                    }
 
-                <span className="signUp">Don't have account register <Link style={{textDecoration:'underline'}} to='/signup'>here</Link></span>
+                    <span className="signUp">Don't have account register <Link style={{textDecoration:'underline'}} to='/signup'>here</Link></span>
+                </div>
             </div>
         )
     }

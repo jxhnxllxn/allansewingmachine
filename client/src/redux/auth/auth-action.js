@@ -20,7 +20,6 @@ import setAuthToken from "../../utils/setAuthToken";
 // }
 // load user
 export const auth = () => async dispatch => {
-    console.log('runned')
     if(localStorage.token){
         setAuthToken(localStorage.token);
     }
@@ -67,7 +66,7 @@ export const login = (dataToSubmit) => {
 }
 
 //logout
-export const logout = () => async dispatch => {
+export const logout = () => {
     const request = axios.get('/api/auth/logout')
     .then(response => response.data);
 
@@ -92,8 +91,7 @@ export const checkoutCreateUser = dataToSubmit => {
         }
   }
   
-  export const checkoutUpdateUser = dataToSubmit => {
-  
+export const checkoutUpdateUser = dataToSubmit => {
     const request = axios
         .put('/api/auth/updatedetail',dataToSubmit)
         .then(res => res.data)
@@ -102,4 +100,16 @@ export const checkoutCreateUser = dataToSubmit => {
             payload: request
         }
     
+  }
+
+//   updatepassword
+  
+export const updatePassword = dataToSubmit => {
+    const request = axios
+        .put('/api/auth/updatepassword',dataToSubmit)
+        .then(res => res.data)
+        return {
+            type: AuthActionTypes.UPDATE_PASSWORD,
+            payload: request
+        }
   }

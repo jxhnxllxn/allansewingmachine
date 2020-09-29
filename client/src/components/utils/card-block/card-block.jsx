@@ -23,10 +23,9 @@ const CardBlock = (props) => {
                     :null
                 }
                 <div style={{
-                    width:'100%',
                     display:'grid',
-                    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-                    gridGap: '1rem',
+                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 280px))",
+                    gridGap: '2rem',
                     justifyContent:'center',
                     alignItems:'center'
                 }}>

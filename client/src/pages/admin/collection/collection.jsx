@@ -8,19 +8,28 @@ import MyButton from '../../../components/utils/button/button';
 import Loading from "../../../components/loading/loading";
 import Modal from '../../../components/modal/modal'
 import FileUpload from '../../../components/utils/file-upload/file-upload'
-// import FormInput from '../../../components/utils/form-field/form-field'
 import './collection.scss'
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const Collection = () => {
-
+    const [collections, setCollections] = useState({
+        collections:[],
+        loading:true
+    })
     useEffect(() => {
-        dispatch(getCollections())
-    }, [getCollections]);
+        dispatch(getCollections()).then(res => {
+            setCollections({
+                ...collections,
+                collections:res.payload.data,
+                loading:false
+            })
+        })
+        return () => {
+            setCollections([])
+        }
+    }, [])
 
     const dispatch = useDispatch()
-    const collections = useSelector(state => state.collection.collections);
-    const loading = useSelector(state => state.collection.loading);
 
     const [modalData, setModalData] = useState(null);
 
@@ -132,17 +141,17 @@ const Collection = () => {
         }
       }
 
-    const data = collections && !loading ? collections : [];
-  
-    const tableData = data.map(col => (
-        <tr key={col._id}>
-            <td>{col.name}</td>       
-            <td><img className="collectionPhoto" src={`${renderImage(col.images)}`} alt='collection_image'/></td>  
-            <td>view | <button onClick={() => openModal(col)}>Delete</button></td>
-        </tr>
-    ));
 
-    
+    const tableData = collections &&
+            collections.collections.map(col => (
+                <tr key={col._id}>
+                    <td>{col.name}</td>       
+                    <td><img className="collectionPhoto" src={`${renderImage(col.images)}`} alt='collection_image'/></td>  
+                    <td>view | <button onClick={() => openModal(col)}>Delete</button></td>      
+                </tr>
+            ));
+
+
     const handleDeleteCollection = async e => {
         e.preventDefault();
         deleteCollection(modalData._id);
@@ -177,22 +186,24 @@ const Collection = () => {
                     <h2>Manage collection</h2>
                     {/* <FormInput type="text" name="search" value={searchInput} onChange={e => updateForm(e)} label="Search" /> */}
                 </div>
-    
-                {!loading ?  
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Collection Image</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tableData}
-                        </tbody>
-                        
-                    </table> : <Loading></Loading>
+                {
+                    !collections.loading ? 
+                            <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Collection Image</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tableData}
+                            </tbody>
+
+                        </table>
+                        :<Loading />
                 }
+                    
                 <Modal ref={modalRef}>
     
                 {modalData && <Fragment>
@@ -210,8 +221,6 @@ const Collection = () => {
                                 <MyButton onClick={closeModal} type="primary" title="Cancel" value="Submit" /> 
                             </div>
                         </form>
-                            
-                    
                 </Fragment>}
                    
                </Modal> 

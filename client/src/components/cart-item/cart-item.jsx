@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import useDebounce from "../utils/debounce";
+import addComma from '../../components/utils/add-comma';
 import './cart-item.scss'
 
 import {
     clearItem,
-    addItem,
-    removeItem,
     updateQuantity
   } from '../../redux/cart/cart-action';
 
@@ -37,34 +36,18 @@ const CartItem = (props) => {
     );
     
 
-    
-    // const onChange = e => setData({[e.target.name]:e.target.value});
-
-
-
     return (
         <div className='checkout-item'>
         <div className='image-container'>
             <img src={renderImage(props.cartItem.images)} alt='item' />
         </div>
         <span className='name'>{props.cartItem.name}</span>
-        {/* <span className='quantity'>
-            <div className='arrow' onClick={() => dispatch(removeItem(props.cartItem))}>
-            &#10094;
-            </div>
-            <span className='value'>{props.cartItem.quantity}</span>
-            <div className='arrow' onClick={() => dispatch(addItem(props.cartItem))}>
-            &#10095;
-            </div>
-            
-            <span className='value'>{props.cartItem.unit}</span>
-        </span> */}
-
+    
         <span className='quantity'>
             <input type='number' name="quantity" value={quantity} onChange={handleChange} min='1' />
         </span>
 
-        <span className='price'>{props.cartItem.price}</span>
+        <span className='price'>Php {addComma(props.cartItem.price)}.00</span>
         <div className='remove-button' onClick={() => dispatch(clearItem(props.cartItem))}>
             &#10005;
         </div>

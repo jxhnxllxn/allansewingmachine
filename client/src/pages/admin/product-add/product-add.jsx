@@ -7,7 +7,7 @@ import {update,generateData,isFormValid,populateOptionFields, resetFields} from 
 import MyButton from '../../../components/utils/button/button';
 import { useEffect } from 'react';
 import FileUpload from '../../../components/utils/file-upload/file-upload';
-
+import './product-add.scss'
 const ProductAdd = () => {
 
     const updateFields = (newFormData) => {
@@ -260,9 +260,9 @@ const ProductAdd = () => {
 
     return (
         <div className="card">
-            <h1>Product Add</h1>
-            <form onSubmit={(e) => submitForm(e)}>
+            <form className="product_add_wrapper" onSubmit={(e) => submitForm(e)}>
 
+            <h1>Add product</h1>
                 <FileUpload 
                     imagesHandler={(images)=> imagesHandler(images)}
                     reset={formField.formSuccess}

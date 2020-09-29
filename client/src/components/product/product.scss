@@ -3,8 +3,11 @@
   width: 100%;
   .image{
     margin-right: 1rem;
-    width: 500px;
+    min-width: 150px;
   }
+}
+.product_wrapper{
+  min-width: 280px;
 }
 
 .image {

@@ -42,10 +42,10 @@ const ProductPreview = (props) => {
 
     return (
         <div className="product_preview_wrapper">
-            <PageTop
+            {/* <PageTop
                 className="page_top"
                 title="Product detail"
-            />
+            /> */}
             {
                 productDetail ? 
                 <div className="details">

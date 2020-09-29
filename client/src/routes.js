@@ -8,12 +8,14 @@ import ShopCollection from './pages/user/shop/shop-collection/shop-collection';
 import ProductPreview from './pages/user/shop/product-preview/product-preview';
 import SignIn from "./pages/sign-in/sign-in";
 import SignUp from "./pages/sign-up/sign-up";
-import Cart from "./pages/user/dashboard/cart/cart"
-import Checkout from "./pages/user/dashboard/checkout/checkout";
+import Cart from "./pages/user/cart/cart"
+import Checkout from "./pages/user/checkout/checkout";
 import Admin from "./pages/admin/admin";
-// import UserDashboard from "./pages/user/dashboard/dashboard"
-import Layout from "./hoc/layout"
 
+import UserDashboard from "./pages/user/dashboard/dashboard"
+import UpdateProfile from "./pages/user/dashboard/update_profile"
+
+import Layout from "./hoc/layout"
 import NotFound from "./pages/notfound/notfound";
 import BranchServices from './pages/user/branch-services/branch-services.jsx';
 
@@ -27,8 +29,12 @@ const Routes = () => {
             <Route path='/product/:product' component={Auth(ProductPreview,null)} exact/>
             <Route path='/branch-services' component={Auth(BranchServices,null)} exact/>
             
-            <Route path='/cart' component={Auth(Cart,null)} exact/>
+            <Route path='/user/cart' component={Auth(Cart,null)} exact/>
             <Route path='/cart/checkout' component={Auth(Checkout,null)} exact/>
+
+            <Route path='/user/dashboard' component={Auth(UserDashboard,true)} exact/>
+            <Route path="/user/user_profile" exact component={Auth(UpdateProfile,true)}/>
+       
             <Route path='/signin' component={Auth(SignIn,false)}/>
             <Route path='/signup' component={Auth(SignUp,false)}/>
             <Route path="/admin" component={Auth(Admin,true,true)}/> 
