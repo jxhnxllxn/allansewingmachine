@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
-const xss = require('xss-clean');
+// const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 const cors = require('cors')
@@ -65,7 +65,7 @@ app.use(mongoSanitize());
 app.use(helmet());
 
 //Prevent XSS attacks
-app.use(xss());
+// app.use(xss());
 
 //Rate limiting
 const limiter = rateLimit({
@@ -97,17 +97,18 @@ app.use('/api/order',order);
 app.use('/api/user',user);
 
 
+// middlewares
+app.use(errorHandler);
+
+
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
     app.use(express.static('client/build'));
   
-    app.get('*', (req, res) => {
+    app.get('/*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
   }
-
-// middlewares
-app.use(errorHandler);
 
 
 
