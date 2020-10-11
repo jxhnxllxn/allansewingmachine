@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
-// const xss = require('xss-clean');
+const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
 const cors = require('cors')
@@ -18,7 +18,7 @@ const connectDB = require('./config/db');
 
 
 // Load env vars
-dotenv.config({path:'./config/config.env'});
+dotenv.config({ path: './config/config.env' });
 
 // Connect Database
 connectDB();
@@ -55,7 +55,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //File uploading
 app.use(fileUpload({
-    useTempFiles:true
+    useTempFiles: true
 }));
 
 //Mongo Sanitize security
@@ -65,11 +65,11 @@ app.use(mongoSanitize());
 app.use(helmet());
 
 //Prevent XSS attacks
-// app.use(xss());
+app.use(xss());
 
 //Rate limiting
 const limiter = rateLimit({
-    windowMs:10 * 60 * 1000,//10 mins
+    windowMs: 10 * 60 * 1000,//10 mins
     max: 100
 });
 
@@ -89,12 +89,12 @@ app.use(cors());
 
 
 //Mount routers
-app.use('/api/auth',auth);
-app.use('/api/collection',collection);
-app.use('/api/category',category);
-app.use('/api/product',product);
-app.use('/api/order',order);
-app.use('/api/user',user);
+app.use('/api/auth', auth);
+app.use('/api/collection', collection);
+app.use('/api/category', category);
+app.use('/api/product', product);
+app.use('/api/order', order);
+app.use('/api/user', user);
 
 
 // middlewares
@@ -104,21 +104,21 @@ app.use(errorHandler);
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
     app.use(express.static('client/build'));
-  
-    app.get('/*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
-  }
+}
 
 
 
 const PORT = process.env.PORT || 5000;
 
-const server = app.listen(PORT,console.log(`server running in ${process.env.NODE_ENV} mode on port ${PORT}`)); 
+const server = app.listen(PORT, console.log(`server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
 
 //Handle unhandle promise rejection
-process.on('unhandledRejection',(err,promise)=>{
+process.on('unhandledRejection', (err, promise) => {
     console.log(`Error: ${err.message}`);
     // close server exit process
-    server.close(()=>process.exit(1));
+    server.close(() => process.exit(1));
 })

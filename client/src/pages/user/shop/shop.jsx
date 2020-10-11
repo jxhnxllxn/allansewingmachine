@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import CardBlock from '../../../components/utils/card-block/card-block'
 import { getCollections } from "../../../redux/collection/collection-action"; 
 // import Collection from "../../../components/collection/collection";
@@ -6,23 +6,32 @@ import './shop.scss';
 import { useSelector } from 'react-redux';
 
 import {store} from "../../../redux/store";
+import Loading from '../../../components/loading/loading';
 
 
 const Shop = () => {
+    const [state, setState] = useState({
+        isLoading:true,
+    })
 
     useEffect(() => {
-        store.dispatch(getCollections());
+        store.dispatch(getCollections()).then(() => {
+            setState({isLoading:false})
+        });
     }, []);
 
     const collections = useSelector(state => state.collection.collections)
         return (
             <div className="shop_wrapper">
-                <CardBlock 
-                    list={collections} 
-                    title="Shop"
-                />
+                {
+                    state.isLoading ? <Loading/>:
+                    <CardBlock 
+                        list={collections} 
+                        title="Shop"
+                    />
+                }
+                
             </div>
-            
         )
 }
 

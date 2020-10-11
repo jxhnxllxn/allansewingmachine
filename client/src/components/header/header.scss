@@ -12,15 +12,18 @@
     background-color: rgba(#f0f2f5, .9);
     padding: 0 50px;
 
-  
-    .logo {
-      height: 120%;
-      width: 150px;
-      padding: 25px;
-      background-image: url('../../assets/img/brand.png');
-      background-size: contain;
-      background-repeat: no-repeat;
+  .logo_container{
+    display: flex;
+    align-items: baseline;
+    align-items: center;
+    span{
+      margin-left: 1rem;
     }
+    .logo {
+      height: 50px;
+      width: 50px;
+    }
+  }
   
     .options {
       height: 100%;

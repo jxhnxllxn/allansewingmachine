@@ -6,7 +6,7 @@ const Footer = () => {
         <footer className="footer">
             <div className="container">
                 <div className="logo">
-                    RDG Agri-Ventures Company
+                    Allan Sewing Machine
                 </div>
                 <div className="wrapper">
                     <div className="left">
@@ -19,7 +19,7 @@ const Footer = () => {
                             </svg>
                                 <div className="nfo">
                                     <div>Address</div>
-                                    <div>0736 Purok V. Brgy. Namunga, Rosario, Batangas</div>
+                                    <div>Padre Garcia, Batangas</div>
                                 </div>
                             </div>
                             <div >
@@ -29,7 +29,7 @@ const Footer = () => {
                                 </svg>
                                 <div className="nfo">
                                     <div>Phone</div>
-                                    <div>(043) 3211441 / 09175067645 / 09228189301 / 09478904024</div>
+                                    <div>+63 949 7731 035</div>
                                 </div>
                             </div>
                             <div >
@@ -51,7 +51,7 @@ const Footer = () => {
                                 </svg>
                                 <div className="nfo">
                                     <div>Email</div>
-                                    <div>rdgagri-venturescompany@yahoo.com</div>
+                                    <div>allan@allansewingmachine.com</div>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +66,7 @@ const Footer = () => {
                     </div>      
                 </div>
                     <div className="credits">
-                        <h4>&copy; RDG Agri-Ventures Company</h4>
+                        <h4>&copy; Allan Sewing Machine</h4>
                         <h5>Powered by John Allen</h5>
                     </div>
                     

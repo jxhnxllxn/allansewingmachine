@@ -7,51 +7,51 @@ import Loading from '../../loading/loading';
 import { useState } from 'react';
 import './file-upload.scss'
 
- 
+
 const FileUpload = (props) => {
     const [state, setState] = useState({
-        uploadedFiles:[],
-        uploading:false
+        uploadedFiles: [],
+        uploading: false
     })
 
     const onDrop = (files) => {
         setState({
             ...state,
-            uploading:true,
+            uploading: true,
         })
         const formData = new FormData();
-        formData.append("file",files[0]);
+        formData.append("file", files[0]);
         const config = {
-            header:{'content-type':'multipart/form-data'}
+            header: { 'content-type': 'multipart/form-data' }
         }
 
-        axios.post('/api/auth/uploadimage',formData,config)
-        .then(res => {
-            setState({
-                ...state,
-                uploading:false,
-                uploadedFiles:[
-                    ...state.uploadedFiles,
-                    res.data
-                ]
-            });
-            if(state.uploading === false && state.uploadedFiles !== null){
-                props.imagesHandler(state.uploadedFiles);
-                console.log('works')
-            }
-        })
+        axios.post('/api/auth/uploadimage', formData, config)
+            .then(res => {
+                setState({
+                    ...state,
+                    uploading: false,
+                    uploadedFiles: [
+                        ...state.uploadedFiles,
+                        res.data
+                    ]
+                });
+                if (state.uploading === false && state.uploadedFiles !== null) {
+                    props.imagesHandler(state.uploadedFiles);
+                    console.log('works')
+                }
+            })
     }
     useEffect(() => {
-        if(state.uploading === false && state.uploadedFiles !== null){
+        if (state.uploading === false && state.uploadedFiles !== null) {
             props.imagesHandler(state.uploadedFiles);
         }
     }, [state.uploadedFiles])
- 
+
     const onRemove = (id) => {
         const data = {
-            public_id:`${id}`
+            public_id: `${id}`
         }
-        axios.post('/api/auth/deleteimage',data).then(res => {
+        axios.post('/api/auth/deleteimage', data).then(res => {
             let images = state.uploadedFiles.filter(item => {
                 return item.public_id !== id;
             })
@@ -65,72 +65,72 @@ const FileUpload = (props) => {
         })
     }
 
-    const showUploadedImages = () => (    
-        state.uploadedFiles.map(item=>(
-            <div 
+    const showUploadedImages = () => (
+        state.uploadedFiles.map(item => (
+            <div
                 key={item.public_id}
-                onClick={()=> onRemove(item.public_id)}
+                onClick={() => onRemove(item.public_id)}
                 className="images_to_show"
-                    style={{
-                        backgroundImage:`url(${item.url})`,
-                        backgroundSize:'cover',
-                        height:'300px',
-                        width:'240px',
+                style={{
+                    backgroundImage: `url(${item.url})`,
+                    backgroundSize: 'cover',
+                    height: '300px',
+                    width: '240px',
 
-                    }}
+                }}
             >
             </div>
         ))
     )
     useEffect(() => {
-        if(props.reset){
+        if (props.reset) {
             setState({
                 uploadedFiles: []
             })
-        }else{
+        } else {
             console.log(props)
         }
     }, [props.reset])
 
     return (
-    <div>
-        <Dropzone 
-            onDrop={(e) => onDrop(e)}
-            multiple={false}
-            className="dropzone_box"
-        >
-            {({getRootProps, getInputProps}) => (
-                <div className="dropzone_box container">
-                <div
-                    {...getRootProps({
-                    className: 'dropzone',
-                    onDrop: event => event.stopPropagation()
-                    })}
-                >
-                    <input {...getInputProps()} />
-                    <p>Drag 'n' drop your image, or click to select files</p>
-                </div>
-                </div>
-                
-            )}
-        </Dropzone>
-        
+        <div>
+            <Dropzone
+                onDrop={(e) => onDrop(e)}
+                multiple={false}
+                className="dropzone_box"
+            >
+                {({ getRootProps, getInputProps }) => (
+                    <div className="dropzone_box container">
+                        <div
+                            {...getRootProps({
+                                className: 'dropzone',
+                                onDrop: event => event.stopPropagation()
+                            })}
+                        >
+                            <input {...getInputProps()} />
+                            <p>Drag 'n' drop your image, or click to select files</p>
+                        </div>
+                    </div>
+
+                )}
+            </Dropzone>
+
             <div className="show_upload_image">
                 {showUploadedImages()}
             </div>
-        
-        {
-            state.uploading ?
-                <div style={{
-                    textAlign:'center',
-                    paddingTop:'60px',
-                    display:'block'
-                }}>
-                    <Loading />
-                </div>
-                :null 
-        }
-    </div>    
+
+            {
+                state.uploading ?
+                    <div style={{
+                        textAlign: 'center',
+                        paddingTop: '60px',
+                        display: 'block'
+                    }}>
+                        <Loading />
+                    </div>
+                    : null
+            }
+        </div>
     );
 }
 

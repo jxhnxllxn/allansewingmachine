@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -10,11 +10,16 @@ import { getOrderHistory } from '../../../redux/order/order-action';
 const UserHistoryBlock = () => {
     const dispatch = useDispatch()
     const [orderHistory, setOrderHistory] = useState([])
+    const fetchOrderHistory = useCallback(() => {
+        dispatch(getOrderHistory()).then(res => {
+            setOrderHistory(res.payload.data)
+        })
+    },
+    [],)
+
     useEffect(() => {
-       dispatch(getOrderHistory()).then(res => {
-           setOrderHistory(res.payload.data)
-       })
-    }, [])
+       fetchOrderHistory()
+    }, [fetchOrderHistory])
 
     const renderBlocks = () => (
         orderHistory ? 
@@ -60,8 +65,6 @@ const UserHistoryBlock = () => {
             }) :null
                 
     )
-    console.log(orderHistory)
-
 
     return (
         <div className="history_blocks">

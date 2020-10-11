@@ -29,9 +29,7 @@ const CardBlock = (props) => {
                     justifyContent:'center',
                     alignItems:'center'
                 }}>
-
                     {renderCard(props.list)}
-
                 </div>
             </div>
         </div>

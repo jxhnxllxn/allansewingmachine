@@ -1,10 +1,11 @@
 import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink} from 'react-router-dom';
+import { Link, NavLink} from 'react-router-dom';
 
 import { selectCartHidden, selectSettingHidden } from '../../redux/ui/ui-selector';
 import { selectIsAdmin, selectIsAuth,selectIsLoading } from "../../redux/auth/auth-selector";
 import { toggleSettingHidden } from "../../redux/ui/ui-actions";
+import { ReactComponent as Logo } from '../../assets/sewing.svg';
 
 import CartIcon from "../cart-icon/cart-icon";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown";
@@ -22,7 +23,10 @@ const Header = () => {
 
     const header = (
         <div className="header page_container">
-            <div className="logo"></div>
+            <Link className="logo_container" to="/">
+                <Logo className='logo'/>
+                <span>Allan Sewing Machine</span>
+            </Link>
 
             <div className="options">             
             <Fragment>
@@ -32,12 +36,6 @@ const Header = () => {
                 <NavLink className="option" to="/shop" >
                 Shop
                 </NavLink>
-                <NavLink className="option" to="/branch-services" >
-                Branch & Services
-                </NavLink> 
-                {/* <NavLink className="option" to="/contact" >
-                Contact
-                </NavLink> */}
             </Fragment>
             <CartIcon />
 

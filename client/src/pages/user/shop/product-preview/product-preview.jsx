@@ -1,25 +1,33 @@
 import React, { useRef } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import PageTop from '../../../../components/utils/page-top/page-top'
 import { getProductDetail, clearProductDetail} from '../../../../redux/product/product-action'
 import Loading from '../../../../components/loading/loading'
 import DetailsThumb from "./detail-thumb";
 import './product-preview.scss'
 import { useState } from 'react'
 import { addItem } from '../../../../redux/cart/cart-action'
+import { useCallback } from 'react'
 
 const ProductPreview = (props) => {
     const dispatch = useDispatch();
     const [state, setState] = useState({index:0})
     const myRef = useRef();
+
+    const fetchProductDetail = useCallback(
+        () => {
+            const id = props.match.params.product;
+            dispatch(getProductDetail(id));
+        },
+        [],
+    )
+
     useEffect(() => {
-        const id = props.match.params.product;
-        dispatch(getProductDetail(id));
+        fetchProductDetail()
         return () => {
             dispatch(clearProductDetail())
         }
-    }, [])
+    }, [fetchProductDetail])
 
     const handleTab = index =>{
         setState({index:index});
