@@ -1,42 +1,36 @@
 import React, { useEffect } from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAngleUp, faAngleDown} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import {Collapse, FormControlLabel, RadioGroup} from '@material-ui/core';
+import { Collapse, FormControlLabel, RadioGroup } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio'
 import { useState } from 'react';
 
 const CollapseRadio = (props) => {
-    const [state, setState] = useState({
-        open:false,
-        value:'0'
-    })
+    const [isOpen, setIsOpen] = useState(false)
+    const [value, setValue] = useState('0')
 
     useEffect(() => {
-        if(props.initState){
-            setState({
-                ...state,
-                open: props.initState
-            })
+        if (props.initState) {
+            setIsOpen(props.initState)
         }
-            
-    },[props.initState]);
+    }, [props.initState]);
 
     const handleClick = () => {
-        setState({...state,open:!state.open})
+        setIsOpen(!isOpen)
     }
-    
+
     const handleAngle = () => (
-        state.open ?
-            <FontAwesomeIcon 
+        isOpen ?
+            <FontAwesomeIcon
                 icon={faAngleUp}
                 className="icon"
             />
             :
-            <FontAwesomeIcon 
+            <FontAwesomeIcon
                 icon={faAngleDown}
                 className="icon"
             />
@@ -45,39 +39,38 @@ const CollapseRadio = (props) => {
     const renderList = () => (
         props.list ?
             props.list.map(value => (
-                <FormControlLabel  
+                <FormControlLabel
                     key={value._id}
                     value={`${value._id}`}
                     control={<Radio />}
                     label={value.name}
                 />
             ))
-        :null
+            : null
     )
 
     const handleChange = e => {
         props.handleFilters(e.target.value)
-        setState({...state,value: e.target.value})
+        setValue(e.target.value)
     }
 
 
     return (
         <div>
-             <List style={{borderBottom:'1px solid #dbdbdb'}}>
-                <ListItem onClick={handleClick} style={{padding:'10px 23px 10px 0'}}>
-                    <ListItemText 
+            <List style={{ borderBottom: '1px solid #dbdbdb' }}>
+                <ListItem onClick={handleClick} style={{ padding: '10px 23px 10px 0' }}>
+                    <ListItemText
                         primary={props.title}
                         className="collapse_title"
-
                     />
                     {handleAngle()}
                 </ListItem>
-                <Collapse in={state.open} timeout="auto" unmountOnExit>
+                <Collapse in={isOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                         <RadioGroup
                             aria-label="prices"
                             name="prices"
-                            value={state.value}
+                            value={value}
                             onChange={handleChange}
                         >
                             {renderList()}

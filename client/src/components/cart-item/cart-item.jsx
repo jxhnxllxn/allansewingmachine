@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
-import useDebounce from "../utils/debounce";
 import addComma from '../../components/utils/add-comma';
 import './cart-item.scss'
 
@@ -23,16 +22,12 @@ const CartItem = (props) => {
 
     const [quantity, setQuantity] = useState(props.cartItem.quantity)
 
-    const debounceQuantity = useDebounce(quantity, 1000);
-
     useEffect(
         () => {
-            if (debounceQuantity) {
-                console.log(debounceQuantity)
-                dispatch(updateQuantity(props.cartItem, debounceQuantity));
-            }
+            dispatch(updateQuantity(props.cartItem, quantity));
+            console.log('wrong')
         },
-        [debounceQuantity]
+        [dispatch, quantity]
     );
 
 

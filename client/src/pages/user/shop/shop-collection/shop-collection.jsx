@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import CollapseCheckBox from '../../../../components/utils/collapse-checkbox/collapse-checkbox'
 import CollapseRadio from '../../../../components/utils/collapse-radio/collapse-radio'
 import PageTop from '../../../../components/utils/page-top/page-top'
-import {getCategories,getProductsToShop} from '../../../../redux/product/product-action'
-import {price} from '../../../../components/utils/fixed-categories'
+import { getCategories, getProductsToShop } from '../../../../redux/product/product-action'
+import { price } from '../../../../components/utils/fixed-categories'
 import './shop-collection.scss'
 import LoadMoreCards from '../load-more/load-more'
 
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faBars, faTh} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBars, faTh } from '@fortawesome/free-solid-svg-icons';
 
 
 const ShopCollection = (props) => {
@@ -18,26 +18,27 @@ const ShopCollection = (props) => {
     const dispatch = useDispatch()
 
     const [state, setState] = useState({
-        grid:'',
-        limit:20,
-        skip:0,
-        filters:{
-            collections:[props.match.params.collection],
-            categories:[],
-            price:[]
+        grid: '',
+        limit: 20,
+        skip: 0,
+        filters: {
+            collections: [props.match.params.collection],
+            categories: [],
+            price: []
         }
     })
 
     useEffect(() => {
+
         dispatch(getCategories());
-        dispatch(getProductsToShop(state.skip,state.limit,state.filters));
+        dispatch(getProductsToShop(state.skip, state.limit, state.filters));
     }, []);
 
     const handlePrice = (value) => {
         const data = price;
         let array = [];
-        for(let key in data){
-            if(data[key]._id ===parseInt(value,10)){
+        for (let key in data) {
+            if (data[key]._id === parseInt(value, 10)) {
                 array = data[key].array
             }
         }
@@ -46,11 +47,11 @@ const ShopCollection = (props) => {
     }
 
 
-    const handleFilters = (filters,category) =>{
-        const newFilters = {...state.filters}
+    const handleFilters = (filters, category) => {
+        const newFilters = { ...state.filters }
         newFilters[category] = filters;
 
-        if(category === "price"){
+        if (category === "price") {
             let priceValues = handlePrice(filters);
             newFilters[category] = priceValues
         }
@@ -59,7 +60,7 @@ const ShopCollection = (props) => {
 
         setState({
             ...state,
-            filters:newFilters
+            filters: newFilters
         })
     }
 
@@ -68,10 +69,10 @@ const ShopCollection = (props) => {
             0,
             state.limit,
             filters
-        )).then(()=>{
+        )).then(() => {
             setState({
                 ...state,
-                skip:0
+                skip: 0
             })
         })
     }
@@ -83,7 +84,7 @@ const ShopCollection = (props) => {
             state.limit,
             state.filters,
             products.toShop,
-        )).then(()=>{
+        )).then(() => {
             setState({
                 ...state,
                 skip
@@ -94,29 +95,29 @@ const ShopCollection = (props) => {
     const handleGrid = () => {
         setState({
             ...state,
-            grid:!state.grid ? 'grid_bars' : ''
+            grid: !state.grid ? 'grid_bars' : ''
         })
     }
 
     return (
 
         <div className="shop_collection_wrapper">
-            <PageTop className="page_title" title="Browse Product"/>
+            <PageTop className="page_title" title="Browse Product" />
 
             <div>
                 <div className="shop_wrapper">
                     <div className="left">
-                        <CollapseCheckBox 
+                        <CollapseCheckBox
                             initState={true}
                             title="Categories"
                             list={products.categories}
-                            handleFilters={(filter)=> handleFilters(filter,'category')}
+                            handleFilters={(filter) => handleFilters(filter, 'category')}
                         />
-                        <CollapseRadio 
+                        <CollapseRadio
                             initState={false}
                             title="price"
                             list={price}
-                            handleFilters={(filter)=> handleFilters(filter,'price')}
+                            handleFilters={(filter) => handleFilters(filter, 'price')}
                         />
                     </div>
                     <div className="right">
@@ -126,25 +127,25 @@ const ShopCollection = (props) => {
                                     className={`grid_btn ${state.grid ? '' : 'active'}`}
                                     onClick={() => handleGrid()}
                                 >
-                                    <FontAwesomeIcon icon={faTh}/>
+                                    <FontAwesomeIcon icon={faTh} />
                                 </div>
 
                                 <div
                                     className={`grid_btn ${!state.grid ? '' : 'active'}`}
                                     onClick={() => handleGrid()}
                                 >
-                                    <FontAwesomeIcon icon={faBars}/>
+                                    <FontAwesomeIcon icon={faBars} />
                                 </div>
 
                             </div>
                         </div>
                         <div>
-                            <LoadMoreCards 
+                            <LoadMoreCards
                                 grid={state.grid}
                                 limit={state.limit}
                                 size={products.toShopSize}
                                 products={products.toShop}
-                                loadMore = {() => loadMoreCards()}
+                                loadMore={() => loadMoreCards()}
                             />
                         </div>
                     </div>

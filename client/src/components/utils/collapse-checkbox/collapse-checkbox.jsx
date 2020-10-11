@@ -1,97 +1,90 @@
 import React, { useEffect } from 'react'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faAngleUp, faAngleDown} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleUp, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
-import {Collapse} from '@material-ui/core';
+import { Collapse } from '@material-ui/core';
 import { useState } from 'react';
 
 
-const CollapseCheckBox = (props) => {
-    
-    const [state, setState] = useState({
-        open: false,
-        checked: []
-    })
+const CollapseCheckBox = ({ initState, handleFilters, list, title }) => {
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [checked, setChecked] = useState([]);
+
 
     useEffect(() => {
-        if(props.initState){
-            setState({
-                ...state,
-                open: props.initState
-            })
+        if (initState) {
+            setIsOpen(initState)
         }
-    },[props.initState]);
+    }, [initState]);
 
     const handleClick = () => {
-        setState({...state, open:!state.open})
+        setIsOpen(!isOpen)
     }
 
     const handleAngle = () => (
-        state.open ?
-            <FontAwesomeIcon 
+        isOpen ?
+            <FontAwesomeIcon
                 icon={faAngleUp}
                 className="icon"
             />
             :
-            <FontAwesomeIcon 
+            <FontAwesomeIcon
                 icon={faAngleDown}
                 className="icon"
             />
     )
-    
+
     const handleToggle = value => () => {
-        const {checked} = state;
-        const  currentIndex = checked.indexOf(value);
+        const currentIndex = checked.indexOf(value);
         const newChecked = [...checked];
-        if(currentIndex === -1){
+        if (currentIndex === -1) {
             newChecked.push(value)
-        }else{
-            newChecked.splice(currentIndex,1)
+        } else {
+            newChecked.splice(currentIndex, 1)
         }
 
-        setState({
-            ...state,
-            checked:newChecked
-        })
+        setChecked(newChecked)
     }
 
     useEffect(() => {
-        props.handleFilters(state.checked)
-    }, [state.checked])
+        handleFilters(checked)
+        console.log('wrong')
+    }, [checked])
 
     const renderList = () => (
-        props.list ?
-            props.list.map((value)=>(
-               <ListItem key={value._id} style={{padding:'10px 0'}}>
+        list ?
+            list.map((value) => (
+                <ListItem key={value._id} style={{ padding: '10px 0' }}>
                     <ListItemText primary={value.name} />
                     <ListItemSecondaryAction>
-                        <Checkbox  
+                        <Checkbox
                             color='primary'
                             onChange={handleToggle(value._id)}
-                            checked={state.checked.indexOf(value._id) !== -1}
+                            checked={checked.indexOf(value._id) !== -1}
                         />
                     </ListItemSecondaryAction>
-               </ListItem>
+                </ListItem>
             ))
-        :null
+            : null
     )
 
     return (
         <div className="collapase_items_wrapper">
-            <List style={{borderBottom:'1px solid #dbdbdb'}}>
-                <ListItem onClick={handleClick} style={{padding:'10px 23px 10px 0'}}>
-                    <ListItemText 
-                        primary={props.title}
+            <List style={{ borderBottom: '1px solid #dbdbdb' }}>
+                <ListItem onClick={handleClick} style={{ padding: '10px 23px 10px 0' }}>
+                    <ListItemText
+                        primary={title}
                         className="collapse_title"
 
                     />
                     {handleAngle()}
                 </ListItem>
-                <Collapse in={state.open} timeout="auto" unmountOnExit>
+                <Collapse in={isOpen} timeout="auto" unmountOnExit>
                     <List component="div" disablePadding>
                         {renderList()}
                     </List>

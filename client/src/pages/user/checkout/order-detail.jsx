@@ -1,8 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrder } from "../../../redux/order/order-action";
-import {clearCart } from '../../../redux/cart/cart-action';
-import {update,generateData, resetFields} from '../../../components/utils/form-action/form-action';
+import { clearCart } from '../../../redux/cart/cart-action';
+import { update, generateData, resetFields } from '../../../components/utils/form-action/form-action';
 import { selectCartItems, selectCartItemsCount, selectCartTotal } from '../../../redux/cart/cart-selectors';
 import addComma from '../../../components/utils/add-comma';
 
@@ -13,174 +13,174 @@ import Modal from '../../../components/modal/modal';
 import { withRouter } from 'react-router-dom';
 const OrderDetail = (props) => {
   const cartCount = useSelector(state => selectCartItemsCount(state))
-    useEffect(() => {
-      if(cartCount <= 0 ){
-        props.history.push('/user/dashboard')
-      }
-    }, [cartCount])
-    const dispatch = useDispatch();
-    const modalRef = useRef();
-    const cartItems = useSelector(state => selectCartItems(state));
-    const total = useSelector(state => selectCartTotal(state))
-    const [formField, setFormField] = useState({
-        formError: false,
-        formErrorMessage:[],
-        formSuccess:false,
-        formData:{
-            additionalInfo:{
-              element:'textarea',
-              label:'orders notes (optional)',
-              value:'',
-              config:{
-                  name:'input_additional_Info',
-                  type:'text',
-              },
-              validation:{
-                required:false,
-              },
-              valid:true,
-              touched:true,
-              validationMessage:'',
-              showlabel:true  
-            },
-        }
-    })
-  
+  useEffect(() => {
+    if (cartCount <= 0) {
+      props.history.push('/user/dashboard')
+    }
+  }, [cartCount, props.history])
+  const dispatch = useDispatch();
+  const modalRef = useRef();
+  const cartItems = useSelector(state => selectCartItems(state));
+  const total = useSelector(state => selectCartTotal(state))
+  const [formField, setFormField] = useState({
+    formError: false,
+    formErrorMessage: [],
+    formSuccess: false,
+    formData: {
+      additionalInfo: {
+        element: 'textarea',
+        label: 'orders notes (optional)',
+        value: '',
+        config: {
+          name: 'input_additional_Info',
+          type: 'text',
+        },
+        validation: {
+          required: false,
+        },
+        valid: true,
+        touched: true,
+        validationMessage: '',
+        showlabel: true
+      },
+    }
+  })
 
-    const updateForm = (element) => {
-        const newFormData = update(element,formField.formData,'checkout');
-        setFormField({
+
+  const updateForm = (element) => {
+    const newFormData = update(element, formField.formData, 'checkout');
+    setFormField({
+      ...formField,
+      formError: false,
+      formData: newFormData,
+    })
+  }
+
+  const [orderDetail, setOrderDetail] = useState({
+    orders: cartItems,
+    total: total,
+    shipping: 'flat_rate',
+    paymentOptions: 'paypal'
+  })
+
+  const handleOnChange = e => {
+    setOrderDetail({
+      ...orderDetail,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  const addFee = () => {
+    const t = orderDetail.shipping === "flat_rate" ? total + 200 : total;
+    return t;
+  }
+
+
+  const openModal = () => {
+    modalRef.current.openModal()
+  }
+
+  const closeModal = () => {
+    modalRef.current.closeModal()
+
+  }
+
+  const resetFieldHandler = () => {
+    openModal()
+    const newFormData = resetFields(formField.formData, 'checkout')
+    setFormField({
+      formData: newFormData,
+      formSuccess: true
+    })
+
+    setTimeout(() => {
+      closeModal()
+      dispatch(clearCart())
+    }, 10000);
+  }
+
+
+  const submitForm = e => {
+    e.preventDefault();
+    let dataToSubmit = generateData(formField.formData, 'checkout');
+    // let formIsValid = isFormValid(formField.formData,'checkout');
+    let paymentId = {
+      paymentID: ''
+    }
+    let data = {
+      ...dataToSubmit,
+      ...orderDetail
+    }
+
+    dispatch(addOrder({
+      orderDetail: data,
+      paymentData: paymentId
+    }))
+      .then(res => {
+        if (res.payload.success) {
+          resetFieldHandler()
+        } else {
+          setFormField({
             ...formField,
-            formError:false,
-            formData: newFormData,
-        })
-      }
-  
-    const [orderDetail, setOrderDetail] = useState({
-        orders:cartItems,
-        total:total,
-        shipping:'flat_rate',
-        paymentOptions:'paypal'
-    })
-
-    const handleOnChange = e => {
-      setOrderDetail({
-        ...orderDetail,
-        [e.target.name]: e.target.value
-      })
-    }
-
-    const addFee = () => {
-      const t = orderDetail.shipping === "flat_rate" ? total + 200 : total;
-      return t;
-    }
-  
-    
-    const openModal = () => {
-      modalRef.current.openModal()
-    }
-
-    const closeModal = () => {
-      modalRef.current.closeModal()
-      
-    }
-
-    const resetFieldHandler = () => {
-        openModal()
-        const newFormData = resetFields(formField.formData,'checkout')
-        setFormField({
-          formData:newFormData,
-          formSuccess:true
-        })
-        
-        setTimeout(() => {
-          closeModal()
-          dispatch(clearCart())
-        }, 10000);
-    }
-
-  
-      const submitForm = e => {
-          e.preventDefault();
-          let dataToSubmit = generateData(formField.formData,'checkout');
-          // let formIsValid = isFormValid(formField.formData,'checkout');
-          let paymentId = {
-              paymentID:''
-          }
-          let data = {
-              ...dataToSubmit,
-              ...orderDetail
-          }
-
-          dispatch(addOrder({
-            orderDetail: data,
-            paymentData: paymentId
-          }))
-          .then(res => {
-            if(res.payload.success){
-                resetFieldHandler()
-            }else{
-              setFormField({
-                ...formField,
-                formSuccess:false,
-                formErrorMessage:res.payload.data
-              })
-            }
+            formSuccess: false,
+            formErrorMessage: res.payload.data
           })
-      }
-  
-      const transactionError = (data) => {
-        console.log(data)
-  
-      }
-      const transactionCanceled = (data) => {
-        console.log(data)
-  
-      }
-      const transactionSuccess = (data) => {
-        let dataToSubmit = generateData(formField.formData,'checkout');
-  
-        dispatch(addOrder({
-          orderDetail: dataToSubmit,
-          paymentData: data
-        }))
-        .then(res => {
-          if(res.payload.success){
-            resetFieldHandler();
-          }else{
-            setFormField({
-              ...formField,
-              formSuccess:false,
-            })
-          }
-        })
-        .catch(err => {
-            setFormField({
-                ...formField,
-                formError:true,
-                formErrorMessage:err.response.data.error
-            })
-        })
-              
-      }
-  
-    
-    return (
-        <form onSubmit={e => submitForm(e)}>
-            <div className="additional_info card">
-                    <h3>Additional Information</h3>
-                    
-                    <FormField
-                        id={'additionalInfo'}
-                        formData={formField.formData.additionalInfo}
-                        change={(element) => updateForm(element)}
-                    />     
-                    
-            </div>
-            <div className="payment_method card">
-                <h3>Your order</h3>
+        }
+      })
+  }
 
-                <table>
+  const transactionError = (data) => {
+    console.log(data)
+
+  }
+  const transactionCanceled = (data) => {
+    console.log(data)
+
+  }
+  const transactionSuccess = (data) => {
+    let dataToSubmit = generateData(formField.formData, 'checkout');
+
+    dispatch(addOrder({
+      orderDetail: dataToSubmit,
+      paymentData: data
+    }))
+      .then(res => {
+        if (res.payload.success) {
+          resetFieldHandler();
+        } else {
+          setFormField({
+            ...formField,
+            formSuccess: false,
+          })
+        }
+      })
+      .catch(err => {
+        setFormField({
+          ...formField,
+          formError: true,
+          formErrorMessage: err.response.data.error
+        })
+      })
+
+  }
+
+
+  return (
+    <form onSubmit={e => submitForm(e)}>
+      <div className="additional_info card">
+        <h3>Additional Information</h3>
+
+        <FormField
+          id={'additionalInfo'}
+          formData={formField.formData.additionalInfo}
+          change={(element) => updateForm(element)}
+        />
+
+      </div>
+      <div className="payment_method card">
+        <h3>Your order</h3>
+
+        <table>
           <thead>
             <tr>
               <th>Product</th>
@@ -204,7 +204,7 @@ const OrderDetail = (props) => {
             </tr>
           </tbody>
           <tfoot>
-          <tr className='shipping'>
+            <tr className='shipping'>
               <th>Shipping</th>
               <td>
                 <ul>
@@ -255,7 +255,7 @@ const OrderDetail = (props) => {
 
 
         <h2 className='payment-header'>Payment method</h2>
-        
+
         <ul className='payment-options'>
           <li>
             <input
@@ -329,55 +329,55 @@ const OrderDetail = (props) => {
           </li>
         </ul>
 
-      <div className="agreement" style={{marginBottom:'1rem'}}>
-      <input
-          id='agreement'
-          type='checkbox'
-          name='agreement'
-        //   checked={userAgreed}
-        //   onChange={() => setUserAgreed(!userAgreed)}
-        />
-
-        <label htmlFor='agreement'>
-          I have read and agree to the webiste terms and conditions *
-        </label>
-      </div>
-        
-              
-        {
-          orderDetail.paymentOptions === 'paypal' ? 
-          <Paypal
-            toPay={addFee()}
-            transactionError={(data)=>transactionError(data)}
-            transactionCanceled={(data)=>transactionCanceled(data)}
-            transactionSuccess={(data)=>transactionSuccess(data)}
+        <div className="agreement" style={{ marginBottom: '1rem' }}>
+          <input
+            id='agreement'
+            type='checkbox'
+            name='agreement'
+          //   checked={userAgreed}
+          //   onChange={() => setUserAgreed(!userAgreed)}
           />
-          :
-          <MyButton runAction={e => submitForm(e)} type="submit" title="Place order" value="Submit" />          
-        }
-        
-        {formField.formSuccess ?
-            <div className="success_label">
-                <h1>Successfull</h1>
-            </div> : null
-        }
 
-        {formField.formError ?
-            <div className="error_label">
-                <h1>{formField.formErrorMessage}</h1>
-            </div> : null
-        }
+          <label htmlFor='agreement'>
+            I have read and agree to the webiste terms and conditions *
+        </label>
         </div>
 
 
-        <Modal ref={modalRef}>    
-           <h1>THANK YOU!</h1>
-           <h1>YOUR ORDER IS NOW COMPLETE</h1>
-        </Modal> 
+        {
+          orderDetail.paymentOptions === 'paypal' ?
+            <Paypal
+              toPay={addFee()}
+              transactionError={(data) => transactionError(data)}
+              transactionCanceled={(data) => transactionCanceled(data)}
+              transactionSuccess={(data) => transactionSuccess(data)}
+            />
+            :
+            <MyButton runAction={e => submitForm(e)} type="submit" title="Place order" value="Submit" />
+        }
 
-        </form>
+        {formField.formSuccess ?
+          <div className="success_label">
+            <h1>Successfull</h1>
+          </div> : null
+        }
 
-    )
+        {formField.formError ?
+          <div className="error_label">
+            <h1>{formField.formErrorMessage}</h1>
+          </div> : null
+        }
+      </div>
+
+
+      <Modal ref={modalRef}>
+        <h1>THANK YOU!</h1>
+        <h1>YOUR ORDER IS NOW COMPLETE</h1>
+      </Modal>
+
+    </form>
+
+  )
 }
 
 export default withRouter(OrderDetail)

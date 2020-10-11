@@ -10,7 +10,6 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const hpp = require('hpp');
-const cors = require('cors')
 
 const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/error.middleware');
@@ -78,11 +77,6 @@ app.use(limiter);
 //Prevent http params pollution
 app.use(hpp());
 
-//Enable CORS
-// tested
-// app.use(cors());
-app.use(cors());
-
 //set static folder
 // app.use(express.static(path.join(__dirname,'public')));
 // app.use(express.static('client/build'))
@@ -103,7 +97,7 @@ app.use(errorHandler);
 
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
-    app.use(express.static('client/build'));
+    app.use(express.static(path.join(__dirname, 'client/build')));
 
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));

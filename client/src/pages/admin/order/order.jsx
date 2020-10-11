@@ -18,7 +18,7 @@ const OrderDetail = (props) => {
         return () => {
             setOrder([])
         }
-    }, [props.match.params.id])
+    }, [dispatch, props.match.params.id])
 
     console.log(order)
 

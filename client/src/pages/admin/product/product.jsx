@@ -1,6 +1,6 @@
-import React, {useState, useEffect, useRef, Fragment} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { getProducts, deleteProduct } from "../../../redux/product/product-action"; 
+import React, { useState, useEffect, useRef, Fragment } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getProducts, deleteProduct } from "../../../redux/product/product-action";
 import Loading from "../../../components/loading/loading";
 import CustomButton from '../../../components/custom-button/custom-button'
 import Modal from '../../../components/modal/modal'
@@ -16,16 +16,16 @@ const Product = (props) => {
 
     const [modalData, setModalData] = useState(null);
 
-    const [data, setData] = useState({
-        searchInput:'',
-        confirmAction:''
+    const [data] = useState({
+        searchInput: '',
+        confirmAction: ''
     })
-    
-    const {confirmAction} = data;
+
+    const { confirmAction } = data;
 
     useEffect(() => {
         dispatch(getProducts())
-    }, [])
+    }, [dispatch])
 
     // const onChange = e => setData({...data,[e.target.name]:e.target.value});
 
@@ -38,19 +38,19 @@ const Product = (props) => {
         modalRef.current.closeModal()
     }
     const renderImage = (images) => {
-        if(images.length > 0){
-          return images[0].url
-        }else{
-          return '/images/slide2.jpg'
+        if (images.length > 0) {
+            return images[0].url
+        } else {
+            return '/images/slide2.jpg'
         }
-      }
+    }
 
     const productData = products && !loading ? products : [];
-  
+
     const tableData = productData.map(col => (
         <tr key={col._id}>
-            <td>{col.name}</td> 
-            <td><img className="collectionPhoto" src={`${renderImage(col.images)}`} alt='product_image'/></td>      
+            <td>{col.name}</td>
+            <td><img className="collectionPhoto" src={`${renderImage(col.images)}`} alt='product_image' /></td>
             <td>{col.collections.name}</td>
             <td>{col.category.name}</td>
             <td>{col.price}</td>
@@ -79,29 +79,29 @@ const Product = (props) => {
                 <div className="floatRight">
                     <CustomButton onClick={() => props.history.push(`${props.match.url}/add`)} buttonType="primary" type="submit">Add Product</CustomButton>
                 </div>
-                {!loading ? 
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Collection</th>
-                        <th>Category</th>
-                        <th>Price</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                    
-                    {tableData}
-                    </tbody>
-                    
-                    <Modal ref={modalRef}>    
-                        {modalData && <Fragment>
-                            <h2>Are you sure you want to delete {modalData.name} product?</h2>
-                            <br/>
-                            <p>This action cannot be undone. This will permanently delete the {modalData.name} product.</p>
-                            <br/>
-                            <p>Please type <b>rdg/{modalData.name}</b></p>
+                {!loading ?
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Collection</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+
+                            {tableData}
+                        </tbody>
+
+                        <Modal ref={modalRef}>
+                            {modalData && <Fragment>
+                                <h2>Are you sure you want to delete {modalData.name} product?</h2>
+                                <br />
+                                <p>This action cannot be undone. This will permanently delete the {modalData.name} product.</p>
+                                <br />
+                                <p>Please type <b>rdg/{modalData.name}</b></p>
                                 <form onSubmit={handleDeleteProduct}>
                                     {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
                                     <div className="form-ation">
@@ -109,14 +109,14 @@ const Product = (props) => {
                                         <CustomButton buttonType="default" onClick={closeModal}>Cancel</CustomButton>
                                     </div>
                                 </form>
-                                    
-                            
-                        </Fragment>}
-                        
-                    </Modal> 
 
-                    
-                </table> : <Loading></Loading>}
+
+                            </Fragment>}
+
+                        </Modal>
+
+
+                    </table> : <Loading></Loading>}
 
             </div>
         </div>

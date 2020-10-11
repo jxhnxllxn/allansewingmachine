@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect, Fragment } from 'react'
-import { addCollection, getCollections, deleteCollection } from "../../../redux/collection/collection-action"; 
+import { addCollection, getCollections, deleteCollection } from "../../../redux/collection/collection-action";
 
 import FormField from '../../../components/utils/form-field/form-field';
-import {update,generateData,isFormValid, resetFields} from '../../../components/utils/form-action/form-action';
+import { update, generateData, isFormValid, resetFields } from '../../../components/utils/form-action/form-action';
 import MyButton from '../../../components/utils/button/button';
 
 import Loading from "../../../components/loading/loading";
@@ -12,68 +12,68 @@ import './collection.scss'
 import { useDispatch } from 'react-redux';
 
 const Collection = () => {
+    const dispatch = useDispatch()
     const [collections, setCollections] = useState({
-        collections:[],
-        loading:true
+        collections: [],
+        loading: true
     })
     useEffect(() => {
         dispatch(getCollections()).then(res => {
-            setCollections({
-                ...collections,
-                collections:res.payload.data,
-                loading:false
-            })
+            setCollections(c => ({
+                ...c,
+                collections: res.payload.data,
+                loading: false
+            }))
         })
         return () => {
             setCollections([])
         }
-    }, [])
+    }, [dispatch])
 
-    const dispatch = useDispatch()
 
     const [modalData, setModalData] = useState(null);
 
     const updateForm = (element) => {
-        const newFormData = update(element,formField.formData,'collection');
+        const newFormData = update(element, formField.formData, 'collection');
         setFormField({
-            formError:false,
+            formError: false,
             formData: newFormData,
         })
     }
 
     const resetFieldHandler = () => {
-        const newFormData = resetFields(formField.formData,'collection')
+        const newFormData = resetFields(formField.formData, 'collection')
         setFormField({
-            formData:newFormData,
-            formSuccess:true
+            formData: newFormData,
+            formSuccess: true
         });
-        setTimeout(()=>{
+        setTimeout(() => {
             setFormField({
                 ...formField,
-                formSuccess:true
+                formSuccess: true
             })
-        },3000)
+        }, 3000)
     }
 
     const submitForm = e => {
         e.preventDefault();
-        let dataToSubmit = generateData(formField.formData,'collection');
-        let formIsValid = isFormValid(formField.formData,'collection');
+        let dataToSubmit = generateData(formField.formData, 'collection');
+        let formIsValid = isFormValid(formField.formData, 'collection');
         // setErrors(true)
 
-        if(formIsValid){
-            dispatch(addCollection(dataToSubmit)).then(res =>{
-                if(res.payload.success){
+        if (formIsValid) {
+            dispatch(addCollection(dataToSubmit)).then(res => {
+                if (res.payload.success) {
                     resetFieldHandler();
-                }else{
+                } else {
                     setFormField({
                         ...formField,
-                        formError:true
+                        formError: true
                     })
                 }
             })
-        }else{
-            setFormField({...formField,formError:true})
+        } else {
+            setFormField({ ...formField, formError: true })
         }
     }
 
@@ -93,38 +93,38 @@ const Collection = () => {
 
     const [formField, setFormField] = useState({
         formError: false,
-        formSuccess:false,
-        formData:{
-            name:{
-                element:'input',
-                label:'Collection name',
-                value:'',
-                config:{
-                    name:'collection_input',
-                    type:'text',
+        formSuccess: false,
+        formData: {
+            name: {
+                element: 'input',
+                label: 'Collection name',
+                value: '',
+                config: {
+                    name: 'collection_input',
+                    type: 'text',
                 },
-                validation:{
-                    required:true,
+                validation: {
+                    required: true,
                 },
-                valid:false,
-                touched:false,
-                validationMessage:'',
-                showlabel:true
+                valid: false,
+                touched: false,
+                validationMessage: '',
+                showlabel: true
             },
-            images:{
-                value:[],
-                validation:{
-                    required:false,
+            images: {
+                value: [],
+                validation: {
+                    required: false,
                 },
-                valid:false,
-                touched:false,
-                validationMessage:'',
-                showlabel:false
+                valid: false,
+                touched: false,
+                validationMessage: '',
+                showlabel: false
             }
         }
     })
 
-      
+
     const modalRef = useRef();
     const openModal = (data) => {
         setModalData(data);
@@ -134,22 +134,22 @@ const Collection = () => {
         modalRef.current.closeModal()
     }
     const renderImage = (images) => {
-        if(images.length > 0){
-          return images[0].url
-        }else{
-          return '/images/slide2.jpg'
+        if (images.length > 0) {
+            return images[0].url
+        } else {
+            return '/images/slide2.jpg'
         }
-      }
+    }
 
 
     const tableData = collections &&
-            collections.collections.map(col => (
-                <tr key={col._id}>
-                    <td>{col.name}</td>       
-                    <td><img className="collectionPhoto" src={`${renderImage(col.images)}`} alt='collection_image'/></td>  
-                    <td>view | <button onClick={() => openModal(col)}>Delete</button></td>      
-                </tr>
-            ));
+        collections.collections.map(col => (
+            <tr key={col._id}>
+                <td>{col.name}</td>
+                <td><img className="collectionPhoto" src={`${renderImage(col.images)}`} alt='collection_image' /></td>
+                <td>view | <button onClick={() => openModal(col)}>Delete</button></td>
+            </tr>
+        ));
 
 
     const handleDeleteCollection = async e => {
@@ -161,12 +161,12 @@ const Collection = () => {
     return (
         <div className="admin-collection">
             <div className="add-collection">
-                
+
                 <div className="card">
-                    <h2>Add collection</h2>          
+                    <h2>Add collection</h2>
                     <form onSubmit={(e) => submitForm(e)}>
-                        <FileUpload 
-                            imagesHandler={(images)=> imagesHandler(images)}
+                        <FileUpload
+                            imagesHandler={(images) => imagesHandler(images)}
                             reset={formField.formSuccess}
                         />
                         <FormField
@@ -174,9 +174,9 @@ const Collection = () => {
                             formData={formField.formData.name}
                             change={(element) => updateForm(element)}
                         />
-                            <MyButton onClick={(e) => submitForm(e)} type="primary" title="Add Collection" value="Submit" /> 
-                        
-                    </form>      
+                        <MyButton onClick={(e) => submitForm(e)} type="primary" title="Add Collection" value="Submit" />
+
+                    </form>
                 </div>
             </div>
 
@@ -187,8 +187,8 @@ const Collection = () => {
                     {/* <FormInput type="text" name="search" value={searchInput} onChange={e => updateForm(e)} label="Search" /> */}
                 </div>
                 {
-                    !collections.loading ? 
-                            <table>
+                    !collections.loading ?
+                        <table>
                             <thead>
                                 <tr>
                                     <th>Name</th>
@@ -201,29 +201,29 @@ const Collection = () => {
                             </tbody>
 
                         </table>
-                        :<Loading />
+                        : <Loading />
                 }
-                    
+
                 <Modal ref={modalRef}>
-    
-                {modalData && <Fragment>
-                    <h2>Are you sure you want to delete {modalData.collectionName} collection?</h2>
-                    <br/>
-                    <p>This action cannot be undone. This will permanently delete the {modalData.collectionName} collection, and all product under the collection.</p>
-                    <br/>
-                    <p>Please type <b>rdg/{modalData.collectionName}</b></p>
+
+                    {modalData && <Fragment>
+                        <h2>Are you sure you want to delete {modalData.collectionName} collection?</h2>
+                        <br />
+                        <p>This action cannot be undone. This will permanently delete the {modalData.collectionName} collection, and all product under the collection.</p>
+                        <br />
+                        <p>Please type <b>rdg/{modalData.collectionName}</b></p>
                         <form onSubmit={handleDeleteCollection}>
                             {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
                             <div className="form-ation">
                                 {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.collectionName}`)}>Delete</CustomButton> */}
-                               
-                                <MyButton onClick={closeModal} type="primary" title="Cancel" value="Submit" /> 
-                                <MyButton onClick={closeModal} type="primary" title="Cancel" value="Submit" /> 
+
+                                <MyButton onClick={closeModal} type="primary" title="Cancel" value="Submit" />
+                                <MyButton onClick={closeModal} type="primary" title="Cancel" value="Submit" />
                             </div>
                         </form>
-                </Fragment>}
-                   
-               </Modal> 
+                    </Fragment>}
+
+                </Modal>
 
             </div>
         </div>

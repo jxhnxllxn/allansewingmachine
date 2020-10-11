@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -10,60 +10,56 @@ import { getOrderHistory } from '../../../redux/order/order-action';
 const UserHistoryBlock = () => {
     const dispatch = useDispatch()
     const [orderHistory, setOrderHistory] = useState([])
-    const fetchOrderHistory = useCallback(() => {
+
+    useEffect(() => {
         dispatch(getOrderHistory()).then(res => {
             setOrderHistory(res.payload.data)
         })
-    },
-    [],)
-
-    useEffect(() => {
-       fetchOrderHistory()
-    }, [fetchOrderHistory])
+    }, [dispatch])
 
     const renderBlocks = () => (
-        orderHistory ? 
-            Object.keys(orderHistory).map((key,index)=>{
-                return(
-                <table key={index}>
-                    <thead>
-                        <tr>
-                            <th>Order number</th>
-                            <th>Product</th>
-                            <th>Price paid</th>
-                            <th>Quantity</th>
-                            <th>Sub total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        orderHistory[key]['product'].map((data,i) => (
-                            <Fragment key={i}>
-
+        orderHistory ?
+            Object.keys(orderHistory).map((key, index) => {
+                return (
+                    <table key={index}>
+                        <thead>
                             <tr>
-                            <td>{index + 1}</td>
-                            <td>{data.name}</td>
-                            <td>{data.price}</td>
-                            <td>{data.quantity}</td>
-                            <td>{data.price * data.quantity}</td>
+                                <th>Order number</th>
+                                <th>Product</th>
+                                <th>Price paid</th>
+                                <th>Quantity</th>
+                                <th>Sub total</th>
                             </tr>
-                            </Fragment>
-                        ))
-                    }
-                        <tr>
-                        <td>Date</td>
-                        <td>{orderHistory[key]['createdAt']}</td>
-                        <td></td>
-                        <td>Total</td>
-                        <td>{orderHistory[key]['total']}</td>
-                        </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                orderHistory[key]['product'].map((data, i) => (
+                                    <Fragment key={i}>
 
-                    </tbody>
-                </table>
-                    
-                )    
-            }) :null
-                
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{data.name}</td>
+                                            <td>{data.price}</td>
+                                            <td>{data.quantity}</td>
+                                            <td>{data.price * data.quantity}</td>
+                                        </tr>
+                                    </Fragment>
+                                ))
+                            }
+                            <tr>
+                                <td>Date</td>
+                                <td>{orderHistory[key]['createdAt']}</td>
+                                <td></td>
+                                <td>Total</td>
+                                <td>{orderHistory[key]['total']}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                )
+            }) : null
+
     )
 
     return (

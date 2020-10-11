@@ -1,5 +1,5 @@
 const errorResponse = require('../../utils/errorResponse.util');
-const asyncHandler = require('../../middlewares/async.middleware');
+const asyncHandler = require('express-async-handler');
 const Product = require('../../models/product/Product.model');
 
 
@@ -7,16 +7,16 @@ const Product = require('../../models/product/Product.model');
 // @route   GET /api/products
 // @route   GET /api/category/:categoryId/products
 // @access  Public
-exports.getProductsToShop = asyncHandler(async (req,res,next) => {
+exports.getProductsToShop = asyncHandler(async (req, res, next) => {
     let order = req.body.order ? req.body.order : "desc";
     let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
-    let limit = req.body.limit ? parseInt(req.body.limit) : 100; 
+    let limit = req.body.limit ? parseInt(req.body.limit) : 100;
     let skip = parseInt(req.body.skip);
     let findArgs = {};
 
-    for(let key in req.body.filters){
-        if(req.body.filters[key].length > 0 ){
-            if(key === 'price'){
+    for (let key in req.body.filters) {
+        if (req.body.filters[key].length > 0) {
+            if (key === 'price') {
                 findArgs[key] = {
                     $lte: req.body.filters[key][1],
                     $gte: req.body.filters[key][0]
@@ -25,7 +25,7 @@ exports.getProductsToShop = asyncHandler(async (req,res,next) => {
             // else if(key === 'collections'){
             //     findArgs['collections'] = req.body.filters[key]
             // }
-            else{
+            else {
                 findArgs[key] = req.body.filters[key]
             }
         }
@@ -34,27 +34,27 @@ exports.getProductsToShop = asyncHandler(async (req,res,next) => {
     findArgs['publish'] = true;
 
     Product.
-    find(findArgs).
-    populate('collections').
-    populate('category').
-    sort([[sortBy,order]]).
-    skip(skip).
-    limit(limit).
-    exec((err,articles)=>{
-        if(err) return res.status(400).send(err);
-        res.status(200).json({
-            size: articles.length,
-            articles
+        find(findArgs).
+        populate('collections').
+        populate('category').
+        sort([[sortBy, order]]).
+        skip(skip).
+        limit(limit).
+        exec((err, articles) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({
+                size: articles.length,
+                articles
+            })
         })
-    })
 });
 
 // @desc    get all Products
 // @route   GET /api/products
 // @route   GET /api//products
 // @access  Public
-exports.getProducts = asyncHandler(async (req,res,next) => {
-    
+exports.getProducts = asyncHandler(async (req, res, next) => {
+
 
     res
         .status(200)
@@ -67,24 +67,24 @@ exports.getProducts = asyncHandler(async (req,res,next) => {
 // @route   GET /api/products/:id
 // @access  Private
 
-exports.getProduct = asyncHandler(async (req,res,next) => {
-   const product = await Product.findById(req.params.id)
-   .populate({
-       path:'category',
-       select:'name email'
-   })
-   .populate({
-    path:'collections',
-    select:'name'
-})
-   ;
+exports.getProduct = asyncHandler(async (req, res, next) => {
+    const product = await Product.findById(req.params.id)
+        .populate({
+            path: 'category',
+            select: 'name email'
+        })
+        .populate({
+            path: 'collections',
+            select: 'name'
+        })
+        ;
 
-   if(!product){
-       return next(new errorResponse(`No product with the id of ${req.params.id}`),404);
-   }
+    if (!product) {
+        return next(new errorResponse(`No product with the id of ${req.params.id}`), 404);
+    }
     res.status(200).json({
-        success:true,
-        data:product
+        success: true,
+        data: product
     })
 });
 
@@ -93,7 +93,7 @@ exports.getProduct = asyncHandler(async (req,res,next) => {
 // @route   GET /api/category/:categoryId/products
 // @access  Private
 
-exports.addProduct = asyncHandler(async (req,res,next) => {
+exports.addProduct = asyncHandler(async (req, res, next) => {
     // req.body.category = req.params.categoryId;
 
     // const category = await Category.findById(req.params.categoryId);
@@ -107,48 +107,48 @@ exports.addProduct = asyncHandler(async (req,res,next) => {
 
     const product = await Product.create(req.body);
 
-     res.status(200).json({
-         success:true,
-         data:product
-     })
- });
- 
+    res.status(200).json({
+        success: true,
+        data: product
+    })
+});
+
 // @desc   Update Product
 // @route   GET /api/category/:categoryId/products
 // @access  Private
 
-exports.updateProduct = asyncHandler(async (req,res,next) => {
+exports.updateProduct = asyncHandler(async (req, res, next) => {
 
     let category = await Product.findById(req.params.id);
 
-    if(!category){
+    if (!category) {
         return next(
             new errorResponse(`No category with the id of ${req.params.id}`),
             404
         );
     }
 
-    category = await Product.findByIdAndUpdate(req.params.id, req.body,{
-        new:true,
-        runValidators:true
+    category = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
     });
 
-     res.status(200).json({
-         success:true,
-         data:category
-     })
- });
- 
- 
+    res.status(200).json({
+        success: true,
+        data: category
+    })
+});
+
+
 // @desc    Delete Product
 // @route   GET /api/category/:categoryId/products
 // @access  Private
 
-exports.deleteProduct = asyncHandler(async (req,res,next) => {
+exports.deleteProduct = asyncHandler(async (req, res, next) => {
 
     const category = await Product.findById(req.params.id);
 
-    if(!category){
+    if (!category) {
         return next(
             new errorResponse(`No category with the id of ${req.params.id}`),
             404
@@ -156,11 +156,11 @@ exports.deleteProduct = asyncHandler(async (req,res,next) => {
     }
 
     await category.remove();
-    
-     res.status(200).json({
-         success:true,
-         data:category
-     })
- });
+
+    res.status(200).json({
+        success: true,
+        data: category
+    })
+});
 
 

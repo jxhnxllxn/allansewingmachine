@@ -1,50 +1,50 @@
 const path = require('path');
 const errorResponse = require('../../utils/errorResponse.util');
-const asyncHandler = require('../../middlewares/async.middleware');
+const asyncHandler = require('express-async-handler');
 const Collection = require('../../models/product/Collection.model');
 const fs = require('fs')
 
 // @desc    get all Collection
 // @route   GET /api/Collection
 // @access  Private
-exports.getCollections = asyncHandler (async (req,res,next)=>{
+exports.getCollections = asyncHandler(async (req, res, next) => {
 
-    res
-        .status(200)
-        .json(res.advanceResults);
-   
+  res
+    .status(200)
+    .json(res.advanceResults);
+
 });
 
 // @desc    get single Collection
 // @route   GET /api/Collection/:id
 // @access  Private
-exports.getCollection = asyncHandler (async (req, res, next)=>{
-    const collection = await Collection.findById(req.params.id).populate('categories');
+exports.getCollection = asyncHandler(async (req, res, next) => {
+  const collection = await Collection.findById(req.params.id).populate('categories');
 
-    if (!collection) {
-      return next(
-        new errorResponse(`Collection owner not found with ID of ${req.params.id}`, 404)
-      );
-    }
-  
-    res.status(200).json({ success: true, data: collection });
+  if (!collection) {
+    return next(
+      new errorResponse(`Collection owner not found with ID of ${req.params.id}`, 404)
+    );
+  }
+
+  res.status(200).json({ success: true, data: collection });
 });
 
 // @desc    update Collection
 // @route   PUT /api/Collection/:id
 // @access  Private
-exports.updateCollection = asyncHandler (async (req,res,next)=>{
+exports.updateCollection = asyncHandler(async (req, res, next) => {
 
-    const collection = await Collection.findByIdAndUpdate(req.params.id,req.body,{
-        new:true,
-        runValidators:true
-    });
+  const collection = await Collection.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
 
-    if(!collection){
-        return next(new errorResponse(`Collection not found with ID of ${req.params.id}`,404));
-    }
+  if (!collection) {
+    return next(new errorResponse(`Collection not found with ID of ${req.params.id}`, 404));
+  }
 
-    res.status(200).json({success:true,data:collection});
+  res.status(200).json({ success: true, data: collection });
 
 });
 
@@ -55,13 +55,13 @@ exports.updateCollection = asyncHandler (async (req,res,next)=>{
 //             new errorResponse('No files were uploaded', 404)
 //         );
 //     }
-  
+
 //     const file = req.files['file'];
 //     // Make sure the image is a photo
 //     if (!file.mimetype.startsWith('image')) {
 //       return next(new errorResponse(`Please upload an image file`, 400));
 //     }
-  
+
 //     // Check filesize
 //     if (file.size > process.env.MAX_FILE_UPLOAD) {
 //       return next(
@@ -71,10 +71,10 @@ exports.updateCollection = asyncHandler (async (req,res,next)=>{
 //         )
 //       );
 //     }
-  
+
 //     // Create custom filename
 //     file.name = `photo_${new Date().getTime().toString()}${path.parse(file.name).ext}`;
-  
+
 //     file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async err => {
 //       if (err) {
 //         console.error(err);
@@ -88,26 +88,26 @@ exports.updateCollection = asyncHandler (async (req,res,next)=>{
 // @desc    delete Collection
 // @route   DELETE /api/collection/:id
 // @access  Private
-exports.deleteCollection = asyncHandler (async (req,res,next)=>{
-    const collection = await Collection.findById(req.params.id);
-  
-    if(!collection){
-        return next(new errorResponse(`Collection not found with ID of ${req.params.id}`,404));
+exports.deleteCollection = asyncHandler(async (req, res, next) => {
+  const collection = await Collection.findById(req.params.id);
+
+  if (!collection) {
+    return next(new errorResponse(`Collection not found with ID of ${req.params.id}`, 404));
+  }
+
+  fs.unlink(`${process.env.FILE_UPLOAD_PATH}/${collection.collectionPhoto}`, async err => {
+    if (err) {
+      console.error(err);
+      return next(new errorResponse(`Problem with file deletion`, 500));
     }
 
-    fs.unlink(`${process.env.FILE_UPLOAD_PATH}/${collection.collectionPhoto}`, async err => {
-      if (err) {
-        console.error(err);
-        return next(new errorResponse(`Problem with file deletion`, 500));
-      }
-      
-      collection.remove();
+    collection.remove();
 
-      res
-          .status(200)
-          .json({success:true,data:collection});
+    res
+      .status(200)
+      .json({ success: true, data: collection });
 
-    });
+  });
 
 });
 
@@ -127,11 +127,11 @@ exports.deleteCollection = asyncHandler (async (req,res,next)=>{
 // @route     PUT /api/collection/:id/photo
 // @access    Private
 exports.createCollection = asyncHandler(async (req, res, next) => {
-  
+
   const collection = await Collection.create(req.body);
 
   res.status(200).json({
-      success:true,
-      data:collection
+    success: true,
+    data: collection
   })
 });  
