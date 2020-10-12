@@ -343,7 +343,7 @@ const OrderDetail = (props) => {
         </label>
         </div>
 
-
+        {/* 
         {
           orderDetail.paymentOptions === 'paypal' ?
             <Paypal
@@ -354,7 +354,8 @@ const OrderDetail = (props) => {
             />
             :
             <MyButton runAction={e => submitForm(e)} type="submit" title="Place order" value="Submit" />
-        }
+        } */}
+        <MyButton runAction={e => submitForm(e)} type="submit" title="Place order" value="Submit" />
 
         {formField.formSuccess ?
           <div className="success_label">
