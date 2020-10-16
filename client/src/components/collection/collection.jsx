@@ -10,10 +10,13 @@ const Collection = (props) => {
           return '/images/slide2.jpg'
         }
       }
-      
+
+    const handleClick = () => {
+      props.history.push(`${props.match.url}/${props._id}`)
+    }
     
     return(
-        <div className="collection_wrapper" onClick={() => props.history.push(`${props.match.url}/${props._id}`)}>
+        <div className="collection_wrapper" onClick={handleClick}>
             <div className="background_image" style={{background:`url(${renderCardImage(props.images)})`,backgroundSize: 'cover'}}/>
             <div className="content">
                 <h1 className="title">{props.name} Shop</h1>

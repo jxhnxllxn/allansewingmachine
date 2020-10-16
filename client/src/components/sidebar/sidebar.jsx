@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux';
 
 const Sidebar = () => {
     const dispatch = useDispatch()
+    const handleLogout = () => {
+        dispatch(logout())
+    }
     return (
     <div className="sidebar">
         <div className="profile_info">
@@ -15,7 +18,7 @@ const Sidebar = () => {
         <NavLink to="/admin/product" className="option">Product</NavLink>
         <NavLink to="/admin/collection" className="option">Collection</NavLink>
         <NavLink to="/admin/category" className="option">Category</NavLink>
-        <Link to="/" className="option" onClick={() => dispatch(logout())}>Logout</Link>
+        <Link to="/" className="option" onClick={handleLogout}>Logout</Link>
     </div>
     )
 }

@@ -6,6 +6,8 @@ import './cart-item-dropdown.scss'
 
 const CartItemDropdown = ({item}) => {
   
+  const dispatch = useDispatch()
+  
   const renderCardImage = (images) => {
     if(images.length > 0){
       return images[0].url
@@ -14,7 +16,10 @@ const CartItemDropdown = ({item}) => {
     }
   }
 
-  const dispatch = useDispatch()
+  const handleClearItem = () => {
+    dispatch(clearItem(item))
+  }
+
   return (
     <div className='cart-item'>
         <img src={renderCardImage(item.images)} alt='item' />
@@ -23,7 +28,7 @@ const CartItemDropdown = ({item}) => {
           <span className='price'>
               {item.quantity} x ${item.price}
           </span>
-          <span className='remove-button' onClick={() => dispatch(clearItem(item))}>
+          <span className='remove-button' onClick={handleClearItem}>
               &#10005;
           </span>
         </div>

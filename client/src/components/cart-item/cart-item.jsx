@@ -19,7 +19,9 @@ const CartItem = (props) => {
         }
     }
     const handleChange = e => setQuantity(e.target.value);
-
+    const handleClearItem = () => {
+        dispatch(clearItem(props.cartItem))
+    }
     const [quantity, setQuantity] = useState(props.cartItem.quantity)
 
     useEffect(
@@ -43,7 +45,7 @@ const CartItem = (props) => {
             </span>
 
             <span className='price'>Php {addComma(props.cartItem.price)}.00</span>
-            <div className='remove-button' onClick={() => dispatch(clearItem(props.cartItem))}>
+            <div className='remove-button' onClick={handleClearItem}>
                 &#10005;
         </div>
         </div>

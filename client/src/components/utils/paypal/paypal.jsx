@@ -4,11 +4,12 @@ import { useDispatch } from 'react-redux';
 import { cleanOrder, getPaypalScript } from '../../../redux/order/order-action';
 import Loading from '../../loading/loading'
 
-const Paypal = () => {
+const Paypal = (props) => {
     const dispatch = useDispatch()
     const [isLoading, setIsLoading] = useState(true)
     const [paypalConfig, setPaypalConfig] = useState({})
     const [sdkReady, setSdkReady] = useState(false)
+
 
     useEffect(() => {
       setIsLoading(true)
@@ -44,8 +45,8 @@ const Paypal = () => {
         {
           sdkReady ?
             <PayPalButton
-                amount="0.01"
-                currency="PHP"
+                amount={props.toPay}
+                currency={paypalConfig.currency}
                 // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                 onSuccess={(details, data) => {
                     alert("Transaction completed by " + details.payer.name.given_name);

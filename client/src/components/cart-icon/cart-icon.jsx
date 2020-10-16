@@ -7,9 +7,12 @@ import './cart-icon.scss';
 
 const CartIcon = () => {
   const dispatch = useDispatch();
+  const handleToggleCartHidden = () => {
+    dispatch(toggleCartHidden())
+  }
   const itemCount = useSelector(state => selectCartItemsCount(state));
   return (
-    <div className='cart-icon' onClick={() => dispatch(toggleCartHidden())}>
+    <div className='cart-icon' onClick={handleToggleCartHidden}>
       <ShoppingIcon className='shopping-icon' />
       <span className='item-count'>{itemCount > 0 ? itemCount : null}</span>
     </div>

@@ -5,13 +5,7 @@ const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary');
-const mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet');
-// const xss = require('xss-clean');
-const rateLimit = require('express-rate-limit');
-const hpp = require('hpp');
 
-const bodyParser = require('body-parser');
 const errorHandler = require('./middlewares/error.middleware');
 const connectDB = require('./config/db');
 
@@ -33,8 +27,6 @@ const user = require('./routes/user.route');
 
 const app = express();
 
-// Body parser
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json({ extended: false }));
 
 //Cooki Parser
@@ -57,29 +49,6 @@ app.use(fileUpload({
     useTempFiles: true
 }));
 
-//Mongo Sanitize security
-app.use(mongoSanitize());
-
-//Helmet set security hearder
-app.use(helmet());
-
-//Prevent XSS attacks
-// app.use(xss());
-
-//Rate limiting
-const limiter = rateLimit({
-    windowMs: 10 * 60 * 1000,//10 mins
-    max: 100
-});
-
-app.use(limiter);
-
-//Prevent http params pollution
-app.use(hpp());
-
-//set static folder
-// app.use(express.static(path.join(__dirname,'public')));
-// app.use(express.static('client/build'))
 
 
 //Mount routers

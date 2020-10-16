@@ -21,6 +21,10 @@ const Header = () => {
     const settingDropdown = useSelector(state => selectSettingHidden(state))
     const dispatch = useDispatch()
 
+    const handleToggleSettingHidden = () => {
+        dispatch(toggleSettingHidden())
+    }
+
     const header = (
         <div className="header page_container">
             <Link className="logo_container" to="/">
@@ -42,7 +46,7 @@ const Header = () => {
             {
                 isAuthenticated ? 
                 (<Fragment>
-                <div className="option menu" onClick={() => dispatch(toggleSettingHidden())}>
+                <div className="option menu" onClick={handleToggleSettingHidden}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="30" height="30" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z"/>
                         <circle cx="12" cy="7" r="4" />

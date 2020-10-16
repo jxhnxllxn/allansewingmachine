@@ -14,6 +14,9 @@ const Layout = (props) => {
     const dispatch = useDispatch();
     const isAdmin = useSelector(state => selectIsAdmin(state))
     const menuBackDrop = useSelector(state => selectBackdropHidden(state))
+    const handleBackDropHidden = () => {
+        dispatch(backDropHidden())
+    }
     
     return (
         <div>
@@ -27,7 +30,7 @@ const Layout = (props) => {
             }
             {
                 menuBackDrop ? 
-                    <div className="menuBackdrop" onClick={() => dispatch(backDropHidden())} />
+                    <div className="menuBackdrop" onClick={handleBackDropHidden} />
                 :null
             }
             

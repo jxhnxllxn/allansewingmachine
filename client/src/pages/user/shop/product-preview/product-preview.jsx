@@ -52,6 +52,10 @@ const ProductPreview = (props) => {
         }
     }
 
+    const handleAddItem = () => {
+        dispatch(addItem(productDetail))
+    }
+
     const productDetails = () => (
         !productDetail ?
             errorMsg && <div className="error_message">
@@ -70,7 +74,7 @@ const ProductPreview = (props) => {
                     <p>{productDetail.description}</p>
                     <DetailsThumb images={productDetail.images} tab={handleTab} myRef={myRef} />
 
-                    <button className="cart" onClick={() => { dispatch(addItem(productDetail)) }}>Add to cart</button>
+                    <button className="cart" onClick={handleAddItem}>Add to cart</button>
                 </div>
             </div>
     )

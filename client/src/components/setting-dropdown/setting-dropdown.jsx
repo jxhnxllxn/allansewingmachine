@@ -9,11 +9,17 @@ import './setting-dropdwon.scss'
 
 const SettingDropdown = () => {
     const dispatch = useDispatch();
+    const handleCloseAllMenu = () => {
+        dispatch(closeAllMenu())
+    }
+    const handleLogout = () => {
+        dispatch(logout())
+    }
     return(
         <div className="setting_dropdown">
             <ul>
-                <li><Link to='/user/dashboard' onClick={() => dispatch(closeAllMenu())}>Setting</Link></li>
-                <li><Link onClick={() => dispatch(logout())} to='/'>Sign out</Link></li>
+                <li><Link to='/user/dashboard' onClick={handleCloseAllMenu}>Setting</Link></li>
+                <li><Link onClick={handleLogout} to='/'>Sign out</Link></li>
             </ul>
         </div>
     )

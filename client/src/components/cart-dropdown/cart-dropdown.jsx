@@ -11,6 +11,9 @@ import { withRouter } from 'react-router-dom';
 const CartDropdown = ({history}) => {
     const cartItems = useSelector(state => selectCartItems(state))
     const dispatch = useDispatch()
+    const handleToggleCartHidden = () => {
+        dispatch(toggleCartHidden())
+    }
     return(
         <div className="cart-dropdown">
         <div className="cart-items">
@@ -27,7 +30,7 @@ const CartDropdown = ({history}) => {
         </div>
             <MyButton className="cart_dropdown_button"  type="primary" 
                 runAction={() => {
-                    dispatch(toggleCartHidden());
+                    handleToggleCartHidden()
                     history.push('/user/cart');
                     }
                 }  

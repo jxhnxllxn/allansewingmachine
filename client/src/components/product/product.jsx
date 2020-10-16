@@ -14,6 +14,18 @@ const renderCardImage = (images) => {
 
 const Product = (props) => {
   const dispatch = useDispatch()
+  const handleAddItem = () => {
+    dispatch(addItem({
+      _id:props._id,
+      name:props.name,
+      images:props.images,
+      price:props.price,
+      collection:props.collections.name,
+      category:props.category.name,
+      sold:props.sold,
+      available:props.available,
+    }))
+  }
   
   return (
     <div className={`product_wrapper card ${props.grid}`}>
@@ -45,19 +57,7 @@ const Product = (props) => {
             <div className="button_wrapp">
                 <MyButton 
                   type="bag_link"
-                  runAction={()=>{
-                    dispatch(addItem({
-                      _id:props._id,
-                      name:props.name,
-                      images:props.images,
-                      price:props.price,
-                      collection:props.collections.name,
-                      category:props.category.name,
-                      sold:props.sold,
-                      available:props.available,
-                    }))
-
-                  }}
+                  runAction={handleAddItem}
                 />
             </div>
         </div>
