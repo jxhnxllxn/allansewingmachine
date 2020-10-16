@@ -90,6 +90,15 @@ app.use('/api/product', product);
 app.use('/api/order', order);
 app.use('/api/user', user);
 
+app.get('/api/config/paypal',(req,res) => res.send({
+    env:process.env.PAYPAL_ENV,
+    currency:process.env.PAYPAL_CURRENCY,
+    locale:process.env.PAYPAL_LOCALE,
+    sandbox:process.env.PAYPAL_SANDBOX,
+    production:process.env.PAYPAL_PRODUCTION,
+
+}));
+
 
 // middlewares
 app.use(errorHandler);

@@ -60,7 +60,7 @@ const OrderDetail = (props) => {
     orders: cartItems,
     total: total,
     shipping: 'flat_rate',
-    paymentOptions: 'paypal'
+    paymentOptions: 'viaPaypal'
   })
 
   const handleOnChange = e => {
@@ -310,12 +310,12 @@ const OrderDetail = (props) => {
             <input
               type='radio'
               name='paymentOptions'
-              id='paypal'
+              id='viaPaypal'
               onChange={handleOnChange}
-              checked={orderDetail.paymentOptions === 'paypal'}
-              value='paypal'
+              checked={orderDetail.paymentOptions === 'viaPaypal'}
+              value='viaPaypal'
             />
-            <label htmlFor='paypal'>Paypal</label>
+            <label htmlFor='viaPaypal'>Paypal</label>
             <div className='po-box'>
               <img
                 src='https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg'
@@ -343,9 +343,9 @@ const OrderDetail = (props) => {
         </label>
         </div>
 
-        {/* 
+        
         {
-          orderDetail.paymentOptions === 'paypal' ?
+          orderDetail.paymentOptions === 'viaPaypal' ?
             <Paypal
               toPay={addFee()}
               transactionError={(data) => transactionError(data)}
@@ -354,9 +354,8 @@ const OrderDetail = (props) => {
             />
             :
             <MyButton runAction={e => submitForm(e)} type="submit" title="Place order" value="Submit" />
-        } */}
-        <MyButton runAction={e => submitForm(e)} type="submit" title="Place order" value="Submit" />
-
+        }
+        
         {formField.formSuccess ?
           <div className="success_label">
             <h1>Successfull</h1>

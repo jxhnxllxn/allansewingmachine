@@ -159,6 +159,7 @@ const BillingShipping = (props) => {
                 config: {
                     name: 'password_input',
                     type: 'password',
+                    autoComplete: "on"
                 },
                 validation: {
                     required: false
@@ -174,6 +175,7 @@ const BillingShipping = (props) => {
                 config: {
                     name: 'confirm_password_input',
                     type: 'password',
+                    autoComplete: "on"
                 },
                 validation: {
                     required: false,

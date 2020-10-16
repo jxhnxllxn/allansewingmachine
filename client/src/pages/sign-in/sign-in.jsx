@@ -39,6 +39,7 @@ const SignIn = ({ history }) => {
                 config: {
                     name: 'password_input',
                     type: 'password',
+                    autoComplete: "on"
                 },
                 validation: {
                     required: true,

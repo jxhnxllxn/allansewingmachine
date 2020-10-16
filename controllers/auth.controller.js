@@ -11,7 +11,7 @@ const fs = require('fs');
 // @route   POST /api/auth/me
 // @access  Private
 exports.getMe = asyncHandler(async (req, res, next) => {
-    const user = await User.findById(req.user.id).select('-password').populate('orders')
+    const user = await User.findById(req.user._id).populate('orders')
     res
         .status(200)
         .json({
@@ -26,6 +26,11 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 // @route   POST /api/auth/register
 // @access  Public
 exports.register = asyncHandler(async (req, res, next) => {
+    const  {email} = req.body
+    const userExist = await User.findOne({email})
+    if(userExist){
+        return next(new errorResponse('User already exists', 400));
+    }
     const user = await User.create({
         name: req.body.name,
         email: req.body.email,

@@ -89,3 +89,19 @@ export const getOrderHistory = ()  => {
             payload: request
         }
 }
+
+export const getPaypalScript = () => {
+    const request = axios.get('/api/config/paypal')
+    .then(res => res.data)
+    return {
+        type: OrderActionTypes.GET_PAYPAL_SCRIPT,
+        payload:request
+    }
+}
+
+export const cleanOrder = () => {
+    return {
+        type: OrderActionTypes.CLEAN_ORDER,
+        payload: {}
+    }
+}

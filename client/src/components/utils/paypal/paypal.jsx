@@ -1,52 +1,68 @@
-import React from 'react';
-import PaypalExpressBtn from 'react-paypal-express-checkout';
+import React, { useEffect, useState } from 'react'
+import { PayPalButton } from "react-paypal-button-v2";
+import { useDispatch } from 'react-redux';
+import { cleanOrder, getPaypalScript } from '../../../redux/order/order-action';
+import Loading from '../../loading/loading'
 
-// sb-p5ber3262392@business.example.com
-// ATow62LzM8Rc1TGO2Nh2KGTEOMsqwdxqZQrfR6u4t7Xq7OyF-mYYD9OsjY2OiyDgNDB2K8BO6Dpw_nVF
-// EHkmUD_yquUtiMJhcvMdZBI6u8IF61yK-vw26eaTjdDZ6ntEUTmi8vDdecrok4dnypEkAw0CXSetQPSk
-const Paypal = (props) => {
-    const onSuccess = (payment) => {
-        props.transactionSuccess(payment)
-    }		
+const Paypal = () => {
+    const dispatch = useDispatch()
+    const [isLoading, setIsLoading] = useState(true)
+    const [paypalConfig, setPaypalConfig] = useState({})
+    const [sdkReady, setSdkReady] = useState(false)
 
-    const onCancel = (data) => {
-        props.transactionCanceled(data)
-    }	
+    useEffect(() => {
+      setIsLoading(true)
+        const addPaypalScript = async (clientId) => {
+          const script = document.createElement('script')
+          script.type = 'text/javascript'
+          script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
+          script.async = true
+          script.onload = () => {
+            setSdkReady(true)
+          }
+            document.body.appendChild(script)
+        }
+        dispatch(getPaypalScript())
+        .then(res => {
+            setPaypalConfig(res.payload)
+            addPaypalScript(res.payload.sandbox)
+            setIsLoading(false)
+        })
 
-    const onError = (err) => {
-        props.transactionError(err)
-    }	
-
-    let env = 'sandbox'; // you can set here to 'production' for production
-    let currency = 'PHP'; // or you can set this value from your props or state  
-    let total = props.toPay;  // same as above, this is the total amount (based on currency) to be 
-    // let locale = 'en-PH';
-    let locale = 'en-US'; 
-
-    const client = {
-        sandbox: 'ATow62LzM8Rc1TGO2Nh2KGTEOMsqwdxqZQrfR6u4t7Xq7OyF-mYYD9OsjY2OiyDgNDB2K8BO6Dpw_nVF',
-        production: '',
-     }
-
+        // if(!window.paypal){
+        //   console.log(window.paypal)
+        // }else{
+        //   setSdkReady(true)
+        //   console.log(window.paypal)
+        // }
+        return () => {
+            dispatch(cleanOrder())
+        }
+    }, [dispatch])
     return (
-        <div>
-            <PaypalExpressBtn 
-                client={client}
-                env={env}
-                locale={locale}
-                currency={currency}
-                total={total}
+      <>
+        {
+          sdkReady ?
+            <PayPalButton
+                amount="0.01"
+                currency="PHP"
+                // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                onSuccess={(details, data) => {
+                    alert("Transaction completed by " + details.payer.name.given_name);
 
-                onError={onError}
-                onCancel={onCancel}
-                onSuccess={onSuccess}
-                style={{
-                    size:'medium',
-                    shape:'rect',
+                    // OPTIONAL: Call your server to save the transaction
+                    return fetch("/paypal-transaction-complete", {
+                        method: "post",
+                        body: JSON.stringify({
+                            orderId: data.orderID
+                        })
+                    });
                 }}
             />
-        </div>
+          :  <Loading />
+        }
+      </>
     )
-}
+  }
 
-export default Paypal
+  export default Paypal

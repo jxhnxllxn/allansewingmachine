@@ -9,11 +9,7 @@ import { auth } from "./redux/auth/auth-action";
 import Routes from './routes';
 
 import './App.scss';
-import setAuthToken from './utils/setAuthToken';
 
-if(localStorage.token){
-  setAuthToken(localStorage.token);
-}
 
 const App = () => {
   useEffect(() => {

@@ -43,6 +43,14 @@ export default function(state = initialState, action){
                 loading:false,
                 orderHistory:[payload.data]
             }
+        case OrderActionTypes.GET_PAYPAL_SCRIPT:
+            return {
+                ...state,
+                loading:false,
+                paypalScript:payload
+            }
+        case OrderActionTypes.CLEAN_ORDER:
+            return {}
 
         default:
             return state

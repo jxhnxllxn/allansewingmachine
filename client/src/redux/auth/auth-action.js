@@ -1,9 +1,6 @@
 import axios from "axios";
 // import { setAlert } from "../alert/alert-action";
 import { AuthActionTypes } from "./auth-types"; 
-import setAuthToken from "../../utils/setAuthToken"; 
-
-
 // export const auth = () => {
 //     if(localStorage.token){
 //         setAuthToken(localStorage.token);
@@ -19,13 +16,15 @@ import setAuthToken from "../../utils/setAuthToken";
 //     }
 // }
 // load user
-export const auth = () => async dispatch => {
-    if(localStorage.token){
-        setAuthToken(localStorage.token);
-    }
-    
+export const auth = () => async dispatch => {    
     try {
-        const res = await axios.get('/api/auth/me');
+        const config = {
+            headers:{
+                'Content-Type':'application/json',
+                Authorization:`Bearer ${localStorage.token}`
+            }
+        }
+        const res = await axios.get('/api/auth/me',config);
         dispatch({
             type:AuthActionTypes.USER_LOADED,
             payload:res.data,
