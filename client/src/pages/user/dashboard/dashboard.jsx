@@ -1,7 +1,7 @@
 import React from 'react';
-import UserLayout from '../../../hoc/user.js';
-import MyButton from '../../../components/utils/button/button';
-import UserHistoryBlock from '../../../components/utils/history-block/history-block';
+import UserLayout from '../../../layout/user-layout.js';
+import MyButton from '../../../components/utils/button';
+import UserHistoryBlock from '../../../components/utils/history-block';
 import './dashboard.scss';
 
 const UserDashboard = ({user}) => {

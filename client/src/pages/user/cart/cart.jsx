@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
-import CartItem from '../../../components/cart-item/cart-item';
+import CartItem from '../../../components/cart-item';
 import {selectCartItems,selectCartTotal} from '../../../redux/cart/cart-selectors';
-import MyButton from '../../../components/utils/button/button';
+import MyButton from '../../../components/utils/button';
 import './cart.scss'
   
 

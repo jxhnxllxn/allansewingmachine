@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import HomeSlider from './home-slider/home-slider';
-import CardBlock from '../../../components/utils/card-block/card-block';
+import CardBlock from '../../../components/utils/card-block';
 
 import { store } from "../../../redux/store";
 import { getProductsByArrival, getProductsBySell } from "../../../redux/product/product-action";
@@ -24,7 +24,7 @@ const Home = () => {
 
     return (
         <div className="home_wrapper">
-            {/* <HomeSlider /> */}
+            <HomeSlider />
             <CardBlock
                 list={productBySell}
                 title="Best Seller"

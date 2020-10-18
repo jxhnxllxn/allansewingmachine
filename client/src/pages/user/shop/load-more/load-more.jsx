@@ -1,5 +1,5 @@
 import React from 'react'
-import CardBlockShop from '../../../../components/utils/card-block-shop/card-block-shop'
+import CardBlockShop from '../../../../components/utils/card-block-shop'
 import './load-more.scss'
 const LoadMoreCards = (props) => {
     return (

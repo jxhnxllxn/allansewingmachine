@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import CardBlock from '../../../components/utils/card-block/card-block'
+import CardBlock from '../../../components/utils/card-block'
 import { getCollections } from "../../../redux/collection/collection-action"; 
 // import Collection from "../../../components/collection/collection";
 import './shop.scss';
 import { useSelector } from 'react-redux';
 
 import {store} from "../../../redux/store";
-import Loading from '../../../components/loading/loading';
+import Loading from '../../../components/loading';
 
 
 const Shop = () => {

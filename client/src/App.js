@@ -7,9 +7,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import {store,persistore} from "./redux/store";
 import { auth } from "./redux/auth/auth-action";
 import Routes from './routes';
-
-import './App.scss';
-
+import './sass/main.scss'
 
 const App = () => {
   useEffect(() => {

@@ -2,14 +2,14 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrder } from "../../../redux/order/order-action";
 import { clearCart } from '../../../redux/cart/cart-action';
-import { update, generateData, resetFields } from '../../../components/utils/form-action/form-action';
+import { update, generateData, resetFields } from '../../../components/utils/form-action';
 import { selectCartItems, selectCartItemsCount, selectCartTotal } from '../../../redux/cart/cart-selectors';
 import addComma from '../../../components/utils/add-comma';
 
-import Paypal from '../../../components/utils/paypal/paypal';
-import MyButton from '../../../components/utils/button/button'
-import FormField from '../../../components/utils/form-field/form-field'
-import Modal from '../../../components/modal/modal';
+import Paypal from '../../../components/utils/paypal';
+import MyButton from '../../../components/utils/button'
+import FormField from '../../../components/utils/form-field'
+import Modal from '../../../components/modal';
 import { withRouter } from 'react-router-dom';
 const OrderDetail = (props) => {
   const cartCount = useSelector(state => selectCartItemsCount(state))

@@ -50,7 +50,6 @@ app.use(fileUpload({
 }));
 
 
-
 //Mount routers
 app.use('/api/auth', auth);
 app.use('/api/collection', collection);

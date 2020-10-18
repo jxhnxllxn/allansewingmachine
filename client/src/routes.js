@@ -1,13 +1,13 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 // import AdminRoute from "./components/routing/AdminRoute";
-import Auth from "./hoc/auth.jsx";
+import Auth from "./components/auth.jsx";
 import Home from "./pages/user/home/home"
 import Shop from "./pages/user/shop/shop";
 import ShopCollection from './pages/user/shop/shop-collection/shop-collection';
 import ProductPreview from './pages/user/shop/product-preview/product-preview';
-import SignIn from "./pages/sign-in/sign-in";
-import SignUp from "./pages/sign-up/sign-up";
+import SignIn from "./pages/sign-in";
+import SignUp from "./pages/sign-up";
 import Cart from "./pages/user/cart/cart"
 import Checkout from "./pages/user/checkout/checkout";
 import Admin from "./pages/admin/admin";
@@ -15,8 +15,8 @@ import Admin from "./pages/admin/admin";
 import UserDashboard from "./pages/user/dashboard/dashboard"
 import UpdateProfile from "./pages/user/dashboard/update_profile"
 
-import Layout from "./hoc/layout"
-import NotFound from "./pages/notfound/notfound";
+import Layout from "./layout/layout"
+import NotFound from "./pages/notfound";
 import BranchServices from './pages/user/branch-services/branch-services.jsx';
 
 const Routes = () => {

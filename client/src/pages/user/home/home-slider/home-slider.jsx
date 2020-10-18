@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick';
-import MyButton from '../../../../components/utils/button/button';
+import MyButton from '../../../../components/utils/button';
 import './home-slider.scss'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";

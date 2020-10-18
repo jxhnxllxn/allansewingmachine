@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductDetail, clearProductDetail } from '../../../../redux/product/product-action'
-import Loading from '../../../../components/loading/loading'
+import Loading from '../../../../components/loading'
 import DetailsThumb from "./detail-thumb";
 import './product-preview.scss'
 import { useState } from 'react'
