@@ -1,0 +1,10 @@
+.featured_collection {
+  min-height: 70vh;
+  overflow: hidden;
+  .featured_image {
+    position: relative;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat;
+  }
+}

@@ -5,6 +5,14 @@
 @import "./1\ -\ base/base";
 
 // 2 - PAGES
+@import "./2\ -\ pages/cart";
+@import "./2\ -\ pages/checkout";
+@import "./2\ -\ pages/dashboard";
+@import "./2\ -\ pages/home";
+@import "./2\ -\ pages/product-preview";
+@import "./2\ -\ pages/shop-collection";
+@import "./2\ -\ pages/shop";
+@import "./2\ -\ pages/cart";
 @import "./2\ -\ pages/admin/admin";
 @import "./2\ -\ pages/admin/category";
 @import "./2\ -\ pages/admin/collection-preview";
@@ -32,9 +40,17 @@
 @import "./3\ -\ components/footer";
 @import "./3\ -\ components/header";
 @import "./3\ -\ components/sidebar";
+@import "./3\ -\ components/slider";
 @import "./3\ -\ components/layout";
 @import "./3\ -\ components/user";
 
+@import "./3\ -\ components/utils/button";
+@import "./3\ -\ components/utils/card-block-shop";
+@import "./3\ -\ components/utils/card-block";
+@import "./3\ -\ components/utils/collapse-checkbox";
+@import "./3\ -\ components/utils/file-upload";
+@import "./3\ -\ components/utils/form-field";
+@import "./3\ -\ components/utils/page-top";
 // 4 - CUSTOM
 
 // @import "./4\ -\ custom/custom-input";

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect} from 'react';
+import React, { useEffect} from 'react';
 import { BrowserRouter as Router} from "react-router-dom";
 
 //redux
@@ -18,9 +18,9 @@ const App = () => {
   <Provider store={store}>
     <Router>
     <PersistGate persistor={persistore}>
-    <Fragment>
+    <>
         <Routes />
-    </Fragment>
+    </>
     </PersistGate>
     </Router>
   </Provider>

@@ -1,46 +1,50 @@
-import React from 'react'
+import React, {lazy,Suspense} from 'react'
 import { Switch, Route } from 'react-router-dom'
 // import AdminRoute from "./components/routing/AdminRoute";
-import Auth from "./components/auth.jsx";
-import Home from "./pages/user/home/home"
-import Shop from "./pages/user/shop/shop";
-import ShopCollection from './pages/user/shop/shop-collection/shop-collection';
-import ProductPreview from './pages/user/shop/product-preview/product-preview';
-import SignIn from "./pages/sign-in";
-import SignUp from "./pages/sign-up";
-import Cart from "./pages/user/cart/cart"
-import Checkout from "./pages/user/checkout/checkout";
-import Admin from "./pages/admin/admin";
-
-import UserDashboard from "./pages/user/dashboard/dashboard"
-import UpdateProfile from "./pages/user/dashboard/update_profile"
+import Auth from "./components/auth.jsx"
+import Home from "./pages/home"
 
 import Layout from "./layout/layout"
-import NotFound from "./pages/notfound";
-import BranchServices from './pages/user/branch-services/branch-services.jsx';
+import Loading from './components/loading'
+
+import ErrorBoundary from './components/errorBoundary.jsx'
+
+const Shop = lazy(()=>import("./pages/shop"))
+const ShopCollection = lazy(()=>import("./pages/shop-collection"))
+const ProductPreview = lazy(()=>import("./pages/product-preview"))
+const SignIn = lazy(()=>import("./pages/sign-in"))
+const SignUp = lazy(()=>import("./pages/sign-up"))
+const Cart = lazy(()=>import("./pages/cart"))
+const Checkout = lazy(()=>import("./pages/checkout"))
+const Admin = lazy(()=>import("./pages/admin/admin"))
+const UserDashboard = lazy(()=>import("./pages/dashboard"))
+const UpdateProfile = lazy(()=>import("./pages/update_profile"))
+// const NotFound = lazy(()=>import("./pages/notfound"))
 
 const Routes = () => {
     return (
         <Layout>
-        <Switch>
-            <Route exact path='/' component={Auth(Home,null)}/>
-            <Route path='/shop' component={Auth(Shop,null)} exact/>
-            <Route path='/shop/:collection' component={Auth(ShopCollection,null)} exact/>
-            <Route path='/product/:product' component={Auth(ProductPreview,null)} exact/>
-            <Route path='/branch-services' component={Auth(BranchServices,null)} exact/>
-            
-            <Route path='/user/cart' component={Auth(Cart,null)} exact/>
-            <Route path='/cart/checkout' component={Auth(Checkout,null)} exact/>
+             <Switch> 
+                <ErrorBoundary>
+                <Route exact path='/' component={Auth(Home,null)}/>
+                <Suspense fallback={<Loading />}>
+                    <Route path='/shop' component={Auth(Shop,null)} exact/>
+                    <Route path='/shop/:collection' component={Auth(ShopCollection,null)} exact/>
+                    <Route path='/product/:product' component={Auth(ProductPreview,null)} exact/>
+                    
+                    <Route path='/user/cart' component={Auth(Cart,null)} exact/>
+                    <Route path='/cart/checkout' component={Auth(Checkout,null)} exact/>
 
-            <Route path='/user/dashboard' component={Auth(UserDashboard,true)} exact/>
-            <Route path="/user/user_profile" exact component={Auth(UpdateProfile,true)}/>
-       
-            <Route path='/signin' component={Auth(SignIn,false)}/>
-            <Route path='/signup' component={Auth(SignUp,false)}/>
-            <Route path="/admin" component={Auth(Admin,true,true)}/> 
-            {/* <Route path="/user/dashboard" component={Auth(UserDashboard,true)}/>  */}
-            <Route path="*" component={NotFound} />
-        </Switch>
+                    <Route path='/user/dashboard' component={Auth(UserDashboard,true)} exact/>
+                    <Route path="/user/user_profile" exact component={Auth(UpdateProfile,true)}/>
+            
+                    <Route path='/signin' exact component={Auth(SignIn,false)}/>
+                    <Route path='/signup' exact component={Auth(SignUp,false)}/>
+                    <Route path="/admin" component={Auth(Admin,true,true)}/>
+                    {/* <Route path="*" component={NotFound} /> */}
+                </Suspense>
+                </ErrorBoundary>
+            </Switch>
         </Layout>
     )
 }

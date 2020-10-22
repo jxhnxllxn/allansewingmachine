@@ -1,53 +1,47 @@
-.sidebar{
-    // z-index: 1;
-    top: 0;
-    background: #121212;
-    // margin-top: 70px;
-    padding-top: 30px;
-    position: fixed;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    // height: calc(100% - 9%);
-    transition: 0.5s;
-    transition-property: left;
-    overflow-y: auto;
-    .profile_info{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .profile_image{
-            width: 100%;
-            height: 100px;
-            border-radius: 100px;
-            margin-bottom: 10px;
-        }
+.sidebar {
+  // z-index: 1;
+  top: 0;
+  background: #121212;
+  // margin-top: 70px;
+  padding-top: 3rem;
+  position: fixed;
+  left: 0;
+  width: 15rem;
+  height: 100%;
+  transition: 0.5s;
+  transition-property: left;
+  overflow-y: auto;
+  .profile_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .profile_image {
+      width: 100%;
+      height: 10rem;
+      border-radius: 10rem;
+      margin-bottom: 1rem;
     }
-    & .option{
-        color: #E8E4C9;
-        display: block;
-        width: 100%;
-        line-height: 60px;
-        text-decoration: none;
-        padding-left: 40px;
-        box-sizing: border-box;
-        transition: 0.5s;
-        transition-property: background;
-        transition: ease-out .3s;
-        &.active {
-            color: green;
-            font-weight: bold;
-          }
-        &:hover{
-            letter-spacing: 4px;
-            font-weight: bold;
-            color: green;
-        }
-    }
-}
-
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
   }
+  & .option {
+    color: #e8e4c9;
+    display: block;
+    width: 100%;
+    line-height: 3rem;
+    text-decoration: none;
+    padding-left: 4rem;
+    box-sizing: border-box;
+    transition: 0.5s;
+    transition-property: background;
+    transition: ease-out 0.3s;
+    &.active {
+      color: green;
+      font-weight: bold;
+    }
+    &:hover {
+      letter-spacing: 4px;
+      font-weight: bold;
+      color: green;
+    }
+  }
+}

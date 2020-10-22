@@ -1,12 +1,12 @@
-.grid_bars{
+.grid_bars {
   display: flex;
   width: 100%;
-  .image{
+  .image {
     margin-right: 1rem;
     min-width: 150px;
   }
 }
-.product_wrapper{
+.product_wrapper {
   min-width: 280px;
 }
 
@@ -16,12 +16,12 @@
   background-repeat: no-repeat;
 }
 
-.action_container{
-  .tags{
+.action_container {
+  .tags {
     margin: 5px 0;
   }
 }
-.actions{
+.actions {
   display: flex;
   justify-content: space-between;
 }

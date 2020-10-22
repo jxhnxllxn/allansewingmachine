@@ -6,7 +6,7 @@ const Collection = (props) => {
         if(images.length > 0){
           return images[0].url
         }else{
-          return '/images/slide2.jpg'
+          return '/images/sewer.jpg'
         }
       }
 

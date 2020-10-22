@@ -1,15 +1,20 @@
-.page_layout{
-    display: grid;
-    min-height: 100vh;
-    grid-template-columns:[full-start] minmax(4rem,1fr) [center-start] repeat(6, [col-start] minmax(min-content,14rem)[col-end]) [center-end] minmax(4rem,1fr) [full-start] ;
+.page_layout {
+  display: grid;
+  min-height: 90vh;
+  grid-template-columns:
+    [full-start] minmax(4rem, 1fr) [center-start] repeat(
+      6,
+      [col-start] minmax(min-content, 14rem) [col-end]
+    )
+    [center-end] minmax(4rem, 1fr) [full-start];
 }
 
-.menuBackdrop{
-    position: absolute;    
-    top: 0;    
-    left:0;    
-    bottom: 0;    
-    right: 0; 
-    background-color: transparent;
-    z-index: 101;
+.menuBackdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  z-index: 101;
 }

@@ -1,13 +1,12 @@
 // GOOGLE FONTS
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lato:wght@300&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300&family=Sacramento&display=swap");
 // FONTS
-$font-primary: 'Dancing Script', cursive;
-$font-secondary: 'Lato', sans-serif;
-
+$font-primary: "Open Sans Condensed", sans-serif;
+$font-secondary: "Lato", sans-serif;
+$font-brand: "Sacramento", cursive;
 // COLORS
 $red: #ff033e;
-$black: #000000;
+$black: #222222;
 $white: #ffffff;
 $yellow: #fff3d8;
 $whitesmoke: #f5f5f5;
@@ -15,18 +14,12 @@ $whitesmoke: #f5f5f5;
 $color-darker: #212121;
 
 // elegant-color TINT (add white)
-$color-dark: #2e2e2e;
-$color-dark-1: #4b4b4b;
-$color-dark-2: #696969;
-$color-dark-3: #878787;
-$color-dark-4: #a5a5a5;
-$color-dark-5: #c3c3c3;
-$color-dark-6: #e1e1e1;
+$color-royal-1: #8b133b;
+$color-royal-2: #04395b;
+$color-royal-3: #7d97a9;
+$color-royal-4: #d9b95e;
+$color-royal-5: #ebe6d3;
 
 // dark wood
 $color-wood: #855e42;
-// https://www.htmlcsscolor.com/hex/855E42#:~:text=Tints%20of%20Dark%20Wood%20%23855E42&text=Sum%20of%20RGB%20(Red%2BGreen,%2D%20color%20contains%20mainly%3A%20red.
-
-// light border
-$light-border: 1px solid rgba($color-dark-5, 0.4);
-$dark-border: 1px solid $color-darker;
+// https://www.albiongould.com/modern-royal-color-palette/

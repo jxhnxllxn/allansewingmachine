@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, {useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink} from 'react-router-dom';
 
@@ -10,6 +10,7 @@ import { ReactComponent as Logo } from '../assets/sewing.svg';
 import CartIcon from "../components/cart-icon";
 import CartDropdown from "../components/cart-dropdown";
 import SettingDropdwon from "../components/setting-dropdown";
+import { useState } from 'react';
 
 const Header = () => {
     const isAdmin = useSelector(state => selectIsAdmin(state));
@@ -23,38 +24,67 @@ const Header = () => {
         dispatch(toggleSettingHidden())
     }
 
+    const [minimize, setMinimize] = useState(false)
+    
+    const scrollFunction = () => {
+        if (window.scrollY > 80) {
+            setMinimize(true)
+        } else {
+            setMinimize(false)
+        }
+    }
+
+
+    useEffect(() => {
+        window.addEventListener('scroll',scrollFunction);
+        return () => {
+            window.removeEventListener('scroll',scrollFunction);
+        }
+     }, [])
+
+        
     const header = (
-        <div className="header page_container">
+        <div className={`header page_container ${minimize ? 'minimize':''}`}>
             <Link className="logo_container" to="/">
                 <Logo className='logo'/>
-                <span>Allan Sewing Machine</span>
+                <span className="brand">Allan Sewing Machine</span>
             </Link>
 
             <div className="options">             
-            <Fragment>
+            <>
                 <NavLink exact className="option" to="/" >
                 Home
                 </NavLink>
                 <NavLink className="option" to="/shop" >
                 Shop
                 </NavLink>
-            </Fragment>
-            <CartIcon />
+            </>
 
             {
                 isAuthenticated ? 
-                (<Fragment>
+                (<>
                 <div className="option menu" onClick={handleToggleSettingHidden}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="30" height="30" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="2rem" height="2rem" viewBox="0 0 24 24" strokeWidth="1" stroke="#d9b95e" fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z"/>
                         <circle cx="12" cy="7" r="4" />
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                     </svg>
                 </div>
-                </Fragment>)
+                </>)
                 :
                 (<NavLink className="option" to='/signin'>Sign in</NavLink>)
             }
+            
+            <CartIcon />
+
+            <div className="option menu">
+                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-search" width="2rem" height="2rem" viewBox="0 0 24 24" strokeWidth="1" stroke="#d9b95e" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <circle cx="10" cy="10" r="7" />
+                <line x1="21" y1="21" x2="15" y2="15" />
+                </svg>
+            </div>
+            
 
             </div>
 
@@ -72,9 +102,9 @@ const Header = () => {
         )
 
     return(
-    <Fragment>
+    <>
         {isAdmin && isAuthenticated && !loading ? null:(header)}
-    </Fragment>
+    </>
     );
 }
 

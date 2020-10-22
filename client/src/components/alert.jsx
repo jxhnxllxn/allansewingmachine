@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import ReactDOM from "react-dom";
 import PropTypes from 'prop-types';
 import { connect } from "react-redux";
@@ -13,7 +13,7 @@ const Alert = ({alerts}) => {
         ))}
     </div> : null
     return ReactDOM.createPortal(
-        <Fragment>{alert}</Fragment>,
+        <>{alert}</>,
         document.getElementById("modal-root")
     )    
 

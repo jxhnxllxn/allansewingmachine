@@ -1,37 +1,37 @@
+.my_link {
+  margin: 1rem auto;
+  .link_default {
+    align-self: flex-start;
+    text-transform: uppercase;
+    padding: 1rem;
+    display: table;
+    background: $color-royal-1;
+    margin-top: 1rem;
+    transition: ease-out 0.3s;
+    color: $color-royal-5;
+    &:hover {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+  }
+  .button_primary,
+  .add_to_cart_link {
+    text-align: center;
+    align-self: baseline;
+    letter-spacing: 0.5px;
+    line-height: 2rem;
+    padding: 0px 0.5rem;
+    font-size: 1.3rem;
+    color: white;
+    font-family: "Roboto Condensed", sans-serif;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+    transition: ease-out 0.3s;
+    background-color: $color-royal-2;
 
-.my_link{
-    margin: 10px auto;
-    .link_default {
-        align-self: flex-start;
-        text-transform: uppercase;
-        padding: 10px;
-        display: table;
-        background: #e1ddc3;
-        margin-top: 10px;
-        transition: ease-out .3s;
-        &:hover{
-            box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-        }
+    &:hover {
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
     }
-    .button_primary, .add_to_cart_link{
-        text-align: center;
-        align-self: baseline;
-        letter-spacing: 0.5px;
-        line-height: 40px;
-        padding: 0px 5px;
-        font-size: 18px;
-        color: white;
-        font-family: 'Roboto Condensed', sans-serif;
-        border: none;
-        border-radius: 2px;
-        cursor: pointer;
-        outline: none;
-        transition: ease-out .3s;
-        background-color: #2471A3 ;
-      
-        &:hover {
-          box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-        }
-    }
- 
+  }
 }

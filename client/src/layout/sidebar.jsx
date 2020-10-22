@@ -11,7 +11,7 @@ const Sidebar = () => {
     return (
     <div className="sidebar">
         <div className="profile_info">
-            <img src={require('../../src/assets/img/brand.png')} className="profile_image" alt="" />
+            <img src={require('../../src/assets/images/sewer.jpg')} className="profile_image" alt="" />
         </div>
         <NavLink exact to="/admin" className="option">Dashboard</NavLink>
         <NavLink to="/admin/product" className="option">Product</NavLink>

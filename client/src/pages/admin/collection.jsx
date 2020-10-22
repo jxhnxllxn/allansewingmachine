@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { addCollection, getCollections, deleteCollection } from "../../redux/collection/collection-action";
 
 import FormField from '../../components/utils/form-field';
@@ -205,7 +205,7 @@ const Collection = () => {
 
                 <Modal ref={modalRef}>
 
-                    {modalData && <Fragment>
+                    {modalData && <>
                         <h2>Are you sure you want to delete {modalData.collectionName} collection?</h2>
                         <br />
                         <p>This action cannot be undone. This will permanently delete the {modalData.collectionName} collection, and all product under the collection.</p>
@@ -220,7 +220,7 @@ const Collection = () => {
                                 <MyButton onClick={closeModal} type="primary" title="Cancel" value="Submit" />
                             </div>
                         </form>
-                    </Fragment>}
+                    </>}
 
                 </Modal>
 

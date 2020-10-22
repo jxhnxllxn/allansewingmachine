@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Fragment } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts, deleteProduct } from "../../redux/product/product-action";
 import Loading from "../../components/loading";
@@ -93,7 +93,7 @@ const Product = (props) => {
                         </tbody>
 
                         <Modal ref={modalRef}>
-                            {modalData && <Fragment>
+                            {modalData && <>
                                 <h2>Are you sure you want to delete {modalData.name} product?</h2>
                                 <br />
                                 <p>This action cannot be undone. This will permanently delete the {modalData.name} product.</p>
@@ -108,7 +108,7 @@ const Product = (props) => {
                                 </form>
 
 
-                            </Fragment>}
+                            </>}
 
                         </Modal>
 

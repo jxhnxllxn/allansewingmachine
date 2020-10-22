@@ -1,33 +1,49 @@
-* {
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: "Roboto Condensed", sans-serif;
-  background-color: #f0f2f5;
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
+html {
+  overflow-x: hidden;
+  font-size: 10px;
+  word-spacing: 0.15rem;
+  color: $black;
+  font-family: $font-primary;
+  background-color: $color-royal-5;
+
+  @include respond(sm) {
+    font-size: 92.5%;
+  }
+
+  @include respond(md) {
+    font-size: 95%;
+  }
+
+  @include respond(lg) {
+    font-size: 97.5%;
+  }
 }
 
 .page_layout {
-  padding: 15px 0;
-  margin-top: 70px;
+  padding: 1rem 0;
+  margin-top: 4rem;
 }
 .container {
-  padding: 20px 50px;
+  padding: 1.5rem 4rem;
 }
 
 input,
 textarea,
 select {
   background-color: transparent;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: $font-primary;
 }
 .main_loader {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 9rem;
 }
 
 a {
@@ -39,7 +55,7 @@ a {
   position: relative;
   margin: 1rem;
   padding: 2rem 1rem 1rem 1rem;
-  background-color: #ffffff;
+  background-color: $white;
   text-align: start;
   border-radius: 2px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -48,8 +64,8 @@ a {
 }
 
 .disabledCard {
-  background-color: rgba(whitesmoke, 0.8);
-  border: 1px solid whitesmoke;
+  background-color: rgba($whitesmoke, 0.8);
+  border: 1px solid $whitesmoke;
   position: relative;
   margin: 1rem;
   padding: 2rem 1rem 1rem 1rem;
@@ -84,27 +100,27 @@ tr:nth-child(even) {
 }
 
 .tag {
-  background: #82828287;
-  color: #ffffff;
-  padding: 0px 20px;
+  background-color: rgba($color-royal-2, 0.9);
+  color: $color-royal-5;
+  padding: 0px 2rem;
   text-transform: uppercase;
   display: table;
 }
 
 .tag.title {
-  font-size: 50px;
+  font-size: 3rem;
   font-weight: 700;
 }
 
 .tag.low_title {
-  font-size: 30px;
+  font-size: 2rem;
   font-weight: 300;
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
 .title {
   text-transform: uppercase;
   text-align: center;
-  font-size: 25px;
-  margin-bottom: 50px;
+  font-size: 2rem;
+  margin-bottom: 1rem;
 }

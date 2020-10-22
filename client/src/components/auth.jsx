@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { selectCurrentUser, selectIsAdmin, selectIsAuth } from '../redux/auth/auth-selector';
 import Loading from "./loading";
@@ -36,7 +36,7 @@ export default function (ComposedClass, reload, adminRoute) {
 
 
         return (
-            <Fragment>
+            <>
                 {state.loading ?
                     <div className="main_loader">
                         <Loading />
@@ -44,7 +44,7 @@ export default function (ComposedClass, reload, adminRoute) {
                     :
                     <ComposedClass {...props} user={currentUser} />
                 }
-            </Fragment>
+            </>
         )
     }
     return AuthenticationCheck;

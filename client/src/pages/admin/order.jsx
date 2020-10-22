@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Loading from '../../components/loading'
@@ -25,7 +25,7 @@ const OrderDetail = (props) => {
         loading ?
             <Loading />
             :
-            <Fragment>
+            <>
                 <ul>
                     <li>Name: <span>{order.user.name}</span> </li>
                     <li>Code: <span>{order.paymentId}</span></li>
@@ -56,7 +56,7 @@ const OrderDetail = (props) => {
                         }
                     </tbody>
                 </table>
-            </Fragment>
+            </>
 
     )
 

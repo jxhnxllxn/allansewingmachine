@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useDebounce from '../../components/utils/debounce.jsx'
 import Loading from '../../components/loading';
@@ -304,7 +304,7 @@ const Dashboard = () => {
 
                 <Modal ref={modalRef}>
 
-                    {modalData && <Fragment>
+                    {modalData && <>
                         <h2>Are you sure you want to delete {modalData.name} category?</h2>
                         <br />
                         <p>This action cannot be undone. This will permanently delete the {modalData.name} category, and all product under the category.</p>
@@ -321,7 +321,7 @@ const Dashboard = () => {
                         </form>
 
 
-                    </Fragment>}
+                    </>}
 
                 </Modal>
 

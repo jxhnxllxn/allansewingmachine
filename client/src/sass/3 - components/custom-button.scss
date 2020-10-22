@@ -1,52 +1,50 @@
 .custom-button {
-    min-width: 165px;
-    width: auto;
-    height: 40px;
-    letter-spacing: 0.5px;
-    line-height: 40px;
-    padding: 0 5px 0 5px;
-    margin: 5px;
-    font-size: 18px;
-    color: white;
-    font-family: 'Roboto Condensed', sans-serif;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
-    outline: none;
-  
-    // &:hover {
-    //   background-color: white;
-    //   color: black;
-    //   border: 1px solid black;
-    // }
-  
-    
-    // &.inverted {
-    //   background-color: white;
-    //   color: black;
-    //   border: 1px solid black;
-  
-    //   &:hover {
-    //     background-color: black;
-    //     color: white;
-    //     border: none;
-    //   }
-    // }
-  }
-  .btnDisabled{
-    cursor: unset;
-    opacity: .7;
-    box-shadow: none;
-    color: gray;
-  }
-  .danger{
-    background-color: red;
-  }
-  .default{
-    background-color: gray;
-  }
-  .primary{
-    background-color: #2471A3 ;
-  }
-  
+  min-width: 165px;
+  width: auto;
+  height: 40px;
+  letter-spacing: 0.5px;
+  line-height: 40px;
+  padding: 0 5px 0 5px;
+  margin: 5px;
+  font-size: 18px;
+  color: white;
+  font-family: "Roboto Condensed", sans-serif;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  outline: none;
+
+  // &:hover {
+  //   background-color: white;
+  //   color: black;
+  //   border: 1px solid black;
+  // }
+
+  // &.inverted {
+  //   background-color: white;
+  //   color: black;
+  //   border: 1px solid black;
+
+  //   &:hover {
+  //     background-color: black;
+  //     color: white;
+  //     border: none;
+  //   }
+  // }
+}
+.btnDisabled {
+  cursor: unset;
+  opacity: 0.7;
+  box-shadow: none;
+  color: gray;
+}
+.danger {
+  background-color: red;
+}
+.default {
+  background-color: gray;
+}
+.primary {
+  background-color: #2471a3;
+}

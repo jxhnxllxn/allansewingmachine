@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, Fragment } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { addCategory, getCategories, deleteCategory } from "../../redux/category/category-action";
 
 import FormField from '../../components/utils/form-field';
@@ -157,7 +157,7 @@ const Category = () => {
                 }
                 <Modal ref={modalRef}>
 
-                    {modalData && <Fragment>
+                    {modalData && <>
                         <h2>Are you sure you want to delete {modalData.categoryName} category?</h2>
                         <br />
                         <p>This action cannot be undone. This will permanently delete the {modalData.categoryName} category, and all product under the category.</p>
@@ -174,7 +174,7 @@ const Category = () => {
                         </form>
 
 
-                    </Fragment>}
+                    </>}
 
                 </Modal>
 

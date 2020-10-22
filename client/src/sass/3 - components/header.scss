@@ -1,49 +1,86 @@
 .header {
-    position: fixed;
-    height: 80px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    font-size: 18px;
-    position: fixed;
-    z-index: 102;
-    top: 0;
-    left: 0;
-    background-color: rgba(#f0f2f5, .9);
-    padding: 0 50px;
+  transition: ease-out 0.3s;
+  position: fixed;
+  height: 5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  z-index: 102;
+  top: 0;
+  left: 0;
+  background-color: rgba($color-royal-2, 1);
+  padding: 0 4rem;
+  color: $color-royal-5;
+  font-size: 120%;
+  backface-visibility: hidden;
+  border: none;
 
-  .logo_container{
+  &.minimize {
+    transition: ease-out 0.3s;
+    height: 3.5rem;
+    font-size: 110%;
+    .logo_container {
+      .logo {
+        height: 2rem;
+        width: 2rem;
+      }
+      .brand {
+        font-family: $font-brand;
+        font-size: 120%;
+      }
+    }
+  }
+
+  .logo_container {
     display: flex;
     align-items: baseline;
     align-items: center;
-    span{
+    span {
       margin-left: 1rem;
     }
     .logo {
-      height: 50px;
-      width: 50px;
+      transition: ease-out 0.3s;
+      height: 3rem;
+      width: 3rem;
+    }
+    .brand {
+      transition: ease-out 0.3s;
+      font-family: $font-brand;
+      font-size: 130%;
     }
   }
-  
-    .options {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      .option {
-        padding: 10px 15px;
-        cursor: pointer;
-        
-        transition: ease-in 3s;
-      }
-      .active {
-        &::after{
-          content: "";
-          display: block;
-          width: 30px;
-          border-bottom: 3px solid green; 
-        }
+
+  .options {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .option {
+      padding: 0.6rem 1.2rem;
+      cursor: pointer;
+    }
+    .active {
+      &::after {
+        content: "";
+        display: block;
+        width: 2rem;
+        border-bottom: 3px solid #b3b9b1;
       }
     }
+  }
 }
 
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 20px 10px !important;
+  }
+  #navbar a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  #navbar-right {
+    float: none;
+  }
+}
