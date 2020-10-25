@@ -8,10 +8,15 @@
 
 html {
   overflow-x: hidden;
-  font-size: 12px;
+  font-size: 80%;
   word-spacing: 0.15rem;
-  color: $black;
+  color: #222222;
   font-family: $font-primary;
+  font-display: auto;
+  font-display: block;
+  font-display: swap;
+  font-display: fallback;
+  font-display: optional;
   background-color: $color-royal-5;
 
   @include respond(sm) {
@@ -53,13 +58,13 @@ a {
 
 .card {
   position: relative;
-  margin: 1rem;
-  padding: 2rem 1rem 1rem 1rem;
+  // margin: 1rem;
+  padding: 0.5rem;
   background-color: $white;
   text-align: start;
   border-radius: 2px;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 0.2rem;
   transition: 0.3s ease-out;
   &:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);

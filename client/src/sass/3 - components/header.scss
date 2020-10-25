@@ -33,7 +33,7 @@
 
   .logo_container {
     display: flex;
-    align-items: baseline;
+    justify-content: baseline;
     align-items: center;
     span {
       margin-left: 1rem;
@@ -47,6 +47,7 @@
       transition: ease-out 0.3s;
       font-family: $font-brand;
       font-size: 130%;
+      transform: translateY(0.2rem);
     }
   }
 

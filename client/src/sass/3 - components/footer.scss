@@ -4,9 +4,16 @@
   .container {
     display: flex;
     flex-direction: column;
-    .logo {
-      align-self: center;
+    .brand {
       font-size: 2rem;
+      font-family: $font-brand;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .logo {
+        height: 3rem;
+        width: 3rem;
+      }
     }
     .wrapper {
       display: flex;

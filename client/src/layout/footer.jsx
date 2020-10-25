@@ -1,10 +1,12 @@
 import React from 'react'
+import { ReactComponent as Logo } from '../assets/sewing.svg'
 
 const Footer = () => {
     return (
         <footer className="footer">
             <div className="container">
-                <div className="logo">
+                <div className="brand">
+                    <Logo className='logo'/>
                     Allan Sewing Machine
                 </div>
                 <div className="wrapper">

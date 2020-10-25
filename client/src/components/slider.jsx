@@ -40,16 +40,17 @@ const HomeSlider = () => {
                     <div className="featured_image"
                         style={{
                             background:`url(${item.img})`,
-                            minHeight:'65vh',
+                            minHeight:'70vh',
                             position:'relative',
-                            backgroundSize: 'cover'
+                            backgroundSize: 'cover',
+                            position:'relative'
                         }}
                     >
 
                         <div className="featured_action" style={{
                             position: 'absolute',
                             bottom: '10%',
-                            left: '5rem',
+                            left: '4rem',
                         }}>
                             <div className="tag title">{item.lineOne}</div>
                             <div className="tag low_title">{item.lineTwo}</div>

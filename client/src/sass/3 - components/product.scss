@@ -1,19 +1,26 @@
-.grid_bars {
-  display: flex;
-  width: 100%;
-  .image {
-    margin-right: 1rem;
+.product_wrapper {
+  padding: 0.2rem;
+  &.grid_bars {
+    display: flex;
+    width: 100%;
+    .image {
+      margin-right: 1rem;
+    }
   }
-}
+  .image {
+    height: 9rem;
+    border: none;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 0.1rem;
+  }
 
-.image {
-  height: 9rem;
-  border: none;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
+  .action_container {
+    padding: 0.5rem;
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
 }

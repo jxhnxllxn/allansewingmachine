@@ -16,9 +16,13 @@ const Collection = (props) => {
     
     return(
         <div className="collection_wrapper" onClick={handleClick}>
-            <div className="background_image" style={{background:`url(${renderCardImage(props.images)})`,backgroundSize: 'cover'}}/>
+            <div className="background_image" 
+              style={{
+                background:`url(${renderCardImage(props.images)})`,
+                backgroundSize: 'cover',
+                }}/>
             <div className="content">
-                <h1 className="title">{props.name} Shop</h1>
+                <h1 className="title_collection">{props.name}</h1>
             </div>
         </div> 
     )
