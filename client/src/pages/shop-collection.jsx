@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import CollapseCheckBox from '../components/utils/collapse-checkbox'
-import CollapseRadio from '../components/utils/collapse-radio'
-import PageTop from '../components/utils/page-top'
+import CollapseCheckBox from '../components/custom/collapse-checkbox'
+import CollapseRadio from '../components/custom/collapse-radio'
+import PageTop from '../components/custom/page-top'
 import { getCategories, getProductsToShop } from '../redux/product/product-action'
-import { price } from '../components/utils/fixed-categories'
+import { price } from '../components/custom/fixed-categories'
 import LoadMoreCards from '../components/load-more'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

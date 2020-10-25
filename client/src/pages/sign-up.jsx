@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { register } from "../redux/auth/auth-action";
-import MyButton from '../components/utils/button';
-import FormField from '../components/utils/form-field';
-import {update,generateData,isFormValid} from '../components/utils/form-action';
+import MyButton from '../components/custom/button';
+import FormField from '../components/custom/form-field';
+import {update,generateData,isFormValid} from '../components/custom/form-action';
 
   const SignUp = ({history}) => {
     const dispatch = useDispatch()

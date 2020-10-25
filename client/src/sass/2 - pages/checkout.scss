@@ -29,15 +29,15 @@ table {
     }
   }
 
-  thead th:first-of-type {
-    text-align: left;
-  }
+  // thead th:first-of-type {
+  //   text-align: left;
+  // }
 
-  thead tr th:nth-of-type(2),
-  tbody tr td:nth-of-type(2),
-  tfoot tr td:nth-of-type(2) {
-    text-align: right;
-  }
+  // thead tr th:nth-of-type(2),
+  // tbody tr td:nth-of-type(2),
+  // tfoot tr td:nth-of-type(2) {
+  //   text-align: right;
+  // }
 
   tbody {
     tr {
@@ -52,18 +52,18 @@ table {
         }
       }
 
-      &:nth-last-child(2) {
-        td {
-          padding-bottom: 0.5rem;
-        }
-      }
+      // &:nth-last-child(2) {
+      //   td {
+      //     padding-bottom: 0.5rem;
+      //   }
+      // }
 
-      &:last-of-type {
-        td {
-          // border-top: $dark-border;
-          padding: 0.5rem 0;
-        }
-      }
+      // &:last-of-type {
+      //   td {
+      //     // border-top: $dark-border;
+      //     padding: 0.5rem 0;
+      //   }
+      // }
     }
   }
 

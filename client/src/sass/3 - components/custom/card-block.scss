@@ -1,0 +1,11 @@
+.card_block {
+  width: 100%;
+  .container {
+    .title {
+      font-family: $font-brand;
+      text-transform: capitalize;
+      font-size: 300%;
+      text-align: left;
+    }
+  }
+}

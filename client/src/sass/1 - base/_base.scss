@@ -8,7 +8,7 @@
 
 html {
   overflow-x: hidden;
-  font-size: 10px;
+  font-size: 12px;
   word-spacing: 0.15rem;
   color: $black;
   font-family: $font-primary;
@@ -58,9 +58,12 @@ a {
   background-color: $white;
   text-align: start;
   border-radius: 2px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   border-radius: 5px;
+  transition: 0.3s ease-out;
+  &:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .disabledCard {
@@ -74,48 +77,30 @@ a {
   border-radius: 5px;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-tbody {
-  Loading {
-    transform: translate(-50%, -50%);
-  }
-}
-
-td,
-th {
-  border: 1px solid #e8e4c9;
-  text-align: left;
-  // padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #e8e4c9;
-}
-
 .flex {
   display: flex;
 }
 
 .tag {
-  background-color: rgba($color-royal-2, 0.9);
-  color: $color-royal-5;
+  background-color: rgba($color-royal-2, 1);
+  color: rgba($color-royal-5, 0.8);
   padding: 0px 2rem;
   text-transform: uppercase;
   display: table;
+  border-radius: 0.5rem;
 }
 
 .tag.title {
   font-size: 3rem;
   font-weight: 700;
+  text-transform: capitalize;
 }
 
 .tag.low_title {
   font-size: 2rem;
   font-weight: 300;
   margin-top: 1rem;
+  text-transform: capitalize;
 }
 
 .title {

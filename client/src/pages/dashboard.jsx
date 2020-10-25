@@ -1,7 +1,7 @@
 import React from 'react';
 import UserLayout from '../layout/user-layout.js';
-import MyButton from '../components/utils/button';
-import UserHistoryBlock from '../components/utils/history-block';
+import MyButton from '../components/custom/button';
+import UserHistoryBlock from '../components/custom/history-block';
 
 const UserDashboard = ({user}) => {
     return (

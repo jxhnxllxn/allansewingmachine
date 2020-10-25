@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import useDebounce from '../../components/utils/debounce.jsx'
+import useDebounce from '../../components/custom/debounce.jsx'
 import Loading from '../../components/loading';
+import CustomTable from "../../components/custom/table";
 import Modal from '../../components/modal';
-import MyButton from '../../components/utils/button';
+import MyButton from '../../components/custom/button';
 import { getAllOrder, getCanceledOrder, getDashboardAdmin, getPendingOrder, getProcessedOrder, searchCharacter } from '../../redux/order/order-action';
 
 
@@ -34,7 +35,7 @@ const Dashboard = () => {
                 setOrders({
                     ...orders,
                     loading: false,
-                    order: []
+                    orders: []
                 });
             })
         } else {
@@ -64,7 +65,7 @@ const Dashboard = () => {
             setOrders({
                 ...orders,
                 loading: false,
-                order: []
+                orders: []
             });
         })
     }, [])
@@ -85,7 +86,7 @@ const Dashboard = () => {
             setOrders({
                 ...orders,
                 loading: false,
-                order: []
+                orders: []
             });
         })
     }
@@ -104,7 +105,7 @@ const Dashboard = () => {
             setOrders({
                 ...orders,
                 loading: false,
-                order: []
+                orders: []
             });
         })
     }
@@ -123,7 +124,7 @@ const Dashboard = () => {
             setOrders({
                 ...orders,
                 loading: false,
-                order: []
+                orders: []
             });
         })
     }
@@ -143,7 +144,7 @@ const Dashboard = () => {
             setOrders({
                 ...orders,
                 loading: false,
-                order: []
+                orders: []
             });
         })
     }
@@ -161,39 +162,14 @@ const Dashboard = () => {
 
     }
 
-    const table = () => (
-        !orders.loading ?
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Name</th>
-                        <th>Code</th>
-                        <th>Total</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                    {orderTableRow()}
-                </tbody>
-
-            </table>
-            : <Loading />
-
-    )
-
-    const orderTableRow = () => (
-        orders.orders.map(i => (
-            <tr key={i._id}>
-                <td>{i.name}</td>
-                <td>{i.paymentId}</td>
-                <td>{i.total}</td>
-                <td>{i.createdAt}</td>
-                <td>{i.status}</td>
-                <td><MyButton linkTo={`/admin/order/${i._id}`} title="View" type="default" /> | <button onClick={() => openModal(i)}>Delete</button></td>
-            </tr>
-        ))
-    )
-
+    const tableData = useMemo(() => {
+        return {
+            tHead:['Name','Code','Total','Date','Status','Action'],
+            tData:orders.orders ? orders.orders : null,
+            viewDataLink:'/admin/order',
+        }
+    })
+    
     const handleChange = e => setQuantity(e.target.value);
 
     const [quantity, setQuantity] = useState(5)
@@ -294,14 +270,13 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {table()}
-
                 {
-                    orders.orders.length <= 0 && !orders.loading ?
-                        <h1>Sorry, No result.</h1>
-                        : null
+                    orders.loading ? 
+                        <Loading />
+                        :
+                        <CustomTable tableData={tableData} openModal={openModal}/>
                 }
-
+                
                 <Modal ref={modalRef}>
 
                     {modalData && <>

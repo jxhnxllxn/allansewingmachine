@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { addCollection, getCollections, deleteCollection } from "../../redux/collection/collection-action";
 
-import FormField from '../../components/utils/form-field';
-import { update, generateData, isFormValid, resetFields } from '../../components/utils/form-action';
-import MyButton from '../../components/utils/button';
+import FormField from '../../components/custom/form-field';
+import { update, generateData, isFormValid, resetFields } from '../../components/custom/form-action';
+import MyButton from '../../components/custom/button';
 
 import Loading from "../../components/loading";
 import Modal from '../../components/modal'
-import FileUpload from '../../components/utils/file-upload'
+import FileUpload from '../../components/custom/file-upload'
 import { useDispatch } from 'react-redux';
 
 const Collection = () => {

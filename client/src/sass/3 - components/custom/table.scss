@@ -1,0 +1,26 @@
+.crudTable {
+  border-collapse: collapse;
+  width: 100%;
+  thead {
+    th {
+      padding: 0.8rem 0 0.8rem 0.5rem;
+      text-align: left;
+      background-color: $color-royal-2;
+      color: $color-royal-5;
+    }
+  }
+  tbody {
+    tr {
+      &:hover {
+        background-color: $color-royal-3;
+      }
+      &:nth-child(even) {
+        background-color: $color-royal-5;
+      }
+    }
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import {addItem} from '../redux/cart/cart-action'
-import MyButton from './utils/button'
+import addComma from "../utils/helper/add-comma";
+import MyButton from './custom/button'
 
 const renderCardImage = (images) => {
   if(images.length > 0){
@@ -35,7 +36,7 @@ const Product = (props) => {
             <div className="tags">
               <h3 className="category">{props.category.categoryName} </h3>
               <h2 className="name">{props.name}</h2>
-              <div className="price">Php {props.price}.00</div>
+              <div className="price">Php {addComma(props.price)}.00</div>
             </div>
         {
           props.grid ? 

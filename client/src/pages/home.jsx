@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import HomeSlider from '../components/slider';
-import CardBlock from '../components/utils/card-block';
+import CardBlock from '../components/custom/card-block';
 
 import { store } from "../redux/store";
 import { getProductsByArrival, getProductsBySell } from "../redux/product/product-action";

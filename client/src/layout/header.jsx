@@ -64,7 +64,7 @@ const Header = () => {
                 isAuthenticated ? 
                 (<>
                 <div className="option menu" onClick={handleToggleSettingHidden}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="2rem" height="2rem" viewBox="0 0 24 24" strokeWidth="1" stroke="#d9b95e" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="1.8rem" height="1.8rem" viewBox="0 0 24 24" strokeWidth="1" stroke="#d9b95e" fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z"/>
                         <circle cx="12" cy="7" r="4" />
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
@@ -78,7 +78,7 @@ const Header = () => {
             <CartIcon />
 
             <div className="option menu">
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-search" width="2rem" height="2rem" viewBox="0 0 24 24" strokeWidth="1" stroke="#d9b95e" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-search" width="1.8rem" height="1.8rem" viewBox="0 0 24 24" strokeWidth="1" stroke="#d9b95e" fill="none" strokeLinecap="round" strokeLinejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                 <circle cx="10" cy="10" r="7" />
                 <line x1="21" y1="21" x2="15" y2="15" />

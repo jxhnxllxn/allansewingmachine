@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick';
-import MyButton from './utils/button';
+import MyButton from './custom/button';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -25,7 +25,7 @@ const HomeSlider = () => {
     const setting = {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 1000,
         slidesToShow: 1,
         slideToScroll: 1,
         onLazyLoad:true,

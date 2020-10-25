@@ -2,11 +2,11 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { getCategories, getCollections, addProduct } from "../../redux/product/product-action";
 import { useState } from 'react';
-import FormField from '../../components/utils/form-field';
-import { update, generateData, isFormValid, populateOptionFields, resetFields } from '../../components/utils/form-action';
-import MyButton from '../../components/utils/button';
+import FormField from '../../components/custom/form-field';
+import { update, generateData, isFormValid, populateOptionFields, resetFields } from '../../components/custom/form-action';
+import MyButton from '../../components/custom/button';
 import { useEffect } from 'react';
-import FileUpload from '../../components/utils/file-upload';
+import FileUpload from '../../components/custom/file-upload';
 const ProductAdd = () => {
 
     const dispatch = useDispatch()

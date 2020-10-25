@@ -26,7 +26,6 @@
         width: 2rem;
       }
       .brand {
-        font-family: $font-brand;
         font-size: 120%;
       }
     }
@@ -61,12 +60,7 @@
       cursor: pointer;
     }
     .active {
-      &::after {
-        content: "";
-        display: block;
-        width: 2rem;
-        border-bottom: 3px solid #b3b9b1;
-      }
+      color: rgba($color-royal-4, 1);
     }
   }
 }
