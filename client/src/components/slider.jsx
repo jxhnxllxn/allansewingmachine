@@ -43,7 +43,6 @@ const HomeSlider = () => {
                             minHeight:'70vh',
                             position:'relative',
                             backgroundSize: 'cover',
-                            position:'relative'
                         }}
                     >
 
@@ -52,8 +51,10 @@ const HomeSlider = () => {
                             bottom: '10%',
                             left: '4rem',
                         }}>
-                            <div className="tag title">{item.lineOne}</div>
-                            <div className="tag low_title">{item.lineTwo}</div>
+                            <div className="tag">
+                                <h1 className="title">{item.lineOne}</h1>
+                                <h3 className="low_title">{item.lineTwo}</h3>
+                            </div>
                             <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
                         </div>
 

@@ -187,22 +187,17 @@ const ProductAdd = () => {
     useEffect(() => {
         dispatch(getCollections()).then(res => {
             const newFormData = populateOptionFields(formField.formData, res.payload.data, 'collections');
-            // populateOptionFields(formData,categories,'categories');
             updateFields(newFormData);
         })
-
-
-        console.log('wrong')
+    // eslint-disable-next-line
     }, [dispatch])
 
     useEffect(() => {
         dispatch(getCategories()).then(res => {
             const newFormData = populateOptionFields(formField.formData, res.payload.data, 'category');
-            // populateOptionFields(formData,categories,'categories');
             updateFields(newFormData);
         })
-
-        console.log('wrong2')
+    // eslint-disable-next-line
     }, [dispatch])
 
 

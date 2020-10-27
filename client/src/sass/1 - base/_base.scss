@@ -87,30 +87,22 @@ a {
 }
 
 .tag {
-  background-color: rgba($color-royal-2, 1);
+  background-color: rgba($color-royal-2, 2);
   color: rgba($color-royal-5, 0.8);
-  padding: 0px 2rem;
+  padding: 0px 1rem;
   text-transform: uppercase;
-  display: table;
   border-radius: 0.5rem;
 }
 
-.tag.title {
-  font-size: 3rem;
-  font-weight: 700;
-  text-transform: capitalize;
-}
-
-.tag.low_title {
+.low_title {
   font-size: 2rem;
   font-weight: 300;
-  margin-top: 1rem;
   text-transform: capitalize;
+  font-family: $font-brand;
 }
 
 .title {
   text-transform: uppercase;
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 1rem;
+  letter-spacing: 0.2rem;
 }

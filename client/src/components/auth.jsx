@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { selectCurrentUser, selectIsAdmin, selectIsAuth } from '../redux/auth/auth-selector';
-import Loading from "./loading";
 
 export default function (ComposedClass, reload, adminRoute) {
 
@@ -10,10 +9,6 @@ export default function (ComposedClass, reload, adminRoute) {
         const isAdmin = useSelector(state => selectIsAdmin(state));
         const isAuthenticated = useSelector(state => selectIsAuth(state));
         const currentUser = useSelector(state => selectCurrentUser(state))
-
-        const [state, setState] = useState({
-            loading: true,
-        });
 
         useEffect(() => {
             if (!isAuthenticated) {
@@ -31,19 +26,13 @@ export default function (ComposedClass, reload, adminRoute) {
                     }
                 }
             }
-            setState({ loading: false })
         }, [isAuthenticated, isAdmin, props.history])
 
 
         return (
             <>
-                {state.loading ?
-                    <div className="main_loader">
-                        <Loading />
-                    </div>
-                    :
+            
                     <ComposedClass {...props} user={currentUser} />
-                }
             </>
         )
     }

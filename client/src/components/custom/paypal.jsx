@@ -6,13 +6,11 @@ import Loading from '../loading'
 
 const Paypal = (props) => {
     const dispatch = useDispatch()
-    const [isLoading, setIsLoading] = useState(true)
     const [paypalConfig, setPaypalConfig] = useState({})
     const [sdkReady, setSdkReady] = useState(false)
 
 
     useEffect(() => {
-      setIsLoading(true)
         const addPaypalScript = async (clientId) => {
           const script = document.createElement('script')
           script.type = 'text/javascript'
@@ -27,15 +25,7 @@ const Paypal = (props) => {
         .then(res => {
             setPaypalConfig(res.payload)
             addPaypalScript(res.payload.sandbox)
-            setIsLoading(false)
         })
-
-        // if(!window.paypal){
-        //   console.log(window.paypal)
-        // }else{
-        //   setSdkReady(true)
-        //   console.log(window.paypal)
-        // }
         return () => {
             dispatch(cleanOrder())
         }
@@ -47,11 +37,8 @@ const Paypal = (props) => {
             <PayPalButton
                 amount={props.toPay}
                 currency={paypalConfig.currency}
-                // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
                 onSuccess={(details, data) => {
                     alert("Transaction completed by " + details.payer.name.given_name);
-
-                    // OPTIONAL: Call your server to save the transaction
                     return fetch("/paypal-transaction-complete", {
                         method: "post",
                         body: JSON.stringify({

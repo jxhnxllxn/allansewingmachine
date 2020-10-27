@@ -7,4 +7,18 @@
     background-position: center !important;
     background-repeat: no-repeat;
   }
+  .featured_action {
+    .tag {
+      padding-top: 1.5rem;
+      overflow: hidden;
+      position: relative;
+      .title {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0 0.4rem;
+        background-color: rgba($color-royal-1, 1);
+      }
+    }
+  }
 }

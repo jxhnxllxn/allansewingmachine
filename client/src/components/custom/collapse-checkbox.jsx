@@ -53,7 +53,7 @@ const CollapseCheckBox = ({ initState, handleFilters, list, title }) => {
 
     useEffect(() => {
         handleFilters(checked)
-        console.log('wrong')
+    // eslint-disable-next-line
     }, [checked])
 
     const renderList = () => (

@@ -31,7 +31,8 @@ const ShopCollection = (props) => {
 
         dispatch(getCategories());
         dispatch(getProductsToShop(state.skip, state.limit, state.filters));
-    }, []);
+        // eslint-disable-next-line
+    }, [dispatch]);
 
     const handlePrice = (value) => {
         const data = price;

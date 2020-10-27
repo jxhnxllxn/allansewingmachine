@@ -43,6 +43,7 @@ const FileUpload = (props) => {
         if (state.uploading === false && state.uploadedFiles !== null) {
             props.imagesHandler(state.uploadedFiles);
         }
+    // eslint-disable-next-line
     }, [state.uploadedFiles])
 
     const onRemove = (id) => {
@@ -88,6 +89,7 @@ const FileUpload = (props) => {
         } else {
             console.log(props)
         }
+    // eslint-disable-next-line
     }, [props.reset])
 
     return (

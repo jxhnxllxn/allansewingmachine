@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProducts, deleteProduct } from "../../redux/product/product-action";
-import Loading from "../../components/loading";
-import CustomButton from '../../components/custom-button'
+import Loading from "../../components/loading"
 import Modal from '../../components/modal'
-import { withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom'
+import MyButton from '../../components/custom/button';
 
 const Product = (props) => {
     const products = useSelector(state => state.product.products);
@@ -74,7 +74,7 @@ const Product = (props) => {
                     {/* <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" /> */}
                 </div>
                 <div className="floatRight">
-                    <CustomButton onClick={() => props.history.push(`${props.match.url}/add`)} buttonType="primary" type="submit">Add Product</CustomButton>
+                    <MyButton onClick={() => props.history.push(`${props.match.url}/add`)}  type="submit" title="Add product" />
                 </div>
                 {!loading ?
                     <table>
@@ -102,8 +102,8 @@ const Product = (props) => {
                                 <form onSubmit={handleDeleteProduct}>
                                     {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
                                     <div className="form-ation">
-                                        <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.name}`)}>Delete</CustomButton>
-                                        <CustomButton buttonType="default" onClick={closeModal}>Cancel</CustomButton>
+                                        {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.name}`)}>Delete</CustomButton>
+                                        <CustomButton buttonType="default" onClick={closeModal}>Cancel</CustomButton> */}
                                     </div>
                                 </form>
 

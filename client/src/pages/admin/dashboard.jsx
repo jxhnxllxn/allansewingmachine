@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import useDebounce from '../../components/custom/debounce.jsx'
 import Loading from '../../components/loading';
@@ -49,7 +49,8 @@ const Dashboard = () => {
             })
         }
     },
-        [debouncedSearchTerm]);
+    // eslint-disable-next-line
+    [dispatch,debouncedSearchTerm]);
 
     useEffect(() => {
         dispatch(getDashboardAdmin()).then(res => {
@@ -68,7 +69,9 @@ const Dashboard = () => {
                 orders: []
             });
         })
-    }, [])
+        
+    // eslint-disable-next-line
+    }, [dispatch])
 
 
     const pendingOrder = () => {
@@ -162,13 +165,13 @@ const Dashboard = () => {
 
     }
 
-    const tableData = useMemo(() => {
+    const tableData = () => {
         return {
             tHead:['Name','Code','Total','Date','Status','Action'],
             tData:orders.orders ? orders.orders : null,
             viewDataLink:'/admin/order',
         }
-    })
+    }
     
     const handleChange = e => setQuantity(e.target.value);
 

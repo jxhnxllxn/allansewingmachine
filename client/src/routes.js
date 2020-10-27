@@ -1,6 +1,6 @@
 import React, {lazy,Suspense} from 'react'
 import { Switch, Route } from 'react-router-dom'
-// import AdminRoute from "./components/routing/AdminRoute";
+
 import Auth from "./components/auth.jsx"
 import Home from "./pages/home"
 
