@@ -1,9 +1,6 @@
 import React from 'react'
-import Slider from 'react-slick';
-import MyButton from './custom/button';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
+import Slider from 'react-slick'
+import MyButton from './custom/button'
 const HomeSlider = () => {
     const slides = [
             {
@@ -23,6 +20,7 @@ const HomeSlider = () => {
         ]
     
     const setting = {
+        lazyLoad: ondemand,
         dots: true,
         infinite: true,
         speed: 1000,
@@ -40,7 +38,7 @@ const HomeSlider = () => {
                     <div className="featured_image"
                         style={{
                             background:`url(${item.img})`,
-                            minHeight:'70vh',
+                            minHeight:'73vh',
                             position:'relative',
                             backgroundSize: 'cover',
                         }}

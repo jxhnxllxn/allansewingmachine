@@ -1,9 +1,25 @@
 import React from 'react'
+import { useEffect } from 'react';
+import { lazyload } from 'react-lazyload';
+
 import { ReactComponent as Logo } from '../assets/sewing.svg'
 
+
+
 const Footer = () => {
+    useEffect(() => {
+        lazyload({
+            height: 200,
+            once: true,
+            offset: 100
+          })
+    }, [])
     return (
         <footer className="footer">
+        {
+            
+          console.log('footer rendered')
+        }
             <div className="container">
                 <div className="brand">
                     <Logo className='logo'/>

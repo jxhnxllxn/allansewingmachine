@@ -12,11 +12,6 @@ html {
   word-spacing: 0.15rem;
   color: #222222;
   font-family: $font-primary;
-  font-display: auto;
-  font-display: block;
-  font-display: swap;
-  font-display: fallback;
-  font-display: optional;
   background-color: $color-royal-5;
 
   @include respond(sm) {

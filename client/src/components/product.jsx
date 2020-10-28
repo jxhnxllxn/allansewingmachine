@@ -4,6 +4,8 @@ import {addItem} from '../redux/cart/cart-action'
 import addComma from "../utils/helper/add-comma";
 import MyButton from './custom/button'
 
+import LazyLoad from 'react-lazyload';
+
 const renderCardImage = (images) => {
   if(images.length > 0){
     return images[0].url
@@ -29,8 +31,11 @@ const Product = (props) => {
   
   return (
     <div className={`product_wrapper card ${props.grid}`}>
+    <LazyLoad height={200}>
         <div className="image" style={{background:`url(${renderCardImage(props.images)})`,backgroundSize:'cover'}}>
         </div>
+    </LazyLoad>
+        
 
         <div className="action_container">
             <div className="tags">
