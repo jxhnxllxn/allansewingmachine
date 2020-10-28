@@ -28,7 +28,8 @@ const user = require('./routes/user.route');
 
 const app = express();
 
-app.use(compression());
+app.use(compression({ filter: shouldCompress }))
+
 app.use(express.json({ extended: false }));
 
 //Cooki Parser
