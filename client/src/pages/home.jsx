@@ -1,26 +1,17 @@
 import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import HomeSlider from '../components/slider';
 import CardBlock from '../components/custom/card-block';
-
-import { store } from "../redux/store";
 import { getProductsByArrival, getProductsBySell } from "../redux/product/product-action";
 
 const Home = () => {
-
-
+    const dispatch = useDispatch();
     useEffect(() => {
-        store.dispatch(getProductsByArrival());
-        store.dispatch(getProductsBySell());
-    }, []);
-
-
+        dispatch(getProductsByArrival());
+        dispatch(getProductsBySell());
+    }, [dispatch]);
     const productBySell = useSelector(state => state.product.productBySell)
     const productByArrival = useSelector(state => state.product.productByArrival)
-
-
-    // const products = useSelector(state => state.product.products)
-
     return (
         <div className="home_wrapper">
             <HomeSlider />
