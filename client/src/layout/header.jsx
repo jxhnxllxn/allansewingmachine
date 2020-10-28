@@ -44,25 +44,22 @@ const Header = () => {
 
         
     const header = (
-        <div className={`header page_container ${minimize ? 'minimize':''}`}>
+        <header className={`header page_container ${minimize ? 'minimize':''}`}>
             <Link className="logo_container" to="/">
                 <Logo className='logo'/>
-                <span className="brand">Allan Sewing Machine</span>
+                <div className="brand">Allan Sewing Machine</div>
             </Link>
 
-            <div className="options">             
-            <>
+            <div className="options">
                 <NavLink exact className="option" to="/" >
                 Home
                 </NavLink>
                 <NavLink className="option" to="/shop" >
                 Shop
                 </NavLink>
-            </>
-
             {
                 isAuthenticated ? 
-                (<>
+                <>
                 <div className="option menu" onClick={handleToggleSettingHidden}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="1.8rem" height="1.8rem" viewBox="0 0 24 24" strokeWidth="1" stroke="#d9b95e" fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z"/>
@@ -70,9 +67,9 @@ const Header = () => {
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                     </svg>
                 </div>
-                </>)
+                </>
                 :
-                (<NavLink className="option" to='/signin'>Sign in</NavLink>)
+                <NavLink className="option" to='/signin'>Sign in</NavLink>
             }
             
             <CartIcon />
@@ -98,7 +95,7 @@ const Header = () => {
                     <SettingDropdwon />
                 :null
             }
-        </div>
+        </header>
         )
 
     return(

@@ -20,9 +20,9 @@ const Layout = (props) => {
         <div>
             <Header />
             <Alert />
-                <div className="page_layout">
+                <main className="page_layout">
                     {props.children}
-                </div>
+                </main>
             {
                 isAdmin ? null: <Footer />
             }

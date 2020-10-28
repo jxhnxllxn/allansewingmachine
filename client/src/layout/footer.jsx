@@ -83,8 +83,8 @@ const Footer = () => {
                     </div>      
                 </div>
                     <div className="credits">
-                        <h4>&copy; Allan Sewing Machine</h4>
-                        <h5>Powered by John Allen</h5>
+                        <h3>&copy; Allan Sewing Machine</h3>
+                        <h4>Powered by John Allen</h4>
                     </div>
                     
             </div>

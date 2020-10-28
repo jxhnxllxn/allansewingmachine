@@ -1,6 +1,8 @@
 import React from 'react'
 import Slider from 'react-slick'
 import MyButton from './custom/button'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const HomeSlider = () => {
     const slides = [
             {
@@ -21,6 +23,7 @@ const HomeSlider = () => {
     
     const setting = {
         lazyLoad: true,
+        centerMode:true,
         dots: true,
         infinite: true,
         speed: 1000,
@@ -37,7 +40,8 @@ const HomeSlider = () => {
                     <div className="featured_image"
                         style={{
                             background:`url(${item.img})`,
-                            minHeight:'73vh',
+                            height:'73vh',
+                            width:'100vw',
                             position:'relative',
                             backgroundSize: 'cover',
                         }}
@@ -50,7 +54,7 @@ const HomeSlider = () => {
                         }}>
                             <div className="tag">
                                 <h1 className="title">{item.lineOne}</h1>
-                                <h3 className="low_title">{item.lineTwo}</h3>
+                                <h2 className="low_title">{item.lineTwo}</h2>
                             </div>
                             <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
                         </div>

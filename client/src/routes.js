@@ -1,13 +1,13 @@
 import React, {lazy,Suspense} from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import Auth from "./components/auth.jsx"
+import Auth from "./components/auth"
 import Home from "./pages/home"
 
 import Layout from "./layout/layout"
 import Loading from './components/loading'
 
-import ErrorBoundary from './components/errorBoundary.jsx'
+import ErrorBoundary from './components/errorBoundary'
 
 const Shop = lazy(()=>import("./pages/shop"))
 const ShopCollection = lazy(()=>import("./pages/shop-collection"))
@@ -19,7 +19,6 @@ const Checkout = lazy(()=>import("./pages/checkout"))
 const Admin = lazy(()=>import("./pages/admin/admin"))
 const UserDashboard = lazy(()=>import("./pages/dashboard"))
 const UpdateProfile = lazy(()=>import("./pages/update_profile"))
-// const NotFound = lazy(()=>import("./pages/notfound"))
 
 const Routes = () => {
     return (
@@ -41,7 +40,6 @@ const Routes = () => {
                     <Route path='/signin' exact component={Auth(SignIn,false)}/>
                     <Route path='/signup' exact component={Auth(SignUp,false)}/>
                     <Route path="/admin" component={Auth(Admin,true,true)}/>
-                    {/* <Route path="*" component={NotFound} /> */}
                 </Suspense>
                 </ErrorBoundary>
             </Switch>
