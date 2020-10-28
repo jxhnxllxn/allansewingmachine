@@ -1,4 +1,26 @@
 // FONTS
+@font-face {
+  font-family: "Rajdhani";
+  src: url("/font/Rajdhani-Regular.eot");
+  src: local("Rajdhani Regular"), local("Rajdhani-Regular"),
+    url("/font/Rajdhani-Regular.eot?#iefix") format("embedded-opentype"),
+    url("/font/Rajdhani-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bad Script";
+  src: url("/font/BadScript-Regular.eot");
+  src: local("Bad Script Regular"), local("BadScript-Regular"),
+    url("/font/BadScript-Regular.eot?#iefix") format("embedded-opentype"),
+    url("/font/BadScript-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 $font-primary: "Rajdhani", sans-serif;
 $font-brand: "Bad Script", cursive;
 // COLORS
