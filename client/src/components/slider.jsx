@@ -23,7 +23,6 @@ const HomeSlider = () => {
     
     const setting = {
         lazyLoad: true,
-        centerMode:true,
         dots: true,
         infinite: true,
         speed: 1000,
@@ -40,7 +39,7 @@ const HomeSlider = () => {
                     <div className="featured_image"
                         style={{
                             background:`url(${item.img})`,
-                            height:'73vh',
+                            height:'calc(100vh - 5rem)',
                             width:'100vw',
                             position:'relative',
                             backgroundSize: 'cover',
