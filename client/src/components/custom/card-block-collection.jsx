@@ -1,10 +1,10 @@
 import React from 'react'
-import Product from '../product'
+import Collection from '../collection'
 
 const CardBlock = (props) => {
     const renderCard= () => (
         props.list ?
-            props.list.map((card,i)=><Product key={i} {...card}/> )
+            props.list.map((card,i)=> <Collection key={i} {...card}/>)
         :null
     )
 

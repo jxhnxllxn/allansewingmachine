@@ -20,13 +20,12 @@ const HomeSlider = () => {
         ]
     
     const setting = {
-        lazyLoad: ondemand,
+        lazyLoad: true,
         dots: true,
         infinite: true,
         speed: 1000,
         slidesToShow: 1,
         slideToScroll: 1,
-        onLazyLoad:true,
         autoplaySpeed:5000,
         autoplay:true,
     }

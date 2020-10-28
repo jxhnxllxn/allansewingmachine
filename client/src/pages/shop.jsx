@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CardBlock from '../components/custom/card-block'
+import CardBlockCollection from '../components/custom/card-block-collection'
 import { getCollections } from "../redux/collection/collection-action"; 
 // import Collection from "../../../components/collection/collection";
 import { useSelector } from 'react-redux';
@@ -24,7 +24,7 @@ const Shop = () => {
             <div className="shop_wrapper">
                 {
                     state.isLoading ? <Loading/>:
-                    <CardBlock 
+                    <CardBlockCollection
                         list={collections} 
                         title="Shop"
                     />
