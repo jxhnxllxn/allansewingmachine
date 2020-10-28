@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const cloudinary = require('cloudinary');
+const compression = require('compression')
 
 const errorHandler = require('./middlewares/error.middleware');
 const connectDB = require('./config/db');
@@ -27,6 +28,7 @@ const user = require('./routes/user.route');
 
 const app = express();
 
+app.use(compression());
 app.use(express.json({ extended: false }));
 
 //Cooki Parser
