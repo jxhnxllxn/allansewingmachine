@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { ReactComponent as ShoppingBagIcon } from '../../assets/icons/shopping-bag.svg'
 
 const MyButton = props => {
     const buttons = () => {
@@ -22,12 +23,7 @@ const MyButton = props => {
                             props.runAction();
                         }}
                     >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-shopping-cart" width="1.5rem" height="1.5rem" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#d9b95e" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                    <circle cx="9" cy="19" r="2" />
-                    <circle cx="17" cy="19" r="2" />
-                    <path d="M3 3h2l2 12a3 3 0 0 0 3 2h7a3 3 0 0 0 3 -2l1 -7h-15.2" />
-                    </svg>
+                    <ShoppingBagIcon />
                     </div> 
                 break;
             case "submit":

@@ -4,6 +4,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+
+import { ReactComponent as UpIcon } from '../../assets/icons/chevron-up.svg'
+import { ReactComponent as DownIcon } from '../../assets/icons/chevron-down.svg'
 import { Collapse } from '@material-ui/core';
 import { useState } from 'react';
 
@@ -26,15 +29,9 @@ const CollapseCheckBox = ({ initState, handleFilters, list, title }) => {
 
     const handleAngle = () => (
         isOpen ?
-            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-up" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <polyline points="6 15 12 9 18 15" />
-        </svg>
+            <UpIcon />
             :
-            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-down" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-            <polyline points="6 9 12 15 18 9" />
-            </svg>
+           <DownIcon />
     )
 
     const handleToggle = value => () => {
