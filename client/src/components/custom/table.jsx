@@ -1,10 +1,37 @@
 import React from 'react'
+import { ReactComponent as ArrowLeftIcon } from '../../assets/icons/arrow-left.svg'
+import { ReactComponent as ArrowRightIcon } from '../../assets/icons/arrow-right.svg'
+import { ReactComponent as ArrowFirstPageIcon } from '../../assets/icons/arrow-first-page.svg'
+import { ReactComponent as ArrowLastPageIcon } from '../../assets/icons/arrow-last-page.svg'
 
-const Table = ({tableData,openModal}) => {
+const Table = ({tableData,openModal,setSearchTerm}) => {
   
   console.log(tableData);
     return (
       <>
+
+<div className="table_header">
+                    <h2>Manage orders</h2>
+                    <div className="filter_pagination">
+                        <input
+                            placeholder="Search Name"
+                            onChange={e => setSearchTerm(e.target.value)}
+                        />
+                        <div className="pagination">
+                            <div className="item_per_page">
+                                <span>Item per page </span>
+                            </div>
+
+                            <div className="arrows">
+                                <ArrowFirstPageIcon />
+                                <ArrowLeftIcon />
+                                <span>6</span>
+                                <ArrowRightIcon />
+                                <ArrowLastPageIcon />
+                            </div>
+                        </div>
+                    </div>
+                </div>
       {
         tableData.tData &&
         <table className="crudTable">
