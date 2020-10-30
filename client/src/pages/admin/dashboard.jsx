@@ -1,12 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import useDebounce from '../../components/custom/debounce.jsx'
-import Loading from '../../components/loading';
-import CustomTable from "../../components/custom/table";
-import Modal from '../../components/modal';
-import MyButton from '../../components/custom/button';
-import { getAllOrder, getCanceledOrder, getDashboardAdmin, getPendingOrder, getProcessedOrder, searchCharacter } from '../../redux/order/order-action';
-
+import Loading from '../../components/loading'
+import CustomTable from "../../components/custom/table"
+import Modal from '../../components/modal'
+import MyButton from '../../components/custom/button'
+import { getAllOrder, getCanceledOrder, getDashboardAdmin, getPendingOrder, getProcessedOrder, searchCharacter } from '../../redux/order/order-action'
+import { ReactComponent as ClockIcon } from '../../assets/icons/clock.svg'
+import { ReactComponent as DobleCheckIcon } from '../../assets/icons/double-check.svg'
+import { ReactComponent as TimesIcon } from '../../assets/icons/times.svg'
+import { ReactComponent as CheckIcon } from '../../assets/icons/check.svg'
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -165,12 +168,14 @@ const Dashboard = () => {
 
     }
 
-    const tableData = () => {
-        return {
-            tHead:['Name','Code','Total','Date','Status','Action'],
-            tData:orders.orders ? orders.orders : null,
-            viewDataLink:'/admin/order',
-        }
+    const tableData =  {
+        tHead:['Name','Code','Total','Date','Status','Action'],
+        tData:orders.orders ? orders.orders : null,
+        link:{
+            view:'/admin/order',
+            delete:'',
+            edit:''
+        },
     }
     
     const handleChange = e => setQuantity(e.target.value);
@@ -184,37 +189,22 @@ const Dashboard = () => {
                 <div className="order-dashboard">
                     <div className={`${orders.active === 'pending' ? 'active' : ''} card-item`} onClick={pendingOrder}>
                         <span className="badge">{count.pending}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-clock" width="60" height="60" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <circle cx="12" cy="12" r="9" />
-                            <polyline points="12 7 12 12 15 15" />
-                        </svg>
+                        <ClockIcon />
                         <h3>Pending</h3>
                     </div>
                     <div className={`${orders.active === 'processed' ? 'active' : ''} card-item`} onClick={processedOrder}>
                         <span className="badge">{count.processed}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-check" width="60" height="60" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <path d="M5 12l5 5l10 -10" />
-                        </svg>
+                        <CheckIcon />
                         <h3>Processed</h3>
                     </div>
                     <div className={`${orders.active === 'canceled' ? 'active' : ''} card-item`} onClick={canceledOrder}>
                         <span className="badge">{count.canceled}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-x" width="60" height="60" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="18" y1="6" x2="6" y2="18" />
-                            <line x1="6" y1="6" x2="18" y2="18" />
-                        </svg>
+                        <TimesIcon />
                         <h3>Canceled</h3>
                     </div>
                     <div className={`${orders.active === 'all' ? 'active' : ''} card-item`} onClick={allOrder}>
                         <span className="badge">{count.all}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-checks" width="60" height="60" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <path d="M7 12l5 5l10 -10" />
-                            <path d="M2 12l5 5m5 -5l5 -5" />
-                        </svg>
+                        <DobleCheckIcon />
                         <h3>Total</h3>
                     </div>
                 </div>
