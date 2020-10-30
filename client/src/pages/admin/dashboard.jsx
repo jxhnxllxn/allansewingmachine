@@ -43,13 +43,7 @@ const Dashboard = () => {
             })
         } else {
             setOrders({ ...orders, loading: true });
-            dispatch(getAllOrder()).then(res => {
-                setOrders({
-                    orders: res.payload.data,
-                    loading: false,
-                    active: 'all'
-                })
-            })
+            allOrder();
         }
     },
     // eslint-disable-next-line
@@ -220,7 +214,6 @@ const Dashboard = () => {
                 }
                 
                 <Modal ref={modalRef}>
-
                     {modalData && <>
                         <h2>Are you sure you want to delete {modalData.name} category?</h2>
                         <br />
@@ -236,10 +229,7 @@ const Dashboard = () => {
                                 <MyButton runAction={closeModal} type="submit" title="Cancel" value="Submit" />
                             </div>
                         </form>
-
-
                     </>}
-
                 </Modal>
 
             </div>

@@ -11,10 +11,6 @@ const orderSchema = new mongoose.Schema({
         required: [true, 'Sorry something goes wrong'],
 
     },
-    // email:{
-    //     type:String,
-    //     required:[true, 'Sorry something goes wrong']
-    // },
     shippingAddress: {
         address: {
             type: String,
@@ -45,25 +41,40 @@ const orderSchema = new mongoose.Schema({
             default: ''
         }
     },
-    // contact:{
-    //     type:String,
-    //     required:[true, 'Sorry something goes wrong']
-    // },
-    total: {
-        required: [true, 'Make some orders'],
-        type: String
-    },
     additionalInfo: {
         type: String,
     },
-    shipping: {
+    shippingMethod: {
         type: String,
     },
-    paymentOption: {
+    paymentMethod: {
         type: String,
     },
-    paymentId: {
-        type: String,
+    paymentResult: {
+        id:{type:String},
+        status:{type:String},
+        update_time:{type:String},
+        email_address:{type:String},
+    },
+    taxPrice:{
+        type:Number,
+        required:true,
+        default:0.0
+    },
+    shippinngPrice:{
+        type:Number,
+        required:true,
+        default:0.0
+    },
+    totalPrice:{
+        type:Number,
+        required:true,
+        default:0.0
+    },
+    totalPrice:{
+        type:Boolean,
+        required:true,
+        default:false
     },
     product: [{
         product: {
@@ -73,17 +84,17 @@ const orderSchema = new mongoose.Schema({
         },
         name: {
             type: String,
-            required: [true, 'Product not available']
+            required: true,
         },
         quantity: {
             type: Number,
             default: 0,
-            required: [true, 'Make some orders']
+            required: true,
         },
         price: {
             type: Number,
             default: 0,
-            required: [true, 'Make some orders']
+            required: true,
         },
 
     }],
@@ -91,7 +102,17 @@ const orderSchema = new mongoose.Schema({
         type: String,
         enum: ['pending', 'canceled', 'doned'],
         default: 'pending',
-
+    },
+    paidAt:{
+        type:Date,
+    },
+    isDelivered:{
+        type:Boolean,
+        required:true,
+        default:false,
+    },
+    deliveredAt:{
+        type:Date
     }
 },
     { timestamps: true }

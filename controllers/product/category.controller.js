@@ -1,7 +1,7 @@
 const errorResponse = require('../../utils/errorResponse.util');
 const asyncHandler = require('express-async-handler');
-const Category = require('../../models/product/Category.model');
-const Collection = require('../../models/product/Collection.model');
+const Category = require('../../models/Category.model');
+const Collection = require('../../models/Collection.model');
 
 // @desc    get all Categories
 // @route   GET /api/v1/categories

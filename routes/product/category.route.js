@@ -8,7 +8,7 @@ const {
     deleteCategory
   } = require('../../controllers/product/category.controller');
 
-const Category = require('../../models/product/Category.model');
+const Category = require('../../models/Category.model');
 const advanceResults = require('../../middlewares/advaceResult.middleware');
 
 // Includes other resources routers

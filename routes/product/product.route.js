@@ -2,7 +2,7 @@ const express = require('express');
 
 const {getProducts, getProduct, addProduct, updateProduct, deleteProduct, getProductsToShop} = require('../../controllers/product/product.controller');
 const advanceResults = require('../../middlewares/advaceResult.middleware');
-const Product = require('../../models/product/Product.model')
+const Product = require('../../models/Product.model')
 
 const router = express.Router({mergeParams:true});
 

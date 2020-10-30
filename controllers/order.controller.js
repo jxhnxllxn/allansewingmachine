@@ -1,7 +1,7 @@
 const errorResponse = require('../utils/errorResponse.util');
 const asyncHandler = require('express-async-handler');
 const Order = require('../models/Order.model');
-const Product = require('../models/product/Product.model');
+const Product = require('../models/Product.model');
 
 const async = require('async');
 

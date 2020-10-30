@@ -1,0 +1,50 @@
+const product = [
+    {
+        user:'1',
+        name: 'Lorem ipsum dolor.',
+        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti, praesentium!',
+        rating: 4.5,
+        numReviews: 4,
+        images:['/public/uploads/collection-photo.jpg'],
+        price: 3000,
+        brand: 'Juki',
+        condition: 'used',
+        category: 'Sewing machines',
+        stock: 20,
+        sold: 10,
+        publish:true,
+    },
+    {
+        user:'1',
+        name: 'Lorem ipsum dolor.',
+        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti, praesentium!',
+        rating: 4.5,
+        numReviews: 4,
+        images:['/public/uploads/collection-photo.jpg'],
+        price: 3000,
+        brand: 'Juki',
+        condition: 'used',
+        category: 'Sewing machines',
+        stock: 20,
+        sold: 10,
+        publish:true,
+    },
+    {
+        user:'1',
+        name: 'Lorem ipsum dolor.',
+        description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti, praesentium!',
+        rating: 4.5,
+        numReviews: 4,
+        images:['/public/uploads/collection-photo.jpg'],
+        price: 3000,
+        brand: 'Juki',
+        condition: 'used',
+        category: 'Sewing machines',
+        stock: 20,
+        sold: 10,
+        publish:true,
+    }
+]
+
+
+module.exports = product;

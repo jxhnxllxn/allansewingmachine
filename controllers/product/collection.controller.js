@@ -1,7 +1,7 @@
 const path = require('path');
 const errorResponse = require('../../utils/errorResponse.util');
 const asyncHandler = require('express-async-handler');
-const Collection = require('../../models/product/Collection.model');
+const Collection = require('../../models/Collection.model');
 const fs = require('fs')
 
 // @desc    get all Collection

@@ -1,6 +1,6 @@
 const errorResponse = require('../../utils/errorResponse.util');
 const asyncHandler = require('express-async-handler');
-const Product = require('../../models/product/Product.model');
+const Product = require('../../models/Product.model');
 
 
 // @desc    get product by arrival

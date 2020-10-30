@@ -9,7 +9,7 @@ const {
     // collectionPhotoUpload,
   } = require('../../controllers/product/collection.controller');
 
-const Collection = require('../../models/product/Collection.model')
+const Collection = require('../../models/Collection.model')
 const advanceResults = require('../../middlewares/advaceResult.middleware');
 
 
