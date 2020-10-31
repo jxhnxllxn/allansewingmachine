@@ -1,19 +1,5 @@
 import axios from "axios";
-// import { setAlert } from "../alert/alert-action";
 import { ProductActionTypes } from "./product-types";
-
-// api secret
-// Oz_rD2QLe7_lm3sTs2sY5R0_8iA
-
-// api key
-// 495551122347166
-
-// cloud name
-// dgia0xiqo
-
-// environment var 
-// cloudinary://495551122347166:Oz_rD2QLe7_lm3sTs2sY5R0_8iA@dgia0xiqo
-
 
 export const getProductDetail = (id) => {
     const request = axios
@@ -34,22 +20,20 @@ export const clearProductDetail = () => {
     }
 }
 
-export const getProductsBySell = () => {
-    const request = axios.get('/api/product?select=name,description,images,price&sort=-sold&limit=8')
-            .then(res => res.data);
-            return {
-                type: ProductActionTypes.GET_PRODUCT_BY_SELL,
-                payload: request
-            }
-}
 
-export const getProductsByArrival = () => {
-    const request = axios.get('/api/product?select=name,description,images,price&sort=-createdAt&limit=8')
-            .then(res => res.data);
-            return {
-                type: ProductActionTypes.GET_PRODUCT_BY_ARRIVAL,
-                payload: request
-            }
+export const getProductsToHome = () => async dispatch => {
+    try {
+        const {data} = await axios.get('/api/product/home')
+        dispatch({
+            type: ProductActionTypes.GET_PRODUCT_TO_HOME,
+             payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: ProductActionTypes.ERROR_PRODUCT,
+            payload: error.response && error.response.data.error ? error.response.data.error : error.message
+        })
+    }
 }
 
 export const getProductsToShop = (skip,limit,filters =[], previousState=[]) => {
@@ -122,16 +106,6 @@ export const deleteProduct = (data) => dispatch => {
                 payload: err.response.data
             })
         )
-}
-
-export const getCategories = () => {
-    const request = axios.get('/api/category?select=name')
-        .then(res => res.data);
-    return {
-        type: ProductActionTypes.GET_CATEGORIES,
-        payload: request
-    }
-        
 }
 
 export const getCollections = () => {

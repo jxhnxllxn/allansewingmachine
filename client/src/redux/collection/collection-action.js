@@ -1,36 +1,60 @@
 import axios from "axios";
 import { CollectionActionTypes } from "./collection-types"; 
 
-export const getCollections = () => {
-    const request = axios
-        .get('/api/collection')
-        .then(res => res.data);
-        return {
+export const getCollections = () => async (dispatch) => {
+    try {
+        const {data} = await  axios.get('/api/collection')           
+        dispatch({
             type: CollectionActionTypes.GET_COLLECTIONS,
-            payload: request
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: CollectionActionTypes.ERROR_COLLECTION,
+            payload: error.response && error.response.data.error ? error.response.data.error : error.message
+        })
+    }
+}
+
+export const addCollection = (dataToSubmit)  => async (dispatch) => {
+        const config = {
+            headers:{
+                'Content-Type':'application/json',
+                Authorization:`Bearer ${localStorage.token}`
+            }
+        }
+
+        try {
+            const {data} = await  axios.post('/api/collection',dataToSubmit,config)        
+            dispatch({
+                type: CollectionActionTypes.ADD_COLLECTION,
+                payload: data
+            })
+        } catch (error) {
+            dispatch({
+                type: CollectionActionTypes.ERROR_COLLECTION,
+                payload: error.response && error.response.data.error ? error.response.data.error : error.message
+            })
         }
 }
 
-export const addCollection = (dataToSubmit)  => {
-
-    const request = axios
-        .post('/api/collection',dataToSubmit)
-        .then(res => res.data)
-        return {
-            type: CollectionActionTypes.ADD_COLLECTION,
-            payload: request
+export const deleteCollection = (dataToDelete) => async (dispatch)=> {
+    const config = {
+        headers:{
+            'Content-Type':'application/json',
+            Authorization:`Bearer ${localStorage.token}`
         }
-    
-}
-
-
-export const deleteCollection = (data) => {
-    const request = axios
-        .delete(`/api/collection/${data}`)
-        .then(res => res.data)
-
-        return {
+    }
+    try {
+        const {data} = await axios.delete(`/api/collection/${dataToDelete}`,config)
+        dispatch({
             type: CollectionActionTypes.DELETE_COLLECTION,
-            payload: request
-        }
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: CollectionActionTypes.ERROR_COLLECTION,
+            payload: error.response && error.response.data.error ? error.response.error : error.message
+        })
+    }
 } 

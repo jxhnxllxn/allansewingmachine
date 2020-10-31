@@ -1,12 +1,12 @@
 const express = require('express');
 
-const {getProducts, getProduct, addProduct, updateProduct, deleteProduct, getProductsToShop} = require('../../controllers/product/product.controller');
-const advanceResults = require('../../middlewares/advaceResult.middleware');
-const Product = require('../../models/Product.model')
+const {getProducts, getProduct, addProduct, updateProduct, deleteProduct, getProductsToShop, getProductToHome} = require('../controllers/product.controller');
+const advanceResults = require('../middlewares/advaceResult.middleware');
+const Product = require('../models/Product.model')
 
 const router = express.Router({mergeParams:true});
 
-const {protect,authorize} = require('../../middlewares/auth.middleware');
+const {protect,authorize} = require('../middlewares/auth.middleware');
 
 router.route('/')
     .get(advanceResults(Product,['collections','category']),getProducts)
@@ -15,6 +15,9 @@ router.route('/')
 
 router.route('/shop')
     .post(getProductsToShop)
+
+router.route('/home')
+    .get(getProductToHome)
 
 router.route('/:id')
     .get(getProduct)

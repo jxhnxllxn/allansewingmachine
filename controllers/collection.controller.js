@@ -1,14 +1,13 @@
 const path = require('path');
-const errorResponse = require('../../utils/errorResponse.util');
+const errorResponse = require('../utils/errorResponse.util');
 const asyncHandler = require('express-async-handler');
-const Collection = require('../../models/Collection.model');
+const Collection = require('../models/Collection.model');
 const fs = require('fs')
 
 // @desc    get all Collection
 // @route   GET /api/Collection
 // @access  Private
 exports.getCollections = asyncHandler(async (req, res, next) => {
-
   res
     .status(200)
     .json(res.advanceResults);
@@ -19,7 +18,7 @@ exports.getCollections = asyncHandler(async (req, res, next) => {
 // @route   GET /api/Collection/:id
 // @access  Private
 exports.getCollection = asyncHandler(async (req, res, next) => {
-  const collection = await Collection.findById(req.params.id).populate('categories');
+  const collection = await Collection.findById(req.params.id);
 
   if (!collection) {
     return next(
@@ -111,17 +110,6 @@ exports.deleteCollection = asyncHandler(async (req, res, next) => {
 
 });
 
-
-
-// @desc    create Collection
-// @route   POST /api/Collection
-// @access  Private
-// exports.createCollection = asyncHandler (async (req,res,next)=>{
-//   const collect = await Collection.create(req.body);
-//   res
-//       .status(201)
-//       .json({success:true,data: collect})
-// });
 
 // @desc      Upload photo for collection
 // @route     PUT /api/collection/:id/photo

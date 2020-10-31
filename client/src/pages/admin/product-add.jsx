@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { getCategories, getCollections, addProduct } from "../../redux/product/product-action";
+import { getCollections, addProduct } from "../../redux/product/product-action";
 import { useState } from 'react';
 import FormField from '../../components/custom/form-field';
 import { update, generateData, isFormValid, populateOptionFields, resetFields } from '../../components/custom/form-action';
@@ -191,15 +191,6 @@ const ProductAdd = () => {
         })
     // eslint-disable-next-line
     }, [dispatch])
-
-    useEffect(() => {
-        dispatch(getCategories()).then(res => {
-            const newFormData = populateOptionFields(formField.formData, res.payload.data, 'category');
-            updateFields(newFormData);
-        })
-    // eslint-disable-next-line
-    }, [dispatch])
-
 
 
     const updateForm = (element) => {

@@ -19,8 +19,8 @@ connectDB();
 
 // Route files
 const auth = require('./routes/auth.route');
-const collection = require('./routes/product/collection.route');
-const product = require('./routes/product/product.route');
+const collection = require('./routes/collection.route');
+const product = require('./routes/product.route');
 const order = require('./routes/order.route');
 const user = require('./routes/user.route');
 

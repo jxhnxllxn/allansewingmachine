@@ -23,7 +23,6 @@ const Product = (props) => {
       images:props.images,
       price:props.price,
       collection:props.collections.name,
-      category:props.category.name,
       sold:props.sold,
       available:props.available,
     }))
@@ -39,7 +38,6 @@ const Product = (props) => {
 
         <div className="action_container">
             <div className="tags">
-              <h3 className="category">{props.category.categoryName} </h3>
               <h2 className="name">{props.name}</h2>
               <div className="price">Php {addComma(props.price)}.00</div>
             </div>

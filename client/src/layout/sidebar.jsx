@@ -16,7 +16,6 @@ const Sidebar = () => {
         <NavLink exact to="/admin" className="option">Dashboard</NavLink>
         <NavLink to="/admin/product" className="option">Product</NavLink>
         <NavLink to="/admin/collection" className="option">Collection</NavLink>
-        <NavLink to="/admin/category" className="option">Category</NavLink>
         <Link to="/" className="option" onClick={handleLogout}>Logout</Link>
     </div>
     )

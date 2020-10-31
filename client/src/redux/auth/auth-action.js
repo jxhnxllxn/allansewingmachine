@@ -1,21 +1,6 @@
 import axios from "axios";
-// import { setAlert } from "../alert/alert-action";
 import { AuthActionTypes } from "./auth-types"; 
-// export const auth = () => {
-//     if(localStorage.token){
-//         setAuthToken(localStorage.token);
-//     }
-    
-//     const request = axios.get('/api/auth/me')
-//         .then(res => res.data)
-//         .catch(err => err.data);
 
-//     return{
-//         type:AuthActionTypes.USER_LOADED,
-//         payload: request
-//     }
-// }
-// load user
 export const auth = () => async dispatch => {    
     try {
         const config = {
@@ -24,10 +9,10 @@ export const auth = () => async dispatch => {
                 Authorization:`Bearer ${localStorage.token}`
             }
         }
-        const res = await axios.get('/api/auth/me',config);
+        const data = await axios.get('/api/auth/me',config);
         dispatch({
             type:AuthActionTypes.USER_LOADED,
-            payload:res.data,
+            payload:data,
         });
 
     } catch (err) {
@@ -38,7 +23,12 @@ export const auth = () => async dispatch => {
 }
 
 //register
-export const register = (dataToSubmit) => {
+export const register = (dataToSubmit) => async dispatch => {
+    try {
+        
+    } catch (error) {
+        
+    }
     const request = axios.post('/api/auth/register',dataToSubmit)
         .then(res => res.data);
         return{

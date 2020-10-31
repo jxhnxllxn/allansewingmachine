@@ -1,31 +1,21 @@
 import React from 'react';
 import ReactDOM from "react-dom";
-import PropTypes from 'prop-types';
-import { connect } from "react-redux";
 
-const Alert = ({alerts}) => {
-    const alert = alerts !== null && alerts.length > 0 ? 
+const Alert = ({message,variant}) => {
+    const messageData = message ? message.split(',') : null;
+    const alert = messageData !== null ? 
     <div className="alertContainer">
-        {alerts.map(alert => (  
-        <div key={alert.id} className={`alert alert-${alert.alertType}`}>
-            {alert.msg}
+        {messageData.map((msg,i) => (  
+        <div key={i} className={`alert alert-${variant}`}>
+            {msg}
         </div>
         ))}
     </div> : null
     return ReactDOM.createPortal(
         <>{alert}</>,
-        document.getElementById("modal-root")
+        document.getElementById("alert-root")
     )    
-
 }
 
 
-Alert.propTypes = { 
-    alerts: PropTypes.array.isRequired,
-};
-
-const mapStateToProps = state => ({
-    alerts: state.alert
-})
-
-export default connect(mapStateToProps)(Alert);
+export default Alert;

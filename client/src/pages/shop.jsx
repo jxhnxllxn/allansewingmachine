@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import CardBlockCollection from '../components/custom/card-block-collection'
 import { getCollections } from "../redux/collection/collection-action"; 
-// import Collection from "../../../components/collection/collection";
-import { useSelector } from 'react-redux';
-
-import {store} from "../redux/store";
+import { useDispatch, useSelector } from 'react-redux';
+import Alert from '../components/alert'
 import Loading from '../components/loading';
 
 
 const Shop = () => {
-    const [state, setState] = useState({
-        isLoading:true,
-    })
+    const dispatch = useDispatch()
+    const collectionState = useSelector(state => state.collection)
+    const {loading,collections,error} = collectionState;
 
     useEffect(() => {
-        store.dispatch(getCollections()).then(() => {
-            setState({isLoading:false})
-        });
-    }, []);
+        dispatch(getCollections())
+    }, [dispatch]);
 
-    const collections = useSelector(state => state.collection.collections)
         return (
             <div className="shop_wrapper">
                 {
-                    state.isLoading ? <Loading/>:
+                    loading ? <Loading/> : error ? <Alert message={error} variant='danger'/>:
                     <CardBlockCollection
                         list={collections} 
                         title="Shop"
                     />
                 }
-                
             </div>
         )
 }

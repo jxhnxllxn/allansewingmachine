@@ -2,27 +2,34 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import HomeSlider from '../components/slider';
 import CardBlock from '../components/custom/card-block';
-import { getProductsByArrival, getProductsBySell } from "../redux/product/product-action";
+import { getProductsToHome } from "../redux/product/product-action";
+import Loading from '../components/loading';
+import Alert from '../components/alert';
 
 const Home = () => {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getProductsByArrival());
-        dispatch(getProductsBySell());
+        dispatch(getProductsToHome());
     }, [dispatch]);
-    const productBySell = useSelector(state => state.product.productBySell)
-    const productByArrival = useSelector(state => state.product.productByArrival)
+    const productState = useSelector(state => state.product)
+    const {loading, productToHome, error} = productState
     return (
         <div className="home_wrapper">
             <HomeSlider />
-            <CardBlock
-                list={productBySell}
-                title="Best Seller"
-            />
-            <CardBlock
-                list={productByArrival}
-                title="New Arrival"
-            />
+            {
+                loading ? <Loading /> : error ? <Alert message={error} variant='danger'/> :
+                <>
+                    <CardBlock
+                    list={productToHome.bestSeller}
+                    title="Best Seller"
+                    />
+                    <CardBlock
+                        list={productToHome.newArrival}
+                        title="New Arrival"
+                    />
+                </>
+            }
+            
         </div>
     )
 }

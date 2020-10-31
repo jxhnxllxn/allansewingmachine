@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import CollapseCheckBox from '../components/custom/collapse-checkbox'
 import CollapseRadio from '../components/custom/collapse-radio'
 import PageTop from '../components/custom/page-top'
-import { getCategories, getProductsToShop } from '../redux/product/product-action'
+import { getProductsToShop } from '../redux/product/product-action'
 import { price } from '../components/custom/fixed-categories'
 import LoadMoreCards from '../components/load-more'
 
@@ -19,14 +18,11 @@ const ShopCollection = (props) => {
         skip: 0,
         filters: {
             collections: [props.match.params.collection],
-            categories: [],
             price: []
         }
     })
 
     useEffect(() => {
-
-        dispatch(getCategories());
         dispatch(getProductsToShop(state.skip, state.limit, state.filters));
         // eslint-disable-next-line
     }, [dispatch]);
@@ -104,12 +100,6 @@ const ShopCollection = (props) => {
             <div>
                 <div className="shop_wrapper">
                     <div className="left">
-                        <CollapseCheckBox
-                            initState={true}
-                            title="Categories"
-                            list={products.categories}
-                            handleFilters={(filter) => handleFilters(filter, 'category')}
-                        />
                         <CollapseRadio
                             initState={false}
                             title="price"

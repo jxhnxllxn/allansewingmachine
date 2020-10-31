@@ -7,15 +7,15 @@ const {
     updateCollection,
     deleteCollection,
     // collectionPhotoUpload,
-  } = require('../../controllers/product/collection.controller');
+  } = require('../controllers/collection.controller');
 
-const Collection = require('../../models/Collection.model')
-const advanceResults = require('../../middlewares/advaceResult.middleware');
+const Collection = require('../models/Collection.model')
+const advanceResults = require('../middlewares/advaceResult.middleware');
 
 
 const router = express.Router();
 
-const {protect,authorize} = require('../../middlewares/auth.middleware');
+const {protect,authorize} = require('../middlewares/auth.middleware');
 
 router
   .route('/:id/photo')

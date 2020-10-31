@@ -1,6 +1,24 @@
-const errorResponse = require('../../utils/errorResponse.util');
+const errorResponse = require('../utils/errorResponse.util');
 const asyncHandler = require('express-async-handler');
-const Product = require('../../models/Product.model');
+const Product = require('../models/Product.model');
+
+
+// @desc    get products to homepage
+// @route   GET /api/products/productsToHome
+// @access  Public
+
+exports.getProductToHome = asyncHandler(async (req, res, next) => {
+    const bestSeller = await Product.find({}).sort({sold:-1}).limit(8)
+    const newArrival = await Product.find({}).sort({createdAt:-1}).limit(8)
+    
+    res.status(200).json({
+        success: true,
+        data: {
+            bestSeller:bestSeller,
+            newArrival:newArrival
+        }
+    })
+});
 
 
 // @desc    get product by arrival
@@ -36,7 +54,6 @@ exports.getProductsToShop = asyncHandler(async (req, res, next) => {
     Product.
         find(findArgs).
         populate('collections').
-        populate('category').
         sort([[sortBy, order]]).
         skip(skip).
         limit(limit).
@@ -54,8 +71,6 @@ exports.getProductsToShop = asyncHandler(async (req, res, next) => {
 // @route   GET /api//products
 // @access  Public
 exports.getProducts = asyncHandler(async (req, res, next) => {
-
-
     res
         .status(200)
         .json(res.advanceResults);
@@ -69,10 +84,6 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 
 exports.getProduct = asyncHandler(async (req, res, next) => {
     const product = await Product.findById(req.params.id)
-        .populate({
-            path: 'category',
-            select: 'name email'
-        })
         .populate({
             path: 'collections',
             select: 'name'
@@ -90,7 +101,7 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
 
 
 // @desc    Add Products
-// @route   GET /api/category/:categoryId/products
+// @route   GET /api/category/:categoryI d/products
 // @access  Private
 
 exports.addProduct = asyncHandler(async (req, res, next) => {

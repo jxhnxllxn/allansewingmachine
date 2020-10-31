@@ -26,6 +26,11 @@ export default function(state = initialState, action){
                 collections: state.collections.filter(collection => collection._id !== payload.data._id),
                 loading:false
             }
+        case CollectionActionTypes.ERROR_COLLECTION:
+            return {
+                loading:false,
+                error: payload
+            }
         default:
             return state
     }
