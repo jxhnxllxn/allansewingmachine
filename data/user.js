@@ -4,6 +4,7 @@ const users = [
     {
         name:'John Allen de Chavez',
         email:'johnallendechavez23@gmail.com',
+        password:bcrypt.hashSync('johnjohn',10),
         address:{
             unit:'19',
             street:'San Felipe',
@@ -14,11 +15,11 @@ const users = [
         },
         contact:'09352213921',
         role:'admin',
-        password:bcrypt.hashSync('johnjohn',10),
     },
     {
         name:'John Doe',
-        email:'johDoe@gmail.com',
+        email:'johndoe@gmail.com',
+        password:bcrypt.hashSync('johnjohn',10),
         address:{
             unit:'19',
             street:'San Felipe',
@@ -28,11 +29,11 @@ const users = [
             zipcode:'4224'
         },
         contact:'09352213921',
-        password:bcrypt.hashSync('johnjohn',10),
     },
     {
         name:'Jane Doe',
         email:'janedoe@gmail.com',
+        password:bcrypt.hashSync('johnjohn',10),
         address:{
             unit:'19',
             street:'San Felipe',
@@ -42,7 +43,6 @@ const users = [
             zipcode:'4224'
         },
         contact:'09352213921',
-        password:bcrypt.hashSync('johnjohn',10),
     }
 ]
 

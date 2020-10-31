@@ -1,14 +1,14 @@
-const product = [
+const products = [
     {
         user:'1',
-        name: 'Lorem ipsum dolor.',
+        name: 'Lorem ipsum.',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti, praesentium!',
         rating: 4.5,
         numReviews: 4,
         images:['/public/uploads/collection-photo.jpg'],
         price: 3000,
         brand: 'Juki',
-        condition: 'used',
+        condition: 'USED',
         category: 'Sewing machines',
         stock: 20,
         sold: 10,
@@ -16,14 +16,14 @@ const product = [
     },
     {
         user:'1',
-        name: 'Lorem ipsum dolor.',
+        name: 'Torem ipsum dolor.',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti, praesentium!',
         rating: 4.5,
         numReviews: 4,
         images:['/public/uploads/collection-photo.jpg'],
         price: 3000,
         brand: 'Juki',
-        condition: 'used',
+        condition: 'NEW',
         category: 'Sewing machines',
         stock: 20,
         sold: 10,
@@ -31,14 +31,14 @@ const product = [
     },
     {
         user:'1',
-        name: 'Lorem ipsum dolor.',
+        name: 'Xorem dolor.',
         description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti, praesentium!',
         rating: 4.5,
         numReviews: 4,
         images:['/public/uploads/collection-photo.jpg'],
         price: 3000,
         brand: 'Juki',
-        condition: 'used',
+        condition: 'USED',
         category: 'Sewing machines',
         stock: 20,
         sold: 10,
@@ -47,4 +47,4 @@ const product = [
 ]
 
 
-module.exports = product;
+module.exports = products;

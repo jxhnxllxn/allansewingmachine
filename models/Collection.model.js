@@ -11,8 +11,8 @@ const collectionSchema = new mongoose.Schema({
     },
     
     images:{
-        type: Array,
-        default:[]
+        type: String,
+        default:'noimage.jpg'
     },
     
     createdAt:{

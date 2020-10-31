@@ -20,7 +20,6 @@ connectDB();
 // Route files
 const auth = require('./routes/auth.route');
 const collection = require('./routes/product/collection.route');
-const category = require('./routes/product/category.route');
 const product = require('./routes/product/product.route');
 const order = require('./routes/order.route');
 const user = require('./routes/user.route');
@@ -55,7 +54,6 @@ app.use(fileUpload({
 //Mount routers
 app.use('/api/auth', auth);
 app.use('/api/collection', collection);
-app.use('/api/category', category);
 app.use('/api/product', product);
 app.use('/api/order', order);
 app.use('/api/user', user);
