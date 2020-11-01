@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser, selectIsAdmin, selectIsAuth } from '../redux/auth/auth-selector';
 
 export default function (ComposedClass, reload, adminRoute) {
-
-
     const AuthenticationCheck = (props) => {
         const isAdmin = useSelector(state => selectIsAdmin(state));
         const isAuthenticated = useSelector(state => selectIsAuth(state));
@@ -26,8 +24,10 @@ export default function (ComposedClass, reload, adminRoute) {
                     }
                 }
             }
+            return () => {
+                window.scrollTo(0, 0)
+            }
         }, [isAuthenticated, isAdmin, props.history])
-
 
         return (
             <>

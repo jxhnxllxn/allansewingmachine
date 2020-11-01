@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { addOrder } from "../redux/order/order-action";
 import { clearCart } from '../redux/cart/cart-action';
-import { update, generateData, resetFields } from '../components/custom/form-action';
+import { update, generateData, resetFields } from '../utils/helper/form-action';
 import { selectCartItems, selectCartItemsCount, selectCartTotal } from '../redux/cart/cart-selectors';
 import addComma from '../utils/helper/add-comma';
 
-import Paypal from '../components/custom/paypal';
-import MyButton from '../components/custom/button'
-import FormField from '../components/custom/form-field'
+import Paypal from '../components/paypal';
+import MyButton from '../components/button'
+import FormField from '../components/form-field'
 import Modal from '../components/modal';
 import { withRouter } from 'react-router-dom';
 const OrderDetail = (props) => {

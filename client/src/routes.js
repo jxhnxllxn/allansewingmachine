@@ -7,7 +7,7 @@ import Home from "./pages/home"
 import Layout from "./layout/layout"
 import Loading from './components/loading'
 
-import ErrorBoundary from './components/errorBoundary'
+import ErrorBoundary from './utils/helper/errorBoundary'
 
 const Shop = lazy(()=>import("./pages/shop"))
 const ShopCollection = lazy(()=>import("./pages/shop-collection"))

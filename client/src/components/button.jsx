@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ReactComponent as ShoppingBagIcon } from '../../assets/icons/shopping-bag.svg'
+import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.svg'
 
 const MyButton = props => {
     const buttons = () => {

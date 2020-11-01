@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux';
 import {addItem} from '../redux/cart/cart-action'
 import addComma from "../utils/helper/add-comma";
-import MyButton from './custom/button'
+import MyButton from './button'
 
 import LazyLoad from 'react-lazyload';
 
@@ -10,7 +10,7 @@ const renderCardImage = (images) => {
   if(images.length > 0){
     return images[0].url
   }else{
-    return '/images/slide2.jpg'
+    return '/images/sewer.jpg'
   }
 }
 

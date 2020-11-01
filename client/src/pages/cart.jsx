@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import CartItem from '../components/cart-item';
 import {selectCartItems,selectCartTotal} from '../redux/cart/cart-selectors';
-import MyButton from '../components/custom/button';
+import MyButton from '../components/button';
 
 const Cart = (props) => {
     const cartItems = useSelector(state => selectCartItems(state));

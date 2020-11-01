@@ -273,7 +273,7 @@ exports.uploadimage = (req, res) => {
             return res.status(400).json({ success: false, data: 'Not an image' })
         }
 
-        cloudinary.v2.uploader.upload(file.tempFilePath, { folder: 'vetshop' }, async (err, result) => {
+        cloudinary.v2.uploader.upload(file.tempFilePath, { folder: 'allansewingmachine' }, async (err, result) => {
             if (err) throw err;
             removeTmp(file.tempFilePath)
             res.json({ public_id: result.public_id, url: result.secure_url })

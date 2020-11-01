@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 
-import Loading from '../loading';
+import Loading from '../components/loading';
 import { useState } from 'react';
 
 const FileUpload = (props) => {

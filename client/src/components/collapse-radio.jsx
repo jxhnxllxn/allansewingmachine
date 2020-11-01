@@ -6,8 +6,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { Collapse, FormControlLabel, RadioGroup } from '@material-ui/core';
 import Radio from '@material-ui/core/Radio'
 
-import { ReactComponent as UpIcon } from '../../assets/icons/chevron-up.svg'
-import { ReactComponent as DownIcon } from '../../assets/icons/chevron-down.svg'
+import { ReactComponent as UpIcon } from '../assets/icons/chevron-up.svg'
+import { ReactComponent as DownIcon } from '../assets/icons/chevron-down.svg'
 import { useState } from 'react';
 
 const CollapseRadio = (props) => {

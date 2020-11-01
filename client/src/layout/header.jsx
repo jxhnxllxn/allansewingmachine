@@ -28,7 +28,7 @@ const Header = () => {
     const [minimize, setMinimize] = useState(false)
     
     const scrollFunction = () => {
-        if (window.scrollY > 80) {
+        if (window.scrollY > 50) {
             setMinimize(true)
         } else {
             setMinimize(false)
@@ -45,10 +45,10 @@ const Header = () => {
 
         
     const header = (
-        <header className={`header page_container ${minimize ? 'minimize':''}`}>
+        <header className={`header container ${minimize ? 'minimize':''}`}>
             <Link className="logo_container" to="/">
                 <SewingIcon className='logo'/>
-                <div className="brand">Allan Sewing Machine</div>
+                <div className="brand">Allan Sewing Machines</div>
             </Link>
 
             <div className="options">

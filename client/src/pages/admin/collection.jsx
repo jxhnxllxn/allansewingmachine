@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { addCollection, getCollections, deleteCollection } from "../../redux/collection/collection-action";
 
-import FormField from '../../components/custom/form-field';
-import { update, generateData, isFormValid, resetFields } from '../../components/custom/form-action';
-import MyButton from '../../components/custom/button';
+import FormField from '../../components/form-field';
+import { update, generateData, isFormValid, resetFields } from '../../utils/helper/form-action';
+import MyButton from '../../components/button';
 
 import Loading from "../../components/loading";
 import Modal from '../../components/modal'
-import FileUpload from '../../components/custom/file-upload'
+import FileUpload from '../../components/file-upload'
 import { useDispatch } from 'react-redux';
 
 const Collection = () => {
@@ -214,7 +214,7 @@ const Collection = () => {
                         <form onSubmit={handleDeleteCollection}>
                             {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
                             <div className="form-ation">
-                                {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.collectionName}`)}>Delete</CustomButton> */}
+                                {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.collectionName}`)}>Delete<Button> */}
 
                                 <MyButton onClick={closeModal} type="primary" title="Cancel" value="Submit" />
                                 <MyButton onClick={closeModal} type="primary" title="Cancel" value="Submit" />

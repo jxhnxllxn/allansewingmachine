@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { PayPalButton } from "react-paypal-button-v2";
 import { useDispatch } from 'react-redux';
-import { cleanOrder, getPaypalScript } from '../../redux/order/order-action';
-import Loading from '../loading'
+import { cleanOrder, getPaypalScript } from '../redux/order/order-action';
+import Loading from './loading'
 
 const Paypal = (props) => {
     const dispatch = useDispatch()

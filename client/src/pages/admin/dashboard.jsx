@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import useDebounce from '../../components/custom/debounce.jsx'
+import useDebounce from '../../utils/helper/debounce.jsx'
 import Loading from '../../components/loading'
-import CustomTable from "../../components/custom/table"
+import CustomTable from "../../components/table"
 import Modal from '../../components/modal'
-import MyButton from '../../components/custom/button'
+import MyButton from '../../components/button'
 import { getAllOrder, getCanceledOrder, getDashboardAdmin, getPendingOrder, getProcessedOrder, searchCharacter } from '../../redux/order/order-action'
 import { ReactComponent as ClockIcon } from '../../assets/icons/clock.svg'
 import { ReactComponent as DobleCheckIcon } from '../../assets/icons/double-check.svg'
@@ -223,7 +223,7 @@ const Dashboard = () => {
                         <form onSubmit={handleDeleteOrder}>
                             {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
                             <div className="form-ation">
-                                {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.categoryName}`)}>Delete</CustomButton> */}
+                                {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.categoryName}`)}>Delete<Button> */}
 
                                 <MyButton runAction={closeModal} type="submit" title="Cancel" value="Submit" />
                                 <MyButton runAction={closeModal} type="submit" title="Cancel" value="Submit" />

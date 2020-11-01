@@ -1,8 +1,8 @@
 import React from 'react'
-import { ReactComponent as ArrowLeftIcon } from '../../assets/icons/arrow-left.svg'
-import { ReactComponent as ArrowRightIcon } from '../../assets/icons/arrow-right.svg'
-import { ReactComponent as ArrowFirstPageIcon } from '../../assets/icons/arrow-first-page.svg'
-import { ReactComponent as ArrowLastPageIcon } from '../../assets/icons/arrow-last-page.svg'
+import { ReactComponent as ArrowLeftIcon } from '../assets/icons/arrow-left.svg'
+import { ReactComponent as ArrowRightIcon } from '../assets/icons/arrow-right.svg'
+import { ReactComponent as ArrowFirstPageIcon } from '../assets/icons/arrow-first-page.svg'
+import { ReactComponent as ArrowLastPageIcon } from '../assets/icons/arrow-last-page.svg'
 
 const Table = ({tableData,openModal,setSearchTerm}) => {
   

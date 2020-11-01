@@ -1,6 +1,6 @@
 .page_layout {
   display: grid;
-  min-height: 90vh;
+  min-height: 70vh;
   grid-template-columns:
     [full-start] minmax(4rem, 1fr) [center-start] repeat(
       6,

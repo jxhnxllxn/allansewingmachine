@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import CardBlockCollection from '../components/custom/card-block-collection'
+import CardBlockCollection from '../components/card-block-collection'
 import { getCollections } from "../redux/collection/collection-action"; 
 import { useDispatch, useSelector } from 'react-redux';
 import Alert from '../components/alert'

@@ -1,5 +1,5 @@
 import React from 'react'
-import Product from '../product'
+import Product from '../components/product'
 
 const CardBlock = (props) => {
     const renderCard= () => (

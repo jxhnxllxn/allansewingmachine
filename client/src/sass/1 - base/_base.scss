@@ -4,15 +4,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  outline: none;
 }
 
 html {
   overflow-x: hidden;
   font-size: 80%;
   word-spacing: 0.15rem;
-  color: #222222;
+  color: $black;
   font-family: $font-primary;
-  background-color: $color-royal-5;
+  background-color: rgba($color-royal-5, 1);
 
   @include respond(sm) {
     font-size: 92.5%;

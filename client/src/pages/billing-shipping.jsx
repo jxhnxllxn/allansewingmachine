@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { checkoutCreateUser, checkoutUpdateUser } from "../redux/auth/auth-action";
 import { selectIsAuth, selectCurrentUser } from '../redux/auth/auth-selector'
-import { update, generateData, isFormValid, populateFields } from '../components/custom/form-action';
-import MyButton from '../components/custom/button'
-import FormField from '../components/custom/form-field'
+import { update, generateData, isFormValid, populateFields } from '../utils/helper/form-action';
+import MyButton from '../components/button'
+import FormField from '../components/form-field'
 const BillingShipping = (props) => {
     const currentUser = useSelector(state => selectCurrentUser(state));
     const isAuthenticated = useSelector(state => selectIsAuth(state));

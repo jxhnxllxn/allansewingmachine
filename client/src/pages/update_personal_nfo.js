@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import FormField from '../components/custom/form-field';
-import { update, generateData, isFormValid, populateFields } from '../components/custom/form-action';
+import FormField from '../components/form-field';
+import { update, generateData, isFormValid, populateFields } from '../utils/helper/form-action';
 import { useEffect } from 'react';
 import { checkoutUpdateUser, updatePassword } from '../redux/auth/auth-action';
 import { useDispatch, useSelector } from 'react-redux';

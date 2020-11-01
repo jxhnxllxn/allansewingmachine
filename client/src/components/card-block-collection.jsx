@@ -1,5 +1,5 @@
 import React from 'react'
-import Collection from '../collection'
+import Collection from './collection'
 
 const CardBlock = (props) => {
     const renderCard= () => (

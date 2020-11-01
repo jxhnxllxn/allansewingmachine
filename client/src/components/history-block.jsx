@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getOrderHistory } from '../../redux/order/order-action';
+import { getOrderHistory } from '../redux/order/order-action';
 // import moment from 'moment';
 
 // {moment(product.dateOfPurchase).format("MM-DD-YYYY")}

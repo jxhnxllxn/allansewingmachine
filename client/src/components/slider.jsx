@@ -1,6 +1,6 @@
 import React from 'react'
 import Slider from 'react-slick'
-import MyButton from './custom/button'
+import MyButton from './button'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 const HomeSlider = () => {
@@ -24,12 +24,15 @@ const HomeSlider = () => {
     const setting = {
         lazyLoad: true,
         dots: true,
+        fade: true,
         infinite: true,
         speed: 1000,
         slidesToShow: 1,
         slideToScroll: 1,
         autoplaySpeed:5000,
         autoplay:true,
+        centerPadding:'100px',
+        arrows: false
     }
 
     const generateSlide = () => (
@@ -38,25 +41,22 @@ const HomeSlider = () => {
                 <div key={i}>
                     <div className="featured_image"
                         style={{
-                            background:`url(${item.img})`,
-                            height:'calc(100vh - 5rem)',
-                            width:'100vw',
-                            position:'relative',
-                            backgroundSize: 'cover',
+                                backgroundImage:`linear-gradient(to right bottom,
+                                    rgb(246, 214, 125, .8),
+                                    rgb(235, 230, 211, .8)
+                                ),url(${item.img})`,
+                                height: '80vh',
+                                width:'70vw',
                         }}
                     >
 
-                        <div className="featured_action" style={{
-                            position: 'absolute',
-                            bottom: '10%',
-                            left: '4rem',
-                        }}>
+                        {/* <div className="featured_action">
                             <div className="tag">
                                 <h1 className="title">{item.lineOne}</h1>
                                 <h2 className="low_title">{item.lineTwo}</h2>
                             </div>
                             <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
-                        </div>
+                        </div> */}
 
                     </div>
                 </div>
@@ -64,8 +64,8 @@ const HomeSlider = () => {
         :null
     )
     return (
-        <div className="featured_collection">
-            <Slider {...setting}>
+        <div className="featured_collection container">
+            <Slider {...setting} >
                 {generateSlide()}
             </Slider>
         </div>

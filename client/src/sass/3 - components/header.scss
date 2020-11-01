@@ -9,26 +9,15 @@
   z-index: 102;
   top: 0;
   left: 0;
-  background-color: rgba($color-royal-2, 1);
-  padding: 0 4rem;
-  color: $color-royal-5;
-  font-size: 120%;
+  background-color: $color-royal-5;
+  color: $black;
+  font-size: 130%;
   backface-visibility: hidden;
   border: none;
-
+  text-transform: capitalize;
   &.minimize {
     transition: ease-out 0.3s;
     height: 3.5rem;
-    font-size: 110%;
-    .logo_container {
-      .logo {
-        height: 2rem;
-        width: 2rem;
-      }
-      .brand {
-        font-size: 120%;
-      }
-    }
   }
 
   .logo_container {
@@ -40,13 +29,12 @@
     }
     .logo {
       transition: ease-out 0.3s;
-      height: 3rem;
-      width: 3rem;
+      height: 2rem;
+      width: 2rem;
+      margin-right: 0.5rem;
     }
     .brand {
       transition: ease-out 0.3s;
-      font-family: $font-brand;
-      font-size: 130%;
       transform: translateY(0.2rem);
     }
   }
@@ -55,9 +43,8 @@
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     .option {
-      padding: 0.6rem 1.2rem;
+      padding: 0 1rem;
       cursor: pointer;
     }
     .active {

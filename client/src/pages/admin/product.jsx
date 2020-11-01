@@ -4,7 +4,7 @@ import { getProducts, deleteProduct } from "../../redux/product/product-action";
 import Loading from "../../components/loading"
 import Modal from '../../components/modal'
 import { withRouter } from 'react-router-dom'
-import MyButton from '../../components/custom/button';
+import MyButton from '../../components/button';
 
 const Product = (props) => {
     const products = useSelector(state => state.product.products);
@@ -102,8 +102,8 @@ const Product = (props) => {
                                 <form onSubmit={handleDeleteProduct}>
                                     {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
                                     <div className="form-ation">
-                                        {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.name}`)}>Delete</CustomButton>
-                                        <CustomButton buttonType="default" onClick={closeModal}>Cancel</CustomButton> */}
+                                        {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.name}`)}>Delete<Button>
+                                        <CustomButton buttonType="default" onClick={closeModal}>Cancel<Button> */}
                                     </div>
                                 </form>
 

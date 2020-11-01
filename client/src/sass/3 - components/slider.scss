@@ -1,10 +1,11 @@
 .featured_collection {
   overflow: hidden;
+  position: relative;
   .featured_image {
     position: relative;
+    overflow: hidden !important;
     background-size: cover !important;
     background-position: center !important;
-    background-repeat: no-repeat;
   }
   .featured_action {
     .tag {

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import CollapseRadio from '../components/custom/collapse-radio'
-import PageTop from '../components/custom/page-top'
+import CollapseRadio from '../components/collapse-radio'
+import PageTop from '../components/page-top'
 import { getProductsToShop } from '../redux/product/product-action'
-import { price } from '../components/custom/fixed-categories'
+import { price } from '../components/fixed-categories'
 import LoadMoreCards from '../components/load-more'
 
 
