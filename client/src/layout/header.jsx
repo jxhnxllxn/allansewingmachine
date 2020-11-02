@@ -12,6 +12,7 @@ import CartIcon from "../components/cart-icon"
 import CartDropdown from "../components/cart-dropdown";
 import SettingDropdwon from "../components/setting-dropdown"
 import { useState } from 'react'
+import {useThrottle} from '../utils/hooks/useThrottle'
 
 const Header = () => {
     const isAdmin = useSelector(state => selectIsAdmin(state));
@@ -28,6 +29,7 @@ const Header = () => {
     const [minimize, setMinimize] = useState(false)
     
     const scrollFunction = () => {
+        console.log('throttel')
         if (window.scrollY > 50) {
             setMinimize(true)
         } else {
@@ -35,11 +37,13 @@ const Header = () => {
         }
     }
 
+    const scrollThrottle = useThrottle(scrollFunction,100);
+
 
     useEffect(() => {
-        window.addEventListener('scroll',scrollFunction);
+        window.addEventListener('scroll',scrollThrottle);
         return () => {
-            window.removeEventListener('scroll',scrollFunction);
+            window.removeEventListener('scroll',scrollThrottle);
         }
      }, [])
 
@@ -52,12 +56,9 @@ const Header = () => {
             </Link>
 
             <div className="options">
-                <NavLink exact className="option" to="/" >
-                Home
-                </NavLink>
-                <NavLink className="option" to="/shop" >
-                Shop
-                </NavLink>
+                <NavLink exact className="option" to="/" >Home</NavLink>
+                <NavLink className="option" to="/shop" >Shop</NavLink>
+                <NavLink className="option" to="/shop" >About</NavLink>
                 {
                     isAuthenticated ? 
                     <>
