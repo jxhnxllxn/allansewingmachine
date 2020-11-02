@@ -114,7 +114,7 @@ const ShopCollection = (props) => {
                                     className={`grid_btn ${state.grid ? '' : 'active'}`}
                                     onClick={() => handleGrid()}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-template" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-template" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                     <rect x="4" y="4" width="16" height="4" rx="1" />
                                     <rect x="4" y="12" width="6" height="8" rx="1" />
@@ -128,7 +128,7 @@ const ShopCollection = (props) => {
                                     className={`grid_btn ${!state.grid ? '' : 'active'}`}
                                     onClick={() => handleGrid()}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid-dots" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid-dots" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                                     <circle cx="5" cy="5" r="1" />
                                     <circle cx="12" cy="5" r="1" />

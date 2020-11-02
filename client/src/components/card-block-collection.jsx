@@ -21,8 +21,8 @@ const CardBlock = (props) => {
                 <div style={{
                     display:'grid',
                     gridTemplateColumns: "repeat(auto-fit, 15rem)",
-                    gridGap: '1rem',
-                    justifyContent:'left',
+                    gridGap: '2rem',
+                    justifyContent:'center',
                     alignItems:'center'
                 }}>
                     {renderCard(props.list)}

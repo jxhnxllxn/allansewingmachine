@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { clearItem } from '../redux/cart/cart-action'
 
-const CartItemDropdown = (props,{item}) => {
+const CartItemDropdown = ({item}) => {
   
   const dispatch = useDispatch()
   
@@ -13,7 +13,7 @@ const CartItemDropdown = (props,{item}) => {
       return '/images/sewer.jpg'
     }
   }
-  console.log(props)
+  console.log(item)
 
   const handleClearItem = () => {
     dispatch(clearItem(item))
@@ -22,15 +22,13 @@ const CartItemDropdown = (props,{item}) => {
   return (
     <div className='cart-item'>
         <img src={renderCardImage(item.images)} alt='item' />
-        <div className='item-details'>
-          <span className='name'>{item.name}</span>
-          <span className='price'>
-              {item.quantity} x ${item.price}
-          </span>
-          <span className='remove-button' onClick={handleClearItem}>
-              &#10005;
-          </span>
-        </div>
+        <span className='name'>{item.name}</span>
+        <span className='price'>
+            {item.quantity} x ${item.price}
+        </span>
+        <span className='remove_button' onClick={handleClearItem}>
+            &#10005;
+        </span>
     </div>
   )
 }

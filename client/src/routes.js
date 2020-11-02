@@ -29,7 +29,7 @@ const Routes = () => {
                 <Suspense fallback={<Loading />}>
                     <Route path='/shop' component={Auth(Shop,null)} exact/>
                     <Route path='/shop/:collection' component={Auth(ShopCollection,null)} exact/>
-                    <Route path='/product/:product' component={Auth(ProductPreview,null)} exact/>
+                    <Route path='/shop/:collection/:product' component={Auth(ProductPreview,null)} exact/>
                     
                     <Route path='/user/cart' component={Auth(Cart,null)} exact/>
                     <Route path='/cart/checkout' component={Auth(Checkout,null)} exact/>

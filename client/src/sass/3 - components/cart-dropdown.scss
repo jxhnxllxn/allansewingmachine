@@ -1,27 +1,29 @@
 .cart-dropdown {
   position: fixed;
-  min-width: 200px;
-  max-height: 340px;
-  display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 2rem 2rem;
   border: 1px solid black;
   background-color: white;
-  top: 70px;
+  top: 5rem;
   right: 6rem;
   z-index: 5;
-  justify-content: space-between;
+  .cartwrap {
+    height: 20rem;
+    position: relative;
+    overflow-y: auto;
+    .empty_message {
+      font-size: 2rem;
+      margin: 50px auto;
+    }
 
-  .empty_message {
-    font-size: 18px;
-    margin: 50px auto;
+    .cart-items {
+      display: table;
+      margin-right: 1rem;
+    }
   }
-
-  .cart-items {
-    height: 240px;
+  .cartLinkWrap {
+    background-color: $white;
     display: flex;
-    flex-direction: column;
-    overflow: auto;
-    overflow-x: hidden;
+    align-items: center;
   }
 }

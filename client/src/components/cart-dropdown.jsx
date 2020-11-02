@@ -14,7 +14,8 @@ const CartDropdown = ({history}) => {
         dispatch(toggleCartHidden())
     }
     return(
-        <div className="cart-dropdown">
+    <div className="cart-dropdown">
+        <div className="cartwrap">
         <div className="cart-items">
             {
                 cartItems.length ? (
@@ -25,8 +26,11 @@ const CartDropdown = ({history}) => {
                     <span className="empty_message">Your cart is Empty</span>
                 )
             }
-
         </div>
+       
+        </div>
+        
+        <div className="cartLinkWrap">
             <MyButton className="cart_dropdown_button"  type="primary" 
                 runAction={() => {
                     handleToggleCartHidden()
@@ -34,8 +38,9 @@ const CartDropdown = ({history}) => {
                     }
                 }  
                 title="Go to Cart" />
-        </div>
-    )
+            </div>
+    </div>
+)
 }
 
 

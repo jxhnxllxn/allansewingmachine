@@ -2,10 +2,7 @@
   width: 100vw;
   .container {
     .title {
-      font-family: $font-brand;
-      text-transform: capitalize;
-      font-size: 300%;
-      text-align: left;
+      margin-bottom: 1rem;
     }
     .product_list {
       display: grid;
