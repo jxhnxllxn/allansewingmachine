@@ -14,7 +14,7 @@ const CartItem = (props) => {
         if (images.length > 0) {
             return images[0].url
         } else {
-            return '/images/slide2.jpg'
+            return '/images/sewer.jpg'
         }
     }
     const handleChange = e => setQuantity(e.target.value);
@@ -45,6 +45,9 @@ const CartItem = (props) => {
             </span>
 
             <span className='price'>Php {addComma(props.cartItem.price)}.00</span>
+
+            <span className='sub_total'>Php {addComma(props.cartItem.price*quantity)}.00</span>
+
             <div className='remove-button' onClick={handleClearItem}>
                 &#10005;
         </div>

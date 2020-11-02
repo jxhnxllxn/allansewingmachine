@@ -6,14 +6,14 @@ import "slick-carousel/slick/slick-theme.css";
 const HomeSlider = () => {
     const slides = [
             {
-                img:'/images/sewer.jpg',
-                lineOne:'Subcontracting',
+                img:'/images/image2.jpg',
+                lineOne:'Subcon Jobs',
                 lineTwo:'Lorem ipsum dolor sit amet.',
                 linkTitle:'Contact us',
                 linkTo:'/contact'
             },
             {
-                img:'/images/shop.jpg',
+                img:'/images/image1.jpg',
                 lineOne:'Shop',
                 lineTwo:'We sell brand new, secondhand and sewing parts',
                 linkTitle:'Shop now',
@@ -29,7 +29,7 @@ const HomeSlider = () => {
         speed: 1000,
         slidesToShow: 1,
         slideToScroll: 1,
-        autoplaySpeed:5000,
+        autoplaySpeed:10000,
         autoplay:true,
         centerPadding:'100px',
         arrows: false
@@ -40,25 +40,24 @@ const HomeSlider = () => {
             slides.map((item,i)=>(
                 <div key={i}>
                     <div className="featured_image"
+                        
                         style={{
-                                backgroundImage:`linear-gradient(to right bottom,
-                                    rgb(246, 214, 125, .8),
-                                    rgb(235, 230, 211, .8)
-                                ),url(${item.img})`,
+                                backgroundImage:`url(${item.img})`,
                                 height: '80vh',
-                                width:'70vw',
+                                width:'100vw',
                         }}
                     >
-
-                        {/* <div className="featured_action">
-                            <div className="tag">
-                                <h1 className="title">{item.lineOne}</h1>
-                                <h2 className="low_title">{item.lineTwo}</h2>
-                            </div>
-                            <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
-                        </div> */}
-
                     </div>
+
+                    <div className="featured_action">
+                        <div className="featured_tag">
+                            <h1>{item.lineOne}</h1>
+                            <h2>{item.lineTwo}</h2>
+                            <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
+                        </div>
+                       
+                    </div>
+
                 </div>
             ))
         :null

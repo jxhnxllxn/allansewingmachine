@@ -9,7 +9,7 @@ export const auth = () => async dispatch => {
                 Authorization:`Bearer ${localStorage.token}`
             }
         }
-        const data = await axios.get('/api/auth/me',config);
+        const {data} = await axios.get('/api/auth/me',config);
         dispatch({
             type:AuthActionTypes.USER_LOADED,
             payload:data,

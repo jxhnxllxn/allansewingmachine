@@ -1,12 +1,10 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { selectCurrentUser, selectIsAdmin, selectIsAuth } from '../../redux/auth/auth-selector';
 
 export default function (ComposedClass, reload, adminRoute) {
     const AuthenticationCheck = (props) => {
-        const isAdmin = useSelector(state => selectIsAdmin(state));
-        const isAuthenticated = useSelector(state => selectIsAuth(state));
-        const currentUser = useSelector(state => selectCurrentUser(state))
+        const authState = useSelector(state => state.auth)
+        const {isAdmin,isAuthenticated,userData} = authState;
 
         useEffect(() => {
             if (!isAuthenticated) {
@@ -31,7 +29,7 @@ export default function (ComposedClass, reload, adminRoute) {
 
         return (
             <>
-                <ComposedClass {...props} user={currentUser} />
+                <ComposedClass {...props} user={userData} />
             </>
         )
     }

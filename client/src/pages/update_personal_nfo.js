@@ -8,7 +8,7 @@ import { selectCurrentUser } from '../redux/auth/auth-selector';
 
 const UpdatePersonalNfo = () => {
     const dispatch = useDispatch();
-    const currentUser = useSelector(formField => selectCurrentUser(formField));
+    const currentUser = useSelector(state => selectCurrentUser(state));
     const [password, setPassword] = useState({
         formError: false,
         formErrorMessage: [],

@@ -4,7 +4,7 @@ const selectAuth = state => state.auth;
 
 export const selectCurrentUser = createSelector(
     [selectAuth],
-    (auth)=>auth.data
+    (auth)=>auth.userData
 );
 
 

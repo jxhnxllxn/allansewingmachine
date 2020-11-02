@@ -24,9 +24,6 @@
     display: flex;
     justify-content: baseline;
     align-items: center;
-    span {
-      margin-left: 1rem;
-    }
     .logo {
       transition: ease-out 0.3s;
       height: 2rem;
@@ -44,7 +41,7 @@
     display: flex;
     align-items: center;
     .option {
-      padding: 0 1rem;
+      padding-left: 2rem;
       cursor: pointer;
     }
     .active {

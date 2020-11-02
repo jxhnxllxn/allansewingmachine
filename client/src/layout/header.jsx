@@ -14,6 +14,7 @@ import SettingDropdwon from "../components/setting-dropdown"
 import { useState } from 'react'
 import {useThrottle} from '../utils/hooks/useThrottle'
 
+
 const Header = () => {
     const isAdmin = useSelector(state => selectIsAdmin(state));
     const isAuthenticated = useSelector(state => selectIsAuth(state));
@@ -45,7 +46,7 @@ const Header = () => {
         return () => {
             window.removeEventListener('scroll',scrollThrottle);
         }
-     }, [])
+     }, [scrollThrottle])
 
         
     const header = (

@@ -18,7 +18,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
             success: true,
             isAuthenticated: true,
             isAdmin: user.role === 'admin' ? true : false,
-            data: user
+            userData: user
         });
 });
 
@@ -250,7 +250,7 @@ const sendTokenResponse = (user, statusCode, res) => {
             success: true,
             isAuthenticated: true,
             isAdmin: user.role === 'admin' ? true : false,
-            data: user,
+            userData: user,
             token
         });
 }

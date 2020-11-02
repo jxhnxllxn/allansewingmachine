@@ -4,7 +4,7 @@ const initialState = {
     token: localStorage.getItem('token'),
     isAuthenticated: false,
     isAdmin:false,
-    data:null,
+    userData:null,
     loading:true
 }
 
@@ -36,7 +36,7 @@ export default function(state = initialState, action){
                 ...state,
                 token:null,
                 isAuthenticated:false,
-                data: null,
+                userData: null,
                 isAdmin:false,
                 loading:false
             }
