@@ -52,17 +52,3 @@
     }
   }
 }
-
-@media screen and (max-width: 768px) {
-  .header {
-    padding: 20px 10px !important;
-  }
-  #navbar a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-  #navbar-right {
-    float: none;
-  }
-}

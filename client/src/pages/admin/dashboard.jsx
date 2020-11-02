@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import useDebounce from '../../utils/helper/debounce.jsx'
+import useDebounce from '../../utils/hooks/useDebounce'
 import Loading from '../../components/loading'
 import CustomTable from "../../components/table"
 import Modal from '../../components/modal'

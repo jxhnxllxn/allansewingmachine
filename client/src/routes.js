@@ -1,7 +1,7 @@
 import React, {lazy,Suspense} from 'react'
 import { Switch, Route } from 'react-router-dom'
 
-import Auth from "./components/auth"
+import Auth from "./components/hoc/auth"
 import Home from "./pages/home"
 
 import Layout from "./layout/layout"

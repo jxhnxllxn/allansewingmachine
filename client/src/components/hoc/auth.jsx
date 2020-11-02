@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux';
-import { selectCurrentUser, selectIsAdmin, selectIsAuth } from '../redux/auth/auth-selector';
+import { selectCurrentUser, selectIsAdmin, selectIsAuth } from '../../redux/auth/auth-selector';
 
 export default function (ComposedClass, reload, adminRoute) {
     const AuthenticationCheck = (props) => {

@@ -33,7 +33,10 @@ html {
   margin-top: 4rem;
 }
 .container {
-  padding: 1.5rem 4rem;
+  padding: 1.5rem 2rem;
+  @include respond(md) {
+    padding: 1.5rem 4rem;
+  }
 }
 
 input,
@@ -55,16 +58,10 @@ a {
 .card {
   position: relative;
   // margin: 1rem;
-  padding: 0.5rem;
   background-color: $white;
-  text-align: start;
   border-radius: 2px;
   overflow: hidden;
   border-radius: 0.2rem;
-  transition: 0.3s ease-out;
-  &:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-  }
 }
 
 .disabledCard {

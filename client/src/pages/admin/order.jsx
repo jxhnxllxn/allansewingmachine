@@ -62,19 +62,17 @@ const OrderDetail = (props) => {
 
 
     return (
-        <div>
-            <div className="card">
-                <div className="card-header">
-                    <h2>Order detail</h2>
-                    <div className="action">
-                        <button>go Back</button>
-                        <button>decline</button>
-                        <button>process</button>
-                    </div>
+        <div className="admin_order_wrapper">
+            <div className="header">
+                <h2>Order detail</h2>
+                <div className="action">
+                    <button>go Back</button>
+                    <button>decline</button>
+                    <button>process</button>
                 </div>
-                <div className="card-body">
-                    {table()}
-                </div>
+            </div>
+            <div className="card-body">
+                {table()}
             </div>
         </div>
     )

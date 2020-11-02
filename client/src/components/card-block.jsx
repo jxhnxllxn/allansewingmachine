@@ -18,13 +18,7 @@ const CardBlock = (props) => {
                         </div>
                     :null
                 }
-                <div style={{
-                    display:'grid',
-                    gridTemplateColumns: "repeat(auto-fit, 15rem)",
-                    gridGap: '1rem',
-                    justifyContent:'left',
-                    alignItems:'center'
-                }}>
+                <div className="product_list">
                     {renderCard(props.list)}
                 </div>
             </div>

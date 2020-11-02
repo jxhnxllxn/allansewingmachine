@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { clearItem } from '../redux/cart/cart-action'
 
-const CartItemDropdown = ({item}) => {
+const CartItemDropdown = (props,{item}) => {
   
   const dispatch = useDispatch()
   
@@ -10,9 +10,10 @@ const CartItemDropdown = ({item}) => {
     if(images.length > 0){
       return images[0].url
     }else{
-      return '/images/slide2.jpg'
+      return '/images/sewer.jpg'
     }
   }
+  console.log(props)
 
   const handleClearItem = () => {
     dispatch(clearItem(item))
