@@ -2,21 +2,17 @@ import { useEffect } from 'react'
 
 const useOutsideClick = (ref, event, callback) => {
   const handleClick = e => {
-    if (
-      e.target.className === 'close-icon' ||
-      e.target.id === 'add_icon' ||
-      ref.filter(r => r.current.contains(e.target)).length > 0
-    ) {
+    if (e.target.className === 'remove_button' || ref.filter(r => r.current.contains(e.target)).length > 0) {
       return
     }
-
+    console.log('clicked')
     callback()
   }
 
   useEffect(() => {
-    document.addEventListener('click', handleClick)
+    window.addEventListener('click', handleClick)
 
-    return () => document.removeEventListener('click', handleClick)
+    return () => window.removeEventListener('click', handleClick)
 
     // eslint-disable-next-line
   }, [...event])

@@ -26,7 +26,6 @@ const CartItem = (props) => {
     useEffect(
         () => {
             dispatch(updateQuantity(props.cartItem, quantity));
-            console.log('wrong')
         },
         // eslint-disable-next-line
         [dispatch, quantity]

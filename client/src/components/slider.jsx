@@ -24,7 +24,6 @@ const HomeSlider = () => {
     const setting = {
         lazyLoad: true,
         dots: true,
-        fade: true,
         infinite: true,
         speed: 1000,
         slidesToShow: 1,
@@ -47,16 +46,17 @@ const HomeSlider = () => {
                                 width:'100vw',
                         }}
                     >
+                        <div className="featured_action">
+                            <div className="featured_tag">
+                                <h1>{item.lineOne}</h1>
+                                <h2>{item.lineTwo}</h2>
+                                <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
+                            </div>
+                        
+                        </div>
                     </div>
 
-                    <div className="featured_action">
-                        <div className="featured_tag">
-                            <h1>{item.lineOne}</h1>
-                            <h2>{item.lineTwo}</h2>
-                            <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
-                        </div>
-                       
-                    </div>
+                    
 
                 </div>
             ))

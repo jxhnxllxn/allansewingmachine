@@ -5,31 +5,34 @@
     overflow: hidden !important;
     background-size: cover !important;
     background-position: center !important;
-  }
-
-  .featured_action {
-    position: absolute;
-    top: 25%;
-    right: 0%;
-    transform: translate(-5%, -50%);
-    border: 0.1rem solid $color-royal-4;
-    background-image: linear-gradient(
-      to right bottom,
-      rgba($color-royal-4, 0.6),
-      rgba($color-royal-5, 0.6)
-    );
-
-    .featured_tag {
-      animation-duration: 3s;
-      max-width: 20rem;
-      text-align: end;
+    border-radius: 0.3rem;
+    position: relative;
+    .featured_action {
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      transform: translate(-10%, -50%);
       padding: 1rem;
-      h1 {
-        margin-bottom: 1rem;
-        font-size: 3rem;
-      }
-      h2 {
-        margin-bottom: 2rem;
+
+      border-radius: 0.3rem;
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-royal-4, 0.6),
+        rgba($color-royal-5, 0.6)
+      );
+
+      .featured_tag {
+        animation-duration: 3s;
+        max-width: 20rem;
+        text-align: end;
+        padding: 1rem;
+        h1 {
+          margin-bottom: 1rem;
+          font-size: 3rem;
+        }
+        h2 {
+          margin-bottom: 2rem;
+        }
       }
     }
   }

@@ -1,20 +1,21 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
 import { selectCartItems } from "../redux/cart/cart-selectors";
 import CartItem from './cart-item-dropdown';
-import { toggleCartHidden } from "../redux/ui/ui-actions";
 import MyButton from "./button";
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
-const CartDropdown = ({history}) => {
+const CartDropdown = ({handleToggleNavCart,cartMenuRef}) => {
+    const history = useHistory()
     const cartItems = useSelector(state => selectCartItems(state))
-    const dispatch = useDispatch()
-    const handleToggleCartHidden = () => {
-        dispatch(toggleCartHidden())
-    }
+    const viewCart = () => {
+        handleToggleNavCart()
+        history.push('/user/cart')
+      }
+    
     return(
-    <div className="cart-dropdown">
+    <div className="cart-dropdown"  ref={cartMenuRef}>
         <div className="cartwrap">
         <div className="cart-items">
             {
@@ -32,11 +33,7 @@ const CartDropdown = ({history}) => {
         
         <div className="cartLinkWrap">
             <MyButton className="cart_dropdown_button"  type="primary" 
-                runAction={() => {
-                    handleToggleCartHidden()
-                    history.push('/user/cart');
-                    }
-                }  
+                runAction={() => { viewCart() }}  
                 title="Go to Cart" />
             </div>
     </div>
@@ -44,4 +41,4 @@ const CartDropdown = ({history}) => {
 }
 
 
-export default withRouter(CartDropdown);
+export default CartDropdown;

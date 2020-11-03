@@ -35,7 +35,6 @@ const FileUpload = (props) => {
                 });
                 if (state.uploading === false && state.uploadedFiles !== null) {
                     props.imagesHandler(state.uploadedFiles);
-                    console.log('works')
                 }
             })
     }

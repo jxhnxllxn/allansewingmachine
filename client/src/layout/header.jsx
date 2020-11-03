@@ -1,94 +1,113 @@
-import React, {useEffect } from 'react'
+import React, { useState, useRef } from 'react'
+
+import { gsap } from 'gsap'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink} from 'react-router-dom'
 import { selectCartHidden, selectSettingHidden } from '../redux/ui/ui-selector'
+import { selectCartItemsCount } from "../redux/cart/cart-selectors"
 import { selectIsAdmin, selectIsAuth,selectIsLoading } from "../redux/auth/auth-selector"
-import { toggleSettingHidden } from "../redux/ui/ui-actions"
+
+import { toggleNavSetting, toggleNavCart } from "../redux/ui/ui-actions"
+
 import { ReactComponent as SewingIcon } from '../assets/icons/sewing.svg'
 import { ReactComponent as PersonIcon } from '../assets/icons/person.svg'
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg'
+import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.svg'
 
-import CartIcon from "../components/cart-icon"
 import CartDropdown from "../components/cart-dropdown";
 import SettingDropdwon from "../components/setting-dropdown"
-import { useState } from 'react'
-import {useThrottle} from '../utils/hooks/useThrottle'
+import useOutsideClick from '../utils/hooks/useOutsideClick'
+
+
+import useMenuToggleAnimation from '../utils/animations/useMenuToggleAnimation'
+import useCartToggleAnimation from '../utils/animations/useCartToggleAnimation'
 
 
 const Header = () => {
-    const isAdmin = useSelector(state => selectIsAdmin(state));
-    const isAuthenticated = useSelector(state => selectIsAuth(state));
-    const loading = useSelector(state => selectIsLoading(state))
-    const cartDropdown = useSelector(state => selectCartHidden(state))
-    const settingDropdown = useSelector(state => selectSettingHidden(state))
     const dispatch = useDispatch()
+    const isAdmin = useSelector(state => selectIsAdmin(state));
+    const isAuthenticated = useSelector(state => selectIsAuth(state))
+    const loading = useSelector(state => selectIsLoading(state))
+    const isCartHidden = useSelector(state => selectCartHidden(state))
+    const isSettignHidden = useSelector(state => selectSettingHidden(state))
+    const itemCount = useSelector(state => selectCartItemsCount(state));
 
-    const handleToggleSettingHidden = () => {
-        dispatch(toggleSettingHidden())
-    }
 
-    const [minimize, setMinimize] = useState(false)
+    const cart_tl = gsap.timeline()
+    const [cartTl] = useState(cart_tl)
+    useCartToggleAnimation(cartTl)
     
-    const scrollFunction = () => {
-        console.log('throttel')
-        if (window.scrollY > 50) {
-            setMinimize(true)
-        } else {
-            setMinimize(false)
-        }
+    const personIconRef = useRef()
+    const personMenuRef = useRef()
+    const cartIconRef = useRef()
+    const cartMenuRef = useRef()
+
+
+    const handleToggleNavSetting = () => {
+        dispatch(toggleNavSetting())
     }
 
-    const scrollThrottle = useThrottle(scrollFunction,100);
+    const handleToggleNavCart = () => {
+        dispatch(toggleNavCart())
+        cartTl.reversed(isCartHidden)
+    }
 
+    useOutsideClick(
+        [cartMenuRef,cartIconRef],
+        [isCartHidden],
+        () => isCartHidden && handleToggleNavCart()
+    )
 
-    useEffect(() => {
-        window.addEventListener('scroll',scrollThrottle);
-        return () => {
-            window.removeEventListener('scroll',scrollThrottle);
-        }
-     }, [scrollThrottle])
+    // useOutsideClick(
+    //     [personMenuRef,personIconRef],
+    //     [isSettignHidden],
+    //     () => isSettignHidden && handleToggleNavSetting()
+    // )
 
-        
     const header = (
-        <header className={`header container ${minimize ? 'minimize':''}`}>
+        <header className='header container'>
             <Link className="logo_container" to="/">
                 <SewingIcon className='logo'/>
-                <div className="brand">Allan Sewing Machines</div>
+                <div className="brand">
+                    <span className='allan'>Allan</span>
+                    <span className='machine'>Sewing Machines</span>
+                </div>
             </Link>
 
             <div className="options">
                 <NavLink exact className="option" to="/" >Home</NavLink>
                 <NavLink className="option" to="/shop" >Shop</NavLink>
+                <NavLink className="option" to="/shop" >Services</NavLink>
                 <NavLink className="option" to="/shop" >About</NavLink>
                 {
                     isAuthenticated ? 
                     <>
-                    <div className="option menu" onClick={handleToggleSettingHidden}>
-                        <PersonIcon />
+                    <div ref={personIconRef} className="option menu">
+                        <PersonIcon onClick={handleToggleNavSetting}/>
                     </div>
+                    <SettingDropdwon 
+                        handleToggleNavSetting={handleToggleNavSetting}
+                        personMenuRef={personMenuRef}
+                    />
                     </>
                     :
-                    <NavLink className="option" to='/signin'>Sign in</NavLink>
+                    <NavLink className="option menu" to='/signin'>Sign in</NavLink>
                 }
-            
-                <CartIcon />
+                <div ref={cartIconRef} className='option menu' onClick={handleToggleNavCart}>
+                    <ShoppingBagIcon/>
+                    <span className='item_count'>{itemCount > 0 ? itemCount : null}</span>
+                </div> 
+                
+                <CartDropdown 
+                    handleToggleNavCart={handleToggleNavCart}
+                    cartMenuRef={cartMenuRef}
+                />
 
                 <div className="option menu">
                     <SearchIcon />
                 </div>
-            
             </div>
-
-            {
-                cartDropdown ? 
-                    <CartDropdown />
-                :null
-            }
-            {
-                isAuthenticated && settingDropdown ? 
-                    <SettingDropdwon />
-                :null
-            }
         </header>
         )
 

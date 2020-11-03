@@ -8,7 +8,6 @@ const AdminLayout = (props) => {
     
     return (
         <div>
-        {console.log(props)}
             <Header />
             <Alert />
             <div className="page_container">

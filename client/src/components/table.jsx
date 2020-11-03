@@ -5,8 +5,6 @@ import { ReactComponent as ArrowFirstPageIcon } from '../assets/icons/arrow-firs
 import { ReactComponent as ArrowLastPageIcon } from '../assets/icons/arrow-last-page.svg'
 
 const Table = ({tableData,openModal,setSearchTerm}) => {
-  
-  console.log(tableData);
     return (
       <>
 

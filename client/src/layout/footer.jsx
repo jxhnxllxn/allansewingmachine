@@ -20,10 +20,6 @@ const Footer = () => {
     }, [])
     return (
         <footer className="footer">
-        {
-            
-          console.log('footer rendered')
-        }
             <div className="container">
                 <div className="brand">
                     <SewingIcon className='logo'/>

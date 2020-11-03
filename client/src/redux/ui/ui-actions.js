@@ -1,16 +1,8 @@
-export const toggleCartHidden = () => ({
+export const toggleNavCart = () => ({
   type: 'TOGGLE_CART_HIDDEN'
 });
 
-export const toggleSettingHidden = () => ({
+export const toggleNavSetting = () => ({
   type: 'TOGGLE_SETTING_HIDDEN'
-});
-
-export const backDropHidden = () => ({
-  type: 'TOGGLE_BACKDROP_HIDDEN'
-});
-
-export const closeAllMenu = () => ({
-  type: 'CLOSE_ALL_MENU'
 });
 

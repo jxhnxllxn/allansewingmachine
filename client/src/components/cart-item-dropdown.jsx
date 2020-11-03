@@ -13,7 +13,6 @@ const CartItemDropdown = ({item}) => {
       return '/images/sewer.jpg'
     }
   }
-  console.log(item)
 
   const handleClearItem = () => {
     dispatch(clearItem(item))

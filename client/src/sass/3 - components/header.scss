@@ -15,24 +15,37 @@
   backface-visibility: hidden;
   border: none;
   text-transform: capitalize;
-  &.minimize {
-    transition: ease-out 0.3s;
-    height: 3.5rem;
-  }
+  // &.minimize {
+  //   transition: ease-out 0.3s;
+  //   height: 3.5rem;
+  // }
 
   .logo_container {
     display: flex;
     justify-content: baseline;
     align-items: center;
+    border-radius: 0.3rem;
+    padding: 1.5rem 0.5rem;
     .logo {
       transition: ease-out 0.3s;
-      height: 2rem;
-      width: 2rem;
+      height: 2.5rem;
+      width: 2.5rem;
       margin-right: 0.5rem;
     }
     .brand {
       transition: ease-out 0.3s;
-      transform: translateY(0.2rem);
+      width: 8rem;
+      font-size: 1.2rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      span {
+        display: block;
+      }
+      .machine {
+        font-size: 0.9rem;
+      }
     }
   }
 
@@ -41,11 +54,25 @@
     display: flex;
     align-items: center;
     .option {
+      position: relative;
       padding-left: 2rem;
       cursor: pointer;
+      opacity: 0.8;
+      .item_count {
+        color: #f0f2f5;
+        position: absolute;
+        font-size: 15px;
+        font-weight: bold;
+        top: 0;
+        right: 0;
+        background-color: #2471a3;
+        padding: 0 3px;
+        border-radius: 2px;
+      }
     }
     .active {
       color: rgba($color-royal-4, 1);
+      opacity: 1;
     }
   }
 }
