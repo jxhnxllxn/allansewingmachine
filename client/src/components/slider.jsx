@@ -8,7 +8,7 @@ const HomeSlider = () => {
             {
                 img:'/images/image2.jpg',
                 lineOne:'Subcon Jobs',
-                lineTwo:'Lorem ipsum dolor sit amet.',
+                lineTwo: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ad vitae non, deserunt molestiae repudiandae recusandae asperiores eveniet accusamus fugiat.',
                 linkTitle:'Contact us',
                 linkTo:'/contact'
             },
@@ -30,7 +30,6 @@ const HomeSlider = () => {
         slideToScroll: 1,
         autoplaySpeed:10000,
         autoplay:true,
-        centerPadding:'100px',
         arrows: false
     }
 
@@ -43,7 +42,6 @@ const HomeSlider = () => {
                         style={{
                                 backgroundImage:`url(${item.img})`,
                                 height: '80vh',
-                                width:'100vw',
                         }}
                     >
                         <div className="featured_action">

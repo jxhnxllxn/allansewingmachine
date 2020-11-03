@@ -62,12 +62,12 @@
 @mixin customScroll {
   /* Track */
   &::-webkit-scrollbar-track {
-    background: rgba($color-dark, 0.04) !important;
+    background: rgba($black, 0.04) !important;
   }
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: rgba($color-dark, 0.2) !important;
+    background: rgba($black, 0.2) !important;
   }
 
   /* Handle on hover */

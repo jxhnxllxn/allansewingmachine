@@ -1,25 +1,17 @@
 .header {
-  transition: ease-out 0.3s;
   position: fixed;
-  height: 5rem;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  z-index: 102;
   top: 0;
   left: 0;
+  right: 0;
+  height: 5rem;
+  display: flex;
+  justify-content: space-between;
+  z-index: 102;
   background-color: $color-royal-5;
   color: $black;
   font-size: 130%;
-  backface-visibility: hidden;
   border: none;
   text-transform: capitalize;
-  // &.minimize {
-  //   transition: ease-out 0.3s;
-  //   height: 3.5rem;
-  // }
-
   .logo_container {
     display: flex;
     justify-content: baseline;

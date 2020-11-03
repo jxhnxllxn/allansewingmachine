@@ -1,6 +1,4 @@
 .featured_collection {
-  overflow: hidden;
-  position: relative;
   .featured_image {
     overflow: hidden !important;
     background-size: cover !important;
@@ -9,16 +7,16 @@
     position: relative;
     .featured_action {
       position: absolute;
-      top: 50%;
-      right: 10%;
-      transform: translate(-10%, -50%);
+      top: 40%;
+      right: 15%;
+      transform: translate(-15%, -40%);
       padding: 1rem;
 
       border-radius: 0.3rem;
       background-image: linear-gradient(
         to right bottom,
-        rgba($color-royal-4, 0.6),
-        rgba($color-royal-5, 0.6)
+        rgba($color-royal-4, 0.8),
+        rgba($color-royal-5, 0.8)
       );
 
       .featured_tag {

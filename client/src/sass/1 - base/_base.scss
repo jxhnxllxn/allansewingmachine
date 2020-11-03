@@ -13,8 +13,6 @@ html {
   word-spacing: 0.15rem;
   color: $black;
   font-family: $font-primary;
-  background-color: rgba($color-royal-5, 1);
-
   @include respond(sm) {
     font-size: 92.5%;
   }
@@ -28,15 +26,30 @@ html {
   }
 }
 
+body {
+  overflow: hidden;
+  min-height: 100%;
+  box-sizing: border-box;
+  font-size: 0.9rem;
+}
+
+body,
+html {
+  visibility: hidden;
+  user-select: none;
+  background: $white;
+  overscroll-behavior: none;
+  margin: 0;
+}
+
 .page_layout {
   padding: 1rem 0;
   margin-top: 4rem;
 }
+
 .container {
-  padding: 1.5rem 2rem;
-  @include respond(md) {
-    padding: 1.5rem 4rem;
-  }
+  @include container;
+  padding: 1.5rem 0;
 }
 
 input,
@@ -62,6 +75,7 @@ a {
   border-radius: 2px;
   overflow: hidden;
   border-radius: 0.2rem;
+  background-color: rgba($whitesmoke, 1);
 }
 
 .disabledCard {
@@ -73,10 +87,6 @@ a {
   text-align: start;
   overflow: hidden;
   border-radius: 5px;
-}
-
-.flex {
-  display: flex;
 }
 
 .tag {

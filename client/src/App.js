@@ -1,4 +1,5 @@
 import React, { useEffect} from 'react'
+import { gsap } from 'gsap'
 import { BrowserRouter as Router} from "react-router-dom"
 
 //redux
@@ -13,6 +14,7 @@ import './sass/main.scss'
 const App = () => {
 
   useEffect(() => {
+    gsap.to('body', { css: { visibility: 'visible' } })
     store.dispatch(auth());
   }, []);
 

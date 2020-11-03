@@ -18,6 +18,8 @@ import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.
 import CartDropdown from "../components/cart-dropdown";
 import SettingDropdwon from "../components/setting-dropdown"
 import useOutsideClick from '../utils/hooks/useOutsideClick'
+import toggleScrollbar from '../utils/helper/toggleScrollbar'
+
 
 
 import useMenuToggleAnimation from '../utils/animations/useMenuToggleAnimation'
@@ -51,6 +53,7 @@ const Header = () => {
     const handleToggleNavCart = () => {
         dispatch(toggleNavCart())
         cartTl.reversed(isCartHidden)
+        toggleScrollbar(isCartHidden)
     }
 
     useOutsideClick(

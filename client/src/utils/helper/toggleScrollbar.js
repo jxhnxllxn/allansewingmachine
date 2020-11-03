@@ -6,7 +6,7 @@ const toggleScrollbar = menuIsOpen => {
     () => {
       gsap.to('body', {
         duration: 0,
-        css: { overflowY: menuIsOpen ? 'auto' : 'hidden' }
+        css: { overflowY: menuIsOpen ? 'auto' : 'hidden'}
       })
     },
     menuIsOpen ? 800 : 0
