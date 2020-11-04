@@ -20,7 +20,24 @@ const user = require('../routes/user.route');
 
 module.exports = app => {
   app.use(mongoSanitize())
-  app.use(helmet())
+  app.use(
+    helmet({
+      contentSecurityPolicy: {
+        directives: {
+          defaultSrc: ["'self'"], 
+          scriptSrc: ["'self'", 'allansewingmachines.herokuapp.com'],
+          styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
+          imgSrc: ["'self'", 'https://allansewingmachines.herokuapp.com', 'data:'],
+          connectSrc: ["'self'", 'https://allansewingmachines.herokuapp.com'],
+          fontSrc: ["'self'", 'https://fonts.gstatic.com'],
+          objectSrc: ["'self'"],
+          mediaSrc: ["'self'"],
+          frameSrc: ["'self'"]
+        },
+        reportOnly: true
+      }
+    })
+  );
   app.use(cors())
   app.use(xss())
   app.use(express.json({ extended: false }))
