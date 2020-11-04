@@ -11,13 +11,12 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node seeder",
     "data:destroy": "node seeder -d",
-    "build": "set \"INLINE_RUNTIME_CHUNK=false\" && react-scripts build",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
     "node": "12.16.2"
   },
-  "author": "John Allen de Chavez",
+  "author": "John Allen de Chavez", 
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.0",
