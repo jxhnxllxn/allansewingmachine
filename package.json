@@ -1,7 +1,7 @@
 {
   "name": "allansewingmachines",
   "version": "1.0.0",
-  "description": "",
+  "description": "Allan Sewing Machines",
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
