@@ -1,7 +1,8 @@
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
-const hpp = require('hpp')
+const mongoSanitize = require('express-mongo-sanitize')
+const xss = require('xss-clean')
 const cookieParser = require('cookie-parser');
 const compression = require('compression')
 
@@ -18,9 +19,10 @@ const order = require('../routes/order.route');
 const user = require('../routes/user.route');
 
 module.exports = app => {
+  app.use(mongoSanitize())
   app.use(helmet())
   app.use(cors())
-  app.use(hpp())
+  app.use(xss())
   app.use(express.json({ extended: false }))
 
   app.use('/api/auth', auth);

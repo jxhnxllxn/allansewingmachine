@@ -16,14 +16,9 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
-
-// Dev logging middleware;
 if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
 }
-
-//File uploading
-
 
 if (process.env.NODE_ENV === 'production') {
     // Set static folder
@@ -34,10 +29,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-
-
 const PORT = process.env.PORT || 5000;
-
 const server = app.listen(PORT, console.log(`server running in ${process.env.NODE_ENV} mode on port ${PORT}`));
 
 //Handle unhandle promise rejection

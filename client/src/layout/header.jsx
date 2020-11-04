@@ -68,6 +68,26 @@ const Header = () => {
     //     () => isSettignHidden && handleToggleNavSetting()
     // )
 
+    const links = [
+        {
+            name: 'Home',
+            linkTo: '/'
+        },
+        {
+            name: 'Shop',
+            linkTo: '/shop'
+        },
+        {
+            name: 'Service',
+            linkTo: '/services'
+        },
+        {
+            name: 'About',
+            linkTo: '/about'
+        },
+    ]
+    
+
     const header = (
         <header className='header container'>
             <Link className="logo_container" to="/">
@@ -79,10 +99,11 @@ const Header = () => {
             </Link>
 
             <div className="options">
-                <NavLink exact className="option" to="/" >Home</NavLink>
-                <NavLink className="option" to="/shop" >Shop</NavLink>
-                <NavLink className="option" to="/shop" >Services</NavLink>
-                <NavLink className="option" to="/shop" >About</NavLink>
+                {
+                    links.map(x => (
+                        <NavLink exact className="option" to={x.linkTo} >{x.name}</NavLink>
+                    ))
+                }
                 {
                     isAuthenticated ? 
                     <>
