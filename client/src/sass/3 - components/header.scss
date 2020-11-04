@@ -3,68 +3,91 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 5rem;
-  display: flex;
-  justify-content: space-between;
+  @include container;
+  padding: 1rem 0;
   z-index: 102;
   background-color: $color-royal-5;
   color: $black;
   font-size: 130%;
-  border: none;
   text-transform: capitalize;
-  .logo_container {
+  nav {
     display: flex;
-    justify-content: baseline;
-    align-items: center;
-    border-radius: 0.3rem;
-    padding: 1.5rem 0.5rem;
-    .logo {
-      transition: ease-out 0.3s;
-      height: 2.5rem;
-      width: 2.5rem;
-      margin-right: 0.5rem;
-    }
-    .brand {
-      transition: ease-out 0.3s;
-      width: 8rem;
-      font-size: 1.2rem;
+    justify-content: space-between;
+    .logo_container {
       display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-direction: column;
-      span {
-        display: block;
+      height: 100%;
+      justify-content: baseline;
+      .logo {
+        transition: ease-out 0.3s;
+        height: 100%;
+        width: 4rem;
+        margin-right: 0.5rem;
       }
-      .machine {
-        font-size: 0.9rem;
+      .brand {
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        span {
+          display: block;
+        }
+        .machine {
+          font-size: 1rem;
+        }
+      }
+    }
+    .links {
+      ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        opacity: 0.8;
+        li {
+          padding-left: 2rem;
+          a {
+            &.active {
+              color: rgba($color-royal-4, 1);
+              opacity: 1;
+            }
+          }
+        }
+      }
+      .dropdowns {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        div > * {
+          margin-left: 1rem;
+        }
       }
     }
   }
 
-  .options {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    .option {
-      position: relative;
-      padding-left: 2rem;
-      cursor: pointer;
-      opacity: 0.8;
-      .item_count {
-        color: #f0f2f5;
-        position: absolute;
-        font-size: 15px;
-        font-weight: bold;
-        top: 0;
-        right: 0;
-        background-color: #2471a3;
-        padding: 0 3px;
-        border-radius: 2px;
-      }
-    }
-    .active {
-      color: rgba($color-royal-4, 1);
-      opacity: 1;
-    }
-  }
+  // .options {
+  //   height: 100%;
+  //   display: flex;
+  //   align-items: center;
+  //   .option {
+  //     position: relative;
+  //     padding-left: 2rem;
+  //     cursor: pointer;
+  //     opacity: 0.8;
+  //     .item_count {
+  //       color: #f0f2f5;
+  //       position: absolute;
+  //       font-size: 15px;
+  //       font-weight: bold;
+  //       top: 0;
+  //       right: 0;
+  //       background-color: #2471a3;
+  //       padding: 0 3px;
+  //       border-radius: 2px;
+  //     }
+  //   }
+  //   .active {
+  //     color: rgba($color-royal-4, 1);
+  //     opacity: 1;
+  //   }
+  // }
 }

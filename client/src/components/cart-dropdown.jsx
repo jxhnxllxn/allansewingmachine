@@ -13,7 +13,6 @@ const CartDropdown = ({handleToggleNavCart,cartMenuRef}) => {
         handleToggleNavCart()
         history.push('/user/cart')
       }
-    
     return(
     <div className="cart-dropdown"  ref={cartMenuRef}>
         <div className="cartwrap">

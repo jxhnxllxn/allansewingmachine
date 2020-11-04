@@ -14,6 +14,7 @@ import { ReactComponent as SewingIcon } from '../assets/icons/sewing.svg'
 import { ReactComponent as PersonIcon } from '../assets/icons/person.svg'
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg'
 import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.svg'
+import { ReactComponent as MenuIcon } from '../assets/icons/menu.svg'
 
 import CartDropdown from "../components/cart-dropdown";
 import SettingDropdwon from "../components/setting-dropdown"
@@ -69,69 +70,100 @@ const Header = () => {
     // )
 
     const links = [
-        {
-            name: 'Home',
-            linkTo: '/'
-        },
-        {
-            name: 'Shop',
-            linkTo: '/shop'
-        },
-        {
-            name: 'Service',
-            linkTo: '/services'
-        },
-        {
-            name: 'About',
-            linkTo: '/about'
-        },
+        [
+            {
+                name: 'Home',
+                linkTo: '/'
+            },
+            {
+                name: 'Shop',
+                linkTo: '/shop'
+            },
+            {
+                name: 'Tech Support',
+                linkTo: '/services'
+            },
+            {
+                name: 'About Us',
+                linkTo: '/about'
+            },
+        ],
+        [
+
+        ]
+        
     ]
     
 
     const header = (
-        <header className='header container'>
-            <Link className="logo_container" to="/">
-                <SewingIcon className='logo'/>
-                <div className="brand">
-                    <span className='allan'>Allan</span>
-                    <span className='machine'>Sewing Machines</span>
+        <header className='header'>
+            <nav>
+                <div className="logo">
+                    <Link className="logo_container" to="/">
+                        <SewingIcon className='logo'/>
+                        <div className="brand">
+                            <span className='allan'>Allan</span>
+                            <span className='machine'>Sewing Machines</span>
+                        </div>
+                    </Link>
                 </div>
-            </Link>
 
-            <div className="options">
-                {
-                    links.map(x => (
-                        <NavLink exact className="option" to={x.linkTo} >{x.name}</NavLink>
-                    ))
-                }
-                {
-                    isAuthenticated ? 
-                    <>
-                    <div ref={personIconRef} className="option menu">
-                        <PersonIcon onClick={handleToggleNavSetting}/>
+                <div className="links">
+                    <ul>
+                        {
+                            links[0].map((x,i) => (                            
+                                <li key={i}>
+                                    <NavLink exact to={x.linkTo} >{x.name}</NavLink>
+                                </li>
+                            ))
+                        }
+                        {
+                            !isAuthenticated && 
+                            <li>
+                                <NavLink to='/signin'>Sign in</NavLink>
+                            </li>
+                        }
+                    </ul>
+                    <div className="dropdowns">
+                    
+                        <div>
+                            <SearchIcon />
+                        </div>
+                        <div>
+                        {
+                            isAuthenticated && 
+                            <>
+                                <div ref={personIconRef}>
+                                    <PersonIcon onClick={handleToggleNavSetting}/>
+                                </div>
+                                <SettingDropdwon 
+                                    handleToggleNavSetting={handleToggleNavSetting}
+                                    personMenuRef={personMenuRef}
+                                />
+                            </>
+                        }
+                        </div>
+
+                        <div>
+                            <div ref={cartIconRef} onClick={handleToggleNavCart}>
+                                <ShoppingBagIcon/>
+                                <span className='item_count'>{itemCount > 0 ? itemCount : null}</span>
+                            </div> 
+                            <CartDropdown 
+                                handleToggleNavCart={handleToggleNavCart}
+                                cartMenuRef={cartMenuRef}
+                            />
+                        </div>
+
+                        <div>
+                            <MenuIcon />
+                        </div>
+
                     </div>
-                    <SettingDropdwon 
-                        handleToggleNavSetting={handleToggleNavSetting}
-                        personMenuRef={personMenuRef}
-                    />
-                    </>
-                    :
-                    <NavLink className="option menu" to='/signin'>Sign in</NavLink>
-                }
-                <div ref={cartIconRef} className='option menu' onClick={handleToggleNavCart}>
-                    <ShoppingBagIcon/>
-                    <span className='item_count'>{itemCount > 0 ? itemCount : null}</span>
-                </div> 
-                
-                <CartDropdown 
-                    handleToggleNavCart={handleToggleNavCart}
-                    cartMenuRef={cartMenuRef}
-                />
-
-                <div className="option menu">
-                    <SearchIcon />
                 </div>
-            </div>
+            </nav>
+
+               
         </header>
         )
 

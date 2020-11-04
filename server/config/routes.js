@@ -26,15 +26,12 @@ module.exports = app => {
         directives: {
           defaultSrc: ["'self'"], 
           scriptSrc: ["'self'", 'allansewingmachines.herokuapp.com'],
-          styleSrc: ["'self'", 'https://fonts.googleapis.com', "'unsafe-inline'"],
-          imgSrc: ["'self'", 'https://allansewingmachines.herokuapp.com', 'data:'],
+          imgSrc: ["'self'", 'https://allansewingmachines.herokuapp.com/images', 'data:'],
           connectSrc: ["'self'", 'https://allansewingmachines.herokuapp.com'],
-          fontSrc: ["'self'", 'https://fonts.gstatic.com'],
           objectSrc: ["'self'"],
           mediaSrc: ["'self'"],
           frameSrc: ["'self'"]
         },
-        reportOnly: true
       }
     })
   );

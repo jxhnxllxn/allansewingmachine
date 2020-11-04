@@ -68,6 +68,11 @@ a {
   color: inherit;
 }
 
+ul {
+  list-style: circle;
+  list-style-position: inside;
+}
+
 .card {
   position: relative;
   // margin: 1rem;
