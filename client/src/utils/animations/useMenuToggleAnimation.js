@@ -2,55 +2,29 @@ import { useEffect } from 'react'
 
 const useMenuToggleAnimation = tl => {
   useEffect(() => {
-    tl.to(
-      'body, header',
-      {
-        duration: 0.6,
-        background: 'rgb(34,34,34)'
-      },
-      0
-    )
-      .to(
-        '.menu span',
-        {
-          y: 0
-        },
-        0
-      )
-
-      .to(
-        'svg',
-        {
-          filter: 'invert(100%)'
-        },
-        0
-      )
-
-      .to(
-        'header, .brand',
-        {
-          color: 'white'
-        },
-        0
-      )
-
-      .to(
-        '.page-wrapper, footer',
-        {
-          autoAlpha: 0
-        },
-        0
-      )
-      .from(
-        '.menu-content',
-        {
-          autoAlpha: 0
-        },
-        0
-      )
-
+    if (window.innerWidth > 768) {
+      tl
+      .from('.menu_bottom .list .menu_list ',{ 
+      })
       .reverse()
-    // eslint-disable-next-line
+    }else if (window.innerWidth < 768) {
+      tl.to('.menu_bottom .list .menu_list ',{ 
+        width:'50vw',
+      })
+      .from('.menu_bottom .list .menu_list li',{ 
+        opacity:0,
+        x:70,
+        duration:0.3,
+        ease:'power4.in',
+        stagger:{
+          amount: 0.3
+        }
+      })
+      .reverse()
+  
+    }
+    console.log(window.innerWidth)
+            // eslint-disable-next-line
   }, [])
 }
 

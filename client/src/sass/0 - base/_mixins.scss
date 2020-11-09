@@ -59,6 +59,11 @@
   transform: translate(-50%, -50%);
 }
 
+@mixin flexAlignItemCenter {
+  display: flex;
+  align-items: center;
+}
+
 @mixin customScroll {
   /* Track */
   &::-webkit-scrollbar-track {

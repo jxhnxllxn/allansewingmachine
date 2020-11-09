@@ -9,7 +9,7 @@ import LoadMoreCards from '../components/load-more'
 
 
 const ShopCollection = (props) => {
-    const products = useSelector(state => state.product)
+    const products = useSelector(({product}) => product)
     const dispatch = useDispatch()
 
     const [state, setState] = useState({

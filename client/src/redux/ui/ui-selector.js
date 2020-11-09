@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectUi = state => state.ui;
+const selectUi = ({ui}) => ui;
 
 export const selectCartHidden = createSelector(
   [selectUi],
@@ -10,6 +10,11 @@ export const selectCartHidden = createSelector(
 export const selectSettingHidden = createSelector(
   [selectUi],
   ui => ui.settingMenuIsOpen
+);
+
+export const selectNavMenuHidden = createSelector(
+  [selectUi],
+  ui => ui.navMenuIsOpen
 );
 
   

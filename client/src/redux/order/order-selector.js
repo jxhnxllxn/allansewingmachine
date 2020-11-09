@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const selectOrder = state => state.order;
+const selectOrder = ({order}) => order;
 
 export const selectAllOrder = createSelector(
     [selectOrder],

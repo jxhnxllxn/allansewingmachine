@@ -11,7 +11,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(getProductsToHome());
     }, [dispatch]);
-    const productState = useSelector(state => state.product)
+    const productState = useSelector(({product}) => product)
     const {loading, productToHome, error} = productState
     return (
         <div className="home_wrapper">

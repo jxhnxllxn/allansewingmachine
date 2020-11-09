@@ -1,8 +1,17 @@
-// 1 - BASE
-@import "./1\ -\ base/variables";
-@import "./1\ -\ base/mixins";
-@import "./1\ -\ base/breakpoints";
-@import "./1\ -\ base/base";
+// 0 - BASE
+@import "./0\ -\ base/variables";
+@import "./0\ -\ base/mixins";
+@import "./0\ -\ base/breakpoints";
+@import "./0\ -\ base/base";
+
+// 1 - LAYOUT
+@import "./1\ -\ layout/footer";
+@import "./1\ -\ layout/side-nav";
+@import "./1\ -\ layout/sidebar";
+@import "./1\ -\ layout/header";
+@import "./1\ -\ layout/layout";
+@import "./1\ -\ layout/user";
+@import "./1\ -\ layout/nav";
 
 // 2 - PAGES
 @import "./2\ -\ pages/cart";
@@ -24,6 +33,12 @@
 @import "./2\ -\ pages/sign-up";
 
 // 3 - COMPONENTS
+
+@import "./3\ -\ components/carousel/arrow";
+@import "./3\ -\ components/carousel/slider";
+@import "./3\ -\ components/carousel/slide";
+@import "./3\ -\ components/carousel/slider-content";
+
 @import "./3\ -\ components/alert";
 @import "./3\ -\ components/cart-item-dropdown";
 @import "./3\ -\ components/cart-item";
@@ -34,12 +49,7 @@
 @import "./3\ -\ components/modal";
 @import "./3\ -\ components/product";
 @import "./3\ -\ components/setting-dropdown";
-@import "./3\ -\ components/footer";
-@import "./3\ -\ components/header";
-@import "./3\ -\ components/sidebar";
 @import "./3\ -\ components/slider";
-@import "./3\ -\ components/layout";
-@import "./3\ -\ components/user";
 
 @import "./3\ -\ components/button";
 @import "./3\ -\ components/table";

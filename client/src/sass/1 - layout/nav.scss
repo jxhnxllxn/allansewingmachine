@@ -1,0 +1,82 @@
+nav {
+  position: relative;
+  .menu_bottom {
+    height: 4rem;
+    @include flexAlignItemCenter;
+    @include container;
+    justify-content: space-between;
+    .logo {
+      .logo_container {
+        @include flexAlignItemCenter;
+        .logo {
+          height: 3rem;
+          width: 3rem;
+          margin-right: 0.5rem;
+        }
+        .brand {
+          color: $black;
+          font-size: 1.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          span {
+            display: block;
+          }
+          .machine {
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+    .list {
+      @include flexAlignItemCenter;
+      padding: 1.5rem 0;
+      font-size: 120%;
+      justify-content: space-between;
+      .menuToggleWrapper {
+        display: none;
+        @include media("<tablet") {
+          display: block;
+          cursor: pointer;
+          align-items: flex-end;
+          padding-left: 2rem;
+          margin-top: 1rem;
+          height: 3rem;
+          border-bottom: 1px solid $border;
+        }
+      }
+      .menu_list {
+        @include flexAlignItemCenter;
+        justify-content: flex-end;
+        @include media("<tablet") {
+          width: 0;
+          display: block;
+          padding: 0;
+          position: absolute;
+          right: -1px;
+          top: 4rem;
+          background-color: $white;
+          border-left: 1px solid $border;
+          height: 100vh;
+        }
+        li {
+          padding-left: 2rem;
+          @include media("<tablet") {
+            display: block;
+            padding-left: 2rem;
+          }
+          a {
+            &.active,
+            &:hover {
+              color: $black;
+            }
+            @include media("<tablet") {
+              display: block;
+              padding: 1rem 1rem 1rem 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}

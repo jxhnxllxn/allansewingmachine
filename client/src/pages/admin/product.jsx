@@ -7,8 +7,8 @@ import { withRouter } from 'react-router-dom'
 import MyButton from '../../components/button';
 
 const Product = (props) => {
-    const products = useSelector(state => state.product.products);
-    const loading = useSelector(state => state.product.loading);
+    const productState = useSelector(({product}) => product);
+    const {products,loading} = productState;
     const dispatch = useDispatch();
 
     const [modalData, setModalData] = useState(null);

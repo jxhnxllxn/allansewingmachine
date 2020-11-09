@@ -1,6 +1,9 @@
 .page_layout {
+  padding: 1rem 0;
+  margin-top: 7rem;
   display: grid;
-  min-height: calc(100vh - 4rem);
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100vh);
   grid-template-columns:
     [full-start] minmax(4rem, 1fr) [center-start] repeat(
       6,

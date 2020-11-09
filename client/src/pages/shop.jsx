@@ -8,7 +8,7 @@ import Loading from '../components/loading';
 
 const Shop = () => {
     const dispatch = useDispatch()
-    const collectionState = useSelector(state => state.collection)
+    const collectionState = useSelector(({collection}) => collection)
     const {loading,collections,error} = collectionState;
 
     useEffect(() => {

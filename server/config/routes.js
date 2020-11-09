@@ -20,22 +20,23 @@ const user = require('../routes/user.route');
 
 module.exports = app => {
   app.use(mongoSanitize())
-  app.use(
-    helmet({
-      contentSecurityPolicy: {
-        directives: {
-          defaultSrc: ["'self'"], 
-          scriptSrc: ["'self'", 'allansewingmachines.herokuapp.com'],
-          imgSrc: ["'self'", 'https://allansewingmachines.herokuapp.com/images', 'data:'],
-          connectSrc: ["'self'", 'https://allansewingmachines.herokuapp.com'],
-          objectSrc: ["'self'"],
-          mediaSrc: ["'self'"],
-          frameSrc: ["'self'"]
-        },
-      }
-    })
-  );
   app.use(cors())
+  // app.use(
+  //   helmet({
+  //     contentSecurityPolicy: {
+  //       directives: {
+  //         defaultSrc: ["'self'"], 
+  //         scriptSrc: ["'self'", 'allansewingmachines.herokuapp.com'],
+  //         imgSrc: ["'self'", 'https://allansewingmachines.herokuapp.com/images', 'data:'],
+  //         connectSrc: ["'self'", 'https://allansewingmachines.herokuapp.com'],
+  //         objectSrc: ["'self'"],
+  //         mediaSrc: ["'self'"],
+  //         frameSrc: ["'self'"]
+  //       },
+  //     }
+  //   })
+  // );
+  app.use(helmet())
   app.use(xss())
   app.use(express.json({ extended: false }))
 

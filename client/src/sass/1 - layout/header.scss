@@ -1,0 +1,64 @@
+.header {
+  z-index: 102;
+  background-color: rgba($white, 1);
+  color: $gray;
+  text-transform: capitalize;
+  border-bottom: 1px solid $border;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 7rem;
+  .menu_top {
+    @include flexAlignItemCenter;
+    border-bottom: 1px solid $border;
+    justify-content: space-between;
+    font-size: 110%;
+    padding: 0 1.5rem;
+    height: 3rem;
+    ul {
+      @include flexAlignItemCenter;
+      list-style-type: none;
+      li {
+        border-left: 1px solid $border;
+        display: inline;
+        @include media("<tablet") {
+          display: none;
+        }
+        a {
+          padding: 1rem;
+          display: block;
+          &.active,
+          &:hover {
+            color: $black;
+          }
+        }
+        &.icons {
+          @include flexAlignItemCenter;
+          padding: 0.5rem;
+          .icon {
+            margin-left: 0.7rem;
+            &.bag {
+              .bag_icon {
+                position: relative;
+                .item_count {
+                  position: absolute;
+                  bottom: -0.2rem;
+                  right: -0.2rem;
+                  background-color: $black;
+                  border-radius: 50%;
+                  min-width: 1rem;
+                  text-align: center;
+                  color: $white;
+                  font-size: 80%;
+                  letter-spacing: -1px;
+                  padding: 1px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

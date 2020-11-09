@@ -29,27 +29,24 @@ html {
 body {
   overflow: hidden;
   min-height: 100%;
-  box-sizing: border-box;
   font-size: 0.9rem;
+  background-color: $white;
 }
 
 body,
 html {
+  box-sizing: border-box;
   visibility: hidden;
   user-select: none;
-  background: $white;
   overscroll-behavior: none;
   margin: 0;
-}
-
-.page_layout {
-  padding: 1rem 0;
-  margin-top: 4rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
   @include container;
-  padding: 1.5rem 0;
+  padding: 1rem;
 }
 
 input,
@@ -69,8 +66,7 @@ a {
 }
 
 ul {
-  list-style: circle;
-  list-style-position: inside;
+  list-style: none;
 }
 
 .card {
@@ -81,17 +77,6 @@ ul {
   overflow: hidden;
   border-radius: 0.2rem;
   background-color: rgba($whitesmoke, 1);
-}
-
-.disabledCard {
-  background-color: rgba($whitesmoke, 0.8);
-  border: 1px solid $whitesmoke;
-  position: relative;
-  margin: 1rem;
-  padding: 2rem 1rem 1rem 1rem;
-  text-align: start;
-  overflow: hidden;
-  border-radius: 5px;
 }
 
 .tag {

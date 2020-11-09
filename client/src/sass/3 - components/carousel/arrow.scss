@@ -1,0 +1,16 @@
+.arrow_wrapper {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  height: 50px;
+  width: 50px;
+  justify-content: center;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  transition: transform ease-in 0.1s;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
