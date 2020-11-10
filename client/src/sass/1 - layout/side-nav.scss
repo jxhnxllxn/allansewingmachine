@@ -1,0 +1,16 @@
+.sidenav-wrapper {
+  position: fixed;
+  top: 3rem;
+  right: 0;
+  z-index: 102;
+  width: 35vw;
+  height: calc(100vh - 3rem);
+  background-color: $white;
+  border-left: 1px solid $border;
+  @include media("<tablet") {
+    width: 20rem;
+  }
+  @include media("<phone") {
+    width: 100%;
+  }
+}

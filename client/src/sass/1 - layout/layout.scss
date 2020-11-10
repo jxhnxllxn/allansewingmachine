@@ -1,15 +1,6 @@
-.page_layout {
-  padding: 1rem 0;
-  margin-top: 7rem;
-  display: grid;
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100vh);
-  grid-template-columns:
-    [full-start] minmax(4rem, 1fr) [center-start] repeat(
-      6,
-      [col-start] minmax(min-content, 14rem) [col-end]
-    )
-    [center-end] minmax(4rem, 1fr) [full-start];
+.page-wrapper {
+  padding-top: 7rem;
+  min-height: calc(100vh - 10rem);
 }
 
 .menuBackdrop {

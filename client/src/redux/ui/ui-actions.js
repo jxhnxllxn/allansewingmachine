@@ -1,9 +1,5 @@
-export const toggleNavCart = () => ({
-  type: 'TOGGLE_CART'
-});
-
-export const toggleNavSetting = () => ({
-  type: 'TOGGLE_SETTING'
+export const toggleMenuIcons = () => ({
+  type: 'TOGGLE_MENU_ICONS'
 });
 
 export const toggleNavMenu = () => ({

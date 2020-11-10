@@ -1,7 +1,5 @@
 .product_preview_wrapper {
-  grid-column: center-start/center-end;
-  display: grid;
-  // grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  @include container;
   .details {
     display: flex;
     justify-content: space-around;

@@ -7,8 +7,6 @@ import FormField from '../components/form-field';
 import { update, generateData, isFormValid } from '../utils/helper/form-action';
 // import Loading from "../../components/loading/loading";
 
-
-
 const SignIn = ({ history }) => {
     const dispatch = useDispatch()
     const [formField, setFormField] = useState({

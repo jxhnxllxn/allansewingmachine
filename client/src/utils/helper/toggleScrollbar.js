@@ -4,9 +4,9 @@ import { gsap } from 'gsap'
 const toggleScrollbar = menuIsOpen => {
   setTimeout(
     () => {
-      gsap.to('body', {
+      gsap.to('html', {
         duration: 0,
-        css: { overflowY: menuIsOpen ? 'auto' : 'hidden'}
+        css: { overflowY: menuIsOpen ? 'visible' : 'hidden'}
       })
     },
     menuIsOpen ? 800 : 0

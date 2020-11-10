@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { gsap } from 'gsap'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,6 +8,7 @@ import { toggleNavMenu } from "../redux/ui/ui-actions"
 // import { ReactComponent as SewingIcon } from '../assets/icons/sewing.svg'
 import { ReactComponent as MenuIcon } from '../assets/icons/menu.svg'
 import useMenuToggleAnimation from '../utils/animations/useMenuToggleAnimation'
+import toggleScrollbar from '../utils/helper/toggleScrollbar'
 const Nav = () => {
     const dispatch = useDispatch()
     const links = [
@@ -34,6 +35,8 @@ const Nav = () => {
             },
         ]
     ]
+
+    
     
     const isNavMenuOpen = useSelector(state => selectNavMenuHidden(state))
 
@@ -42,10 +45,11 @@ const Nav = () => {
     useMenuToggleAnimation(menuTl)
 
     const handleToggleNavMenu = () => {
-        menuTl.reversed(isNavMenuOpen)
         dispatch(toggleNavMenu())
-      }
-
+        menuTl.reversed(isNavMenuOpen)
+        toggleScrollbar(isNavMenuOpen)
+    }
+      
     return (
         <nav>
             <div className={`menu_bottom ${isNavMenuOpen ? 'active' :''}`}>

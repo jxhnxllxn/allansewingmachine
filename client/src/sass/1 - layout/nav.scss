@@ -49,21 +49,27 @@ nav {
         @include flexAlignItemCenter;
         justify-content: flex-end;
         @include media("<tablet") {
-          width: 0;
+          width: 15rem;
           display: block;
           padding: 0;
           position: absolute;
-          right: -1px;
+          right: -15rem;
           top: 4rem;
           background-color: $white;
           border-left: 1px solid $border;
           height: 100vh;
         }
+        @include media("<phone") {
+          width: 100vw;
+          right: -100vw;
+        }
         li {
           padding-left: 2rem;
           @include media("<tablet") {
-            display: block;
-            padding-left: 2rem;
+            @include flexAlignItemCenter;
+            justify-content: flex-end;
+            opacity: 0;
+            padding-top: 1rem;
           }
           a {
             &.active,
@@ -72,7 +78,7 @@ nav {
             }
             @include media("<tablet") {
               display: block;
-              padding: 1rem 1rem 1rem 0;
+              padding-bottom: 2rem;
             }
           }
         }

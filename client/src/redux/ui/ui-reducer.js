@@ -1,18 +1,13 @@
 const initialState = {
-  settingMenuIsOpen: false,
-  cartMenuIsOpen: false,
+  navIconsMenuIsOpen: false,
   navMenuIsOpen: false,
 }
 
 const uiReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'TOGGLE_CART':
+    case 'TOGGLE_MENU_ICONS':
       return {
-        cartMenuIsOpen: !state.cartMenuIsOpen,
-      };
-    case 'TOGGLE_SETTING':
-      return {
-        settingMenuIsOpen: !state.settingMenuIsOpen,
+        navIconsMenuIsOpen: !state.navIconsMenuIsOpen,
       };
     case 'TOGGLE_NAV_MENU':
       return {

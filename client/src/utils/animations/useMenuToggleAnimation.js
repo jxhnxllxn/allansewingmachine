@@ -1,30 +1,23 @@
 import { useEffect } from 'react'
 
 const useMenuToggleAnimation = tl => {
-  useEffect(() => {
-    if (window.innerWidth > 768) {
+
+  useEffect(() => {  
       tl
-      .from('.menu_bottom .list .menu_list ',{ 
-      })
-      .reverse()
-    }else if (window.innerWidth < 768) {
-      tl.to('.menu_bottom .list .menu_list ',{ 
-        width:'50vw',
-      })
-      .from('.menu_bottom .list .menu_list li',{ 
-        opacity:0,
-        x:70,
+      .to('.menu_bottom .list .menu_list',{ 
+        right:'0',
         duration:0.3,
-        ease:'power4.in',
+        ease:'power5.out',
+      })
+      .to('.menu_bottom .list .menu_list li',{ 
+        opacity: 1,
+        x:-20,
+        ease:'power5.in',
         stagger:{
           amount: 0.3
         }
-      })
-      .reverse()
+      }).reverse()
   
-    }
-    console.log(window.innerWidth)
-            // eslint-disable-next-line
   }, [])
 }
 

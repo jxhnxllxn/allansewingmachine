@@ -1,7 +1,6 @@
 .sign_in_wrapper {
-  grid-column: center-start/center-end;
+  z-index: 9999;
   justify-self: center;
-  width: 30rem;
   display: flex;
   flex-direction: column;
   margin-top: 2rem;

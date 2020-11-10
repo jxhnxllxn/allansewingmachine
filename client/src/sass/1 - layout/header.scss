@@ -5,9 +5,11 @@
   text-transform: capitalize;
   border-bottom: 1px solid $border;
   position: fixed;
+  width: calc(100vw - 1rem);
   top: 0;
   left: 0;
   right: 0;
+  margin-right: 1rem;
   height: 7rem;
   .menu_top {
     @include flexAlignItemCenter;

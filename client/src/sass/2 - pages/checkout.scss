@@ -1,5 +1,4 @@
 .checkout_wrapper {
-  grid-column: center-start/center-end;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 600px));
   align-items: flex-start;
