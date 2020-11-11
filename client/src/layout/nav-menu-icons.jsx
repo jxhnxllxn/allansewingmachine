@@ -1,19 +1,12 @@
 
 import React, { lazy, Suspense } from 'react'
 import NavIconLayout from './nav-menu-icons-layout'
-// import SignIn from "../pages/sign-in";
-// import SignUp from '../pages/sign-up'
 import Loading from '../components/loading';
-
 const SignIn = lazy(()=>import("../pages/sign-in"))
 const SignUp = lazy(()=>import("../pages/sign-up"))
 
 
-const NavIcons = ({handleToggleMenuIcons,menuIconsRef,activeMenuIcons}) => {
-
-    const toggleMenuIcon = () => {
-        // handleToggleMenuIcons()
-    }
+const NavIcons = ({menuIconsRef,activeMenuIcons}) => {
     
     const components = (x) => {
         switch (x) {
@@ -51,10 +44,11 @@ const NavIcons = ({handleToggleMenuIcons,menuIconsRef,activeMenuIcons}) => {
                 return null;
         }    
     }
+    
 
     return (
         <NavIconLayout>
-        <div className="nav-icons" ref={menuIconsRef}>
+        <div className="nav-menu" ref={menuIconsRef}>
             {components(activeMenuIcons)}
         </div>
         </NavIconLayout>

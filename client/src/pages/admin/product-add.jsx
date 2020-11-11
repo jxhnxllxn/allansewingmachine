@@ -251,8 +251,8 @@ const ProductAdd = () => {
     }
 
     return (
-        <div className="card">
-            <form className="product_add_wrapper" onSubmit={(e) => submitForm(e)}>
+        <div className="product_add_wrapper">
+            <form onSubmit={(e) => submitForm(e)}>
 
                 <h1>Add product</h1>
                 <FileUpload

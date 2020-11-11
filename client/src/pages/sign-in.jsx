@@ -84,7 +84,6 @@ const SignIn = ({ history }) => {
 
     return (
         <div className="sign_in_wrapper">
-            <div className="card">
             <h2>Already have an account?</h2>
                 <span>Sign in with your email and password</span>
                 <form onSubmit={e => submitForm(e)}>
@@ -108,8 +107,7 @@ const SignIn = ({ history }) => {
                         </div> : null
                 }
 
-                <span className="signUp">Don't have account register <Link style={{ textDecoration: 'underline' }} to='/signup'>here</Link></span>
-            </div>                
+                <span className="signUp">Don't have account register <Link style={{ textDecoration: 'underline' }} to='/signup'>here</Link></span>               
         </div>
     )
 }

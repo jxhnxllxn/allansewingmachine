@@ -115,7 +115,6 @@ import {update,generateData,isFormValid} from '../utils/helper/form-action';
 
   return (
     <div className='sign_up_wrapper'>
-      <div className="card">
       <h2>Do not have a account?</h2>
         <span>Sign up with your email and password</span>
         <form onSubmit={e => submitForm(e)}>
@@ -151,8 +150,6 @@ import {update,generateData,isFormValid} from '../utils/helper/form-action';
 
 
         <span className="signIn">Already have an account sign in <Link style={{textDecoration:'underline'}} to='/signin'>here</Link></span>
-
-      </div>
     </div>
 )
 }

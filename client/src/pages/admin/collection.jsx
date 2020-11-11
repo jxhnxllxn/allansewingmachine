@@ -160,8 +160,6 @@ const Collection = () => {
     return (
         <div className="admin-collection">
             <div className="add-collection">
-
-                <div className="card">
                     <h2>Add collection</h2>
                     <form onSubmit={(e) => submitForm(e)}>
                         <FileUpload
@@ -176,7 +174,6 @@ const Collection = () => {
                         <MyButton onClick={(e) => submitForm(e)} type="primary" title="Add Collection" value="Submit" />
 
                     </form>
-                </div>
             </div>
 
 

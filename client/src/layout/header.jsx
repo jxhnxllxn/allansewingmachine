@@ -15,8 +15,9 @@ import useOutsideClick from '../utils/hooks/useOutsideClick'
 import {useThrottle} from '../utils/hooks/useThrottle'
 import toggleScrollbar from '../utils/helper/toggleScrollbar'
 
-import useCartToggleAnimation from '../utils/animations/useCartToggleAnimation'
 import useNavScrollAnimation from '../utils/animations/useScrollAnimation'
+import useIconsMenuToggle from '../utils/animations/useIconsMenuToggle'
+
 import Nav from './nav'
 import NavIcons from './nav-menu-icons'
 
@@ -28,11 +29,6 @@ const Header = () => {
     const loading = useSelector(state => selectIsLoading(state))
     const isNavMenuIconsHidden = useSelector(state => selectNavMenuIconsHidden(state))
     const itemCount = useSelector(state => selectCartItemsCount(state));
-
-
-    // const cart_tl = gsap.timeline()
-    // const [cartTl] = useState(cart_tl)
-    // useCartToggleAnimation(cartTl)
 
     const header_tl = gsap.timeline()
     const [headerTl] = useState(header_tl)
@@ -46,10 +42,18 @@ const Header = () => {
 
     const [activeMenuIcons, setActiveMenuIcons] = useState('')
 
+    
+    const menu_tl = gsap.timeline()
+    const [menuTl] = useState(menu_tl)
+    useIconsMenuToggle(menuTl)
+
+
     const handleToggleMenuIcons = (x) => {
-        setActiveMenuIcons(x)
+        if(!isNavMenuIconsHidden){
+            setActiveMenuIcons(x)
+        }
         dispatch(toggleMenuIcons())
-        // cartTl.reversed(isNavMenuIconsHidden)
+        menuTl.reversed(isNavMenuIconsHidden)
         toggleScrollbar(isNavMenuIconsHidden)
     }
 
@@ -100,8 +104,8 @@ const Header = () => {
                             </div>
 
                             <div className="icon bag" ref={cartIconRef} onClick={() => handleToggleMenuIcons('cart')}>
+                                <ShoppingBagIcon/>
                                 <div className="bag_icon">
-                                    <ShoppingBagIcon/>
                                     <span className='item_count'>{itemCount > 0 && itemCount}</span>
                                 </div> 
                             </div>

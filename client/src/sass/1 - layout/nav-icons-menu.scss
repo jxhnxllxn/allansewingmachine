@@ -1,16 +1,24 @@
-.sidenav-wrapper {
+.nav-icons {
   position: fixed;
   top: 3rem;
   right: 0;
   z-index: 102;
-  width: 35vw;
+  width: 28rem;
   height: calc(100vh - 3rem);
   background-color: $white;
   border-left: 1px solid $border;
   @include media("<tablet") {
-    width: 20rem;
+    width: 60%;
   }
   @include media("<phone") {
     width: 100%;
+  }
+  .nav-menu {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 2rem;
   }
 }

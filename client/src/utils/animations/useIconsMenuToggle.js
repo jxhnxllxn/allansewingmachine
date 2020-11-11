@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 
 const useCartToggleAnimation = tl => {
   useEffect(() => {
-    tl.from('.cart-dropdown', {
-      y: -5,
+    tl.from('.nav-icons', {
+      x: '50',
       duration: 0.3,
       autoAlpha: 0,
     }).reverse()

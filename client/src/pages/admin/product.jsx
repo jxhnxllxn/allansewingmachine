@@ -63,59 +63,56 @@ const Product = (props) => {
     }
 
     return (
-        <div>
-            <div className="card">
-                <div className="table-header">
-                    <h3>Manage products</h3>
-                    {/* <FormField
-                        id={'unit'}
-                        
-                    /> */}
-                    {/* <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" /> */}
-                </div>
-                <div className="floatRight">
-                    <MyButton onClick={() => props.history.push(`${props.match.url}/add`)}  type="submit" title="Add product" />
-                </div>
-                {!loading ?
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <th>Image</th>
-                                <th>Collection</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-
-                            {tableData}
-                        </tbody>
-
-                        <Modal ref={modalRef}>
-                            {modalData && <>
-                                <h2>Are you sure you want to delete {modalData.name} product?</h2>
-                                <br />
-                                <p>This action cannot be undone. This will permanently delete the {modalData.name} product.</p>
-                                <br />
-                                <p>Please type <b>rdg/{modalData.name}</b></p>
-                                <form onSubmit={handleDeleteProduct}>
-                                    {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
-                                    <div className="form-ation">
-                                        {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.name}`)}>Delete<Button>
-                                        <CustomButton buttonType="default" onClick={closeModal}>Cancel<Button> */}
-                                    </div>
-                                </form>
-
-
-                            </>}
-
-                        </Modal>
-
-
-                    </table> : <Loading></Loading>}
-
+        <div className="product-wrapper-admin">
+            <div className="table-header">
+                <h3>Manage products</h3>
+                {/* <FormField
+                    id={'unit'}
+                    
+                /> */}
+                {/* <FormInput type="text" name="search" value={searchInput} onChange={e => onChange(e)} label="Search" /> */}
             </div>
+            <div className="floatRight">
+                <MyButton onClick={() => props.history.push(`${props.match.url}/add`)}  type="submit" title="Add product" />
+            </div>
+            {!loading ?
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Collection</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+
+                        {tableData}
+                    </tbody>
+
+                    <Modal ref={modalRef}>
+                        {modalData && <>
+                            <h2>Are you sure you want to delete {modalData.name} product?</h2>
+                            <br />
+                            <p>This action cannot be undone. This will permanently delete the {modalData.name} product.</p>
+                            <br />
+                            <p>Please type <b>rdg/{modalData.name}</b></p>
+                            <form onSubmit={handleDeleteProduct}>
+                                {/* <FormInput label="Confirm" type="text" name="confirmAction" value={confirmAction} onChange={e => onChange(e)}/> */}
+                                <div className="form-ation">
+                                    {/* <CustomButton buttonType="danger" type="submit" disabled={Boolean(confirmAction !== `rdg/${modalData.name}`)}>Delete<Button>
+                                    <CustomButton buttonType="default" onClick={closeModal}>Cancel<Button> */}
+                                </div>
+                            </form>
+
+
+                        </>}
+
+                    </Modal>
+
+
+                </table> : <Loading></Loading>}
         </div>
     )
 
