@@ -13,13 +13,12 @@ import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.
 
 import useOutsideClick from '../utils/hooks/useOutsideClick'
 import {useThrottle} from '../utils/hooks/useThrottle'
-import toggleScrollbar from '../utils/helper/toggleScrollbar'
 
 import useNavScrollAnimation from '../utils/animations/useScrollAnimation'
-import useIconsMenuToggle from '../utils/animations/useIconsMenuToggle'
+import useSidenavAnimation from '../utils/animations/useSidenavAnimation'
 
 import Nav from './nav'
-import NavIcons from './nav-menu-icons'
+import NavIcons from './sidenav'
 
 
 const Header = () => {
@@ -45,25 +44,31 @@ const Header = () => {
     
     const menu_tl = gsap.timeline()
     const [menuTl] = useState(menu_tl)
-    useIconsMenuToggle(menuTl)
+    useSidenavAnimation(menuTl)
 
 
     const handleToggleMenuIcons = (x) => {
+        
         if(!isNavMenuIconsHidden){
             setActiveMenuIcons(x)
         }
         dispatch(toggleMenuIcons())
         menuTl.reversed(isNavMenuIconsHidden)
-        toggleScrollbar(isNavMenuIconsHidden)
+       
     }
 
 
+    let lastScrollTop = 0;
+
+
     const scrollFunction = () => {
-        if (window.scrollY > 50 ) {
+        const st = window.scrollY;
+        if (st > lastScrollTop) {
             headerTl.reversed(true)
         }else{
             headerTl.reversed(false)
         }
+        lastScrollTop = st;
     }
     
     const scrollThrottle = useThrottle(scrollFunction,50);
@@ -84,9 +89,9 @@ const Header = () => {
 
     return(
     <header className='header' ref={headerRef}>
-            <div className="menu_top">
-                    <p className='promotionMsg'>Free Shipping For Batangas Area</p>
-                    <ul>
+            <div className="header__top">
+                    <p className='header__promotion'>Free Shipping For Batangas Area</p>
+                    <ul className='header__link'>
                         <li>
                             <Link to='/terms-and-conditions'>terms & conditions</Link>
                         </li>
@@ -95,26 +100,23 @@ const Header = () => {
                         </li>
                         <li className='icons' >
 
-                            <div className="icon search" ref={searchIconRef} onClick={() => handleToggleMenuIcons('search')}>
+                            <div className="icon icon--search" ref={searchIconRef} onClick={() => handleToggleMenuIcons('search')}>
                                 <SearchIcon />
                             </div>  
 
-                            <div className="icon person" ref={personIconRef} onClick={() => handleToggleMenuIcons('person')}>
+                            <div className="icon icon--person" ref={personIconRef} onClick={() => handleToggleMenuIcons('person')}>
                                 <PersonIcon />
                             </div>
 
-                            <div className="icon bag" ref={cartIconRef} onClick={() => handleToggleMenuIcons('cart')}>
+                            <div className="icon icon--bag" id="toggleIconCart" ref={cartIconRef} onClick={() => handleToggleMenuIcons('cart')}>
                                 <ShoppingBagIcon/>
-                                <div className="bag_icon">
-                                    <span className='item_count'>{itemCount > 0 && itemCount}</span>
-                                </div> 
+                                <span className='icon__count'>{itemCount > 0 && itemCount}</span>
                             </div>
 
                         </li>
                     </ul>
 
                     <NavIcons
-                        handleToggleMenuIcons={handleToggleMenuIcons}
                         menuIconsRef={menuIconsRef}
                         activeMenuIcons={activeMenuIcons}
                     />

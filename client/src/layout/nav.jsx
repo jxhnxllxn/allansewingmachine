@@ -8,7 +8,6 @@ import { toggleNavMenu } from "../redux/ui/ui-actions"
 // import { ReactComponent as SewingIcon } from '../assets/icons/sewing.svg'
 import { ReactComponent as MenuIcon } from '../assets/icons/menu.svg'
 import useMenuToggleAnimation from '../utils/animations/useMenuToggleAnimation'
-import toggleScrollbar from '../utils/helper/toggleScrollbar'
 const Nav = () => {
     const dispatch = useDispatch()
     const links = [
@@ -47,7 +46,6 @@ const Nav = () => {
     const handleToggleNavMenu = () => {
         dispatch(toggleNavMenu())
         menuTl.reversed(isNavMenuOpen)
-        toggleScrollbar(isNavMenuOpen)
     }
       
     return (

@@ -37,12 +37,10 @@
   .button_primary,
   .add_to_cart_link {
     text-align: center;
-    align-self: baseline;
-    letter-spacing: 0.5px;
     line-height: 2rem;
     padding: 0px 0.5rem;
     font-size: 1.3rem;
-    color: white;
+    color: $white;
     border: none;
     border-radius: 2px;
     outline: none;

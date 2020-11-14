@@ -1,0 +1,40 @@
+.sidenav-layout {
+  position: fixed;
+  top: 3rem;
+  right: 0;
+  z-index: 102;
+  width: 28rem;
+  height: calc(100vh - 3rem);
+  background-color: $white;
+  border-left: 1px solid $border;
+  @include media("<tablet") {
+    width: 60%;
+  }
+  @include media("<phone") {
+    width: 100%;
+  }
+  .nav-menu {
+    position: absolute;
+    top: 2rem;
+    bottom: 8rem;
+    left: 0;
+    right: 0;
+    align-self: center;
+    padding: 2rem;
+    // background-color: teal;
+    overflow-x: hidden;
+    &::-webkit-scrollbar {
+      width: 0.5rem;
+    }
+    @include customScroll;
+  }
+
+  .sidenav-layout__footer {
+    height: 5rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top: 1px solid $border;
+    z-index: 99999;
+  }
+}

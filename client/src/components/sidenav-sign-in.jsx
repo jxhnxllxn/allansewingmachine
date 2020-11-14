@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { login } from "../redux/auth/auth-action";
-import MyButton from '../components/button';
-import FormField from '../components/form-field';
+import MyButton from './button';
+import FormField from './form-field';
 import { update, generateData, isFormValid } from '../utils/helper/form-action';
 // import Loading from "../../components/loading/loading";
 
-const SignIn = ({ history }) => {
+const SignIn = () => {
     const dispatch = useDispatch()
     const [formField, setFormField] = useState({
         formError: false,
@@ -63,20 +63,20 @@ const SignIn = ({ history }) => {
 
         if (formIsValid) {
             dispatch(login(dataToSubmit))
-                .then(res => {
-                    if (res.payload.success) {
-                        if (res.payload.isAdmin) {
-                            history.push('/admin')
-                        } else {
-                            history.push('/user/dashboard')
-                        }
-                    } else {
-                        setFormField({ ...formField, formError: true })
-                    }
-                })
-                .catch(err => {
-                    setFormField({ ...formField, formError: true })
-                })
+                // .then(res => {
+                //     if (res.payload.success) {
+                //         if (res.payload.isAdmin) {
+                //             history.push('/admin')
+                //         } else {
+                //             history.push('/user/dashboard')
+                //         }
+                //     } else {
+                //         setFormField({ ...formField, formError: true })
+                //     }
+                // })
+                // .catch(err => {
+                //     setFormField({ ...formField, formError: true })
+                // })
         } else {
             setFormField({ ...formField, formError: true })
         }

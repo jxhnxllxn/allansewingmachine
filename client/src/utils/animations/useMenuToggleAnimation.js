@@ -3,7 +3,10 @@ import { useEffect } from 'react'
 const useMenuToggleAnimation = tl => {
 
   useEffect(() => {  
-      tl
+      tl.to('html', {
+        duration: 0,
+        css: { overflowY: 'hidden'}
+      })
       .to('.menu_bottom .list .menu_list',{ 
         right:'0',
         duration:0.3,

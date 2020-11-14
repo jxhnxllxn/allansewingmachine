@@ -20,12 +20,12 @@ const Home = () => {
                 loading ? <Loading /> : error ? <Alert message={error} variant='danger'/> :
                 <>
                     <CardBlock
-                    list={productToHome.bestSeller}
-                    title="Best Seller"
-                    />
-                    <CardBlock
                         list={productToHome.newArrival}
                         title="New Arrival"
+                    />
+                    <CardBlock
+                    list={productToHome.bestSeller}
+                    title="Best Seller"
                     />
                 </>
             }

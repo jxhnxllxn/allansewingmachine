@@ -10,7 +10,7 @@ const Order = require('./models/Order.model')
 const Collection = require('./models/Collection.model')
 
 
-dotenv.config({ path: './config/config.env' });
+require('./config/config')
 
 connectDB();
 

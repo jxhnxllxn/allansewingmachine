@@ -8,7 +8,6 @@ const CardBlockShop = (props) => {
                 <Product 
                     key={cards._id}
                     {...cards}
-                    grid={props.grid}
                 />
             ))
         :null
@@ -27,7 +26,7 @@ const CardBlockShop = (props) => {
                     <div style={{
                     width:'100%',
                     display:'grid',
-                    gridTemplateColumns: props.grid === "grid_bars" ? "" : "repeat(auto-fill, minmax(240px, 1fr))",
+                    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
                     }}>
 
                     {renderCards(props.list)}

@@ -1,0 +1,50 @@
+.ssetting {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  .ssetting__profile {
+    display: flex;
+    .ssetting__photo {
+      height: 6rem;
+      width: 6rem;
+      background-color: teal;
+      margin-bottom: 2rem;
+    }
+    .ssetting__info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem;
+
+      .ssetting__logout {
+        color: $red;
+        border: 1px solid $red;
+        border-radius: 0.2rem;
+        padding: 0.5rem;
+        margin-top: 0.5rem;
+        cursor: pointer;
+        &:hover {
+          background-color: $red;
+          color: $white;
+        }
+      }
+    }
+  }
+  ul.ssetting__link {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    li {
+      display: block;
+      a {
+        padding-bottom: 2rem;
+        display: block;
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+  }
+}

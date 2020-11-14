@@ -13,7 +13,6 @@ const ShopCollection = (props) => {
     const dispatch = useDispatch()
 
     const [state, setState] = useState({
-        grid: '',
         limit: 20,
         skip: 0,
         filters: {
@@ -85,18 +84,9 @@ const ShopCollection = (props) => {
         })
     }
 
-    const handleGrid = () => {
-        setState({
-            ...state,
-            grid: !state.grid ? 'grid_bars' : ''
-        })
-    }
-
     return (
 
         <div className="shop_collection_wrapper">
-            <PageTop className="page_title" title="Browse Product" />
-
             <div>
                 <div className="shop_wrapper">
                     <div className="left">
@@ -109,44 +99,9 @@ const ShopCollection = (props) => {
                     </div>
                     <div className="right">
                         <div className="shop_options">
-                            <div className="shop_grids clear">
-                                <div
-                                    className={`grid_btn ${state.grid ? '' : 'active'}`}
-                                    onClick={() => handleGrid()}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-template" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <rect x="4" y="4" width="16" height="4" rx="1" />
-                                    <rect x="4" y="12" width="6" height="8" rx="1" />
-                                    <line x1="14" y1="12" x2="20" y2="12" />
-                                    <line x1="14" y1="16" x2="20" y2="16" />
-                                    <line x1="14" y1="20" x2="20" y2="20" />
-                                    </svg>
-                                </div>
-
-                                <div
-                                    className={`grid_btn ${!state.grid ? '' : 'active'}`}
-                                    onClick={() => handleGrid()}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid-dots" width="24" height="24" viewBox="0 0 24 24" strokeWidth="1" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <circle cx="5" cy="5" r="1" />
-                                    <circle cx="12" cy="5" r="1" />
-                                    <circle cx="19" cy="5" r="1" />
-                                    <circle cx="5" cy="12" r="1" />
-                                    <circle cx="12" cy="12" r="1" />
-                                    <circle cx="19" cy="12" r="1" />
-                                    <circle cx="5" cy="19" r="1" />
-                                    <circle cx="12" cy="19" r="1" />
-                                    <circle cx="19" cy="19" r="1" />
-                                    </svg>
-                                </div>
-
-                            </div>
                         </div>
                         <div>
                             <LoadMoreCards
-                                grid={state.grid}
                                 limit={state.limit}
                                 size={products.toShopSize}
                                 products={products.toShop}

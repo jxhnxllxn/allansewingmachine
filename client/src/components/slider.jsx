@@ -1,8 +1,11 @@
 import React from 'react'
+import Slider from 'react-slick'
+import MyButton from './button'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 const HomeSlider = () => {
     const slides = [
             {
-                _id:'1',
                 img:'/images/image2.jpg',
                 lineOne:'Subcon Jobs',
                 lineTwo: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ad vitae non, deserunt molestiae repudiandae recusandae asperiores eveniet accusamus fugiat.',
@@ -10,15 +13,6 @@ const HomeSlider = () => {
                 linkTo:'/contact'
             },
             {
-                _id:'2',
-                img:'/images/image1.jpg',
-                lineOne:'Shop',
-                lineTwo:'We sell brand new, secondhand and sewing parts',
-                linkTitle:'Shop now',
-                linkTo:'/shop'
-            },
-            {
-                _id:'3',
                 img:'/images/image1.jpg',
                 lineOne:'Shop',
                 lineTwo:'We sell brand new, secondhand and sewing parts',
@@ -27,35 +21,47 @@ const HomeSlider = () => {
             }
         ]
     
-    const generateSlides = () => (
-        slides.map(x => (
-            <div key={x._id} className="mySlide" style={{backgroundImage:`url(${x.img})`}}>
-                <div className="numbertext">1 /3 </div>
-                <div className="text">{x.lineOne}</div>
-            </div>
-        ))
-    )
-    
-    const generateDots = () => (
-        slides.map((x) => (
-            <span key={x._id} className="dot">x</span>
-        ))
-    )
-
-    const plusSlides = n =>{
-
+    const setting = {
+        lazyLoad: true,
+        dots: true,
+        infinite: true,
+        speed: 1000,
+        slidesToShow: 1,
+        slideToScroll: 1,
     }
-    
 
+    const generateSlide = () => (
+        slides ?
+            slides.map((item,i)=>(
+                <div key={i}>
+                    <div className="featured_image"
+                        
+                        style={{
+                                backgroundImage:`url(${item.img})`,
+                                height: '80vh',
+                        }}
+                    >
+                        <div className="featured_action">
+                            <div className="featured_tag">
+                                <h1>{item.lineOne}</h1>
+                                <h2>{item.lineTwo}</h2>
+                                <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
+                            </div>
+                        
+                        </div>
+                    </div>
+
+                    
+
+                </div>
+            ))
+        :null
+    )
     return (
-        <div className="slider_wrapper">
-                {generateSlides()}
-                
-
-                <div className="prev" onClick={plusSlides(-1)}>&#10094;</div>
-                <div className="next" onClick={plusSlides(1)}>&#10095;</div>
-
-                {generateDots()}
+        <div className="featured_collection">
+            <Slider {...setting} >
+                {generateSlide()}
+            </Slider>
         </div>
     )
 }

@@ -1,27 +1,16 @@
 
 import React, { lazy, Suspense } from 'react'
-import NavIconLayout from './nav-menu-icons-layout'
+import SideNavLayout from './sidenav-layout'
 import Loading from '../components/loading';
-const SignIn = lazy(()=>import("../pages/sign-in"))
-const SignUp = lazy(()=>import("../pages/sign-up"))
+import AuthSideNav from '../pages/sidenav-auth';
+import SideNavCart from '../components/sidenav-cart';
+const SignIn = lazy(()=>import("../components/sidenav-sign-in"))
 
 
-const NavIcons = ({menuIconsRef,activeMenuIcons}) => {
+const Sidenav = ({menuIconsRef,activeMenuIcons}) => {
     
     const components = (x) => {
         switch (x) {
-            case 'signin':
-                return (
-                    <Suspense fallback={<Loading />}>
-                        <SignIn />
-                    </Suspense>
-                )
-            case 'signup':
-                return (
-                    <Suspense fallback={<Loading />}>
-                        <SignUp />
-                    </Suspense>
-                )
             case 'search':
                 return (
                     <Suspense fallback={<Loading />}>
@@ -31,13 +20,13 @@ const NavIcons = ({menuIconsRef,activeMenuIcons}) => {
             case 'cart':
                 return (
                     <Suspense fallback={<Loading />}>
-                        <SignIn />
+                        <SideNavCart />
                     </Suspense>
                 )
             case 'person':
                 return (
                     <Suspense fallback={<Loading />}>
-                        <SignUp />
+                        <AuthSideNav />
                     </Suspense>
                 )
             default:
@@ -47,13 +36,13 @@ const NavIcons = ({menuIconsRef,activeMenuIcons}) => {
     
 
     return (
-        <NavIconLayout>
+        <SideNavLayout>
         <div className="nav-menu" ref={menuIconsRef}>
             {components(activeMenuIcons)}
         </div>
-        </NavIconLayout>
+        </SideNavLayout>
         
     )
 }
 
-export default NavIcons
+export default Sidenav

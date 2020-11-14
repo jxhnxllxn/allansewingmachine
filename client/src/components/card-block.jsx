@@ -9,16 +9,17 @@ const CardBlock = (props) => {
     )
 
     return (
-        <div className="card_block">
+        <div className="card-block">
             <div className="container">
                 {
                     props.title ? 
-                        <div className="title">
+                        <div className="card-block__title">
                             {props.title}
                         </div>
                     :null
                 }
-                <div className="product_list">
+
+                <div className="card-block__product-list">
                     {renderCard(props.list)}
                 </div>
             </div>

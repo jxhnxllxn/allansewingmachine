@@ -1,9 +1,9 @@
 .shop_collection_wrapper {
-  grid-column: center-start/center-end;
+  @include container;
   .shop_wrapper {
     display: flex;
     .left {
-      width: zz;
+      width: 20rem;
     }
     .right {
       width: 100%;

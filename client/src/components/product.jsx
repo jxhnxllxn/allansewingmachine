@@ -4,11 +4,11 @@ import {addItem} from '../redux/cart/cart-action'
 import addComma from "../utils/helper/add-comma"
 
 import LazyLoad from 'react-lazyload'
-import { withRouter } from 'react-router-dom'
 import { ReactComponent as CartIcon } from "../assets/icons/shopping-bag.svg"
+import { useHistory } from 'react-router-dom'
 
-const Product = ({_id,name,price,collectionId,sold,stock,images,grid,description,history}) => {
-
+const Product = ({_id,name,price,collectionId,sold,stock,images}) => {
+  const history = useHistory()
   const renderCardImage = (images) => {
     if(images.length > 0){
       return images[0].url
@@ -30,19 +30,18 @@ const Product = ({_id,name,price,collectionId,sold,stock,images,grid,description
   }
   
   return (
-    <div className={`product_wrapper card ${grid}`}>
+    <div className='product-card'>
     <div onClick={handleLinkTo}>
       <LazyLoad height={200}>
-        <div className="image" style={{background:`url(${renderCardImage(images)})`,backgroundSize:'cover'}}>
+        <div className="product-card__photo" style={{background:`url(${renderCardImage(images)})`,backgroundSize:'cover'}}>
         </div>
       </LazyLoad>
 
       <h2>Php {addComma(price)}.00</h2>
       <h3>{name}</h3>
-      {grid ? <h4>{description}</h4> : null}
     </div>
 
-    <div className="actions">
+    <div className="product-card__actions">
       <div className="button_wrapp">
         <CartIcon onClick={handleAddItem} />
       </div>
@@ -52,4 +51,4 @@ const Product = ({_id,name,price,collectionId,sold,stock,images,grid,description
   )
 }
 
-export default withRouter(Product)
+export default Product

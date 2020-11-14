@@ -1,11 +1,5 @@
 .sign_up_wrapper {
-  grid-column: center-start/center-end;
-  justify-self: center;
-  width: 30rem;
   display: flex;
   flex-direction: column;
   margin-top: 2rem;
-  .card {
-    padding: 2rem;
-  }
 }

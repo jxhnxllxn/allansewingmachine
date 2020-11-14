@@ -1,4 +1,5 @@
 // 0 - BASE
+@import "./0\ -\ base/animations";
 @import "./0\ -\ base/variables";
 @import "./0\ -\ base/mixins";
 @import "./0\ -\ base/breakpoints";
@@ -6,7 +7,7 @@
 
 // 1 - LAYOUT
 @import "./1\ -\ layout/footer";
-@import "./1\ -\ layout/nav-icons-menu";
+@import "./1\ -\ layout/sidenav-layout";
 @import "./1\ -\ layout/sidebar";
 @import "./1\ -\ layout/header";
 @import "./1\ -\ layout/layout";
@@ -40,15 +41,15 @@
 @import "./3\ -\ components/carousel/slider-content";
 
 @import "./3\ -\ components/alert";
-@import "./3\ -\ components/cart-item-dropdown";
+@import "./3\ -\ components/sidenav-cart-item";
+@import "./3\ -\ components/sidenav-cart";
 @import "./3\ -\ components/cart-item";
-@import "./3\ -\ components/cart-dropdown";
 @import "./3\ -\ components/collection-item";
 @import "./3\ -\ components/collection";
 @import "./3\ -\ components/loading";
 @import "./3\ -\ components/modal";
 @import "./3\ -\ components/product";
-@import "./3\ -\ components/setting-dropdown";
+@import "./3\ -\ components/sidenav-setting";
 @import "./3\ -\ components/slider";
 
 @import "./3\ -\ components/button";

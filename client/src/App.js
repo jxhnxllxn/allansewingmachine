@@ -26,7 +26,7 @@ const Admin = lazy(()=>import("./pages/admin/admin"))
 const UserDashboard = lazy(()=>import("./pages/dashboard"))
 const UpdateProfile = lazy(()=>import("./pages/update_profile"))
 
-const NavMenuIcons = lazy(()=>import("./layout/nav-menu-icons"))
+const SideNav = lazy(()=>import("./layout/sidenav"))
 
 const App = () => {
   useResponsiveVH()
@@ -59,14 +59,14 @@ const App = () => {
                     <Route path='/shop/:collection/:product' component={Auth(ProductPreview,null)} exact/>
                     
                     <Route path='/user/cart' component={Auth(Cart,null)} exact/>
-                    <Route path='/cart/checkout' component={Auth(Checkout,null)} exact/>
+                    <Route path='/user/checkout' component={Auth(Checkout,null)} exact/>
 
                     <Route path='/user/dashboard' component={Auth(UserDashboard,true)} exact/>
                     <Route path="/user/user_profile" exact component={Auth(UpdateProfile,true)}/>
             
                     <Route path="/admin" component={Auth(Admin,true,true)}/>
                     
-                    <Route path="/nav-menu-icons" component={NavMenuIcons}/>
+                    <Route path="/sidenav" component={SideNav}/>
                 </Suspense>
                 </ErrorBoundary>
             </Switch>
