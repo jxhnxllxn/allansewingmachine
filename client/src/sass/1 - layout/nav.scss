@@ -1,7 +1,7 @@
 nav {
   position: relative;
   .menu_bottom {
-    height: 4rem;
+    height: 5rem;
     @include flexAlignItemCenter;
     @include container;
     justify-content: space-between;
@@ -14,16 +14,21 @@ nav {
           margin-right: 0.5rem;
         }
         .brand {
-          color: $black;
-          font-size: 1.5rem;
           display: flex;
           flex-direction: column;
+          align-items: center;
           justify-content: center;
-          span {
-            display: block;
+          line-height: 0.6;
+          color: $black--secondary;
+          .brand__allan {
+            font-family: $font-brand;
+            font-size: 2.8rem;
           }
-          .machine {
-            font-size: 1rem;
+          .brand__machine {
+            font-size: 85%;
+            letter-spacing: 2px;
+            text-transform: capitalize;
+            color: $black;
           }
         }
       }
@@ -31,7 +36,9 @@ nav {
     .list {
       @include flexAlignItemCenter;
       padding: 1.5rem 0;
-      font-size: 120%;
+      font-size: 85%;
+      letter-spacing: 2px;
+      text-transform: uppercase;
       justify-content: space-between;
       .menuToggleWrapper {
         display: none;
@@ -48,6 +55,7 @@ nav {
       .menu_list {
         @include flexAlignItemCenter;
         justify-content: flex-end;
+        color: $black--secondary;
         @include media("<tablet") {
           width: 15rem;
           display: block;
@@ -55,7 +63,7 @@ nav {
           position: absolute;
           right: -15rem;
           top: 4rem;
-          background-color: $white;
+          background-color: $background;
           border-left: 1px solid $border;
           height: 100vh;
         }
@@ -70,15 +78,13 @@ nav {
             justify-content: flex-end;
             opacity: 0;
             padding-top: 1rem;
+            margin-bottom: 2rem;
           }
           a {
-            &.active,
-            &:hover {
-              color: $black;
-            }
+            @include underlineOnHover;
+            color: $black;
             @include media("<tablet") {
               display: block;
-              padding-bottom: 2rem;
             }
           }
         }

@@ -2,8 +2,6 @@ import React from 'react'
 import { useEffect } from 'react';
 import { lazyload } from 'react-lazyload';
 
-import { ReactComponent as SewingIcon } from '../assets/icons/sewing.svg'
-
 import { ReactComponent as LocationIcon } from '../assets/icons/location.svg'
 import { ReactComponent as ClockIcon } from '../assets/icons/clock.svg'
 import { ReactComponent as PhoneIcon } from '../assets/icons/phone.svg'
@@ -19,60 +17,57 @@ const Footer = () => {
           })
     }, [])
     return (
-        <footer className="footer">
-            <div className="container">
+        <footer className="footer-wrapper">
+            <div className="footer container">
                 <div className="brand">
-                    <SewingIcon className='logo'/>
-                    Allan Sewing Machine
+                    <span className='brand__allan'>Allan</span>
+                    <span className='brand__machine'>Sewing Machines</span>
                 </div>
-                <div className="wrapper">
-                    <div className="left">
+                <div className="footer__wrapper">
+                    <div className="footer__left">
                         <h2>Contact information</h2>
-                        <div className="business_nfo">
-                            <div >
+                        <div className="footer__businessInfo">
+                            <div className='footer__infoWrapper'>
                                 <LocationIcon />
-                                <div className="nfo">
-                                    <div>Address</div>
-                                    <div>Padre Garcia, Batangas</div>
+                                <div className='footer__info'>
+                                    <div className='footer__info-title'>Address</div>
+                                    <div className='footer__info-desc'>Padre Garcia, Batangas</div>
                                 </div>
                             </div>
-                            <div >
+                            <div className='footer__infoWrapper'>
                                 <PhoneIcon />
-                                <div className="nfo">
-                                    <div>Phone</div>
-                                    <div>+63 949 7731 035</div>
+                                <div className='footer__info'>
+                                    <div className='footer__info-title'>Phone</div>
+                                    <div className='footer__info-desc'>+63 949 7731 035</div>
                                 </div>
                             </div>
-                            <div >
+                            <div className='footer__infoWrapper'>
                                 <ClockIcon />
-                                <div className="nfo">
-                                    <div>Open hours</div>
-                                    <div>Mon-Sat 8:00 AM - 5:00 AM</div>
+                                <div className='footer__info'>
+                                    <div className='footer__info-title'>Open hours</div>
+                                    <div className='footer__info-desc'>Mon-Sat 8:00 AM - 5:00 AM</div>
                                 </div>
                             </div>
-                            <div >
+                            <div className='footer__infoWrapper'>
                                 <MailIcon />
-                                <div className="nfo">
-                                    <div>Email</div>
-                                    <div>allan@allansewingmachine.com</div>
+                                <div className='footer__info'>
+                                    <div className='footer__info-title'>Email</div>
+                                    <div className='footer__info-desc'>allan@allansewingmachine.com</div>
                                 </div>
                             </div>
                         </div>
                     </div> 
-                    <div className="left">
+                    <div className="footer__right">
                         <h2>Be the first to know</h2>
-                        <div>
-                            <div>
-                            Get all the latest information on events, sales and offers.You can miss out.
-                            </div>
-                        </div>
+                        <span>
+                          Get all the latest information on events, sales and offers.You can miss out.
+                        </span>
                     </div>      
                 </div>
-                    <div className="credits">
-                        <h3>&copy; Allan Sewing Machine</h3>
-                        <h4>Powered by John Allen</h4>
+                <div className="footer__credits">
+                        <span>Allan Sewing Machines</span>
+                        <span>&copy;{new Date().getFullYear()} <a href="https://github.com/jhhhn" target="_blank">jhhhn</a></span>
                     </div>
-                    
             </div>
 
         </footer>

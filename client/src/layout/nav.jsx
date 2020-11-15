@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, NavLink } from 'react-router-dom'
 import { selectNavMenuHidden } from '../redux/ui/ui-selector'
 import { toggleNavMenu } from "../redux/ui/ui-actions"
-// import { ReactComponent as SewingIcon } from '../assets/icons/sewing.svg'
 import { ReactComponent as MenuIcon } from '../assets/icons/menu.svg'
+
 import useMenuToggleAnimation from '../utils/animations/useMenuToggleAnimation'
 const Nav = () => {
     const dispatch = useDispatch()
@@ -50,13 +50,12 @@ const Nav = () => {
       
     return (
         <nav>
-            <div className={`menu_bottom ${isNavMenuOpen ? 'active' :''}`}>
+            <div className='menu_bottom'>
                 <div className="logo">
                     <Link className="logo_container" to="/">
-                        {/* <SewingIcon className='logo'/> */}
                         <div className="brand">
-                            <span className='allan'>Allan</span>
-                            <span className='machine'>Sewing Machines</span>
+                            <span className='brand__allan'>Allan</span>
+                            <span className='brand__machine'>Sewing Machines</span>
                         </div>
                     </Link>
                 </div>

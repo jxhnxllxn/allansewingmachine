@@ -5,7 +5,7 @@
   z-index: 102;
   width: 28rem;
   height: calc(100vh - 3rem);
-  background-color: $white;
+  background-color: $background;
   border-left: 1px solid $border;
   @include media("<tablet") {
     width: 60%;
@@ -23,9 +23,6 @@
     padding: 2rem;
     // background-color: teal;
     overflow-x: hidden;
-    &::-webkit-scrollbar {
-      width: 0.5rem;
-    }
     @include customScroll;
   }
 

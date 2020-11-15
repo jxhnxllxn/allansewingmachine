@@ -6,9 +6,18 @@
   justify-content: space-between;
   flex-direction: column;
   border: 1px solid $border;
+  // background-image: linear-gradient(
+  //   to left bottom,
+  //   rgba($background, 1),
+  //   rgba($background--secondary, 1)
+  // );
+  background-color: $background;
+  position: relative;
+  backface-visibility: hidden;
+  border-radius: 0.3rem;
   cursor: pointer;
   &:hover {
-    transform: translateY(-0.1rem);
+    transform: translateY(-1px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
   }
 
@@ -22,7 +31,7 @@
   }
   h2 {
     font-size: 110%;
-    font-weight: 500;
+    font-weight: 700;
   }
   h3 {
     font-size: 90%;

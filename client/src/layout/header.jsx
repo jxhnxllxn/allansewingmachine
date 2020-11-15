@@ -16,6 +16,7 @@ import {useThrottle} from '../utils/hooks/useThrottle'
 
 import useNavScrollAnimation from '../utils/animations/useScrollAnimation'
 import useSidenavAnimation from '../utils/animations/useSidenavAnimation'
+import toggleScrollbar from '../utils/animations/toggleScrollbar'
 
 import Nav from './nav'
 import NavIcons from './sidenav'
@@ -54,6 +55,7 @@ const Header = () => {
         }
         dispatch(toggleMenuIcons())
         menuTl.reversed(isNavMenuIconsHidden)
+        toggleScrollbar(isNavMenuIconsHidden)
        
     }
 

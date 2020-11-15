@@ -1,8 +1,9 @@
 .checkout_wrapper {
+  @include container;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 600px));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 500px));
   align-items: flex-start;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .billing {

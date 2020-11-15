@@ -1,7 +1,7 @@
 .header {
   z-index: 102;
-  background-color: rgba($white, 1);
-  color: $gray;
+  background-color: $background;
+  color: $black;
   text-transform: capitalize;
   border-bottom: 1px solid $border;
   position: fixed;
@@ -10,12 +10,13 @@
   left: 0;
   right: 0;
   margin-right: 1rem;
-  height: 7rem;
+  height: 8rem;
   .header__top {
     @include flexAlignItemCenter;
     border-bottom: 1px solid $border;
     justify-content: space-between;
-    font-size: 110%;
+
+    font-size: 85%;
     padding: 0 1.5rem;
     height: 3rem;
     .header__link {
@@ -57,10 +58,9 @@
                 border-radius: 50%;
                 min-width: 1rem;
                 text-align: center;
-                color: $white;
+                color: $background;
                 font-size: 80%;
                 letter-spacing: -1px;
-                padding: 1px;
               }
             }
           }

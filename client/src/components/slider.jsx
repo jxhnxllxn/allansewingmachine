@@ -23,7 +23,6 @@ const HomeSlider = () => {
     
     const setting = {
         lazyLoad: true,
-        dots: true,
         infinite: true,
         speed: 1000,
         slidesToShow: 1,
@@ -38,17 +37,17 @@ const HomeSlider = () => {
                         
                         style={{
                                 backgroundImage:`url(${item.img})`,
-                                height: '80vh',
+                                height: '100vh',
                         }}
                     >
-                        <div className="featured_action">
+                        {/* <div className="featured_action">
                             <div className="featured_tag">
                                 <h1>{item.lineOne}</h1>
                                 <h2>{item.lineTwo}</h2>
                                 <MyButton type="default" title={item.linkTitle} linkTo={item.linkTo} />
                             </div>
                         
-                        </div>
+                        </div> */}
                     </div>
 
                     

@@ -1,5 +1,7 @@
 import React from 'react'
 import Product from '../components/product'
+import ArrowTitle from '../assets/images/arrow-title-1.png'
+
 
 const CardBlock = (props) => {
     const renderCard= () => (
@@ -14,7 +16,8 @@ const CardBlock = (props) => {
                 {
                     props.title ? 
                         <div className="card-block__title">
-                            {props.title}
+                            <span>{props.title}</span>
+                            <img src={ArrowTitle} alt="arrow-title" />
                         </div>
                     :null
                 }

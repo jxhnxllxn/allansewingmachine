@@ -2,7 +2,12 @@
   .container {
     .card-block__title {
       margin-bottom: 1rem;
-      font-size: 2rem;
+      font-size: 2.5rem;
+      font-family: $font-brand;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
     .card-block__product-list {
       display: grid;

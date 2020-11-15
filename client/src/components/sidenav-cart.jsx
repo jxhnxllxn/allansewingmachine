@@ -45,7 +45,10 @@ const SideNavCart = ({cartMenuRef}) => {
         </div>
 
         <div className="sidenav-cart__footer">
-            <h3 className="sidenav-cart__total">Total <span>Php {addComma(total)}</span></h3>
+            <div className="sidenav-cart__total">
+                <span>Total </span>
+                <span>Php {addComma(total)}</span>
+            </div>
             <div className="sidenav-cart_button" onClick={viewCart}>
                 <h3>Checkout</h3>
                 <RightIcon />

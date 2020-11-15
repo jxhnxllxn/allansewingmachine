@@ -2,6 +2,7 @@ import React from 'react'
 
 import Header from './header'
 import Footer from './footer'
+// import Backdrop from '../components/backdrop'
 
 const Layout = ({children}) => {
     return (
@@ -11,6 +12,7 @@ const Layout = ({children}) => {
                     {children}
                 </main>
             <Footer />
+            {/* <Backdrop /> */}
         </>
     )
 }

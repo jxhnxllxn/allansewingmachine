@@ -1,45 +1,57 @@
 .sidenav-cart {
-  .sidenav-cart__header {
+  &__header {
     display: flex;
     justify-content: space-between;
     padding-bottom: 1rem;
     span {
-      font-weight: 600;
-      font-size: 2rem;
+      letter-spacing: 2px;
+      font-family: $font-brand;
+      font-size: 3rem;
+      color: $black;
     }
     svg {
       height: 2rem;
       width: 2rem;
     }
   }
-  .sidenav-cart__items {
+  &__items {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
     .sidenav-cart__emptymsg {
       font-size: 2rem;
       margin: 50px auto;
     }
   }
-  .sidenav-cart__footer {
+  &__footer {
     position: fixed;
     bottom: 2rem;
     left: 0;
     right: 0;
     padding: 1rem;
-    background-color: $white;
+    background-color: $background;
     @include flexAlignItemCenter;
     flex-direction: column;
     border-top: 1px solid $border;
     .sidenav-cart__total {
+      width: 100%;
       margin: 1rem 0;
-      span {
-        border: 1px solid $border;
-        padding: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      span:first-child {
+        letter-spacing: 2px;
+        font-family: $font-brand;
+        font-size: 3rem;
         color: $black;
+      }
+      span:last-child {
+        letter-spacing: 2px;
+        font-size: 2rem;
+        color: $black;
+        border: 1px solid $border;
         border-radius: 0.3rem;
-        font-weight: 600;
-        &:hover {
-          background-color: rgba($black, 1);
-          color: $white;
-        }
+        padding: 0 1rem;
       }
     }
     .sidenav-cart_button {
@@ -54,7 +66,7 @@
       }
       &:hover {
         background-color: rgba($black, 1);
-        color: $white;
+        color: $background;
       }
     }
   }
