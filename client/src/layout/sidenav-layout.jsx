@@ -1,22 +1,15 @@
-import React from 'react'
+import React from "react";
 
+const SideNavLayout = ({ children }) => {
+   return (
+      <div className='sidenav'>
+         <div className='sidenav__header'></div>
 
-const SideNavLayout = ({children}) => {
-    return (
-        <div className='sidenav-layout'>
-            <div className="sidenav-layout__header">
+         {children}
 
-            </div>
+         <div className='sidenav__footer'></div>
+      </div>
+   );
+};
 
-            {children}
-        
-            <div className="sidenav-layout__footer">
-                
-            </div>
-        </div>
-
-        
-    )
-}
-
-export default SideNavLayout
+export default SideNavLayout;

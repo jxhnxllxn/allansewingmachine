@@ -1,73 +1,62 @@
 .sidenav-cart {
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 1rem;
-    span {
-      letter-spacing: 2px;
-      font-family: $font-brand;
-      font-size: 3rem;
-      color: $black;
-    }
-    svg {
-      height: 2rem;
-      width: 2rem;
-    }
-  }
-  &__items {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    .sidenav-cart__emptymsg {
-      font-size: 2rem;
-      margin: 50px auto;
-    }
-  }
-  &__footer {
-    position: fixed;
-    bottom: 2rem;
-    left: 0;
-    right: 0;
-    padding: 1rem;
-    background-color: $background;
-    @include flexAlignItemCenter;
-    flex-direction: column;
-    border-top: 1px solid $border;
-    .sidenav-cart__total {
-      width: 100%;
-      margin: 1rem 0;
+   &__header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      span:first-child {
-        letter-spacing: 2px;
-        font-family: $font-brand;
-        font-size: 3rem;
-        color: $black;
+      padding-bottom: 1rem;
+      span {
+         font-size: 1rem;
+         color: $black;
       }
-      span:last-child {
-        letter-spacing: 2px;
-        font-size: 2rem;
-        color: $black;
-        border: 1px solid $border;
-        border-radius: 0.3rem;
-        padding: 0 1rem;
-      }
-    }
-    .sidenav-cart_button {
-      @include flexAlignItemCenter;
-      border: 1px solid $border;
-      border-radius: 0.3rem;
-      padding: 0 1rem;
-      cursor: pointer;
       svg {
-        height: 2.5rem;
-        width: 2.5rem;
+         height: 1.5rem;
+         width: 1.5rem;
       }
-      &:hover {
-        background-color: rgba($black, 1);
-        color: $background;
+   }
+   &__items {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      .sidenav-cart__emptymsg {
+         font-size: 2rem;
+         margin: 50px auto;
       }
-    }
-  }
+   }
+   &__footer {
+      @include flexAlignItemCenter;
+      flex-direction: column;
+      border-top: 1px solid $border;
+      padding-top: 2rem;
+      .sidenav-cart__total {
+         width: 100%;
+         margin: 1rem 0;
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         span:first-child {
+            font-size: 1rem;
+            color: $black;
+         }
+         span:last-child {
+            font-size: 1.5rem;
+            border-radius: 0.3rem;
+            padding: 0 1rem;
+         }
+      }
+      .sidenav-cart_button {
+         width: 100%;
+         @include flexAlignItemCenter;
+         justify-content: space-between;
+         border: 1px solid $border;
+         border-radius: 0.3rem;
+         cursor: pointer;
+         svg {
+            height: 2.5rem;
+            width: 2.5rem;
+         }
+         &:hover {
+            background-color: rgba($black, 1);
+            color: $background;
+         }
+      }
+   }
 }

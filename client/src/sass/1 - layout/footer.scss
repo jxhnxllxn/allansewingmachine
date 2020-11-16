@@ -1,89 +1,90 @@
 %header2 {
-  font-size: 100%;
-  color: $black;
-  letter-spacing: 2px;
+   font-size: 100%;
+   color: $black;
+   letter-spacing: 2px;
 }
 
 .footer-wrapper {
-  border-top: 1px solid $border;
-  font-size: 85%;
-  color: $black--secondary;
-  .footer {
-    display: flex;
-    flex-direction: column;
-    min-height: calc(100vh - 5rem);
-    justify-content: flex-end;
-    .brand {
+   border-top: 1px solid $border;
+   font-size: 85%;
+   color: $black--secondary;
+   .footer {
       display: flex;
-      align-items: center;
       flex-direction: column;
-      justify-content: center;
-      line-height: 0.6;
-      padding-bottom: 4rem;
-      &__allan {
-        font-family: $font-brand;
-        font-size: 8rem;
+      min-height: calc(100vh - 5rem);
+      justify-content: flex-end;
+      .brand {
+         display: flex;
+         align-items: center;
+         flex-direction: column;
+         justify-content: center;
+         line-height: 0.6;
+         padding-bottom: 4rem;
+         &__allan {
+            font-family: $font-brand;
+            text-transform: lowercase;
+            font-size: 8rem;
+         }
+         &__machine {
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            font-weight: 300;
+            letter-spacing: 2px;
+         }
       }
-      &__machine {
-        font-size: 2.5rem;
-        text-transform: capitalize;
-        font-weight: 300;
-        letter-spacing: 2px;
-      }
-    }
-    &__wrapper {
-      text-transform: uppercase;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex-wrap: wrap;
-      padding: 1rem 0;
-      .footer__left {
-        width: 50%;
-        h2 {
-          @extend %header2;
-        }
-        .footer__businessInfo {
-          .footer__infoWrapper {
-            display: flex;
-            margin: 0.3rem 0;
-            padding: 1rem 0;
-            align-items: center;
-            .icon {
-              margin-right: 1rem;
+      &__wrapper {
+         text-transform: uppercase;
+         display: flex;
+         justify-content: space-between;
+         align-items: flex-start;
+         flex-wrap: wrap;
+         padding: 1rem 0;
+         .footer__left {
+            width: 50%;
+            h2 {
+               @extend %header2;
             }
-            .footer__info {
-              display: block;
-              &-title {
-                font-size: 100%;
-                color: $black;
-              }
-              &-desc {
-                font-size: 90%;
-                text-transform: capitalize;
-              }
+            .footer__businessInfo {
+               .footer__infoWrapper {
+                  display: flex;
+                  margin: 0.3rem 0;
+                  padding: 1rem 0;
+                  align-items: center;
+                  .icon {
+                     margin-right: 1rem;
+                  }
+                  .footer__info {
+                     display: block;
+                     &-title {
+                        font-size: 100%;
+                        color: $black;
+                     }
+                     &-desc {
+                        font-size: 90%;
+                        text-transform: capitalize;
+                     }
+                  }
+               }
             }
-          }
-        }
+         }
+         .footer__right {
+            width: 50%;
+            h2 {
+               @extend %header2;
+               padding-bottom: 1rem;
+            }
+            span {
+               font-size: 90%;
+            }
+         }
       }
-      .footer__right {
-        width: 50%;
-        h2 {
-          @extend %header2;
-          padding-bottom: 1rem;
-        }
-        span {
-          font-size: 90%;
-        }
+      &__credits {
+         @include flexAlignItemCenter;
+         justify-content: center;
+         flex-direction: column;
+         span {
+            font-size: 90%;
+         }
       }
-    }
-    &__credits {
-      @include flexAlignItemCenter;
-      justify-content: center;
-      flex-direction: column;
-      span {
-        font-size: 90%;
-      }
-    }
-  }
+   }
 }

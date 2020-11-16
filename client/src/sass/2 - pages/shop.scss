@@ -1,2 +1,23 @@
-.shop_wrapper {
+.shop {
+   height: calc(100vh - 6rem);
+   display: flex;
+   &__main {
+      width: 39vw;
+      height: 100%;
+      border: 1px solid $border;
+   }
+   &__collections {
+      height: 100%;
+      width: 59vw;
+      border: 1px solid $border;
+      overflow-x: hidden;
+   }
 }
+
+// {
+//     loading ? <Loading/> : error ? <Alert message={error} variant='danger'/>:
+//     <CardBlockCollection
+//         list={collections}
+//         title="Shop"
+//     />
+// }

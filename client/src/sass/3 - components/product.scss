@@ -1,55 +1,47 @@
 .product-card {
-  padding: 1rem;
-  min-width: 10rem;
-  display: flex;
-  transition: 0.3s ease-out;
-  justify-content: space-between;
-  flex-direction: column;
-  border: 1px solid $border;
-  // background-image: linear-gradient(
-  //   to left bottom,
-  //   rgba($background, 1),
-  //   rgba($background--secondary, 1)
-  // );
-  background-color: $background;
-  position: relative;
-  backface-visibility: hidden;
-  border-radius: 0.3rem;
-  cursor: pointer;
-  &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-  }
+   display: flex;
+   transition: 0.3s linear;
+   justify-content: space-between;
+   flex-direction: column;
+   border: 1px solid $border;
+   background-color: $background;
+   border-radius: 0.3rem;
+   cursor: pointer;
+   backface-visibility: hidden;
+   text-align: center;
+   &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+   }
 
-  .product-card__photo {
-    height: 15rem;
-    object-fit: cover;
-    border: none;
-    background-repeat: no-repeat;
-    border-radius: 0.1rem;
-    margin-bottom: 0.5rem;
-  }
-  h2 {
-    font-size: 110%;
-    font-weight: 700;
-  }
-  h3 {
-    font-size: 90%;
-    font-weight: 500;
-    &:hover {
-      color: $black;
-    }
-  }
-  .product-card__actions {
-    align-self: flex-end;
-    .button_wrapp {
-      padding: 0.2rem;
-      z-index: 200;
-      text-align: end;
-      transition: ease-out 0.3s;
+   &__photo {
+      height: 15rem;
+      object-fit: cover;
+      border: none;
+      background-repeat: no-repeat;
+      border-radius: 0.1rem;
+      margin-bottom: 0.5rem;
+   }
+   h2 {
+      backface-visibility: hidden;
+      font-size: 110%;
+      font-weight: 700;
+   }
+   h3 {
+      backface-visibility: hidden;
+      font-size: 90%;
+      font-weight: 500;
       &:hover {
-        transform: translateY(-0.2rem);
+         color: $black;
       }
-    }
-  }
+   }
+   &__actions {
+      align-self: flex-end;
+      .button_wrapp {
+         padding: 0.2rem;
+         z-index: 200;
+         text-align: end;
+         transition: ease-out 0.3s;
+      }
+   }
 }

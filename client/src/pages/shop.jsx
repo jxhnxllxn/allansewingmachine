@@ -1,33 +1,22 @@
-import React, { useEffect } from 'react';
-import CardBlockCollection from '../components/card-block-collection'
-import { getCollections } from "../redux/collection/collection-action"; 
-import { useDispatch, useSelector } from 'react-redux';
-import Alert from '../components/alert'
-import Loading from '../components/loading';
-
+import React, { useEffect } from "react";
+import { getCollections } from "../redux/collection/collection-action";
+import { useDispatch, useSelector } from "react-redux";
 
 const Shop = () => {
-    const dispatch = useDispatch()
-    const collectionState = useSelector(({collection}) => collection)
-    const {loading,collections,error} = collectionState;
+   const dispatch = useDispatch();
+   const collectionState = useSelector(({ collection }) => collection);
+   const { loading, collections, error } = collectionState;
 
-    useEffect(() => {
-        dispatch(getCollections())
-    }, [dispatch]);
+   useEffect(() => {
+      dispatch(getCollections());
+   }, [dispatch]);
 
-        return (
-            <div className="shop_wrapper">
-                {
-                    loading ? <Loading/> : error ? <Alert message={error} variant='danger'/>:
-                    <CardBlockCollection
-                        list={collections} 
-                        title="Shop"
-                    />
-                }
-            </div>
-        )
-}
-
-
+   return (
+      <div className='shop'>
+         <div className='shop__main'></div>
+         <div className='shop__collections'></div>
+      </div>
+   );
+};
 
 export default Shop;
