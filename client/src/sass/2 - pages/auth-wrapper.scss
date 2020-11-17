@@ -1,0 +1,23 @@
+.authWrapper {
+   display: flex;
+   flex-direction: column;
+   padding: 2rem;
+   text-transform: lowercase;
+   border: 2px solid $border;
+   margin: 3rem 2rem 1rem 2rem;
+   border-radius: 0.5rem;
+   position: relative;
+   h2 {
+      font-family: $font-brand;
+      font-weight: 500;
+      font-size: 3rem;
+      background-color: $background;
+      transform: rotate(-15deg);
+      position: absolute;
+      top: -2.5rem;
+   }
+   span {
+      padding: 1.5rem;
+      color: rgba($black, 0.7);
+   }
+}

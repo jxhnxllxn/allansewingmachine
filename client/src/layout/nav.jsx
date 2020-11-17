@@ -3,13 +3,8 @@ import { gsap } from "gsap";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Link, NavLink } from "react-router-dom";
-import {
-   selectNavMenuHidden,
-   selectNavMenuIconsHidden,
-} from "../redux/ui/ui-selector";
-import { selectCartItemsCount } from "../redux/cart/cart-selectors";
-import { toggleNavMenu } from "../redux/ui/ui-actions";
 
+import { selectCartItemsCount } from "../redux/cart/cart-selectors";
 import { toggleMenuIcons } from "../redux/ui/ui-actions";
 
 import { ReactComponent as MenuIcon } from "../assets/icons/menu.svg";
@@ -17,29 +12,29 @@ import { ReactComponent as PersonIcon } from "../assets/icons/person.svg";
 import { ReactComponent as SearchIcon } from "../assets/icons/search.svg";
 import { ReactComponent as ShoppingBagIcon } from "../assets/icons/shopping-bag.svg";
 
+import { ReactComponent as OuterLogo } from "../assets/icons/logo2.svg";
+import { ReactComponent as InnerLogo } from "../assets/icons/logo3.svg";
+
 import useSidenavAnimation from "../utils/animations/useSidenavAnimation";
 import toggleScrollbar from "../utils/animations/toggleScrollbar";
 import useOutsideClick from "../utils/hooks/useOutsideClick";
 
 import SideNav from "./sidenav";
 
-const Nav = () => {
+const Nav = ({ isNavMenuIconsHidden, mTop }) => {
    const dispatch = useDispatch();
    const searchIconRef = useRef();
    const personIconRef = useRef();
    const cartIconRef = useRef();
    const sidenavRef = useRef();
    const menuIconRef = useRef();
-   const isNavMenuIconsHidden = useSelector((state) =>
-      selectNavMenuIconsHidden(state)
-   );
    const itemCount = useSelector((state) => selectCartItemsCount(state));
 
    const [activeMenuIcons, setActiveMenuIcons] = useState("");
 
    const tl = gsap.timeline();
    const [tl__sidenav] = useState(tl);
-   useSidenavAnimation(tl__sidenav);
+   useSidenavAnimation(tl__sidenav, mTop);
 
    const toggleSideNav = (x) => {
       if (!isNavMenuIconsHidden) {
@@ -59,6 +54,10 @@ const Nav = () => {
    const links = [
       [
          {
+            name: "Home",
+            linkTo: "/",
+         },
+         {
             name: "Shop",
             linkTo: "/shop",
          },
@@ -70,22 +69,59 @@ const Nav = () => {
             name: "Contact",
             linkTo: "/contact",
          },
+         {
+            name: "About Us",
+            linkTo: "/contact",
+         },
       ],
    ];
 
-   const isNavMenuOpen = useSelector((state) => selectNavMenuHidden(state));
-
    return (
       <nav className='nav'>
-         <div className='nav__logo'>
-            <Link className='brand' to='/'>
-               <span className='brand__allan'>Allan</span>
-               <p className='brand__machine'>
-                  <strong>Sewing Machines</strong>
-               </p>
-            </Link>
+         <div className='nav__top'>
+            <div
+               className='icon icon--menu'
+               ref={menuIconRef}
+               onClick={() => toggleSideNav("menu")}
+            >
+               <MenuIcon className='icon_menu' />
+            </div>
+
+            <div className='nav__logo'>
+               <Link className='logo' to='/'>
+                  <OuterLogo className='logo__outer' />
+                  <InnerLogo className='logo__inner' />
+               </Link>
+            </div>
+            <div className='nav__icons'>
+               <div
+                  className='icon icon--search'
+                  ref={searchIconRef}
+                  onClick={() => toggleSideNav("search")}
+               >
+                  <SearchIcon />
+               </div>
+               <div
+                  className='icon icon--person'
+                  ref={personIconRef}
+                  onClick={() => toggleSideNav("person")}
+               >
+                  <PersonIcon />
+               </div>
+               <div
+                  className='icon icon--bag'
+                  id='toggleIconCart'
+                  ref={cartIconRef}
+                  onClick={() => toggleSideNav("cart")}
+               >
+                  <ShoppingBagIcon />
+                  <span className='icon__count'>
+                     {itemCount > 0 && itemCount}
+                  </span>
+               </div>
+            </div>
          </div>
-         <div className='nav__list'>
+         <div className='nav__bottom'>
             <ul>
                {links[0].map((x, i) => (
                   <li key={i}>
@@ -94,46 +130,6 @@ const Nav = () => {
                      </NavLink>
                   </li>
                ))}
-               <li>
-                  <div
-                     className='icon icon--search'
-                     ref={searchIconRef}
-                     onClick={() => toggleSideNav("search")}
-                  >
-                     <SearchIcon />
-                  </div>
-               </li>
-               <li>
-                  <div
-                     className='icon icon--person'
-                     ref={personIconRef}
-                     onClick={() => toggleSideNav("person")}
-                  >
-                     <PersonIcon />
-                  </div>
-               </li>
-               <li>
-                  <div
-                     className='icon icon--bag'
-                     id='toggleIconCart'
-                     ref={cartIconRef}
-                     onClick={() => toggleSideNav("cart")}
-                  >
-                     <ShoppingBagIcon />
-                     <span className='icon__count'>
-                        {itemCount > 0 && itemCount}
-                     </span>
-                  </div>
-               </li>
-               <li>
-                  <div
-                     className='icon icon--menu'
-                     ref={menuIconRef}
-                     onClick={() => toggleSideNav("menu")}
-                  >
-                     <MenuIcon className='icon_menu' />
-                  </div>
-               </li>
             </ul>
          </div>
 

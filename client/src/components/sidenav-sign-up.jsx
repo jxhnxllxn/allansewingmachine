@@ -1,157 +1,164 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../redux/auth/auth-action";
-import MyButton from './button';
-import FormField from './form-field';
-import {update,generateData,isFormValid} from '../utils/helper/form-action';
+import MyButton from "./button";
+import FormField from "./form-field";
+import { update, generateData, isFormValid } from "../utils/helper/form-action";
 
-  const SignUp = ({history}) => {
-    const dispatch = useDispatch()
-    const [formField, setFormField] = useState({
-        formError: false,
-        formSuccess:'',
-        formData:{
-            name:{
-                element:'input',
-                label:'Full name',
-                value:'',
-                config:{
-                    name:'name_input',
-                    type:'text',
-                },
-                validation:{
-                    required:true,
-                },
-                valid:false,
-                touched:false,
-                validationMessage:''
+const SignUp = ({ history }) => {
+   const dispatch = useDispatch();
+   const [formField, setFormField] = useState({
+      formError: false,
+      formSuccess: "",
+      formData: {
+         name: {
+            element: "input",
+            value: "",
+            showlabel: true,
+            config: {
+               label: "Name:",
+               name: "name_input",
+               type: "text",
+               placeholder: "Enter your name",
             },
-            email:{
-                element:'input',
-                label:'Email',
-                value:'',
-                config:{
-                    name:'email_input',
-                    type:'email',
-                },
-                validation:{
-                    required:true,
-                    email:true,
-                },
-                valid:false,
-                touched:false,
-                validationMessage:''
+            validation: {
+               required: true,
             },
-            password:{
-                element:'input',
-                label:'Password',
-                value:'',
-                config:{
-                    name:'password_input',
-                    type:'password',
-                },
-                validation:{
-                    required:true,
-                },
-                valid:false,
-                touched:false,
-                validationMessage:''
+            valid: false,
+            touched: false,
+            validationMessage: "",
+         },
+         email: {
+            element: "input",
+
+            value: "",
+            showlabel: true,
+            config: {
+               label: "Email:",
+               name: "email_input",
+               type: "email",
+               placeholder: "Enter your email",
             },
-            confirmPassword:{
-                element:'input',
-                label:'Confirm password',
-                value:'',
-                config:{
-                    name:'confirm_password_input',
-                    type:'password',
-                },
-                validation:{
-                    required:true,
-                    confirm: 'password'
-                },
-                valid:false,
-                touched:false,
-                validationMessage:''
-            }
-        }
-    })
+            validation: {
+               required: true,
+               email: true,
+            },
+            valid: false,
+            touched: false,
+            validationMessage: "",
+         },
+         password: {
+            element: "input",
+            value: "",
+            showlabel: true,
+            config: {
+               label: "Password:",
+               name: "password_input",
+               type: "password",
+               placeholder: "Enter your password",
+            },
+            validation: {
+               required: true,
+            },
+            valid: false,
+            touched: false,
+            validationMessage: "",
+         },
+         confirmPassword: {
+            element: "input",
+            value: "",
+            showlabel: true,
+            config: {
+               label: "Confirm password:",
+               name: "confirm_password_input",
+               type: "password",
+               placeholder: "Confirm your password",
+            },
+            validation: {
+               required: true,
+               confirm: "password",
+            },
+            valid: false,
+            touched: false,
+            validationMessage: "",
+         },
+      },
+   });
 
-    const updateForm = (element) => {
-        const newFormData = update(element,formField.formData,'register');
-        setFormField({
-            formError:false,
-            formData: newFormData,
-        })
-    }
+   const updateForm = (element) => {
+      const newFormData = update(element, formField.formData, "register");
+      setFormField({
+         formError: false,
+         formData: newFormData,
+      });
+   };
 
-    const submitForm = async e => {
-        e.preventDefault();
-        let dataToSubmit = generateData(formField.formData,'register');
-        let formIsValid = isFormValid(formField.formData,'register');
+   const submitForm = async (e) => {
+      e.preventDefault();
+      let dataToSubmit = generateData(formField.formData, "register");
+      let formIsValid = isFormValid(formField.formData, "register");
 
-        if(formIsValid){
-            dispatch(register(dataToSubmit))
-                .then(res => {
-                if(res.payload.success){
-                    if(res.payload.isAdmin){
-                        history.push('/admin')
-                    }else{
-                        history.push('/cart')
-                    }
-                }else{
-                    setFormField({...formField,formError:true})
-                }
-                })
-                .catch(err => {
-                    console.log(err)
-                    setFormField({...formField,formError:true})
-                })
-        }else{
-            setFormField({...formField,formError:true})
-        }
-    }
+      if (formIsValid) {
+         dispatch(register(dataToSubmit))
+            .then((res) => {
+               if (res.payload.success) {
+                  if (res.payload.isAdmin) {
+                     history.push("/admin");
+                  } else {
+                     history.push("/cart");
+                  }
+               } else {
+                  setFormField({ ...formField, formError: true });
+               }
+            })
+            .catch((err) => {
+               console.log(err);
+               setFormField({ ...formField, formError: true });
+            });
+      } else {
+         setFormField({ ...formField, formError: true });
+      }
+   };
 
-
-  return (
-    <div className='sign_up_wrapper'>
-      <h2>Do not have a account?</h2>
-        <span>Sign up with your email and password</span>
-        <form onSubmit={e => submitForm(e)}>
+   return (
+      <div className='authWrapper'>
+         <h2>Register</h2>
+         <span>Sign up with your email and password</span>
+         <form onSubmit={(e) => submitForm(e)}>
             <FormField
-                id={'name'}
-                formData={formField.formData.name}
-                change={(element) => updateForm(element)}
+               id={"name"}
+               formData={formField.formData.name}
+               change={(element) => updateForm(element)}
             />
             <FormField
-                id={'email'}
-                formData={formField.formData.email}
-                change={(element) => updateForm(element)}
+               id={"email"}
+               formData={formField.formData.email}
+               change={(element) => updateForm(element)}
             />
             <FormField
-                id={'password'}
-                formData={formField.formData.password}
-                change={(element) => updateForm(element)}
+               id={"password"}
+               formData={formField.formData.password}
+               change={(element) => updateForm(element)}
             />
             <FormField
-                id={'confirmPassword'}
-                formData={formField.formData.confirmPassword}
-                change={(element) => updateForm(element)}
+               id={"confirmPassword"}
+               formData={formField.formData.confirmPassword}
+               change={(element) => updateForm(element)}
             />
-            <MyButton runAction={e => submitForm(e)} type="submit" title="Sign Up" value="Submit" />
-        </form>
+            <MyButton
+               runAction={(e) => submitForm(e)}
+               type='submit'
+               title='Sign Up'
+               value='Submit'
+            />
+         </form>
 
-        {formField.formError ?
-          <div className="error_label">
-              Please check your data
-          </div> : null
-        }
-
-
-
-        <span className="signIn">Already have an account sign in <Link style={{textDecoration:'underline'}} to='/signin'>here</Link></span>
-    </div>
-)
-}
+         {formField.formError ? (
+            <div className='error_label'>Please check your data</div>
+         ) : null}
+      </div>
+   );
+};
 
 export default SignUp;

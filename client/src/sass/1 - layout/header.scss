@@ -1,7 +1,6 @@
 .header {
    z-index: 102;
    background-color: $background;
-   color: $black;
    text-transform: uppercase;
    border-bottom: 1px solid $border;
    position: fixed;
@@ -9,12 +8,18 @@
    top: 0;
    left: 0;
    right: 0;
-   height: 6rem;
    &__promotion {
       @include flexAlignItemCenter;
       justify-content: center;
+      background-color: #614e39;
+      background-image: linear-gradient(
+         to right bottom,
+         rgba(#614e39, 1),
+         rgba(#2b1b09, 1)
+      );
       height: 2rem;
       border-bottom: 1px solid $border;
       font-size: 80%;
+      color: $white;
    }
 }

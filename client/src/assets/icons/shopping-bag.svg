@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" stroke-width="2" stroke="#212121bf" fill="none" stroke-linecap="round" stroke-linejoin="round">
+ <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#000"  fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path stroke="none" d="M0 0h24v24H0z"/>
     <circle cx="9" cy="19" r="2" />
     <circle cx="17" cy="19" r="2" />

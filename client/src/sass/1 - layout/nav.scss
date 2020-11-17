@@ -1,44 +1,69 @@
 .nav {
-   height: 4rem;
    position: relative;
-   @include flexAlignItemCenter;
-   @include container;
-   justify-content: space-between;
    text-transform: uppercase;
    color: $black--secondary;
    font-size: 80%;
-   &__logo {
-      .brand {
-         line-height: 0.8;
-         &__allan {
-            font-size: 2rem;
-            z-index: 1;
-            font-family: $font-brand;
-            text-transform: lowercase;
-            &::first-letter {
-               font-size: 4rem;
+   &__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 9rem;
+      @include container;
+      position: relative;
+      .nav__logo {
+         @include absCenter;
+         .logo {
+            &__inner {
+               @include absCenter;
+               height: 5rem;
+               width: 5rem;
+               display: inline-block;
             }
-            color: $black;
-            font-weight: 400;
+            &__outer {
+               height: 7rem;
+               width: 7rem;
+               backface-visibility: hidden;
+               -webkit-animation: spin 60s linear infinite;
+               animation: spin 60s linear infinite;
+               backface-visibility: hidden;
+            }
          }
-         &__machine {
-            color: $black--secondary;
+         @-webkit-keyframes spin {
+            0% {
+               -webkit-transform: rotate(360deg);
+            }
+            100% {
+               -webkit-transform: rotate(0deg);
+            }
+         }
+
+         @keyframes spin {
+            0% {
+               transform: rotate(360deg);
+            }
+            100% {
+               transform: rotate(0deg);
+            }
+         }
+      }
+      .nav__icons {
+         @include flexAlignItemCenter;
+         .icon {
+            margin-left: 1rem;
+            cursor: pointer;
          }
       }
    }
-   &__list {
-      justify-content: space-between;
-      & ul {
+   &__bottom {
+      height: 3rem;
+      border-top: 1px solid $border;
+      ul {
          @include flexAlignItemCenter;
-         font-weight: 600;
-         @include media("<tablet") {
-            flex-direction: column;
-            display: none;
-         }
+         justify-content: center;
          li {
-            a,
-            div {
+            a {
                padding: 1rem 1rem;
+               color: rgba($black, 0.7);
                display: block;
                cursor: pointer;
                &:hover,
@@ -46,30 +71,7 @@
                   color: $black;
                }
             }
-            &:last-child() {
-               display: none;
-               @include media("<tablet") {
-                  display: block;
-               }
-            }
          }
       }
    }
 }
-
-// &.icon--bag {
-//   position: relative;
-//   z-index: 1;
-//   .icon__count {
-//      position: absolute;
-//      bottom: -0.2rem;
-//      right: -0.2rem;
-//      background-color: $black;
-//      border-radius: 50%;
-//      min-width: 1rem;
-//      text-align: center;
-//      color: $background;
-//      font-size: 80%;
-//      letter-spacing: -1px;
-//   }
-// }

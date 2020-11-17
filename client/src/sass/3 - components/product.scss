@@ -1,6 +1,6 @@
 .product-card {
    display: flex;
-   transition: 0.3s linear;
+   transition: all 0.3s;
    justify-content: space-between;
    flex-direction: column;
    border: 1px solid $border;
@@ -23,12 +23,11 @@
       margin-bottom: 0.5rem;
    }
    h2 {
-      backface-visibility: hidden;
-      font-size: 110%;
-      font-weight: 700;
+      font-size: 100%;
+      padding: 1rem 0;
+      font-weight: 600;
    }
    h3 {
-      backface-visibility: hidden;
       font-size: 90%;
       font-weight: 500;
       &:hover {

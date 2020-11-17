@@ -1,23 +1,25 @@
 .sidenav {
-   position: fixed;
-   top: 4rem;
+   position: absolute;
+   top: 8rem;
    right: 0;
    z-index: 102;
-   width: 28rem;
+   width: 100%;
    height: calc(100vh - 3rem);
    background-color: $background;
-   border-left: 1px solid $border;
    overflow-x: hidden;
    @include customScroll;
-   @include media("<tablet") {
-      width: 60%;
-   }
-   @include media("<phone") {
-      width: 100%;
+   &__header {
+      padding-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
    }
    &__main {
-      padding: 2rem 2rem 8rem 2rem;
+      @include container;
       margin-bottom: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
    }
 
    &__footer {

@@ -30,8 +30,7 @@
 @import "./2\ -\ pages/admin/order";
 @import "./2\ -\ pages/admin/product-add";
 @import "./2\ -\ pages/admin/product";
-@import "./2\ -\ pages/sign-in";
-@import "./2\ -\ pages/sign-up";
+@import "./2\ -\ pages/auth-wrapper";
 
 // 3 - COMPONENTS
 
@@ -50,6 +49,7 @@
 @import "./3\ -\ components/loading";
 @import "./3\ -\ components/modal";
 @import "./3\ -\ components/product";
+@import "./3\ -\ components/sidenav-auth";
 @import "./3\ -\ components/sidenav-setting";
 @import "./3\ -\ components/slider";
 

@@ -1,62 +1,27 @@
-$sub-color: grey;
-
-@mixin shrinkLabel {
-  top: -0.8rem;
-  font-size: 0.8rem;
-  color: $black;
-}
-
 .formBlock {
-  position: relative;
-  margin: 2.5rem 0;
-  .error_label {
-    position: absolute;
-    bottom: -1.5rem;
-    color: #f44336;
-    display: block;
-    font-size: 0.8rem;
-    font-weight: bolder;
-    padding: 0.3rem;
-  }
+   margin: 0.5rem 0;
+   .label_inputs {
+      color: rgba($black, 0.7);
+   }
+   input {
+      padding: 0.5rem;
+      margin: 0.3rem 0 1rem 0;
+      border: 1px solid $border;
+      width: 100%;
+   }
+   .error_label {
+      color: rgba($red, 0.8);
+      transform: translateY(-0.5rem);
+      display: block;
+   }
 
-  .form_input {
-    background: none;
-    background-color: transparent;
-    color: $sub-color;
-    font-size: 1rem;
-    padding: 0.8rem 0.8rem 0.8rem 0.3rem;
-    display: block;
-    width: 100%;
-    border: none;
-    border-radius: 0;
-    border-bottom: 1px solid $sub-color;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:focus ~ .form_input_label {
-      @include shrinkLabel();
-    }
-  }
-
-  input[type="password"] {
-    letter-spacing: 0.3em;
-  }
-
-  .form_input_label {
-    color: $sub-color;
-    font-size: 1rem;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 0.2rem;
-    top: 1.3rem;
-    transition: 300ms ease all;
-    backface-visibility: hidden;
-
-    &.shrink {
-      @include shrinkLabel();
-    }
-  }
+   textarea {
+      width: 100%;
+      height: 51px;
+      font-size: 15px;
+      padding: 1rem;
+      box-sizing: border-box;
+      margin-top: 5px;
+      border: 1px solid $border;
+   }
 }
