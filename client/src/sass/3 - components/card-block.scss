@@ -19,9 +19,9 @@
    &__product-list {
       padding: 1rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(10rem, 15rem));
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
       grid-gap: 1rem;
-      justify-content: space-between;
+      justify-content: center;
       @include media("<tablet") {
          grid-template-columns: repeat(2, 13rem);
          justify-content: center;

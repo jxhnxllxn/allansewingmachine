@@ -43,9 +43,9 @@ const SideNavSetting = () => {
                </li>
             ))}
             <li>
-               <Link onClick={handleLogout} className='ssetting__logout'>
+               <span onClick={handleLogout} className='ssetting__logout'>
                   Logout
-               </Link>
+               </span>
             </li>
          </ul>
       </div>

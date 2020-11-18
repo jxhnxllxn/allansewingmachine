@@ -9,11 +9,11 @@ const Product = require("../models/Product.model");
 exports.getProductToHome = asyncHandler(async (req, res, next) => {
    const bestSeller = await Product.find({})
       .sort({ sold: -1 })
-      .limit(4)
+      .limit(12)
       .populate("collectionId");
    const newArrival = await Product.find({})
       .sort({ createdAt: -1 })
-      .limit(4)
+      .limit(12)
       .populate("collectionId");
 
    res.status(200).json({

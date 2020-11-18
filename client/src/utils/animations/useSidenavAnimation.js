@@ -4,7 +4,7 @@ const useCartToggleAnimation = (tl) => {
       tl.to(".header", {
          duration: 0.5,
          ease: "slow(0.7, 0.7, false)",
-         css: { top: "-2rem" },
+         css: { top: "-5rem" },
       })
          .to(".nav__icons", {
             duration: 0,

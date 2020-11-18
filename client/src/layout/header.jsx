@@ -21,13 +21,7 @@ const Header = () => {
    let lastScrollTop = 0;
    const scrollFunction = () => {
       const st = window.scrollY;
-      // if (st > lastScrollTop) {
-      //    tl__header.reversed(true);
-      // } else {
-      //    tl__header.reversed(false);
-      // }
-
-      if (st > 200) {
+      if (st > 100) {
          tl__header.reversed(true);
       } else {
          tl__header.reversed(false);
@@ -47,9 +41,6 @@ const Header = () => {
 
    return (
       <header className='header' ref={headerRef}>
-         <div className='header__promotion'>
-            <p>Free Shipping For Batangas Area</p>
-         </div>
          <Nav isNavMenuIconsHidden={isNavMenuIconsHidden} />
       </header>
    );

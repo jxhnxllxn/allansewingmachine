@@ -99,9 +99,9 @@
       content: "";
       position: absolute;
       width: 0%;
-      left: 0;
-      height: 0.5px;
-      bottom: -3px;
+      left: 0px;
+      height: 2px;
+      bottom: -7px;
       color: $black;
       transform-origin: left;
       transform: translateY(-50%);
@@ -122,7 +122,7 @@
    &.active {
       &:after {
          opacity: 1;
-         width: 50%;
+         width: 1rem;
       }
    }
 }

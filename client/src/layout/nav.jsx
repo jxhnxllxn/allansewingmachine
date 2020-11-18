@@ -9,7 +9,6 @@ import { toggleMenuIcons } from "../redux/ui/ui-actions";
 
 import { ReactComponent as MenuIcon } from "../assets/icons/menu.svg";
 import { ReactComponent as PersonIcon } from "../assets/icons/person.svg";
-import { ReactComponent as SearchIcon } from "../assets/icons/search.svg";
 import { ReactComponent as ShoppingBagIcon } from "../assets/icons/shopping-bag.svg";
 
 import { ReactComponent as OuterLogo } from "../assets/icons/logo2.svg";
@@ -23,7 +22,6 @@ import SideNav from "./sidenav";
 
 const Nav = ({ isNavMenuIconsHidden, mTop }) => {
    const dispatch = useDispatch();
-   const searchIconRef = useRef();
    const personIconRef = useRef();
    const cartIconRef = useRef();
    const sidenavRef = useRef();
@@ -46,7 +44,7 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
    };
 
    useOutsideClick(
-      [sidenavRef, cartIconRef, personIconRef, searchIconRef],
+      [sidenavRef, cartIconRef, personIconRef],
       [isNavMenuIconsHidden],
       () => isNavMenuIconsHidden && toggleSideNav()
    );
@@ -65,76 +63,51 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
             name: "Services",
             linkTo: "/services",
          },
-         {
-            name: "Contact",
-            linkTo: "/contact",
-         },
-         {
-            name: "About Us",
-            linkTo: "/contact",
-         },
       ],
    ];
 
    return (
-      <nav className='nav'>
-         <div className='nav__top'>
-            <div
-               className='icon icon--menu'
-               ref={menuIconRef}
-               onClick={() => toggleSideNav("menu")}
-            >
-               <MenuIcon className='icon_menu' />
-            </div>
-
+      <>
+         <nav className='nav'>
             <div className='nav__logo'>
-               <Link className='logo' to='/'>
-                  <OuterLogo className='logo__outer' />
-                  <InnerLogo className='logo__inner' />
-               </Link>
+               <span>Allan</span>
             </div>
-            <div className='nav__icons'>
-               <div
-                  className='icon icon--search'
-                  ref={searchIconRef}
-                  onClick={() => toggleSideNav("search")}
-               >
-                  <SearchIcon />
-               </div>
-               <div
-                  className='icon icon--person'
-                  ref={personIconRef}
-                  onClick={() => toggleSideNav("person")}
-               >
-                  <PersonIcon />
-               </div>
-               <div
-                  className='icon icon--bag'
-                  id='toggleIconCart'
-                  ref={cartIconRef}
-                  onClick={() => toggleSideNav("cart")}
-               >
-                  <ShoppingBagIcon />
-                  <span className='icon__count'>
-                     {itemCount > 0 && itemCount}
-                  </span>
-               </div>
-            </div>
-         </div>
-         <div className='nav__bottom'>
-            <ul>
-               {links[0].map((x, i) => (
-                  <li key={i}>
-                     <NavLink exact to={x.linkTo}>
-                        {x.name}
-                     </NavLink>
+            <div className='nav__list'>
+               <ul>
+                  {links[0].map((x, i) => (
+                     <li key={i}>
+                        <NavLink exact to={x.linkTo}>
+                           {x.name}
+                        </NavLink>
+                     </li>
+                  ))}
+                  <li>
+                     <div
+                        className='icon icon--person'
+                        ref={personIconRef}
+                        onClick={() => toggleSideNav("person")}
+                     >
+                        <PersonIcon />
+                     </div>
                   </li>
-               ))}
-            </ul>
-         </div>
-
+                  <li>
+                     <div
+                        className='icon icon--bag'
+                        id='toggleIconCart'
+                        ref={cartIconRef}
+                        onClick={() => toggleSideNav("cart")}
+                     >
+                        <ShoppingBagIcon />
+                        <span className='icon__count'>
+                           {itemCount > 0 && itemCount}
+                        </span>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </nav>
          <SideNav sidenavRef={sidenavRef} activeMenuIcons={activeMenuIcons} />
-      </nav>
+      </>
    );
 };
 

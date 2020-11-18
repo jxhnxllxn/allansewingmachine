@@ -2,10 +2,9 @@ import { useEffect } from "react";
 
 const NavScrollAnimation = (tl) => {
    useEffect(() => {
-      tl.from(".header", {
+      tl.from(".nav", {
          duration: 0.5,
-         ease: "slow(0.7, 0.7, false)",
-         css: { top: "-2rem" },
+         css: { height: "3rem" },
       });
       // eslint-disable-next-line
    }, []);
