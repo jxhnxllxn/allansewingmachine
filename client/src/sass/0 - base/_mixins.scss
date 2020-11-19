@@ -100,18 +100,16 @@
       position: absolute;
       width: 0%;
       left: 0px;
-      height: 2px;
+      height: 3px;
       bottom: -7px;
-      color: $black;
       transform-origin: left;
       transform: translateY(-50%);
-      background-color: $black;
+      background-color: $white;
       overflow: hidden;
       box-shadow: none;
    }
 
    &:hover {
-      color: $black;
       &:after {
          transform-origin: right;
          transform: translateY(-50%);

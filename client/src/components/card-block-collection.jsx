@@ -1,35 +1,29 @@
-import React from 'react'
-import Collection from './collection'
+import React from "react";
+import Collection from "./collection";
 
 const CardBlock = (props) => {
-    const renderCard= () => (
-        props.list ?
-            props.list.map((card,i)=> <Collection key={i} {...card}/>)
-        :null
-    )
+   const renderCard = () =>
+      props.list
+         ? props.list.map((card, i) => <Collection key={i} {...card} />)
+         : null;
 
-    return (
-        <div className="card_block">
-            <div className="container">
-                {
-                    props.title ? 
-                        <div className="title">
-                            {props.title}
-                        </div>
-                    :null
-                }
-                <div style={{
-                    display:'grid',
-                    gridTemplateColumns: "repeat(auto-fit, 15rem)",
-                    gridGap: '2rem',
-                    justifyContent:'center',
-                    alignItems:'center'
-                }}>
-                    {renderCard(props.list)}
-                </div>
-            </div>
-        </div>
-    )
-}
+   return (
+      <div className='card_block'>
+         {props.title ? <div className='title'>{props.title}</div> : null}
+         <div
+            style={{
+               display: "grid",
+               zIndex: "-1",
+               gridTemplateColumns: "repeat(14rem, 1fr)",
+               gridGap: "1rem",
+               justifyContent: "center",
+               alignItems: "center",
+            }}
+         >
+            {renderCard(props.list)}
+         </div>
+      </div>
+   );
+};
 
-export default CardBlock
+export default CardBlock;

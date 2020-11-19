@@ -5,15 +5,15 @@ import { getProductsToShop } from "../redux/product/product-action";
 import { price } from "../components/fixed-categories";
 import LoadMoreCards from "../components/load-more";
 
-const ShopCollection = (props) => {
-   const products = useSelector(({ product }) => product);
+const ShopCollection = ({ match }) => {
    const dispatch = useDispatch();
+   const products = useSelector(({ product }) => product);
 
    const [state, setState] = useState({
       limit: 20,
       skip: 0,
       filters: {
-         collections: [props.match.params.collection],
+         // collections: [match.params.collection ? match : null],
          price: [],
       },
    });
@@ -73,21 +73,94 @@ const ShopCollection = (props) => {
    };
 
    return (
-      <div className='shop_collection_wrapper'>
-         <div>
-            <div className='shop_wrapper'>
-               <div className='left'>rad</div>
-               <div className='right'>
-                  <div className='shop_options'></div>
-                  <div>
-                     <LoadMoreCards
-                        limit={state.limit}
-                        size={products.toShopSize}
-                        products={products.toShop}
-                        loadMore={() => loadMoreCards()}
-                     />
-                  </div>
+      <div className='shop'>
+         <div className='shop__toolbar'>Shop / Industrial / 4threads</div>
+         <div className='shop__filter'>
+            {/* collection then category */}
+            <div className='shop__categories'>
+               <div className='dropdown'>
+                  <span>Household</span>
+                  <ul class='dropdown-menu' id='dropdownList'>
+                     <li>
+                        <a href='#'>Action</a>
+                     </li>
+                     <li>
+                        <a href='#'>Another action</a>
+                     </li>
+                     <li>
+                        <a href='#'>Something else here</a>
+                     </li>
+                  </ul>
                </div>
+
+               <div className='dropdown'>
+                  <span>Industrial</span>
+                  <ul class='dropdown-menu' id='dropdownList'>
+                     <li>
+                        <a href='#'>Action</a>
+                     </li>
+                     <li>
+                        <a href='#'>Another action</a>
+                     </li>
+                     <li>
+                        <a href='#'>Something else here</a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div className='shop__filters'>
+               <div className='filter'>
+                  <span className='title'>Machine Type</span>
+                  <ul>
+                     <li>
+                        <input type='checkbox' name='' id='' /> Embrodery Only
+                     </li>
+                     <li>
+                        <input type='checkbox' name='' id='' /> Commercial
+                        Embrodery
+                     </li>
+                     <li>
+                        <input type='checkbox' name='' id='' /> Industrial
+                        Sewing
+                     </li>
+                     <li>
+                        <input type='checkbox' name='' id='' /> Industrial
+                        Overlock
+                     </li>
+                     <li>
+                        <input type='checkbox' name='' id='' /> Industrial
+                        Buttonhole Machines
+                     </li>
+                  </ul>
+                  <span className='filter__showmore'>show more</span>
+               </div>
+               <div className='filter'>
+                  <span className='title'>Brands</span>
+                  <ul>
+                     <li>BROTHER</li>
+                     <li>CHOICE</li>
+                     <li>JUKI</li>
+                     <li>JACK</li>
+                     <li>SIRUBA</li>
+                  </ul>
+                  <span className='filter__showmore'>show more</span>
+               </div>
+               <div className='filter'>
+                  <span className='title'>Price Range</span>
+                  <div></div>
+                  <div></div>
+               </div>
+            </div>
+         </div>
+         <div className='shop__products'>
+            <div className='shop__pagination'></div>
+            <div>
+               <LoadMoreCards
+                  limit={state.limit}
+                  size={products.toShopSize}
+                  products={products.toShop}
+                  loadMore={() => loadMoreCards()}
+               />
             </div>
          </div>
       </div>

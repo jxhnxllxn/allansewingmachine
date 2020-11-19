@@ -21,7 +21,7 @@ const Header = () => {
    let lastScrollTop = 0;
    const scrollFunction = () => {
       const st = window.scrollY;
-      if (st > 100) {
+      if (st > lastScrollTop) {
          tl__header.reversed(true);
       } else {
          tl__header.reversed(false);
@@ -32,12 +32,12 @@ const Header = () => {
 
    const scrollThrottle = useThrottle(scrollFunction, 100);
 
-   useEffect(() => {
-      window.addEventListener("scroll", scrollThrottle);
-      return () => {
-         window.removeEventListener("scroll", scrollThrottle);
-      };
-   }, []);
+   // useEffect(() => {
+   //    window.addEventListener("scroll", scrollThrottle);
+   //    return () => {
+   //       window.removeEventListener("scroll", scrollThrottle);
+   //    };
+   // }, []);
 
    return (
       <header className='header' ref={headerRef}>

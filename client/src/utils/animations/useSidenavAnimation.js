@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 const useCartToggleAnimation = (tl) => {
    useEffect(() => {
-      tl.to(".header", {
-         duration: 0.5,
+      tl.to(".nav__bottom", {
+         duration: 0.3,
          ease: "slow(0.7, 0.7, false)",
-         css: { top: "-5rem" },
+         css: { height: 0 },
       })
          .to(".nav__icons", {
             duration: 0,

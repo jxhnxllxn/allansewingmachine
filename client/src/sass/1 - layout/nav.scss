@@ -1,70 +1,63 @@
 .nav {
-   position: relative;
-   text-transform: uppercase;
-   color: $black--secondary;
-   font-size: 80%;
-
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   height: 5rem;
-   @include container;
+   text-transform: capitalize;
+   font-size: 100%;
    position: relative;
    overflow: hidden;
-   &__logo {
-      .logo {
-         &__inner {
-            @include absCenter;
-            height: 5rem;
-            width: 5rem;
-            display: inline-block;
-         }
-         &__outer {
-            height: 7rem;
-            width: 7rem;
-            backface-visibility: hidden;
-            -webkit-animation: spin 60s linear infinite;
-            animation: spin 60s linear infinite;
-            backface-visibility: hidden;
-         }
-      }
-      @-webkit-keyframes spin {
-         0% {
-            -webkit-transform: rotate(360deg);
-         }
-         100% {
-            -webkit-transform: rotate(0deg);
-         }
-      }
 
-      @keyframes spin {
-         0% {
-            transform: rotate(360deg);
+   background-color: rgb(33, 85, 85);
+   &__top {
+      @include container;
+      color: $white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4rem;
+      .nav__logo {
+         display: flex;
+         flex-direction: column;
+         span:first-child() {
+            font-family: $font-brand;
+            font-size: 120%;
          }
-         100% {
-            transform: rotate(0deg);
+      }
+      .nav__listTop {
+         ul {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            li {
+               padding: 1rem;
+            }
          }
       }
    }
-   &__list {
+   &__bottom {
+      border-top-left-radius: 25px;
+      border-top-right-radius: 5px;
+      background-color: $white;
+      @include container;
+      color: $black--secondary;
+      border-bottom: 2px solid $border;
       height: 3rem;
-      ul {
-         @include flexAlignItemCenter;
-         justify-content: center;
-         li {
-            padding: 1rem 1.5rem;
-            a,
-            div {
-               display: block;
-               cursor: pointer;
-            }
-            a {
-               color: rgba($black, 0.7);
-               @include underlineOnHover;
+      .nav__listBottom {
+         ul {
+            @include flexAlignItemCenter;
+            justify-content: flex-end;
+            li {
+               border-left: 1px solid $border;
+               a {
+                  padding: 1rem 1.5rem;
+                  display: block;
+                  cursor: pointer;
+               }
+               a {
+                  @include underlineOnHover;
+               }
             }
          }
       }
    }
+
    &__icons {
       @include flexAlignItemCenter;
       .icon {

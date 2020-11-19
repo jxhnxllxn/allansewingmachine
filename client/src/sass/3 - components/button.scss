@@ -1,54 +1,54 @@
 .my_link {
-  cursor: pointer;
-  .card_link {
-    border: 1px solid rgba($color-royal-4, 1);
-    padding: 0 1rem;
-    color: rgba($color-royal-4, 1);
-    clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
-    transition: ease-out 0.3s;
-    &:hover {
-      transform: translateY(1rem);
-      letter-spacing: 0.2rem;
-      clip-path: polygon(0 0, 85% 0, 100% 100%, 15% 100%);
-    }
-  }
-  .bag_link {
-    height: 1.5rem;
-    width: 1.5rem;
-    overflow: hidden;
-  }
-  .link_default {
-    align-self: flex-start;
-    text-transform: uppercase;
-    padding: 0.3rem 1rem;
-    background: rgba($color-royal-1, 1);
-    margin-top: 0.5rem;
-    transition: ease-out 0.3s;
-    color: $color-royal-5;
-    border-radius: 1.5rem;
-    letter-spacing: 0.5rem;
-    border: 0.2rem solid rgba($color-royal-1, 1);
-    font-weight: bolder;
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-  }
-  .button_primary,
-  .add_to_cart_link {
-    text-align: center;
-    line-height: 2rem;
-    padding: 0px 0.5rem;
-    font-size: 1.3rem;
-    color: $background;
-    border: none;
-    border-radius: 2px;
-    outline: none;
-    transition: ease-out 0.3s;
-    background-color: $color-royal-2;
+   cursor: pointer;
+   .card_link {
+      border: 1px solid rgba($color-royal-4, 1);
+      padding: 0 1rem;
+      color: rgba($color-royal-4, 1);
+      clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%);
+      transition: ease-out 0.3s;
+      &:hover {
+         transform: translateY(1rem);
+         letter-spacing: 0.2rem;
+         clip-path: polygon(0 0, 85% 0, 100% 100%, 15% 100%);
+      }
+   }
+   .bag_link {
+      height: 1.5rem;
+      width: 1.5rem;
+      overflow: hidden;
+   }
+   .link_default {
+      align-self: flex-start;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      // background: rgba($color-royal-1, 1);
+      margin-top: 0.5rem;
+      transition: ease-out 0.3s;
+      // color: $color-royal-5;
+      border-radius: 1.5rem;
+      letter-spacing: 0.5rem;
+      // border: 0.2rem solid rgba($color-royal-1, 1);
+      font-weight: bolder;
+      &:hover {
+         transform: translateY(-2px);
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+   }
+   .button_primary,
+   .add_to_cart_link {
+      text-align: center;
+      line-height: 2rem;
+      padding: 0px 0.5rem;
+      font-size: 1.3rem;
+      color: $background;
+      border: none;
+      border-radius: 2px;
+      outline: none;
+      transition: ease-out 0.3s;
+      // background-color: $color-royal-2;
 
-    &:hover {
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-  }
+      &:hover {
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+      }
+   }
 }

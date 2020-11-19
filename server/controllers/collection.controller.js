@@ -1,50 +1,57 @@
-const path = require('path');
-const errorResponse = require('../utils/errorResponse.util');
-const asyncHandler = require('express-async-handler');
-const Collection = require('../models/Collection.model');
-const fs = require('fs')
+const path = require("path");
+const errorResponse = require("../utils/errorResponse.util");
+const asyncHandler = require("express-async-handler");
+const Collection = require("../models/Collection.model");
+const fs = require("fs");
 
 // @desc    get all Collection
 // @route   GET /api/Collection
 // @access  Private
 exports.getCollections = asyncHandler(async (req, res, next) => {
-  res
-    .status(200)
-    .json(res.advanceResults);
-
+   res.status(200).json(res.advanceResults);
 });
 
 // @desc    get single Collection
 // @route   GET /api/Collection/:id
 // @access  Private
 exports.getCollection = asyncHandler(async (req, res, next) => {
-  const collection = await Collection.findById(req.params.id);
+   const collection = await Collection.findById(req.params.id);
 
-  if (!collection) {
-    return next(
-      new errorResponse(`Collection owner not found with ID of ${req.params.id}`, 404)
-    );
-  }
+   if (!collection) {
+      return next(
+         new errorResponse(
+            `Collection owner not found with ID of ${req.params.id}`,
+            404
+         )
+      );
+   }
 
-  res.status(200).json({ success: true, data: collection });
+   res.status(200).json({ success: true, data: collection });
 });
 
 // @desc    update Collection
 // @route   PUT /api/Collection/:id
 // @access  Private
 exports.updateCollection = asyncHandler(async (req, res, next) => {
+   const collection = await Collection.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+         new: true,
+         runValidators: true,
+      }
+   );
 
-  const collection = await Collection.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
+   if (!collection) {
+      return next(
+         new errorResponse(
+            `Collection not found with ID of ${req.params.id}`,
+            404
+         )
+      );
+   }
 
-  if (!collection) {
-    return next(new errorResponse(`Collection not found with ID of ${req.params.id}`, 404));
-  }
-
-  res.status(200).json({ success: true, data: collection });
-
+   res.status(200).json({ success: true, data: collection });
 });
 
 // exports.updateCollectionPhoto = asyncHandler(async(req,res,next) => {
@@ -88,38 +95,40 @@ exports.updateCollection = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/collection/:id
 // @access  Private
 exports.deleteCollection = asyncHandler(async (req, res, next) => {
-  const collection = await Collection.findById(req.params.id);
+   const collection = await Collection.findById(req.params.id);
 
-  if (!collection) {
-    return next(new errorResponse(`Collection not found with ID of ${req.params.id}`, 404));
-  }
+   if (!collection) {
+      return next(
+         new errorResponse(
+            `Collection not found with ID of ${req.params.id}`,
+            404
+         )
+      );
+   }
 
-  fs.unlink(`${process.env.FILE_UPLOAD_PATH}/${collection.collectionPhoto}`, async err => {
-    if (err) {
-      console.error(err);
-      return next(new errorResponse(`Problem with file deletion`, 500));
-    }
+   fs.unlink(
+      `${process.env.FILE_UPLOAD_PATH}/${collection.collectionPhoto}`,
+      async (err) => {
+         if (err) {
+            console.error(err);
+            return next(new errorResponse(`Problem with file deletion`, 500));
+         }
 
-    collection.remove();
+         collection.remove();
 
-    res
-      .status(200)
-      .json({ success: true, data: collection });
-
-  });
-
+         res.status(200).json({ success: true, data: collection });
+      }
+   );
 });
-
 
 // @desc      Upload photo for collection
 // @route     PUT /api/collection/:id/photo
 // @access    Private
 exports.createCollection = asyncHandler(async (req, res, next) => {
+   const collection = await Collection.create(req.body);
 
-  const collection = await Collection.create(req.body);
-
-  res.status(200).json({
-    success: true,
-    data: collection
-  })
-});  
+   res.status(200).json({
+      success: true,
+      data: collection,
+   });
+});

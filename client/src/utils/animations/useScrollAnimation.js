@@ -4,7 +4,7 @@ const NavScrollAnimation = (tl) => {
    useEffect(() => {
       tl.from(".nav", {
          duration: 0.5,
-         css: { height: "3rem" },
+         css: { top: "-4rem" },
       });
       // eslint-disable-next-line
    }, []);

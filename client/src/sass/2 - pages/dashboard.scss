@@ -1,22 +1,22 @@
 .user_nfo_panel {
-  background: #f8f8f8;
-  padding: 2rem;
-  margin-bottom: 2rem;
-  h1 {
-    margin: 0 0 1rem 0;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-  }
-  p {
-    display: flex;
-    span {
-      padding: 2px;
-      background-color: $color-royal-4;
-    }
-  }
-  span {
-    display: block;
-    font-size: 1.2rem;
-    font-weight: 300;
-  }
+   background: #f8f8f8;
+   padding: 2rem;
+   margin-bottom: 2rem;
+   h1 {
+      margin: 0 0 1rem 0;
+      text-transform: uppercase;
+      font-size: 1.5rem;
+   }
+   p {
+      display: flex;
+      span {
+         padding: 2px;
+         background-color: $white;
+      }
+   }
+   span {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 300;
+   }
 }

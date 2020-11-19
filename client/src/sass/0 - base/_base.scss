@@ -11,7 +11,7 @@ html {
    overflow-x: hidden;
    font-size: 80%;
    word-spacing: 0.15rem;
-   color: $black;
+   color: $black--secondary;
    // text-shadow: 0px 0px 2rem $black;
    font-family: $font-primary;
    letter-spacing: 1px;
@@ -89,25 +89,4 @@ a {
 
 ul {
    list-style: none;
-}
-
-.tag {
-   background-color: rgba($color-royal-2, 2);
-   color: rgba($color-royal-5, 0.8);
-   text-transform: uppercase;
-   border-radius: 0.5rem;
-}
-
-.low_title {
-   font-size: 2rem;
-   font-weight: 300;
-   text-transform: capitalize;
-   font-family: $font-brand;
-}
-
-.title {
-   text-transform: capitalize;
-   font-size: 3rem;
-   text-align: center;
-   font-family: $font-brand;
 }

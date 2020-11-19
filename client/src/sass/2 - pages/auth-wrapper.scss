@@ -10,14 +10,13 @@
    h2 {
       font-family: $font-brand;
       font-weight: 500;
-      font-size: 3rem;
+      font-size: 2rem;
       background-color: $background;
-      transform: rotate(-15deg);
       position: absolute;
-      top: -2.5rem;
+      top: -1rem;
    }
    span {
-      padding: 1.5rem;
+      padding: 1.5rem 0;
       color: rgba($black, 0.7);
    }
 }
