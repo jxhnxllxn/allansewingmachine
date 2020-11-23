@@ -5,6 +5,7 @@ import CardBlock from "../components/card-block";
 import { getProductsToHome } from "../redux/product/product-action";
 import Loading from "../components/loading";
 import Alert from "../components/alert";
+import HomeCollection from "../components/home-collection";
 
 const Home = () => {
    const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const Home = () => {
    }, [dispatch]);
    const productState = useSelector(({ product }) => product);
    const { loading, productToHome, error } = productState;
+
    return (
       <div className='home_wrapper'>
          <HomeSlider />
@@ -20,10 +22,18 @@ const Home = () => {
          {loading ? (
             <Loading />
          ) : error ? (
-            <Alert message={error} variant='danger' />
+            <Alert />
          ) : (
             <>
-               <CardBlock list={productToHome.bestSeller} title='Best Seller' />
+               <HomeCollection
+                  collections={productToHome.collections}
+                  loading={loading}
+                  error={error}
+               />
+               <CardBlock
+                  list={productToHome.bestSeller}
+                  title={"Best seller"}
+               />
             </>
          )}
       </div>

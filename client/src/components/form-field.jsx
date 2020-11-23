@@ -27,6 +27,7 @@ const FormField = ({ formData, change, id }) => {
                      value={formData.value}
                      onBlur={(event) => change({ event, id, blur: true })}
                      onChange={(event) => change({ event, id })}
+                     className='formfield formfield--input'
                   />
                   {showError()}
                </div>
@@ -43,6 +44,7 @@ const FormField = ({ formData, change, id }) => {
                      value={formData.value}
                      onBlur={(event) => change({ event, id, blur: true })}
                      onChange={(event) => change({ event, id })}
+                     className='formfield formfield--textarea'
                   />
                   {showError()}
                </div>
@@ -59,6 +61,7 @@ const FormField = ({ formData, change, id }) => {
                      value={formData.value}
                      onBlur={(event) => change({ event, id, blur: true })}
                      onChange={(event) => change({ event, id })}
+                     className='formfield formfield--select'
                   >
                      <option value=''>Select One</option>
                      {formData.config.options.map((item) => (
@@ -76,16 +79,32 @@ const FormField = ({ formData, change, id }) => {
             formTemplate = (
                <div>
                   {formData.config.radios.map((item) => (
-                     <div className='radio_input' key={item.key}>
+                     <div className='formBlock' key={item.key}>
                         <label htmlFor={item.value}>{item.label}</label>
                         <input
-                           className='form_radio'
+                           className='formfield formfield--radio'
                            {...formData.config}
                            value={item.value}
                            onChange={(event) => change({ event, id })}
                         />
+                     </div>
+                  ))}
+               </div>
+            );
+            break;
 
-                        {showError()}
+         case "checkbox":
+            formTemplate = (
+               <div>
+                  {formData.config.checkbox.map((item) => (
+                     <div className='formBlock' key={item.key}>
+                        <label htmlFor={item.value}>{item.label}</label>
+                        <input
+                           className='formfield formfield--checkbox'
+                           {...formData.config}
+                           value={item.value}
+                           onChange={(event) => change({ event, id })}
+                        />
                      </div>
                   ))}
                </div>

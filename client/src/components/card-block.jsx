@@ -1,21 +1,19 @@
 import React from "react";
 import Product from "../components/product";
-import ArrowTitle from "../assets/images/arrow-title-1.png";
 
 const CardBlock = ({ list, title }) => {
    const renderCard = () =>
-      list ? list.map((card, i) => <Product key={i} {...card} />) : null;
+      list ? list.map((i) => <Product key={i._id} {...i} />) : null;
 
    return (
       <div className='card-block'>
          {title ? (
             <div className='card-block__title'>
-               <span>{title}</span>
-               <img src={ArrowTitle} alt='arrow-title' />
+               <h1>{title}</h1>
             </div>
          ) : null}
 
-         <div className='card-block__product-list'>{renderCard(list)}</div>
+         <div className='card-block__product-list'>{renderCard()}</div>
       </div>
    );
 };

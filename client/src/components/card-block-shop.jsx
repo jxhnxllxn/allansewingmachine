@@ -3,9 +3,7 @@ import Product from "../components/product";
 
 const CardBlockShop = (props) => {
    const renderCards = () =>
-      props.list
-         ? props.list.map((cards) => <Product key={cards._id} {...cards} />)
-         : null;
+      props.list ? props.list.map((i) => <Product key={i._id} {...i} />) : null;
    return (
       <div className='card_block_shop'>
          <div>

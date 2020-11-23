@@ -37,9 +37,9 @@ const SideNavSetting = () => {
    return (
       <div className='ssetting'>
          <ul className='ssetting__link'>
-            {links.map((x, i) => (
-               <li key={i}>
-                  <Link to={x.linkTo}>{x.name}</Link>
+            {links.map((i, key) => (
+               <li key={key}>
+                  <Link to={i.linkTo}>{i.name}</Link>
                </li>
             ))}
             <li>

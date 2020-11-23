@@ -23,8 +23,8 @@ const SideNavCart = ({ cartMenuRef }) => {
 
    const cartItemList = () => (
       <div>
-         {cartItems.map((cartItem) => (
-            <CartItem key={cartItem._id} item={cartItem} />
+         {cartItems.map((i) => (
+            <CartItem key={i._id} item={i} />
          ))}
          <div className='sidenav-cart__footer'>
             <div className='sidenav-cart__total'>

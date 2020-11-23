@@ -17,6 +17,9 @@ html {
    letter-spacing: 1px;
    font-weight: 600;
    width: calc(100vw - 5px);
+   @include media("<tablet") {
+      width: 100vw;
+   }
    @include respond(sm) {
       font-size: 92.5%;
    }

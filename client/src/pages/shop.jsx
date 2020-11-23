@@ -9,7 +9,7 @@ const ShopCollection = ({ match }) => {
    const dispatch = useDispatch();
    const products = useSelector(({ product }) => product);
 
-   const [state, setState] = useState({
+   const [filter, setFilter] = useState({
       limit: 20,
       skip: 0,
       filters: {
@@ -18,8 +18,69 @@ const ShopCollection = ({ match }) => {
       },
    });
 
+   const [formField, setFormField] = useState({
+      formError: false,
+      formSuccess: false,
+      formData: {
+         embroidery_only: {
+            element: "checkbox",
+            value: "embroidery_only",
+            config: {
+               name: "machine-type[]",
+               type: "checkbox",
+               label: "Embroidery_only",
+            },
+         },
+         embroidery_only: {
+            element: "checkbox",
+            value: "embroidery_only",
+            config: {
+               name: "machine-type[]",
+               type: "checkbox",
+               label: "Embroidery_only",
+            },
+         },
+         embroidery_only: {
+            element: "checkbox",
+            value: "embroidery_only",
+            config: {
+               name: "machine-type[]",
+               type: "checkbox",
+               label: "Embroidery_only",
+            },
+         },
+         embroidery_only: {
+            element: "checkbox",
+            value: "embroidery_only",
+            config: {
+               name: "machine-type[]",
+               type: "checkbox",
+               label: "Embroidery_only",
+            },
+         },
+         embroidery_only: {
+            element: "checkbox",
+            value: "embroidery_only",
+            config: {
+               name: "machine-type[]",
+               type: "checkbox",
+               label: "Embroidery_only",
+            },
+         },
+         embroidery_only: {
+            element: "checkbox",
+            value: "embroidery_only",
+            config: {
+               name: "machine-type[]",
+               type: "checkbox",
+               label: "Embroidery_only",
+            },
+         },
+      },
+   });
+
    useEffect(() => {
-      dispatch(getProductsToShop(state.skip, state.limit, state.filters));
+      dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters));
       // eslint-disable-next-line
    }, [dispatch]);
 
@@ -35,7 +96,7 @@ const ShopCollection = ({ match }) => {
    };
 
    const handleFilters = (filters, category) => {
-      const newFilters = { ...state.filters };
+      const newFilters = { ...filter.filters };
       newFilters[category] = filters;
 
       if (category === "price") {
@@ -45,28 +106,28 @@ const ShopCollection = ({ match }) => {
 
       showFilteredResults(newFilters);
 
-      setState({
-         ...state,
+      setFilter({
+         ...filter,
          filters: newFilters,
       });
    };
 
    const showFilteredResults = (filters) => {
-      dispatch(getProductsToShop(0, state.limit, filters)).then(() => {
-         setState({
-            ...state,
+      dispatch(getProductsToShop(0, filter.limit, filters)).then(() => {
+         setFilter({
+            ...filter,
             skip: 0,
          });
       });
    };
 
    const loadMoreCards = () => {
-      let skip = state.skip + state.limit;
+      let skip = filter.skip + filter.limit;
       dispatch(
-         getProductsToShop(skip, state.limit, state.filters, products.toShop)
+         getProductsToShop(skip, filter.limit, filter.filters, products.toShop)
       ).then(() => {
-         setState({
-            ...state,
+         setFilter({
+            ...filter,
             skip,
          });
       });
@@ -156,7 +217,7 @@ const ShopCollection = ({ match }) => {
             <div className='shop__pagination'></div>
             <div>
                <LoadMoreCards
-                  limit={state.limit}
+                  limit={filter.limit}
                   size={products.toShopSize}
                   products={products.toShop}
                   loadMore={() => loadMoreCards()}

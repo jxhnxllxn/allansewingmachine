@@ -18,10 +18,10 @@ const Footer = () => {
    return (
       <footer className='footer-wrapper'>
          <div className='footer container'>
-            <div className='brand'>
+            {/* <div className='brand'>
                <span className='brand__allan'>allan</span>
                <span className='brand__machine'>Sewing Machines</span>
-            </div>
+            </div> */}
             <div className='footer__wrapper'>
                <div className='footer__left'>
                   <h2>Contact information</h2>

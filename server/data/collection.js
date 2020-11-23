@@ -1,27 +1,64 @@
 const collections = [
    {
       name: "Household Sewing",
-      image: ".../assets/images/collections/household",
+      images: "household.jpg",
+      categories: [
+         "Mechanical types of sewing machines",
+         "Electronic sewing machines",
+         "Computerized or automated machines",
+         "Embroidery machines",
+         "Quilting machines",
+         "Overlocking or serger machines",
+      ],
    },
    {
       name: "Sewing & Embroidery",
-      image: ".../assets/images/collections/embroidery",
+      images: "embroidery.jpg",
+      categories: [
+         "Sewing & embroidery",
+         "Single Head Embroidery",
+         "Multi Head Embroidery",
+         "Embroidery Software",
+         "Embroidery Design",
+      ],
    },
    {
       name: "Industrial Sewing",
-      image: ".../assets/images/collections/industrial",
+      images: "industrial.jpg",
+      categories: [
+         "Cover stitch machine",
+         "Lock stitch machine",
+         "Chain stitch machine",
+         "Blind stitch machine",
+         "Buttons and buttonholes",
+         "Back tack machines",
+         "Leather machines",
+         "Zig-Zag machine",
+      ],
    },
    {
       name: "Scissors & Cutter",
-      image: ".../assets/images/collections/scissors",
+      images: "scissors.jpg",
+      categories: ["Cutting Machines", "Scissors"],
    },
    {
       name: "Accesories",
-      image: ".../assets/images/collections/accesories",
+      images: "accesories.jpg",
+      categories: [
+         "Household Machines Part",
+         "Craft machines parts",
+         "Embroidery Parts",
+         "Hoops",
+         "Industrial Machines parts",
+         "Iron accessories",
+         "Fusing machines parts",
+         "Thread",
+         "Bag closer parts",
+      ],
    },
    {
-      name: "Needle",
-      image: ".../assets/images/collections/needles",
+      name: "Needles",
+      images: "needles.jpg",
    },
 ];
 

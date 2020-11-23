@@ -1,6 +1,7 @@
 const errorResponse = require("../utils/errorResponse.util");
 const asyncHandler = require("express-async-handler");
 const Product = require("../models/Product.model");
+const Collection = require("../models/Collection.model");
 
 // @desc    get products to homepage
 // @route   GET /api/products/productsToHome
@@ -11,10 +12,12 @@ exports.getProductToHome = asyncHandler(async (req, res, next) => {
       .sort({ sold: -1 })
       .limit(12)
       .populate("collectionId");
+   const collections = await Collection.find({}).sort({ name: -1 });
    res.status(200).json({
       success: true,
       data: {
          bestSeller: bestSeller,
+         collections: collections,
       },
    });
 });

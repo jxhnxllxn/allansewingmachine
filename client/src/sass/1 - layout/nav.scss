@@ -2,8 +2,7 @@
    text-transform: capitalize;
    font-size: 100%;
    position: relative;
-   overflow: hidden;
-
+   height: 7rem;
    background-color: rgb(33, 85, 85);
    &__top {
       @include container;
@@ -32,12 +31,12 @@
       }
    }
    &__bottom {
-      border-top-left-radius: 25px;
+      @include container;
+      border-top-left-radius: 5px;
       border-top-right-radius: 5px;
       background-color: $white;
-      @include container;
+      overflow: hidden;
       color: $black--secondary;
-      border-bottom: 2px solid $border;
       height: 3rem;
       .nav__listBottom {
          ul {
