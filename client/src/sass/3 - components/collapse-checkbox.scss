@@ -1,0 +1,30 @@
+.collapse-checkbox {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid $border;
+  .list {
+    &__items {
+      @include flexAlignItemCenter;
+      justify-content: space-between;
+      .icon {
+        transition: linear 0.3s;
+        &.icon--active {
+          transform: rotate(180deg);
+        }
+      }
+    }
+    &__collapse {
+      transition: ease 3s;
+      overflow: hidden;
+      height: 0;
+      &.active {
+        height: auto;
+      }
+      ul {
+        li {
+          font-weight: 400;
+          padding: 0.2rem 0 0.2rem 1rem;
+        }
+      }
+    }
+  }
+}

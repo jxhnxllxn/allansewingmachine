@@ -8,7 +8,10 @@ const fs = require("fs");
 // @route   GET /api/Collection
 // @access  Private
 exports.getCollections = asyncHandler(async (req, res, next) => {
-   res.status(200).json(res.advanceResults);
+   const collections = await Collection.find({})
+      .sort({ name: -1 })
+      .select("-images");
+   res.status(200).json({ success: true, data: collections });
 });
 
 // @desc    get single Collection

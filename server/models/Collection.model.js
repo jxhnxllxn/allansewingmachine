@@ -1,26 +1,31 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
-const collectionSchema = new mongoose.Schema({
-   name: {
-      type: String,
-      required: [true, "Collection name is required"],
-      unique: [1, "Prouduct name must be unique"],
-      maxlength: 100,
-   },
+const categoriesSchema = mongoose.Schema(
+  {
+    title: { type: String },
+  },
+  {
+    timestamps: true,
+  }
+)
 
-   images: {
-      type: String,
-      default: "noImage.jpg",
-   },
-   categories: {
-      type: Array,
-      default: [],
-   },
+const collectionSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'Collection name is required'],
+    unique: [1, 'Collection name must be unique'],
+    maxlength: 100,
+  },
 
-   createdAt: {
-      type: Date,
-      default: Date.now,
-   },
-});
+  images: {
+    type: String,
+    default: 'noImage.jpg',
+  },
+  categories: [categoriesSchema],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+})
 
-module.exports = mongoose.model("Collection", collectionSchema);
+module.exports = mongoose.model('Collection', collectionSchema)

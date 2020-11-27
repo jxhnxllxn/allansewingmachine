@@ -1,67 +1,65 @@
 .nav {
-   text-transform: capitalize;
-   font-size: 100%;
-   position: relative;
-   height: 7rem;
-   background-color: rgb(33, 85, 85);
-   &__top {
-      @include container;
-      color: $white;
+  text-transform: capitalize;
+  font-size: 100%;
+  position: relative;
+  height: 7rem;
+  background-color: rgb(33, 85, 85);
+  &__top {
+    @include container;
+    color: $white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    .nav__logo {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 4rem;
-      .nav__logo {
-         display: flex;
-         flex-direction: column;
-         span:first-child() {
-            font-family: $font-brand;
-            font-size: 120%;
-         }
+      flex-direction: column;
+      span:first-child() {
+        font-family: $font-brand;
+        font-size: 120%;
       }
-      .nav__listTop {
-         ul {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            li {
-               padding: 1rem;
-            }
-         }
+    }
+    .nav__listTop {
+      ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        li {
+          padding: 1rem;
+        }
       }
-   }
-   &__bottom {
+    }
+  }
+  &__bottom {
+    background-color: $white;
+    overflow: hidden;
+    color: $black--secondary;
+    height: 3rem;
+    .nav__listBottom {
       @include container;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      background-color: $white;
-      overflow: hidden;
-      color: $black--secondary;
-      height: 3rem;
-      .nav__listBottom {
-         ul {
-            @include flexAlignItemCenter;
-            justify-content: flex-end;
-            li {
-               border-left: 1px solid $border;
-               a {
-                  padding: 1rem 1.5rem;
-                  display: block;
-                  cursor: pointer;
-               }
-               a {
-                  @include underlineOnHover;
-               }
-            }
-         }
+      ul {
+        @include flexAlignItemCenter;
+        justify-content: flex-end;
+        li {
+          border-left: 1px solid $border;
+          a {
+            padding: 1rem 1.5rem;
+            display: block;
+            cursor: pointer;
+          }
+          a {
+            @include underlineOnHover;
+          }
+        }
       }
-   }
+    }
+  }
 
-   &__icons {
-      @include flexAlignItemCenter;
-      .icon {
-         margin-left: 1rem;
-         cursor: pointer;
-      }
-   }
+  &__icons {
+    @include flexAlignItemCenter;
+    .icon {
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+  }
 }
