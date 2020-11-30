@@ -1,12 +1,22 @@
 import axios from 'axios'
 import { ProductActionTypes } from './product-types'
 
-export const getProductDetail = (id) => {
-  const request = axios.get(`/api/product/${id}`).then((res) => res.data)
-
-  return {
-    type: ProductActionTypes.GET_PRODUCT_DETAIL,
-    payload: request,
+// user
+export const getProductDetail = (id) => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`/api/product/${id}`)
+    dispatch({
+      type: ProductActionTypes.GET_PRODUCT_DETAIL,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: ProductActionTypes.ERROR_PRODUCT,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
   }
 }
 

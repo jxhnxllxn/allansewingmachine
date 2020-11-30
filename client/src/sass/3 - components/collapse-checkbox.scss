@@ -3,9 +3,11 @@
   .list {
     &__items {
       @include flexAlignItemCenter;
-      justify-content: space-between;
+      position: relative;
       .icon {
         transition: linear 0.3s;
+        position: absolute;
+        right: -0.3rem;
         &.icon--active {
           transform: rotate(180deg);
         }
@@ -19,8 +21,8 @@
       }
       ul {
         li {
+          padding: 0.5rem 0;
           font-weight: 400;
-          padding: 0.2rem 0 0.2rem 1rem;
           @include flexAlignItemCenter;
           justify-content: space-between;
         }

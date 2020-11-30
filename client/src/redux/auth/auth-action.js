@@ -1,119 +1,141 @@
-import axios from "axios";
-import { AuthActionTypes } from "./auth-types";
+import axios from 'axios'
+import { AuthActionTypes } from './auth-types'
 
 export const auth = () => async (dispatch) => {
-   try {
-      const config = {
-         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.token}`,
-         },
-      };
-      const { data } = await axios.get("/api/auth/me", config);
-      dispatch({
-         type: AuthActionTypes.USER_LOADED,
-         payload: data,
-      });
-   } catch (error) {
-      dispatch({
-         type: AuthActionTypes.AUTH_ERROR,
-         payload:
-            error.response && error.response.data.error
-               ? error.response.data.error
-               : error.message,
-      });
-   }
-};
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    }
+    const { data } = await axios.get('/api/auth/me', config)
+    dispatch({
+      type: AuthActionTypes.AUTH_USER,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: AuthActionTypes.AUTH_ERROR,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}
 
 //register
 export const register = (dataToSubmit) => async (dispatch) => {
-   const request = axios
-      .post("/api/auth/register", dataToSubmit)
-      .then((res) => res.data);
-   return {
+  try {
+    const { data } = await axios.post('/api/auth/register', dataToSubmit)
+    dispatch({
       type: AuthActionTypes.REGISTER_SUCCESS,
-      payload: request,
-   };
-
-   // const errors = err.response.data.error.split(',');
-   // console.log(errors)
-   // if(errors){
-   //    errors.forEach(error => dispatch(setAlert(error,'danger')))
-   // }
-};
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: AuthActionTypes.REGISTER_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}
 
 //Login User
-export const login = (dataToSubmit) => {
-   const request = axios
-      .post("/api/auth/login", dataToSubmit)
-      .then((res) => res.data);
-   return {
+export const login = (dataToSubmit) => async (dispatch) => {
+  try {
+    const { data } = await axios.post('/api/auth/login', dataToSubmit)
+    dispatch({
       type: AuthActionTypes.LOGIN_SUCCESS,
-      payload: request,
-   };
-};
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: AuthActionTypes.LOGIN_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}
 
 //logout
-export const logout = () => {
-   const request = axios
-      .get("/api/auth/logout")
-      .then((response) => response.data);
-
-   return {
-      type: AuthActionTypes.LOGOUT,
-      payload: request,
-   };
-
-   // await axios.get('/api/auth/logout');
-   // dispatch({type: AuthActionTypes.LOGOUT})
-};
-
-export const checkoutCreateUser = (dataToSubmit) => {
-   const request = axios
-      .post("/api/auth/register", dataToSubmit)
-      .then((res) => res.data);
-   return {
-      type: AuthActionTypes.CHECKOUT_CREATE_USER,
-      payload: request,
-   };
-};
+export const logout = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get('/api/auth/logout')
+    dispatch({
+      type: AuthActionTypes.LOGOUT_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: AuthActionTypes.LOGOUT_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}
 
 export const checkoutUpdateUser = (dataToSubmit) => async (dispatch) => {
-   try {
-      const config = {
-         headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.token}`,
-         },
-      };
-      const { data } = await axios.get(
-         "/api/auth/updatedetail",
-         dataToSubmit,
-         config
-      );
-      dispatch({
-         type: AuthActionTypes.CHECKOUT_UPDATE_USER,
-         payload: data,
-      });
-   } catch (error) {
-      dispatch({
-         type: AuthActionTypes.AUTH_ERROR,
-         payload:
-            error.response && error.response.data.error
-               ? error.response.data.error
-               : error.message,
-      });
-   }
-};
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    }
+    const { data } = await axios.get(
+      '/api/auth/updatedetail',
+      dataToSubmit,
+      config
+    )
+    dispatch({
+      type: AuthActionTypes.CHECKOUT_UPDATE_USER,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: AuthActionTypes.AUTH_ERROR,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}
 
 //   updatepassword
 
-export const updatePassword = (dataToSubmit) => {
-   const request = axios
-      .put("/api/auth/updatepassword", dataToSubmit)
-      .then((res) => res.data);
-   return {
-      type: AuthActionTypes.UPDATE_PASSWORD,
-      payload: request,
-   };
-};
+export const updatePassword = (dataToSubmit) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.token}`,
+      },
+    }
+    const { data } = await axios.put(
+      '/api/auth/updatepassword',
+      dataToSubmit,
+      config
+    )
+    dispatch({
+      type: AuthActionTypes.PASSWORD_UPDATE,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: AuthActionTypes.PASSWORD_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}

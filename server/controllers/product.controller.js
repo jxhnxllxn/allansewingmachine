@@ -74,7 +74,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
 
 exports.getProduct = asyncHandler(async (req, res, next) => {
   const product = await Product.findById(req.params.id).populate({
-    path: 'collections',
+    path: 'collectionId',
     select: 'name',
   })
   if (!product) {

@@ -15,7 +15,7 @@ const ShopCollection = ({ match }) => {
   const { collections } = collectionState
 
   const [filter, setFilter] = useState({
-    limit: 5,
+    limit: 24,
     skip: 0,
     filters: {
       // collections: [match.params.collection && match.params.collection],
@@ -97,6 +97,7 @@ const ShopCollection = ({ match }) => {
         <div className='shop__filterblock'>
           <CollapseCheckbox
             title='Condition'
+            initialState={true}
             list={conditions}
             handleFilters={(filters) => handleFilters(filters, 'condition')}
           />

@@ -1,24 +1,24 @@
 .sidenav {
-   position: absolute;
-   top: 4rem;
-   right: 0;
-   z-index: 102;
-   width: 100%;
-   height: 100vh;
-   background-color: $background;
-   overflow-x: hidden;
-   @include customScroll;
-   &__header {
-      padding-top: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-   }
-   &__main {
-      @include container;
-      margin-bottom: 4rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-   }
+  position: absolute;
+  top: 7rem;
+  right: 0;
+  z-index: 102;
+  width: 100%;
+  height: 100vh;
+  background-color: $background;
+  overflow-x: hidden;
+  @include customScroll;
+  &__header {
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__main {
+    @include container;
+    margin-bottom: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

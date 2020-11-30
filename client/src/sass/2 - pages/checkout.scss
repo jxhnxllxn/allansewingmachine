@@ -1,4 +1,5 @@
 .checkout_wrapper {
+  padding: 1rem 0;
   @include container;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 500px));
@@ -118,7 +119,7 @@ ul.payment-options {
     position: relative;
     flex-wrap: wrap;
 
-    input[type="radio"] {
+    input[type='radio'] {
       margin-right: 0.5rem;
 
       &:checked {

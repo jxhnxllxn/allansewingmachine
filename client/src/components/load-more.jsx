@@ -6,11 +6,11 @@ const LoadMoreCards = ({ size, products, limit, loadMore }) => {
       <div>
         <CardBlockShop list={products} />
       </div>
-      {size > 0 && size >= limit ? (
+      {size > 0 && size >= limit && (
         <div className='load_more_container'>
           <span onClick={() => loadMore()}>Load more</span>
         </div>
-      ) : null}
+      )}
     </div>
   )
 }

@@ -1,13 +1,17 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
 const NavScrollAnimation = (tl) => {
-   useEffect(() => {
-      tl.from(".nav", {
-         duration: 0.5,
-         css: { top: "-4rem" },
-      });
-      // eslint-disable-next-line
-   }, []);
-};
+  useEffect(() => {
+    tl.from('.nav', {
+      duration: 0.5,
+      css: { top: '-4rem' },
+    })
+    //  .from('.nav__logo', {
+    //    duration: 0.5,
+    //    y: '4rem',
+    //  })
+    // eslint-disable-next-line
+  }, [])
+}
 
-export default NavScrollAnimation;
+export default NavScrollAnimation

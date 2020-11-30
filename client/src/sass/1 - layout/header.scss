@@ -1,12 +1,12 @@
 .header {
-   z-index: 102;
-   text-transform: uppercase;
-   position: fixed;
-   width: calc(100vw - 5px);
-   top: 0;
-   left: 0;
-   right: 0;
-   @include media("<tablet") {
-      width: 100vw;
-   }
+  z-index: 102;
+  text-transform: uppercase;
+  position: fixed;
+  width: calc(100vw - 5px);
+  top: 0;
+  left: 0;
+  right: 0;
+  @include media('<tablet') {
+    width: 100vw;
+  }
 }

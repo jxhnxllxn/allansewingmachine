@@ -2,21 +2,24 @@
   text-transform: capitalize;
   font-size: 100%;
   position: relative;
-  height: 7rem;
   background-color: rgb(33, 85, 85);
+  // background-color: $background--secondary;
   &__top {
     @include container;
     color: $white;
-    display: flex;
     justify-content: space-between;
-    align-items: center;
+    @include flexAlignItemCenter;
     height: 4rem;
+    // position: relative;
     .nav__logo {
+      position: fixed;
+      top: 1rem;
       display: flex;
       flex-direction: column;
+      mix-blend-mode: difference;
       span:first-child() {
         font-family: $font-brand;
-        font-size: 120%;
+        font-size: 110%;
       }
     }
     .nav__listTop {
@@ -31,23 +34,21 @@
     }
   }
   &__bottom {
-    background-color: $white;
-    overflow: hidden;
     color: $black--secondary;
-    height: 3rem;
+    background-color: $background;
+    border-bottom: 1px solid $border;
+    overflow: hidden;
     .nav__listBottom {
-      @include container;
       ul {
+        height: 4rem;
+        @include container;
         @include flexAlignItemCenter;
         justify-content: flex-end;
         li {
           border-left: 1px solid $border;
           a {
-            padding: 1rem 1.5rem;
+            padding: 1.5rem;
             display: block;
-            cursor: pointer;
-          }
-          a {
             @include underlineOnHover;
           }
         }

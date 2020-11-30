@@ -1,25 +1,25 @@
 .card-block {
-   @include container;
-   margin-top: 8rem;
-   &__title {
-      padding: 2rem 0;
-      h1 {
-         font-family: $font-brand;
-      }
-   }
-   &__product-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-      row-gap: 1rem;
-      column-gap: 1rem;
+  @include container;
+  margin-top: 8rem;
+  &__title {
+    padding: 2rem 0;
+    h1 {
+      font-family: $font-brand;
+    }
+  }
+  &__product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    row-gap: 1rem;
+    column-gap: 1rem;
+    justify-content: center;
+    @include media('<tablet') {
+      grid-template-columns: repeat(2, 13rem);
       justify-content: center;
-      @include media("<tablet") {
-         grid-template-columns: repeat(2, 13rem);
-         justify-content: center;
-      }
-      @include media("<phone") {
-         grid-template-columns: repeat(2, 10rem);
-         justify-content: center;
-      }
-   }
+    }
+    @include media('<phone') {
+      grid-template-columns: repeat(2, 10rem);
+      justify-content: center;
+    }
+  }
 }
