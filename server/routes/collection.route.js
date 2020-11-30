@@ -1,33 +1,29 @@
-const express = require("express");
+const express = require('express')
 
 const {
-   getCollections,
-   getCollection,
-   createCollection,
-   updateCollection,
-   deleteCollection,
-   // collectionPhotoUpload,
-} = require("../controllers/collection.controller");
+  getCollections,
+  getCollection,
+  createCollection,
+  updateCollection,
+  deleteCollection,
+} = require('../controllers/collection.controller')
 
-const Collection = require("../models/Collection.model");
-const advanceResults = require("../middlewares/advaceResult.middleware");
+const Collection = require('../models/Collection.model')
+const advanceResults = require('../middlewares/advaceResult.middleware')
 
-const router = express.Router();
+const router = express.Router()
 
-const { protect, authorize } = require("../middlewares/auth.middleware");
-
-router.route("/:id/photo");
-// .put(protect,authorize('admin'),collectionPhotoUpload)
+const { protect, authorize } = require('../middlewares/auth.middleware')
 
 router
-   .route("/")
-   .get(advanceResults(Collection), getCollections)
-   .post(protect, authorize("admin"), createCollection);
+  .route('/')
+  .get(advanceResults(Collection, ['categories']), getCollections)
+  .post(protect, authorize('admin'), createCollection)
 
 router
-   .route("/:id")
-   .get(getCollection)
-   .put(protect, authorize("admin"), updateCollection)
-   .delete(protect, authorize("admin"), deleteCollection);
+  .route('/:id')
+  .get(getCollection)
+  .put(protect, authorize('admin'), updateCollection)
+  .delete(protect, authorize('admin'), deleteCollection)
 
-module.exports = router;
+module.exports = router

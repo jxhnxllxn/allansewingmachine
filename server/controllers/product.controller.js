@@ -29,7 +29,7 @@ exports.getProductToHome = asyncHandler(async (req, res, next) => {
 exports.getProductsToShop = asyncHandler(async (req, res, next) => {
   let order = req.body.order ? req.body.order : 'desc'
   let sortBy = req.body.sortBy ? req.body.sortBy : '_id'
-  let limit = req.body.limit ? parseInt(req.body.limit) : 100
+  let limit = req.body.limit ? parseInt(req.body.limit) : 90
   let skip = parseInt(req.body.skip)
   let findArgs = {}
 
@@ -40,8 +40,6 @@ exports.getProductsToShop = asyncHandler(async (req, res, next) => {
           $lte: req.body.filters[key][1],
           $gte: req.body.filters[key][0],
         }
-      } else if (key === 'collections') {
-        findArgs['collections'] = req.body.filters[key]
       } else {
         findArgs[key] = req.body.filters[key]
       }
@@ -50,18 +48,16 @@ exports.getProductsToShop = asyncHandler(async (req, res, next) => {
 
   findArgs['publish'] = true
 
-  Product.find(findArgs)
-    .populate('collections')
+  const data = await Product.find(findArgs)
+    .populate('collectionId')
     .sort([[sortBy, order]])
     .skip(skip)
     .limit(limit)
-    .exec((err, articles) => {
-      if (err) return res.status(400).send(err)
-      res.status(200).json({
-        size: articles.length,
-        articles,
-      })
-    })
+
+  res.status(200).json({
+    size: data.length,
+    articles: data,
+  })
 })
 
 // @desc    get all Products

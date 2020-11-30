@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react'
 import { ReactComponent as UpIcon } from '../assets/icons/chevron-up.svg'
 
@@ -55,12 +55,12 @@ const CollapseCheckbox = ({ initialState, list, title, handleFilters }) => {
           <ul>
             {list.map((i) => (
               <li key={i._id}>
+                <label htmlFor={i.name}>{i.name}</label>
                 <input
                   onChange={() => toggleCheck(i._id)}
                   type='checkbox'
                   checked={state.checked.indexOf(i._id) !== -1}
                 />
-                {i.title}
               </li>
             ))}
           </ul>
