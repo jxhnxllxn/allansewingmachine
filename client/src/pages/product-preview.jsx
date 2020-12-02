@@ -14,10 +14,11 @@ const ProductPreview = (props) => {
   const dispatch = useDispatch()
   const myRef = useRef()
   const [state, setState] = useState({ index: 0 })
-  const authState = useSelector(({ auth }) => auth)
-  const { loading, error, productDetail } = authState
+  const productState = useSelector(({ product }) => product)
+  const { loading, error, productDetail } = productState
 
   useEffect(() => {
+    console.log(productDetail)
     const id = props.match.params.product
     dispatch(getProductDetail(id))
     return () => {

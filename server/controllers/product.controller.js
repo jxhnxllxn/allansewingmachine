@@ -8,10 +8,7 @@ const Collection = require('../models/Collection.model')
 // @access  Public
 
 exports.getProductToHome = asyncHandler(async (req, res, next) => {
-  const bestSeller = await Product.find({})
-    .sort({ sold: -1 })
-    .limit(5)
-    .populate('collectionId')
+  const bestSeller = await Product.find({}).sort({ sold: -1 }).limit(5)
   const collections = await Collection.find({}).sort({ name: -1 })
   res.status(200).json({
     success: true,
@@ -49,7 +46,6 @@ exports.getProductsToShop = asyncHandler(async (req, res, next) => {
   findArgs['publish'] = true
 
   const data = await Product.find(findArgs)
-    .populate('collectionId')
     .sort([[sortBy, order]])
     .skip(skip)
     .limit(limit)

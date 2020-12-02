@@ -18,12 +18,23 @@ const ShopCollection = ({ match }) => {
     limit: 24,
     skip: 0,
     filters: {
-      // collections: [match.params.collection && match.params.collection],
+      collectionId: [],
       price: [],
       categoryId: [],
       condition: [],
     },
   })
+
+  const collectionParams = () => {
+    if (match.params.collection !== 'undefined') {
+      setFilter({
+        ...filter,
+        filters: {
+          collectionId: [`${match.params.collection}`],
+        },
+      })
+    }
+  }
 
   const conditions = [
     {
@@ -37,8 +48,12 @@ const ShopCollection = ({ match }) => {
   ]
 
   useEffect(() => {
+    collectionParams()
     dispatch(getCollections())
     dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
+    return () => {
+      setFilter({})
+    }
     // eslint-disable-next-line
   }, [])
 
@@ -77,7 +92,6 @@ const ShopCollection = ({ match }) => {
 
   return (
     <div className='shop'>
-      {console.log(filter)}
       <div className='shop__toolbar'>Shop / Industrial / 4threads</div>
 
       <div className='shop__filter'>
@@ -88,6 +102,7 @@ const ShopCollection = ({ match }) => {
                 key={i._id}
                 title={i.name}
                 list={i.categories}
+                initialState={collectionParams === i._id}
                 handleFilters={(filters) =>
                   handleFilters(filters, 'categoryId')
                 }

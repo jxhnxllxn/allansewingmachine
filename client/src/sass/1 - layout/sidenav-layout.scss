@@ -1,13 +1,15 @@
 .sidenav {
   position: absolute;
-  top: 7rem;
+  top: 4rem;
   right: 0;
   z-index: 102;
-  width: 100%;
+  width: 40vw;
   height: 100vh;
   background-color: $background;
   overflow-x: hidden;
   @include customScroll;
+  border-left: 2px solid $border;
+  border-top: 1px solid $border;
   &__header {
     padding-top: 1rem;
     display: flex;
@@ -15,7 +17,6 @@
     justify-content: center;
   }
   &__main {
-    @include container;
     margin-bottom: 4rem;
     display: flex;
     align-items: center;

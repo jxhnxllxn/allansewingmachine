@@ -73,7 +73,7 @@ const SignIn = () => {
   }
 
   return (
-    <div className='authWrapper'>
+    <div className='authWrapper card'>
       <h2>Sign in</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={(e) => submitForm(e)}>

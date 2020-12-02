@@ -2,7 +2,7 @@
   text-transform: capitalize;
   font-size: 100%;
   position: relative;
-  background-color: rgb(33, 85, 85);
+  background-color: $navColor;
   // background-color: $background--secondary;
   &__top {
     @include container;

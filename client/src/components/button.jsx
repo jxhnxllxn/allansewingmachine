@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.svg'
 
 const MyButton = (props) => {
   const buttons = () => {
@@ -8,10 +7,7 @@ const MyButton = (props) => {
     switch (props.type) {
       case 'default':
         template = (
-          <Link
-            className={!props.altClass ? 'btn--default' : props.altClass}
-            to={props.linkTo}
-          >
+          <Link className='btn btn--link' to={props.linkTo}>
             {props.title}
           </Link>
         )
@@ -19,7 +15,7 @@ const MyButton = (props) => {
       case 'primary':
         template = (
           <button
-            className='btn--primary'
+            className='btn btn--button'
             onClick={() => {
               props.runAction()
             }}
@@ -30,23 +26,12 @@ const MyButton = (props) => {
         break
       case 'submit':
         template = (
-          <button className='button_primary' type='submit'>
-            {props.title}
-          </button>
+          <input
+            className='btn btn--submit'
+            type='submit'
+            value={props.title}
+          />
         )
-        // case "bag_link":
-        //    template = (
-        //       <div
-        //          className='bag_link'
-        //          onClick={() => {
-        //             props.runAction();
-        //          }}
-        //       >
-        //          <ShoppingBagIcon />
-        //       </div>
-        //    );
-        //    break;
-
         break
 
       default:

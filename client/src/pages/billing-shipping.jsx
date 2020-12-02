@@ -127,7 +127,7 @@ const BillingShipping = (props) => {
       },
       country: {
         element: 'input',
-        value: '',
+        value: 'Philippines',
         config: {
           name: 'country_input',
           placeholder: 'Country',
@@ -167,7 +167,7 @@ const BillingShipping = (props) => {
           autoComplete: 'on',
         },
         validation: {
-          required: false,
+          required: true,
         },
         valid: false,
         touched: false,
@@ -183,7 +183,7 @@ const BillingShipping = (props) => {
           autoComplete: 'on',
         },
         validation: {
-          required: false,
+          required: true,
           confirm: 'password',
         },
         valid: false,
