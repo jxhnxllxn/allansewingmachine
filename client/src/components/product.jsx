@@ -7,7 +7,16 @@ import LazyLoad from 'react-lazyload'
 import { ReactComponent as CartIcon } from '../assets/icons/shopping-bag.svg'
 import { useHistory } from 'react-router-dom'
 
-const Product = ({ _id, name, price, collectionId, sold, stock, images }) => {
+const Product = ({
+  _id,
+  name,
+  price,
+  collectionId,
+  sold,
+  stock,
+  images,
+  condition,
+}) => {
   const history = useHistory()
   const renderCardImage = (images) => {
     if (images.length > 0) {
@@ -50,7 +59,10 @@ const Product = ({ _id, name, price, collectionId, sold, stock, images }) => {
         </LazyLoad>
 
         <h2>Php {addComma(price)}.00</h2>
-        <h3>{name}</h3>
+        <h3>
+          {name}
+          {condition}
+        </h3>
       </div>
 
       <div className='product-card__actions'>

@@ -18,7 +18,6 @@ const Home = () => {
   return (
     <div className='home_wrapper'>
       <HomeSlider />
-
       {loading ? (
         <Loading />
       ) : error ? (

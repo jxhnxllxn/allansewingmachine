@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom'
 import { gsap } from 'gsap'
 
 //redux
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
-import { store, persistore } from './redux/store'
+// import { store, persistore } from './redux/store'
 import { auth } from './redux/auth/auth-action'
 import landingAnimation from './utils/animations/landingAnimation'
 import useResponsiveVH from './utils/hooks/useResponsiveVH'
@@ -27,6 +27,7 @@ const SideNav = lazy(() => import('./layout/sidenav'))
 
 const App = () => {
   useResponsiveVH()
+  const dispatch = useDispatch()
 
   const token = useSelector(({ auth }) => auth.token)
 
@@ -39,54 +40,54 @@ const App = () => {
     landingAnimation()
 
     if (token) {
-      store.dispatch(auth())
+      dispatch(auth())
     }
   }, [token])
 
   return (
-    <PersistGate persistor={persistore}>
-      <Layout>
-        <Switch>
-          <ErrorBoundary>
-            <Route exact path='/' component={Auth(Home, null)} />
-            <Suspense fallback={<Loading />}>
-              <Route
-                path='/shop/:collection?'
-                component={Auth(Shop, null)}
-                exact
-              />
-              <Route
-                path='/shop/:collection/:product'
-                component={Auth(ProductPreview, null)}
-                exact
-              />
+    // <PersistGate persistor={persistore}>
+    <Layout>
+      <Switch>
+        <ErrorBoundary>
+          <Route exact path='/' component={Auth(Home, null)} />
+          <Suspense fallback={<Loading />}>
+            <Route
+              path='/shop/:collection?'
+              component={Auth(Shop, null)}
+              exact
+            />
+            <Route
+              path='/shop/:collection/:product'
+              component={Auth(ProductPreview, null)}
+              exact
+            />
 
-              <Route path='/user/cart' component={Auth(Cart, null)} exact />
-              <Route
-                path='/user/checkout'
-                component={Auth(Checkout, null)}
-                exact
-              />
+            <Route path='/user/cart' component={Auth(Cart, null)} exact />
+            <Route
+              path='/user/checkout'
+              component={Auth(Checkout, null)}
+              exact
+            />
 
-              <Route
-                path='/user/dashboard'
-                component={Auth(UserDashboard, true)}
-                exact
-              />
-              <Route
-                path='/user/user_profile'
-                exact
-                component={Auth(UpdateProfile, true)}
-              />
+            <Route
+              path='/user/dashboard'
+              component={Auth(UserDashboard, true)}
+              exact
+            />
+            <Route
+              path='/user/user_profile'
+              exact
+              component={Auth(UpdateProfile, true)}
+            />
 
-              <Route path='/admin' component={Auth(Admin, true, true)} />
+            <Route path='/admin' component={Auth(Admin, true, true)} />
 
-              <Route path='/sidenav' component={SideNav} />
-            </Suspense>
-          </ErrorBoundary>
-        </Switch>
-      </Layout>
-    </PersistGate>
+            <Route path='/sidenav' component={SideNav} />
+          </Suspense>
+        </ErrorBoundary>
+      </Switch>
+    </Layout>
+    // </PersistGate>
   )
 }
 

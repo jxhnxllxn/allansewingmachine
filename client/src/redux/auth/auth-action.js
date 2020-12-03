@@ -2,14 +2,31 @@ import axios from 'axios'
 import { AuthActionTypes } from './auth-types'
 
 export const auth = () => async (dispatch) => {
+  // try {
+  //   const config = {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Authorization: `Bearer ${localStorage.token}`,
+  //     },
+  //   }
+  //   const { data } = await axios.get('/auth/me', config)
+  //   dispatch({
+  //     type: AuthActionTypes.AUTH_USER,
+  //     payload: data,
+  //   })
+  // } catch (error) {
+  //   dispatch({
+  //     type: AuthActionTypes.AUTH_ERROR,
+  //     payload:
+  //       error.response && error.response.data.error
+  //         ? error.response.data.error
+  //         : error.message,
+  //   })
+  // }
+
   try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    }
-    const { data } = await axios.get('/api/auth/me', config)
+    const { data } = await axios.get('/auth/me')
+
     dispatch({
       type: AuthActionTypes.AUTH_USER,
       payload: data,
@@ -28,7 +45,7 @@ export const auth = () => async (dispatch) => {
 //register
 export const register = (dataToSubmit) => async (dispatch) => {
   try {
-    const { data } = await axios.post('/api/auth/register', dataToSubmit)
+    const { data } = await axios.post('/auth/register', dataToSubmit)
     dispatch({
       type: AuthActionTypes.REGISTER_SUCCESS,
       payload: data,
@@ -47,7 +64,7 @@ export const register = (dataToSubmit) => async (dispatch) => {
 //Login User
 export const login = (dataToSubmit) => async (dispatch) => {
   try {
-    const { data } = await axios.post('/api/auth/login', dataToSubmit)
+    const { data } = await axios.post('/auth/login', dataToSubmit)
     dispatch({
       type: AuthActionTypes.LOGIN_SUCCESS,
       payload: data,
@@ -66,7 +83,7 @@ export const login = (dataToSubmit) => async (dispatch) => {
 //logout
 export const logout = () => async (dispatch) => {
   try {
-    const { data } = await axios.get('/api/auth/logout')
+    const { data } = await axios.get('/auth/logout')
     dispatch({
       type: AuthActionTypes.LOGOUT_SUCCESS,
       payload: data,
@@ -90,11 +107,7 @@ export const checkoutUpdateUser = (dataToSubmit) => async (dispatch) => {
         Authorization: `Bearer ${localStorage.token}`,
       },
     }
-    const { data } = await axios.get(
-      '/api/auth/updatedetail',
-      dataToSubmit,
-      config
-    )
+    const { data } = await axios.get('/auth/updatedetail', dataToSubmit, config)
     dispatch({
       type: AuthActionTypes.CHECKOUT_UPDATE_USER,
       payload: data,
@@ -121,7 +134,7 @@ export const updatePassword = (dataToSubmit) => async (dispatch) => {
       },
     }
     const { data } = await axios.put(
-      '/api/auth/updatepassword',
+      '/auth/updatepassword',
       dataToSubmit,
       config
     )

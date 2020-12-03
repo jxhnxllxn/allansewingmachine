@@ -2,18 +2,23 @@
   display: grid;
   grid-template-columns: 25% 75%;
   grid-template-rows: 5rem;
+  column-gap: 2rem;
   @include container;
+  position: relative;
   &__toolbar {
-    background-color: $white;
+    // background-color: $white;
     grid-column: 1 / -1;
     align-self: center;
     padding: 1rem;
     border-radius: 0.5rem;
+    border: 2px solid $border;
   }
   &__filter {
     margin-right: 1rem;
+    border-radius: 0.5rem;
     .shop__filterblock {
       border-radius: 0.5rem;
+      border: 2px solid $border;
       padding: 1rem;
       margin-bottom: 1rem;
     }

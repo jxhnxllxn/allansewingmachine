@@ -1,14 +1,15 @@
 import { useEffect } from 'react'
 const useCartToggleAnimation = (tl) => {
   useEffect(() => {
-    tl.to('.nav__listBottom ul li', {
-      autoAlpha: 0,
-      x: -100,
-      ease: 'power5.in',
-      stagger: {
-        amount: 0.2,
-      },
-    })
+    tl
+      // .to('.nav__listBottom ul li', {
+      //   autoAlpha: 0,
+      //   x: -100,
+      //   ease: 'power5.in',
+      //   stagger: {
+      //     amount: 0.2,
+      //   },
+      // })
 
       .from('.sidenav', {
         x: '200',

@@ -61,10 +61,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         collections: payload.data,
+        loading: false,
       }
     case ProductActionTypes.GET_PRODUCTS_TO_SHOP:
       return {
         ...state,
+        loading: false,
         toShop: payload.articles,
         toShopSize: payload.size,
       }
@@ -72,6 +74,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         addProduct: payload.data,
+        loading: false,
       }
     case ProductActionTypes.ERROR_PRODUCT:
       return {

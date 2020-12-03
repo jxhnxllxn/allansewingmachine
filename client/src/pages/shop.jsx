@@ -7,15 +7,17 @@ import {
 } from '../redux/product/product-action'
 import LoadMoreCards from '../components/load-more'
 import CollapseCheckbox from '../components/collapse-checkbox'
+import Loading from '../components/loading'
 
 const ShopCollection = ({ match }) => {
   const dispatch = useDispatch()
-  const products = useSelector(({ product }) => product)
+  const productState = useSelector(({ product }) => product)
+  const { toShopSize, toShop, loading, error } = productState
   const collectionState = useSelector(({ collection }) => collection)
   const { collections } = collectionState
 
   const [filter, setFilter] = useState({
-    limit: 24,
+    limit: 5,
     skip: 0,
     filters: {
       collectionId: [],
@@ -26,13 +28,10 @@ const ShopCollection = ({ match }) => {
   })
 
   const collectionParams = () => {
-    if (match.params.collection !== 'undefined') {
-      setFilter({
-        ...filter,
-        filters: {
-          collectionId: [`${match.params.collection}`],
-        },
-      })
+    if (match.params.collection) {
+      handleFilters([match.params.collection], 'collectionId')
+    } else {
+      dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
     }
   }
 
@@ -48,9 +47,9 @@ const ShopCollection = ({ match }) => {
   ]
 
   useEffect(() => {
-    collectionParams()
     dispatch(getCollections())
-    dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
+    // dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
+    collectionParams()
     return () => {
       setFilter({})
     }
@@ -62,11 +61,6 @@ const ShopCollection = ({ match }) => {
     newFilters[category] = filters
 
     showFilteredResults(newFilters)
-
-    setFilter({
-      ...filter,
-      filters: newFilters,
-    })
   }
 
   const showFilteredResults = (filters) => {
@@ -74,14 +68,16 @@ const ShopCollection = ({ match }) => {
       setFilter({
         ...filter,
         skip: 0,
+        filters: filters,
       })
     })
   }
 
   const loadMoreCards = () => {
     let skip = filter.skip + filter.limit
+    console.log(filter)
     dispatch(
-      getProductsToShop(skip, filter.limit, filter.filters, products.toShop)
+      getProductsToShop(skip, filter.limit, filter.filters, toShop)
     ).then(() => {
       setFilter({
         ...filter,
@@ -92,8 +88,8 @@ const ShopCollection = ({ match }) => {
 
   return (
     <div className='shop'>
+      {console.log(filter)}
       <div className='shop__toolbar'>Shop / Industrial / 4threads</div>
-
       <div className='shop__filter'>
         <div className='shop__filterblock'>
           {collections &&
@@ -102,7 +98,7 @@ const ShopCollection = ({ match }) => {
                 key={i._id}
                 title={i.name}
                 list={i.categories}
-                initialState={collectionParams === i._id}
+                initialState={match.params.collection === i._id}
                 handleFilters={(filters) =>
                   handleFilters(filters, 'categoryId')
                 }
@@ -121,14 +117,19 @@ const ShopCollection = ({ match }) => {
 
       <div className='shop__products'>
         <div className='shop__pagination'></div>
-        <div>
+        <Loading />
+        {loading ? (
+          <Loading />
+        ) : error ? (
+          <h1>{error}</h1>
+        ) : (
           <LoadMoreCards
             limit={filter.limit}
-            size={products.toShopSize}
-            products={products.toShop}
+            size={toShopSize}
+            products={toShop}
             loadMore={() => loadMoreCards()}
           />
-        </div>
+        )}
       </div>
     </div>
   )

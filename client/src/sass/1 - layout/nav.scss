@@ -10,6 +10,7 @@
     justify-content: space-between;
     @include flexAlignItemCenter;
     height: 4rem;
+    overflow: hidden;
     // position: relative;
     .nav__logo {
       position: fixed;
@@ -28,7 +29,12 @@
         justify-content: space-between;
         align-items: center;
         li {
-          padding: 1rem;
+          padding: 1.5rem;
+          border-left: 1px solid $border;
+          cursor: pointer;
+          svg {
+            stroke: $black--secondary;
+          }
         }
       }
     }
@@ -36,11 +42,13 @@
   &__bottom {
     color: $black--secondary;
     background-color: $background;
-    border-bottom: 1px solid $border;
+    border-top: 2px solid $border;
+    border-bottom: 2px solid $border;
     overflow: hidden;
     .nav__listBottom {
       ul {
         height: 4rem;
+        font-size: 85%;
         @include container;
         @include flexAlignItemCenter;
         justify-content: flex-end;

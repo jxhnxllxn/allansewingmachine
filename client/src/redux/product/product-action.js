@@ -4,7 +4,7 @@ import { ProductActionTypes } from './product-types'
 // user
 export const getProductDetail = (id) => async (dispatch) => {
   try {
-    const { data } = await axios.get(`/api/product/${id}`)
+    const { data } = await axios.get(`/product/${id}`)
     dispatch({
       type: ProductActionTypes.GET_PRODUCT_DETAIL,
       payload: data,
@@ -29,7 +29,7 @@ export const clearProductDetail = () => {
 
 export const getProductsToHome = () => async (dispatch) => {
   try {
-    const { data } = await axios.get('/api/product/home')
+    const { data } = await axios.get('/product/home')
     dispatch({
       type: ProductActionTypes.GET_PRODUCT_TO_HOME,
       payload: data,
@@ -58,15 +58,13 @@ export const getProductsToShop = (
   }
 
   try {
-    const data = await axios
-      .post(`/api/product/shop`, dataToSubmit)
-      .then((res) => {
-        let newState = [...previousState, ...res.data.articles]
-        return {
-          size: res.data.size,
-          articles: newState,
-        }
-      })
+    const data = await axios.post(`/product/shop`, dataToSubmit).then((res) => {
+      let newState = [...previousState, ...res.data.articles]
+      return {
+        size: res.data.size,
+        articles: newState,
+      }
+    })
     dispatch({
       type: ProductActionTypes.GET_PRODUCTS_TO_SHOP,
       payload: data,
@@ -83,9 +81,7 @@ export const getProductsToShop = (
 }
 
 export const addProduct = (dataToSubmit) => {
-  const request = axios
-    .post('/api/product', dataToSubmit)
-    .then((res) => res.data)
+  const request = axios.post('/product', dataToSubmit).then((res) => res.data)
   // .catch(err => {
   //     err.response.data.error.split(',');
   // });
@@ -97,7 +93,7 @@ export const addProduct = (dataToSubmit) => {
 }
 
 export const getProducts = () => {
-  const request = axios.get('/api/product').then((res) => res.data)
+  const request = axios.get('/product').then((res) => res.data)
   return {
     type: ProductActionTypes.GET_PRODUCTS_SUCCESS,
     payload: request,
@@ -106,7 +102,7 @@ export const getProducts = () => {
 
 export const deleteProduct = (data) => (dispatch) => {
   axios
-    .delete(`/api/product/${data}`)
+    .delete(`/product/${data}`)
     .then((res) =>
       dispatch({
         type: ProductActionTypes.DELETE_SUCCESS,
@@ -123,7 +119,7 @@ export const deleteProduct = (data) => (dispatch) => {
 
 export const getCollections = () => async (dispatch) => {
   try {
-    const { data } = await axios.get('/api/collection?select=name')
+    const { data } = await axios.get('/collection?select=name')
     dispatch({
       type: ProductActionTypes.GET_COLLECTIONS,
       payload: data,

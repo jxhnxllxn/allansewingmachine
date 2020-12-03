@@ -100,11 +100,11 @@
     position: absolute;
     width: 0%;
     left: 0px;
-    height: 3px;
+    height: 1px;
     bottom: 0;
     transform-origin: left;
     transform: translateY(-50%);
-    background-color: rgb(33, 85, 85);
+    background-color: $black;
     box-shadow: none;
   }
 

@@ -7,7 +7,8 @@
   &__items {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 1rem;
+    column-gap: 3rem;
+    row-gap: 3rem;
     justify-content: center;
     transition: ease-out 0.3s;
     @include media('<tablet') {
@@ -18,7 +19,7 @@
       cursor: pointer;
       overflow: hidden;
       position: relative;
-      border-radius: 0.3rem;
+      border: 1px solid $border;
       justify-content: center;
       &:hover {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -40,12 +41,13 @@
         padding: 0 0.5rem;
         display: flex;
         align-items: center;
-        background-color: $whitesmoke;
+        background-color: $background;
         opacity: 1;
         position: absolute;
         box-shadow: $black;
         bottom: 0;
-        border-top-right-radius: 2rem;
+        letter-spacing: 3px;
+        color: $black--secondary;
         .collection__subtitle {
           margin-bottom: 6px;
           font-size: 100%;

@@ -3,7 +3,7 @@ import { CollectionActionTypes } from './collection-types'
 
 export const getCollections = () => async (dispatch) => {
   try {
-    const { data } = await axios.get('/api/collection')
+    const { data } = await axios.get('/collection')
     dispatch({
       type: CollectionActionTypes.GET_COLLECTIONS,
       payload: data,
@@ -28,7 +28,7 @@ export const addCollection = (dataToSubmit) => async (dispatch) => {
   }
 
   try {
-    const { data } = await axios.post('/api/collection', dataToSubmit, config)
+    const { data } = await axios.post('/collection', dataToSubmit, config)
     dispatch({
       type: CollectionActionTypes.ADD_COLLECTION,
       payload: data,
@@ -52,10 +52,7 @@ export const deleteCollection = (dataToDelete) => async (dispatch) => {
     },
   }
   try {
-    const { data } = await axios.delete(
-      `/api/collection/${dataToDelete}`,
-      config
-    )
+    const { data } = await axios.delete(`/collection/${dataToDelete}`, config)
     dispatch({
       type: CollectionActionTypes.DELETE_COLLECTION,
       payload: data,
