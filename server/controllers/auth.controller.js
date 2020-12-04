@@ -2,54 +2,14 @@ const crypto = require('crypto')
 const errorResponse = require('../utils/errorResponse.util')
 const asyncHandler = require('express-async-handler')
 const sendMail = require('../utils/sendEmail.util')
+const sendTokenResponse = require('../utils/sendTokenResponse.util')
 const User = require('../models/User.model')
 const cloudinary = require('cloudinary')
 const fs = require('fs')
 
-// @desc    Get current logged in user
-// @route   POST /api/auth/me
-// @access  Private
-exports.getMe = asyncHandler(async (req, res, next) => {
-  const user = await User.findById(req.user._id).populate('orders')
-  res.status(200).json({
-    success: true,
-    isAuthenticated: true,
-    isAdmin: user.role === 'admin' ? true : false,
-    userData: user,
-  })
-})
-
-// @desc    Create User
-// @route   POST /api/auth/register
-// @access  Public
-exports.register = asyncHandler(async (req, res, next) => {
-  const { email } = req.body
-  const userExist = await User.findOne({ email })
-  if (userExist) {
-    return next(new errorResponse('User already exists', 400))
-  }
-  const user = await User.create({
-    name: req.body.name,
-    email: req.body.email,
-    contact: req.body.contact,
-    address: {
-      unit: req.body.unit,
-      street: req.body.street,
-      country: req.body.country,
-      state: req.body.state,
-      zipcode: req.body.zipcode,
-      city: req.body.city,
-    },
-    password: req.body.password,
-  })
-
-  sendTokenResponse(user, 200, res)
-})
-
 // @desc    Login User
 // @route   POST /api/auth/login
 // @access  Public
-
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body
 
@@ -61,11 +21,71 @@ exports.login = asyncHandler(async (req, res, next) => {
   //Check for user
   const user = await User.findOne({ email }).select('+password')
 
-  if (user && (await user.matchPassword(password))) {
-    sendTokenResponse(user, 200, res)
-  } else {
+  if (!user) {
     return next(new errorResponse('Invalid credentials', 401))
   }
+
+  // Check if password matches
+  const isMatch = await user.matchPassword(password)
+
+  if (!isMatch) {
+    return next(new errorResponse('Invalid credentials', 401))
+  }
+
+  sendTokenResponse(user, 200, res)
+})
+
+// @desc    Get current logged in user
+// @route   POST /api/auth/me
+// @access  Private
+exports.getUserProfile = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user._id).populate('orders')
+  if (user) {
+    res.status(200).json({ user })
+  } else {
+    return next(new errorResponse('User not found', 404))
+  }
+})
+
+// @desc    Create User
+// @route   POST /api/auth/register
+// @access  Public
+exports.register = asyncHandler(async (req, res, next) => {
+  const {
+    name,
+    email,
+    contact,
+    unit,
+    street,
+    country,
+    state,
+    zipcode,
+    city,
+    password,
+  } = req.body
+
+  const userExist = await User.findOne({ email })
+
+  if (userExist) {
+    return next(new errorResponse('User already exists', 400))
+  }
+
+  const user = await User.create({
+    name,
+    email,
+    contact,
+    address: {
+      unit,
+      street,
+      country,
+      state,
+      zipcode,
+      city,
+    },
+    password,
+  })
+
+  sendTokenResponse(user, 200, res)
 })
 
 // @desc    Get current logged out clear cookies
@@ -83,7 +103,7 @@ exports.logout = asyncHandler(async (req, res, next) => {
 })
 
 // @desc    Update user detail
-// @route   GET /api/auth/updatedetail
+// @route   PUT /api/auth/updatedetail
 // @access  Private
 exports.updateDetails = asyncHandler(async (req, res, next) => {
   const fieldsToUpdate = {
@@ -116,11 +136,6 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
 // @route   GET /api/auth/updatepassword
 // @access  Private
 exports.updatePassword = asyncHandler(async (req, res, next) => {
-  // const fieldsToUpdate = {
-  //     name: req.body.name,
-  //     email: req.body.email
-  // }
-
   const user = await User.findById(req.user.id).select('+password')
   //Check current password
   if (!(await user.matchPassword(req.body.currentPassword))) {
@@ -174,7 +189,6 @@ exports.forgotPassword = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     success: true,
     data: user,
-    isAdmin: user.role,
   })
 })
 
@@ -205,35 +219,6 @@ exports.resetPassword = asyncHandler(async (req, res, next) => {
 
   sendTokenResponse(user, 200, res)
 })
-
-//Get token from model, create cookie and send response
-const sendTokenResponse = (user, statusCode, res) => {
-  //Create token
-  const token = user.getSignedJwtToken()
-
-  const options = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRE * 24 * 60 * 60 * 1000
-    ),
-    httpOnly: true,
-  }
-
-  // https
-  if (process.env.NODE_ENV === 'production') {
-    options.secure = true
-  }
-
-  res
-    .status(statusCode)
-    .cookie('token', token, options)
-    .json({
-      success: true,
-      isAuthenticated: true,
-      isAdmin: user.role === 'admin' ? true : false,
-      userData: user,
-      token,
-    })
-}
 
 exports.uploadimage = (req, res) => {
   try {

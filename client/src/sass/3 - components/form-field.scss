@@ -2,7 +2,7 @@
   margin: 0.5rem 0;
   position: relative;
   .label_inputs {
-    color: rgba($black, 0.7);
+    color: $black--secondary;
   }
   .formfield {
     padding: 0.5rem;
@@ -10,6 +10,7 @@
     border: 2px solid $border;
     width: 100%;
     border-radius: 0.5rem;
+    letter-spacing: 2px;
   }
   .formfield--textarea {
     height: 51px;

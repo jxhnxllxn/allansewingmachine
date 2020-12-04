@@ -4,9 +4,7 @@ import { gsap } from 'gsap'
 
 //redux
 import { useDispatch, useSelector } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
-// import { store, persistore } from './redux/store'
-import { auth } from './redux/auth/auth-action'
+import { getUserDetails } from './redux/auth/auth-action'
 import landingAnimation from './utils/animations/landingAnimation'
 import useResponsiveVH from './utils/hooks/useResponsiveVH'
 
@@ -29,7 +27,7 @@ const App = () => {
   useResponsiveVH()
   const dispatch = useDispatch()
 
-  const token = useSelector(({ auth }) => auth.token)
+  const user = useSelector(({ userLogin }) => userLogin)
 
   useEffect(() => {
     //prevent flashing
@@ -39,10 +37,10 @@ const App = () => {
 
     landingAnimation()
 
-    if (token) {
-      dispatch(auth())
+    if (localStorage.token && user.isAuthenticated) {
+      dispatch(getUserDetails())
     }
-  }, [token])
+  }, [localStorage.token])
 
   return (
     // <PersistGate persistor={persistore}>

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { register, checkoutUpdateUser } from '../redux/auth/auth-action'
+import { register, updateUserProfile } from '../redux/auth/auth-action'
 import { selectIsAuth, selectCurrentUser } from '../redux/auth/auth-selector'
 import {
   update,
@@ -244,7 +244,7 @@ const BillingShipping = (props) => {
     let formIsValid = isFormValid(formField.formData, 'billing')
     if (formIsValid) {
       if (isAuthenticated) {
-        dispatch(checkoutUpdateUser(dataToSubmit))
+        dispatch(updateUserProfile(dataToSubmit))
           .then((res) => {
             if (res.payload.success) {
               setFormField({

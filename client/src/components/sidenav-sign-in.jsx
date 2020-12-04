@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/auth/auth-action'
 import MyButton from './button'
 import FormField from './form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
-// import Loading from "../../components/loading/loading";
-
+import Loading from './loading'
 const SignIn = () => {
   const dispatch = useDispatch()
+
+  const userLoginState = useSelector(({ userLogin }) => userLogin)
+  const { error, loading } = userLoginState
+
   const [formField, setFormField] = useState({
     formError: false,
     formSuccess: false,
@@ -51,6 +54,12 @@ const SignIn = () => {
     },
   })
 
+  useEffect(() => {
+    return () => {
+      setFormField({})
+    }
+  }, [])
+
   const updateForm = (element) => {
     const newFormData = update(element, formField.formData, 'login')
     setFormField({
@@ -87,16 +96,22 @@ const SignIn = () => {
           change={(element) => updateForm(element)}
         />
 
-        <MyButton
-          onClick={(e) => submitForm(e)}
-          type='submit'
-          title='Sign In'
-          value='Submit'
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <MyButton
+            onClick={(e) => submitForm(e)}
+            type='submit'
+            title='Sign In'
+            value='Submit'
+          />
+        )}
       </form>
 
       {formField.formError ? (
-        <div className='error_label'>Please check your data</div>
+        <div className='error_label'>Please check your credential</div>
+      ) : error ? (
+        <div className='error_label'>{error}</div>
       ) : null}
     </div>
   )

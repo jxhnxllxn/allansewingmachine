@@ -1,39 +1,24 @@
 import axios from 'axios'
 import { AuthActionTypes } from './auth-types'
 
-export const auth = () => async (dispatch) => {
-  // try {
-  //   const config = {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: `Bearer ${localStorage.token}`,
-  //     },
-  //   }
-  //   const { data } = await axios.get('/auth/me', config)
-  //   dispatch({
-  //     type: AuthActionTypes.AUTH_USER,
-  //     payload: data,
-  //   })
-  // } catch (error) {
-  //   dispatch({
-  //     type: AuthActionTypes.AUTH_ERROR,
-  //     payload:
-  //       error.response && error.response.data.error
-  //         ? error.response.data.error
-  //         : error.message,
-  //   })
-  // }
-
+//Login User
+export const login = (dataToSubmit) => async (dispatch) => {
   try {
-    const { data } = await axios.get('/auth/me')
+    dispatch({
+      type: AuthActionTypes.USER_LOGIN_REQUEST,
+    })
+
+    const { data } = await axios.post('/auth/login', dataToSubmit)
 
     dispatch({
-      type: AuthActionTypes.AUTH_USER,
+      type: AuthActionTypes.USER_LOGIN_SUCCESS,
       payload: data,
     })
+
+    localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
-      type: AuthActionTypes.AUTH_ERROR,
+      type: AuthActionTypes.USER_LOGIN_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
@@ -45,110 +30,230 @@ export const auth = () => async (dispatch) => {
 //register
 export const register = (dataToSubmit) => async (dispatch) => {
   try {
-    const { data } = await axios.post('/auth/register', dataToSubmit)
     dispatch({
-      type: AuthActionTypes.REGISTER_SUCCESS,
+      type: AuthActionTypes.USER_REGISTER_REQUEST,
+    })
+
+    const { data } = await axios.post('/auth/register', dataToSubmit)
+
+    dispatch({
+      type: AuthActionTypes.USER_REGISTER_SUCCESS,
       payload: data,
     })
+
+    localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     dispatch({
-      type: AuthActionTypes.REGISTER_FAIL,
+      type: AuthActionTypes.USER_REGISTER_FAIL,
       payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
+        error.response && error.response.data.message
+          ? error.response.data.message
           : error.message,
     })
   }
 }
 
-//Login User
-export const login = (dataToSubmit) => async (dispatch) => {
+export const getUserDetails = () => async (dispatch, getState) => {
   try {
-    const { data } = await axios.post('/auth/login', dataToSubmit)
     dispatch({
-      type: AuthActionTypes.LOGIN_SUCCESS,
+      type: AuthActionTypes.USER_DETAILS_REQUEST,
+    })
+
+    const {
+      auth: { token },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+    const { data } = await axios.get('/auth/profile', config)
+
+    dispatch({
+      type: AuthActionTypes.USER_DETAILS_SUCCESS,
       payload: data,
     })
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
     dispatch({
-      type: AuthActionTypes.LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      type: AuthActionTypes.USER_DETAILS_FAIL,
+      payload: message,
+    })
+  }
+}
+
+export const updateUserProfile = (dataToSubmit) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({
+      type: AuthActionTypes.SER_UPDATE_PROFILE_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get('/auth/updatedetail', dataToSubmit, config)
+    dispatch({
+      type: AuthActionTypes.USER_UPDATE_PROFILE_SUCCESS,
+      payload: data,
+    })
+
+    localStorage.setItem('userInfo', JSON.stringify(data))
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: AuthActionTypes.USER_UPDATE_PROFILE_FAIL,
+      payload: message,
+    })
+  }
+}
+
+export const listUsers = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: AuthActionTypes.USER_LIST_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    const { data } = await axios.get(`/api/auth`, config)
+
+    dispatch({
+      type: AuthActionTypes.USER_LIST_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: AuthActionTypes.USER_LIST_FAIL,
+      payload: message,
+    })
+  }
+}
+
+export const deleteUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: AuthActionTypes.USER_DELETE_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    }
+
+    await axios.delete(`/api/users/${id}`, config)
+
+    dispatch({ type: AuthActionTypes.USER_DELETE_SUCCESS })
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
+    dispatch({
+      type: AuthActionTypes.USER_DELETE_FAIL,
+      payload: message,
     })
   }
 }
 
 //logout
-export const logout = () => async (dispatch) => {
-  try {
-    const { data } = await axios.get('/auth/logout')
-    dispatch({
-      type: AuthActionTypes.LOGOUT_SUCCESS,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: AuthActionTypes.LOGOUT_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    })
-  }
-}
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('userInfo')
+  localStorage.removeItem('cartItems')
+  dispatch({ type: AuthActionTypes.USER_LOGOUT })
+  // dispatch({ type: AuthActionTypes.USER_DETAILS_RESET })
+  // dispatch({ type: AuthActionTypes.ORDER_LIST_MY_RESET })
+  // dispatch({ type: AuthActionTypes.USER_LIST_RESET })
 
-export const checkoutUpdateUser = (dataToSubmit) => async (dispatch) => {
-  try {
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.token}`,
-      },
-    }
-    const { data } = await axios.get('/auth/updatedetail', dataToSubmit, config)
-    dispatch({
-      type: AuthActionTypes.CHECKOUT_UPDATE_USER,
-      payload: data,
-    })
-  } catch (error) {
-    dispatch({
-      type: AuthActionTypes.AUTH_ERROR,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
-    })
-  }
+  document.location.href = '/'
 }
 
 //   updatepassword
 
-export const updatePassword = (dataToSubmit) => async (dispatch) => {
+export const updatePassword = (dataToSubmit) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: AuthActionTypes.USER_UPDATE_PASSWORD_REQUEST,
+    })
+
+    const {
+      userLogin: { userInfo },
+    } = getState()
+
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.token}`,
+        Authorization: `Bearer ${userInfo.token}`,
       },
     }
+
     const { data } = await axios.put(
       '/auth/updatepassword',
       dataToSubmit,
       config
     )
     dispatch({
-      type: AuthActionTypes.PASSWORD_UPDATE,
+      type: AuthActionTypes.USER_UPDATE_PASSWORD_SUCCESS,
       payload: data,
     })
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    if (message === 'Not authorized, token failed') {
+      dispatch(logout())
+    }
     dispatch({
-      type: AuthActionTypes.PASSWORD_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      type: AuthActionTypes.USER_UPDATE_PASSWORD_FAIL,
+      payload: message,
     })
   }
 }

@@ -1,45 +1,46 @@
 {
-   "name": "allansewingmachines",
-   "version": "1.0.0",
-   "description": "Allan Sewing Machines",
-   "main": "server.js",
-   "scripts": {
-      "client-install": "npm install --prefix client",
-      "start": "node server/server.js",
-      "server": "nodemon server/server.js",
-      "client": "npm start --prefix client",
-      "dev": "concurrently \"npm run server\" \"npm run client\"",
-      "data:import": "node server/seeder",
-      "data:destroy": "node server/seeder -d",
-      "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-   },
-   "engines": {
-      "node": "12.16.2"
-   },
-   "author": "John Allen de Chavez",
-   "license": "ISC",
-   "dependencies": {
-      "async": "^3.2.0",
-      "bcryptjs": "^2.4.3",
-      "cloudinary": "^1.23.0",
-      "compression": "^1.7.4",
-      "cookie-parser": "^1.4.5",
-      "dotenv": "^8.2.0",
-      "express": "^4.17.1",
-      "express-async-handler": "^1.1.4",
-      "express-mongo-sanitize": "^2.0.0",
-      "helmet": "^4.2.0",
-      "jsonwebtoken": "^8.5.1",
-      "mongoose": "^5.9.28",
-      "morgan": "^1.10.0",
-      "node-geocoder": "^3.27.0",
-      "nodemailer": "^6.4.11",
-      "uuid": "^8.3.0",
-      "xss-clean": "^0.1.1"
-   },
-   "devDependencies": {
-      "concurrently": "^5.3.0",
-      "cors": "^2.8.5",
-      "http-proxy-middleware": "^1.0.5"
-   }
+  "name": "allansewingmachines",
+  "version": "1.0.0",
+  "description": "Allan Sewing Machines",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "data:import": "node server/seeder",
+    "data:destroy": "node server/seeder -d",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+  },
+  "engines": {
+    "node": "12.16.2"
+  },
+  "author": "John Allen de Chavez",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.23.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "express-fileupload": "^1.2.0",
+    "express-mongo-sanitize": "^2.0.0",
+    "helmet": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.28",
+    "morgan": "^1.10.0",
+    "node-geocoder": "^3.27.0",
+    "nodemailer": "^6.4.11",
+    "uuid": "^8.3.0",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "cors": "^2.8.5",
+    "http-proxy-middleware": "^1.0.5"
+  }
 }

@@ -51,9 +51,9 @@ const CollapseCheckbox = ({ initialState, list, title, handleFilters }) => {
       <div className='list'>
         <div className='list__items' onClick={handleOpened}>
           <span className='list__title'>{title}</span>
-          <UpIcon className={`icon ${state.opened ? 'icon--active' : ''}`} />
+          <UpIcon className={`icon ${initialState ? 'icon--active' : ''}`} />
         </div>
-        <div className={`list__collapse ${state.opened ? 'active' : ''}`}>
+        <div className={`list__collapse ${initialState ? 'active' : ''}`}>
           <ul>
             {list.map((i) => (
               <li key={i._id}>

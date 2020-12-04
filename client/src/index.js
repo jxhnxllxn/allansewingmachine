@@ -10,8 +10,8 @@ import { gsap } from 'gsap'
 import axios from 'axios'
 gsap.config({ nullTargetWarn: false })
 axios.defaults.baseURL = '/api'
-// axios.defaults.headers.get['Accept'] = 'application/json'
-// axios.defaults.headers.post['Accept'] = 'application/json'
+axios.defaults.headers.get['Accept'] = 'application/json'
+axios.defaults.headers.post['Accept'] = 'application/json'
 
 ReactDOM.render(
   <Provider store={store}>

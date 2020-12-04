@@ -8,9 +8,11 @@ import {
 import LoadMoreCards from '../components/load-more'
 import CollapseCheckbox from '../components/collapse-checkbox'
 import Loading from '../components/loading'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 
 const ShopCollection = ({ match }) => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const productState = useSelector(({ product }) => product)
   const { toShopSize, toShop, loading, error } = productState
   const collectionState = useSelector(({ collection }) => collection)
@@ -35,6 +37,10 @@ const ShopCollection = ({ match }) => {
     }
   }
 
+  useEffect(() => {
+    collectionParams()
+  }, [match.params.collection])
+
   const conditions = [
     {
       _id: 'new',
@@ -49,7 +55,6 @@ const ShopCollection = ({ match }) => {
   useEffect(() => {
     dispatch(getCollections())
     // dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
-    collectionParams()
     return () => {
       setFilter({})
     }
@@ -75,7 +80,6 @@ const ShopCollection = ({ match }) => {
 
   const loadMoreCards = () => {
     let skip = filter.skip + filter.limit
-    console.log(filter)
     dispatch(
       getProductsToShop(skip, filter.limit, filter.filters, toShop)
     ).then(() => {
@@ -86,6 +90,12 @@ const ShopCollection = ({ match }) => {
     })
   }
 
+  const [open, setopen] = useState(false)
+  const handleOpened = (id) => {
+    setopen(!open)
+    history.push(`/shop/${id}`)
+  }
+
   return (
     <div className='shop'>
       {console.log(filter)}
@@ -94,15 +104,16 @@ const ShopCollection = ({ match }) => {
         <div className='shop__filterblock'>
           {collections &&
             collections.map((i) => (
-              <CollapseCheckbox
-                key={i._id}
-                title={i.name}
-                list={i.categories}
-                initialState={match.params.collection === i._id}
-                handleFilters={(filters) =>
-                  handleFilters(filters, 'categoryId')
-                }
-              />
+              <div onClick={() => handleOpened(i._id)} key={i._id}>
+                <CollapseCheckbox
+                  title={i.name}
+                  list={i.categories}
+                  initialState={match.params.collection === i._id}
+                  handleFilters={(filters) =>
+                    handleFilters(filters, 'categoryId')
+                  }
+                />
+              </div>
             ))}
         </div>
         <div className='shop__filterblock'>
@@ -117,7 +128,6 @@ const ShopCollection = ({ match }) => {
 
       <div className='shop__products'>
         <div className='shop__pagination'></div>
-        <Loading />
         {loading ? (
           <Loading />
         ) : error ? (

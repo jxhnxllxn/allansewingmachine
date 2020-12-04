@@ -5,8 +5,9 @@
   font-weight: 500;
   cursor: pointer;
   text-transform: capitalize;
+  letter-spacing: 2px;
 }
 .btn--submit {
-  background-color: $navColor;
+  background-color: $black--secondary;
   color: $white;
 }
