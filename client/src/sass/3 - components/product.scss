@@ -7,16 +7,17 @@
   background-color: $background;
   border-radius: 0.3rem;
   cursor: pointer;
-  backface-visibility: hidden;
+  overflow: hidden;
   text-align: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1), 0 12px 20px rgba(0, 0, 0, 0.1);
   }
 
   &__photo {
     height: 15rem;
-    object-fit: cover;
+    background-size: contain;
     border: none;
     background-repeat: no-repeat;
     border-radius: 0.1rem;
@@ -26,13 +27,18 @@
     font-size: 100%;
     padding: 1rem 0;
     font-weight: 600;
+    padding: 0 1rem;
+    text-align: center;
+    backface-visibility: hidden;
+    border: none;
   }
   h3 {
     font-size: 90%;
     font-weight: 500;
-    &:hover {
-      color: $black;
-    }
+    padding: 1rem;
+    text-align: center;
+    backface-visibility: hidden;
+    border: none;
   }
   &__actions {
     align-self: flex-end;

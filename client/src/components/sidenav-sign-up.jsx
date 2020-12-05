@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { register } from '../redux/auth/auth-action'
+import { register } from '../redux/user/user-action'
 import MyButton from './button'
 import FormField from './form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
@@ -31,7 +31,6 @@ const SignUp = ({ history }) => {
       },
       email: {
         element: 'input',
-
         value: '',
         showlabel: true,
         config: {

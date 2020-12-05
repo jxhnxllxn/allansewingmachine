@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { register, updateUserProfile } from '../redux/auth/auth-action'
-import { selectIsAuth, selectCurrentUser } from '../redux/auth/auth-selector'
+import { register, updateUserProfile } from '../redux/user/user-action'
 import {
   update,
   generateData,
@@ -11,9 +10,14 @@ import {
 } from '../utils/helper/form-action'
 import MyButton from '../components/button'
 import FormField from '../components/form-field'
-const BillingShipping = (props) => {
-  const currentUser = useSelector((state) => selectCurrentUser(state))
-  const isAuthenticated = useSelector((state) => selectIsAuth(state))
+
+const BillingShipping = () => {
+  const userDetailsState = useSelector(({ userDetails }) => userDetails)
+  const { user, loading, error } = userDetailsState
+
+  const isAuthenticated = useSelector(
+    ({ userLogin }) => userLogin.isAuthenticated
+  )
   const dispatch = useDispatch()
   const [formField, setFormField] = useState({
     formError: false,
@@ -195,18 +199,18 @@ const BillingShipping = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      const user = {
-        city: currentUser.address.city,
-        country: currentUser.address.country,
-        state: currentUser.address.state,
-        street: currentUser.address.street,
-        unit: currentUser.address.unit,
-        zipcode: currentUser.address.zipcode,
-        contact: currentUser.contact,
-        email: currentUser.email,
-        name: currentUser.name,
+      const userData = {
+        city: user.address.city,
+        country: user.address.country,
+        state: user.address.state,
+        street: user.address.street,
+        unit: user.address.unit,
+        zipcode: user.address.zipcode,
+        contact: user.contact,
+        email: user.email,
+        name: user.name,
       }
-      const newFormData = populateFields(formField.formData, user)
+      const newFormData = populateFields(formField.formData, userData)
       setFormField({
         ...formField,
         formData: newFormData,

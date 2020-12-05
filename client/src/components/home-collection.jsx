@@ -16,6 +16,7 @@ const Collection = ({ collections }) => {
   }
 
   const collectionItem = () =>
+    collections &&
     collections.map((i) => (
       <div
         className='collection__item'

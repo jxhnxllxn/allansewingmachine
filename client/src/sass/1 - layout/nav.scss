@@ -3,10 +3,10 @@
   font-size: 100%;
   position: relative;
   background-color: $navColor;
+  letter-spacing: 2px;
   // background-color: $background--secondary;
   &__top {
     @include container;
-    color: $white;
     justify-content: space-between;
     @include flexAlignItemCenter;
     height: 4rem;
@@ -17,10 +17,13 @@
       top: 1rem;
       display: flex;
       flex-direction: column;
-      mix-blend-mode: difference;
-      span:first-child() {
+      // mix-blend-mode: difference;
+      color: $black;
+      line-height: 1;
+      .allan {
+        font-weight: 700;
         font-family: $font-brand;
-        font-size: 110%;
+        font-size: 140%;
       }
     }
     .nav__listTop {
@@ -29,11 +32,14 @@
         justify-content: space-between;
         align-items: center;
         li {
-          padding: 1.5rem;
-          border-left: 1px solid $border;
+          // border-left: 1px solid $border;
           cursor: pointer;
-          svg {
-            stroke: $black--secondary;
+          padding: 1.2rem;
+          .icon {
+            svg {
+              stroke: $black--secondary;
+              stroke-width: 2px;
+            }
           }
         }
       }
@@ -53,7 +59,7 @@
         @include flexAlignItemCenter;
         justify-content: flex-end;
         li {
-          border-left: 1px solid $border;
+          // border-left: 1px solid $border;
           a {
             padding: 1.5rem;
             display: block;

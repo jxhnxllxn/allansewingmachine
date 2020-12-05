@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../redux/auth/auth-action'
+import { login } from '../redux/user/user-action'
 import MyButton from './button'
 import FormField from './form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'

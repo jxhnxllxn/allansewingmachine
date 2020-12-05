@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AuthActionTypes } from './auth-types'
+import { AuthActionTypes } from './user-constants'
 
 //Login User
 export const login = (dataToSubmit) => async (dispatch) => {
@@ -8,7 +8,7 @@ export const login = (dataToSubmit) => async (dispatch) => {
       type: AuthActionTypes.USER_LOGIN_REQUEST,
     })
 
-    const { data } = await axios.post('/auth/login', dataToSubmit)
+    const { data } = await axios.post('/user/login', dataToSubmit)
 
     dispatch({
       type: AuthActionTypes.USER_LOGIN_SUCCESS,
@@ -34,10 +34,15 @@ export const register = (dataToSubmit) => async (dispatch) => {
       type: AuthActionTypes.USER_REGISTER_REQUEST,
     })
 
-    const { data } = await axios.post('/auth/register', dataToSubmit)
+    const { data } = await axios.post('/user/register', dataToSubmit)
 
     dispatch({
       type: AuthActionTypes.USER_REGISTER_SUCCESS,
+      payload: data,
+    })
+
+    dispatch({
+      type: AuthActionTypes.USER_LOGIN_SUCCESS,
       payload: data,
     })
 
@@ -60,7 +65,7 @@ export const getUserDetails = () => async (dispatch, getState) => {
     })
 
     const {
-      auth: { token },
+      userLogin: { token },
     } = getState()
 
     const config = {
@@ -69,7 +74,7 @@ export const getUserDetails = () => async (dispatch, getState) => {
         Authorization: `Bearer ${token}`,
       },
     }
-    const { data } = await axios.get('/auth/profile', config)
+    const { data } = await axios.get('/user/profile', config)
 
     dispatch({
       type: AuthActionTypes.USER_DETAILS_SUCCESS,
@@ -110,7 +115,7 @@ export const updateUserProfile = (dataToSubmit) => async (
       },
     }
 
-    const { data } = await axios.get('/auth/updatedetail', dataToSubmit, config)
+    const { data } = await axios.get('/user/updatedetail', dataToSubmit, config)
     dispatch({
       type: AuthActionTypes.USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -148,7 +153,7 @@ export const listUsers = () => async (dispatch, getState) => {
       },
     }
 
-    const { data } = await axios.get(`/api/auth`, config)
+    const { data } = await axios.get(`/api/user`, config)
 
     dispatch({
       type: AuthActionTypes.USER_LIST_SUCCESS,
@@ -206,7 +211,6 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 //logout
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
-  localStorage.removeItem('cartItems')
   dispatch({ type: AuthActionTypes.USER_LOGOUT })
   // dispatch({ type: AuthActionTypes.USER_DETAILS_RESET })
   // dispatch({ type: AuthActionTypes.ORDER_LIST_MY_RESET })
@@ -235,7 +239,7 @@ export const updatePassword = (dataToSubmit) => async (dispatch, getState) => {
     }
 
     const { data } = await axios.put(
-      '/auth/updatepassword',
+      '/user/updatepassword',
       dataToSubmit,
       config
     )

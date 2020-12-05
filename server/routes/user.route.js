@@ -1,39 +1,31 @@
-const express = require('express');
+const express = require('express')
 const {
-    getUsers,
-    getUser,
-    createUser,
-    updateUser,
-    deleteUser,
-    uploadimage,
-    checkoutCreateUser,
-    checkoutUpdateUser
+  register,
+  login,
+  logout,
+  getUserProfile,
+  forgotPassword,
+  resetPassword,
+  updateDetails,
+  updatePassword,
+  uploadimage,
+  deleteimage,
 } = require('../controllers/user.controller')
 
+const router = express.Router()
 
-const User = require('../models/User.model');
-const router = express.Router();
+const { protect, authorize } = require('../middlewares/auth.middleware')
 
-const advanceResults = require('../middlewares/advaceResult.middleware');
-const {protect,authorize} = require('../middlewares/auth.middleware');
+router.post('/register', register)
+router.post('/login', login)
+router.get('/profile', protect, getUserProfile)
+router.get('/logout', logout)
 
-router.use(protect);
-router.use(authorize('admin'))
+router.post('/uploadimage', protect, authorize('admin'), uploadimage)
+router.post('/deleteimage', protect, authorize('admin'), deleteimage)
+router.post('/forgotpassword', forgotPassword)
+router.put('/resetpassword/:resettoken', resetPassword)
+router.put('/updatedetail/', protect, updateDetails)
+router.put('/updatepassword/', protect, updatePassword)
 
-router.route('/')
-    .get(advanceResults(User,['product']),getUsers)   
-    .post(createUser);
-
-router.route('/:id')
-    .get(getUser)
-    .put(updateUser)
-    .delete(deleteUser);
-
-router.route('/checkoutCreateUser')
-    .post(checkoutCreateUser);
-
-
-router.route('/checkoutUpdateUser')
-    .post(checkoutUpdateUser)
-
-module.exports = router;
+module.exports = router

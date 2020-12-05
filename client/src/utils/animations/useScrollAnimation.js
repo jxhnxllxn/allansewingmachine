@@ -6,10 +6,6 @@ const NavScrollAnimation = (tl) => {
       duration: 0.5,
       css: { top: '-4rem' },
     })
-    //  .from('.nav__logo', {
-    //    duration: 0.5,
-    //    y: '4rem',
-    //  })
     // eslint-disable-next-line
   }, [])
 }

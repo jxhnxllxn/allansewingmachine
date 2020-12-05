@@ -12,8 +12,10 @@ const Home = () => {
   useEffect(() => {
     dispatch(getProductsToHome())
   }, [dispatch])
-  const productState = useSelector(({ product }) => product)
-  const { loading, productToHome, error } = productState
+  const productListHomeState = useSelector(
+    ({ productListHome }) => productListHome
+  )
+  const { loading, productToHome, error } = productListHomeState
 
   return (
     <div className='home_wrapper'>
@@ -25,7 +27,7 @@ const Home = () => {
       ) : (
         <>
           <HomeCollection collections={productToHome.collections} />
-          <CardBlock list={productToHome.bestSeller} title={'Best seller'} />
+          <CardBlock list={productToHome.bestSeller} title={'Best sellers'} />
         </>
       )}
     </div>

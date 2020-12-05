@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  getCollections,
-  getProductsToShop,
-} from '../redux/product/product-action'
+import { getProductsToShop } from '../redux/product/product-action'
+import { getCollections } from '../redux/collection/collection-action'
+
 import LoadMoreCards from '../components/load-more'
 import CollapseCheckbox from '../components/collapse-checkbox'
 import Loading from '../components/loading'
@@ -13,13 +12,15 @@ import { useHistory, useRouteMatch } from 'react-router-dom'
 const ShopCollection = ({ match }) => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const productState = useSelector(({ product }) => product)
-  const { toShopSize, toShop, loading, error } = productState
+  const productListShopState = useSelector(
+    ({ productListShop }) => productListShop
+  )
+  const { toShopSize, toShop, loading, error } = productListShopState
   const collectionState = useSelector(({ collection }) => collection)
   const { collections } = collectionState
 
   const [filter, setFilter] = useState({
-    limit: 5,
+    limit: 24,
     skip: 0,
     filters: {
       collectionId: [],
@@ -29,16 +30,16 @@ const ShopCollection = ({ match }) => {
     },
   })
 
-  const collectionParams = () => {
-    if (match.params.collection) {
-      handleFilters([match.params.collection], 'collectionId')
+  const collectionParams = (x) => {
+    if (x) {
+      handleFilters([x], 'collectionId')
     } else {
       dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
     }
   }
 
   useEffect(() => {
-    collectionParams()
+    collectionParams(match.params.collection)
   }, [match.params.collection])
 
   const conditions = [
@@ -89,11 +90,23 @@ const ShopCollection = ({ match }) => {
       })
     })
   }
-
-  const [open, setopen] = useState(false)
   const handleOpened = (id) => {
-    setopen(!open)
-    history.push(`/shop/${id}`)
+    if (id === match.params.collection) {
+      setFilter({
+        limit: 24,
+        skip: 0,
+        filters: {
+          collectionId: [],
+          price: [],
+          categoryId: [],
+          condition: [],
+        },
+      })
+
+      history.push('/shop')
+    } else {
+      history.push(`/shop/${id}`)
+    }
   }
 
   return (
@@ -104,16 +117,16 @@ const ShopCollection = ({ match }) => {
         <div className='shop__filterblock'>
           {collections &&
             collections.map((i) => (
-              <div onClick={() => handleOpened(i._id)} key={i._id}>
-                <CollapseCheckbox
-                  title={i.name}
-                  list={i.categories}
-                  initialState={match.params.collection === i._id}
-                  handleFilters={(filters) =>
-                    handleFilters(filters, 'categoryId')
-                  }
-                />
-              </div>
+              <CollapseCheckbox
+                key={i._id}
+                handleOpened={() => handleOpened(i._id)}
+                title={i.name}
+                list={i.categories}
+                initialState={match.params.collection === i._id}
+                handleFilters={(filters) =>
+                  handleFilters(filters, 'categoryId')
+                }
+              />
             ))}
         </div>
         <div className='shop__filterblock'>

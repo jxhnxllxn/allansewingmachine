@@ -12,12 +12,11 @@ const fileUpload = require('express-fileupload')
 const errorHandler = require('../middlewares/error.middleware')
 
 // Routes
-const auth = require('../routes/auth.route')
+const user = require('../routes/user.route')
 const collection = require('../routes/collection.route')
 const category = require('../routes/category.route')
 const product = require('../routes/product.route')
 const order = require('../routes/order.route')
-const user = require('../routes/user.route')
 
 module.exports = (app) => {
   app.use(mongoSanitize())
@@ -41,12 +40,11 @@ module.exports = (app) => {
   app.use(xss())
   app.use(express.json({ extended: false }))
 
-  app.use('/api/auth', auth)
+  app.use('/api/user', user)
   app.use('/api/collection', collection)
   app.use('/api/category', category)
   app.use('/api/product', product)
   app.use('/api/order', order)
-  app.use('/api/user', user)
 
   app.use(
     fileUpload({

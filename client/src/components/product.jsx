@@ -53,7 +53,9 @@ const Product = ({
             className='product-card__photo'
             style={{
               background: `url(${renderCardImage(images)})`,
-              backgroundSize: 'cover',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
             }}
           ></div>
         </LazyLoad>

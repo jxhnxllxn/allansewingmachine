@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { CollectionActionTypes } from './collection-types'
+import { CollectionActionTypes } from './collection-constants'
 
 export const getCollections = () => async (dispatch) => {
   try {
@@ -67,3 +67,21 @@ export const deleteCollection = (dataToDelete) => async (dispatch) => {
     })
   }
 }
+
+// export const getCollections = () => async (dispatch) => {
+//   try {
+//     const { data } = await axios.get('/collection?select=name')
+//     dispatch({
+//       type: ProductActionTypes.GET_COLLECTIONS,
+//       payload: data,
+//     })
+//   } catch (error) {
+//     dispatch({
+//       type: ProductActionTypes.ERROR_PRODUCT,
+//       payload:
+//         error.response && error.response.data.error
+//           ? error.response.data.error
+//           : error.message,
+//     })
+//   }
+// }

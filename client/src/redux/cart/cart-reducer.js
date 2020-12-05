@@ -1,4 +1,4 @@
-import CartActionTypes from './cart-types'
+import CartActionTypes from './cart-constants'
 import { addItemToCart, removeItemFromCart, updateQuantity } from './cart-utils'
 
 const INITIAL_STATE = {

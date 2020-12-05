@@ -2,7 +2,7 @@ body {
   word-spacing: 0.15rem;
   color: $black--secondary;
   font-family: $font-primary;
-  letter-spacing: 2px;
+  letter-spacing: 0.5px;
   font-weight: 600;
   font-size: 0.9rem;
   -webkit-font-smoothing: antialiased;
@@ -19,6 +19,9 @@ a {
 .heading-primary {
   font-size: 5rem;
   color: $black--secondary;
-  text-transform: capitalize;
-  font-family: $font-brand;
+  text-transform: uppercase;
+  font-weight: bolder;
+  letter-spacing: -5px;
+  line-height: 1;
+  // font-family: $font-brand;
 }

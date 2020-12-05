@@ -53,22 +53,27 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
       {
         name: 'Home',
         linkTo: '/',
+        exact: true,
       },
       {
         name: 'Shop',
         linkTo: '/shop',
+        exact: false,
       },
       {
         name: 'Services',
         linkTo: '/services',
+        exact: true,
       },
       {
         name: 'About',
         linkTo: '/about',
+        exact: true,
       },
       {
         name: 'Contact',
         linkTo: '/contact',
+        exact: true,
       },
     ],
   ]
@@ -78,37 +83,24 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
       <nav className='nav'>
         <div className='nav__top'>
           <div className='nav__logo'>
-            <span>Allan</span>
+            <span className='allan'>Allan</span>
             <span>Sewing Machines</span>
           </div>
           <div></div>
           <div className='nav__listTop'>
             <ul>
-              <li>
-                <div
-                  className='icon icon--search'
-                  ref={searchIconRef}
-                  onClick={() => toggleSideNav('search')}
-                >
+              <li ref={searchIconRef} onClick={() => toggleSideNav('search')}>
+                <div className='icon icon--search'>
                   <SearchIcon />
                 </div>
               </li>
-              <li>
-                <div
-                  className='icon icon--person'
-                  ref={personIconRef}
-                  onClick={() => toggleSideNav('person')}
-                >
+              <li ref={personIconRef} onClick={() => toggleSideNav('person')}>
+                <div className='icon icon--person'>
                   <PersonIcon />
                 </div>
               </li>
-              <li>
-                <div
-                  className='icon icon--bag'
-                  id='toggleIconCart'
-                  ref={cartIconRef}
-                  onClick={() => toggleSideNav('cart')}
-                >
+              <li ref={cartIconRef} onClick={() => toggleSideNav('cart')}>
+                <div className='icon icon--bag' id='toggleIconCart'>
                   <ShoppingBagIcon />
                   <span className='icon__count'>
                     {itemCount > 0 && itemCount}
@@ -124,7 +116,7 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
             <ul>
               {links[0].map((x, i) => (
                 <li key={i}>
-                  <NavLink exact to={x.linkTo}>
+                  <NavLink exact={x.exact} to={x.linkTo}>
                     {x.name}
                   </NavLink>
                 </li>

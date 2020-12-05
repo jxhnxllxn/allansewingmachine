@@ -7,13 +7,12 @@ import {
   populateFields,
 } from '../utils/helper/form-action'
 import { useEffect } from 'react'
-import { updateUserProfile, updatePassword } from '../redux/auth/auth-action'
+import { updateUserProfile, updatePassword } from '../redux/user/user-action'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentUser } from '../redux/auth/auth-selector'
 
 const UpdatePersonalNfo = () => {
   const dispatch = useDispatch()
-  const currentUser = useSelector((state) => selectCurrentUser(state))
+  const currentUser = useSelector(({ userDetails }) => userDetails.user)
   const [password, setPassword] = useState({
     formError: false,
     formErrorMessage: [],

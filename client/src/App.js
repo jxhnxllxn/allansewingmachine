@@ -4,7 +4,7 @@ import { gsap } from 'gsap'
 
 //redux
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from './redux/auth/auth-action'
+import { getUserDetails } from './redux/user/user-action'
 import landingAnimation from './utils/animations/landingAnimation'
 import useResponsiveVH from './utils/hooks/useResponsiveVH'
 
@@ -37,13 +37,12 @@ const App = () => {
 
     landingAnimation()
 
-    if (localStorage.token && user.isAuthenticated) {
+    if (localStorage.getItem('userInfo') && user.isAuthenticated) {
       dispatch(getUserDetails())
     }
   }, [localStorage.token])
 
   return (
-    // <PersistGate persistor={persistore}>
     <Layout>
       <Switch>
         <ErrorBoundary>
@@ -85,7 +84,6 @@ const App = () => {
         </ErrorBoundary>
       </Switch>
     </Layout>
-    // </PersistGate>
   )
 }
 

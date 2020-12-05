@@ -14,11 +14,12 @@ const ProductPreview = (props) => {
   const dispatch = useDispatch()
   const myRef = useRef()
   const [state, setState] = useState({ index: 0 })
-  const productState = useSelector(({ product }) => product)
-  const { loading, error, productDetail } = productState
+  const productDetailsState = useSelector(
+    ({ productDetails }) => productDetails
+  )
+  const { loading, error, product } = productDetailsState
 
   useEffect(() => {
-    console.log(productDetail)
     const id = props.match.params.product
     dispatch(getProductDetail(id))
     return () => {
@@ -44,11 +45,11 @@ const ProductPreview = (props) => {
   }
 
   const handleAddItem = () => {
-    dispatch(addItem(productDetail))
+    dispatch(addItem(product.data))
   }
 
-  const productDetails = () =>
-    !productDetail ? (
+  const productD = () =>
+    !product ? (
       error && (
         <div className='error_message'>
           <h1>{error}</h1>
@@ -57,16 +58,16 @@ const ProductPreview = (props) => {
     ) : (
       <div className='details'>
         <div className='big_img'>
-          <img src={renderImage(productDetail.images)} alt='product images' />
+          <img src={renderImage(product.data.images)} alt='product images' />
         </div>
         <div className='box'>
           <div className='row'>
-            <h2>{productDetail.name}</h2>
-            <span>Php {productDetail.price}.00</span>
+            <h2>{product.data.name}</h2>
+            <span>Php {product.data.price}.00</span>
           </div>
-          <p>{productDetail.description}</p>
+          <p>{product.data.description}</p>
           <DetailsThumb
-            images={productDetail.images}
+            images={product.data.images}
             tab={handleTab}
             myRef={myRef}
           />
@@ -80,7 +81,7 @@ const ProductPreview = (props) => {
 
   return (
     <div className='product_preview_wrapper'>
-      {loading ? <Loading /> : productDetails()}
+      {loading ? <Loading /> : productD()}
     </div>
   )
 }

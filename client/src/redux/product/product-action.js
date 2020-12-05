@@ -1,12 +1,15 @@
 import axios from 'axios'
-import { ProductActionTypes } from './product-types'
+import { ProductActionTypes } from './product-constants'
 
 // user
 export const getProductDetail = (id) => async (dispatch) => {
   try {
+    dispatch({ type: ProductActionTypes.PRODUCT_DETAILS_REQUEST })
+
     const { data } = await axios.get(`/product/${id}`)
+
     dispatch({
-      type: ProductActionTypes.GET_PRODUCT_DETAIL,
+      type: ProductActionTypes.PRODUCT_DETAILS_SUCCESS,
       payload: data,
     })
   } catch (error) {
@@ -22,21 +25,23 @@ export const getProductDetail = (id) => async (dispatch) => {
 
 export const clearProductDetail = () => {
   return {
-    type: ProductActionTypes.CLEAR_PRODUCT_DETAIL,
+    type: ProductActionTypes.PRODUCT_DETAILS_RESET,
     payload: [],
   }
 }
 
 export const getProductsToHome = () => async (dispatch) => {
   try {
+    dispatch({ type: ProductActionTypes.PRODUCT_LIST_HOME_REQUEST })
+
     const { data } = await axios.get('/product/home')
     dispatch({
-      type: ProductActionTypes.GET_PRODUCT_TO_HOME,
+      type: ProductActionTypes.PRODUCT_LIST_HOME_SUCCESS,
       payload: data,
     })
   } catch (error) {
     dispatch({
-      type: ProductActionTypes.ERROR_PRODUCT,
+      type: ProductActionTypes.PRODUCT_LIST_HOME_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
@@ -58,6 +63,7 @@ export const getProductsToShop = (
   }
 
   try {
+    dispatch({ type: ProductActionTypes.PRODUCT_LIST_SHOP_REQUEST })
     const data = await axios.post(`/product/shop`, dataToSubmit).then((res) => {
       let newState = [...previousState, ...res.data.articles]
       return {
@@ -66,12 +72,12 @@ export const getProductsToShop = (
       }
     })
     dispatch({
-      type: ProductActionTypes.GET_PRODUCTS_TO_SHOP,
+      type: ProductActionTypes.PRODUCT_LIST_SHOP_SUCCESS,
       payload: data,
     })
   } catch (error) {
     dispatch({
-      type: ProductActionTypes.ERROR_PRODUCT,
+      type: ProductActionTypes.PRODUCT_LIST_SHOP_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
@@ -80,53 +86,36 @@ export const getProductsToShop = (
   }
 }
 
-export const addProduct = (dataToSubmit) => {
-  const request = axios.post('/product', dataToSubmit).then((res) => res.data)
-  // .catch(err => {
-  //     err.response.data.error.split(',');
-  // });
-
-  return {
-    type: ProductActionTypes.ADD_PRODUCT,
-    payload: request,
-  }
-}
-
-export const getProducts = () => {
-  const request = axios.get('/product').then((res) => res.data)
-  return {
-    type: ProductActionTypes.GET_PRODUCTS_SUCCESS,
-    payload: request,
-  }
-}
-
-export const deleteProduct = (data) => (dispatch) => {
-  axios
-    .delete(`/product/${data}`)
-    .then((res) =>
-      dispatch({
-        type: ProductActionTypes.DELETE_SUCCESS,
-        payload: res.data,
-      })
-    )
-    .catch((err) =>
-      dispatch({
-        type: ProductActionTypes.DELETE_FAIL,
-        payload: err.response.data,
-      })
-    )
-}
-
-export const getCollections = () => async (dispatch) => {
+export const addProduct = (dataToSubmit) => async (dispatch) => {
   try {
-    const { data } = await axios.get('/collection?select=name')
+    dispatch({ type: ProductActionTypes.PRODUCT_CREATE_REQUEST })
+    const { data } = await axios.post('/product', dataToSubmit)
     dispatch({
-      type: ProductActionTypes.GET_COLLECTIONS,
+      type: ProductActionTypes.PRODUCT_CREATE_SUCCESS,
       payload: data,
     })
   } catch (error) {
     dispatch({
-      type: ProductActionTypes.ERROR_PRODUCT,
+      type: ProductActionTypes.PRODUCT_CREATE_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}
+
+export const deleteProduct = (data) => async (dispatch) => {
+  try {
+    dispatch({ type: ProductActionTypes.PRODUCT_DELETE_REQUEST })
+    const { data } = await axios.delete(`/product/${data}`)
+    dispatch({
+      type: ProductActionTypes.PRODUCT_DELETE_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: ProductActionTypes.PRODUCT_DELETE_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

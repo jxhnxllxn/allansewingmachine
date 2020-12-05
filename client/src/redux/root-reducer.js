@@ -1,9 +1,18 @@
 import { combineReducers } from 'redux'
 
-import { userLoginReducer, userDetailsReducer } from './auth/auth-ruducer'
+import { userLoginReducer, userDetailsReducer } from './user/user-reducer'
 import cart from './cart/cart-reducer'
 import collection from './collection/collection-reducer'
-import product from './product/product-reducer'
+import {
+  productListHomeReducer,
+  productListShopReducer,
+  productDetailsReducer,
+  productCreateReducer,
+  productDeleteReducer,
+  productUpdateReducer,
+  productReviewCreateReducer,
+  productTopRatedReducer,
+} from './product/product-reducer'
 import order from './order/order-reducer'
 import ui from './ui/ui-reducer'
 
@@ -15,8 +24,17 @@ export default combineReducers({
   // userList: userListReducer,
   // userDelete: userDeleteReducer,
   // userUpdate: userUpdateReducer,
+
+  productListHome: productListHomeReducer,
+  productListShop: productListShopReducer,
+  productDetails: productDetailsReducer,
+  productCreate: productCreateReducer,
+  productDelete: productDeleteReducer,
+  productUpdate: productUpdateReducer,
+  productReviewCreate: productReviewCreateReducer,
+  productTopRated: productTopRatedReducer,
+
   collection,
-  product,
   cart,
   order,
   ui,

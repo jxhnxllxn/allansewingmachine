@@ -2,7 +2,13 @@ import React, { useCallback, useState } from 'react'
 import { useEffect } from 'react'
 import { ReactComponent as UpIcon } from '../assets/icons/chevron-up.svg'
 
-const CollapseCheckbox = ({ initialState, list, title, handleFilters }) => {
+const CollapseCheckbox = ({
+  initialState,
+  list,
+  title,
+  handleFilters,
+  handleOpened,
+}) => {
   const [state, setstate] = useState({
     opened: false,
     checked: [],
@@ -21,14 +27,10 @@ const CollapseCheckbox = ({ initialState, list, title, handleFilters }) => {
   }, [])
 
   useEffect(() => {
-    if (state.checked.length > 0) {
+    if (initialState) {
       handleFilters(state.checked)
     }
   }, [state.checked])
-
-  const handleOpened = () => {
-    setstate({ ...state, opened: !state.opened })
-  }
 
   const toggleCheck = (x) => {
     const currentIndex = state.checked.indexOf(x)
@@ -49,7 +51,7 @@ const CollapseCheckbox = ({ initialState, list, title, handleFilters }) => {
   return (
     <div className='collapse-checkbox'>
       <div className='list'>
-        <div className='list__items' onClick={handleOpened}>
+        <div className='list__items' onClick={() => handleOpened()}>
           <span className='list__title'>{title}</span>
           <UpIcon className={`icon ${initialState ? 'icon--active' : ''}`} />
         </div>
