@@ -7,7 +7,7 @@ import { getCollections } from '../redux/collection/collection-action'
 import LoadMoreCards from '../components/load-more'
 import CollapseCheckbox from '../components/collapse-checkbox'
 import Loading from '../components/loading'
-import { useHistory, useRouteMatch } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const ShopCollection = ({ match }) => {
   const dispatch = useDispatch()
@@ -30,16 +30,25 @@ const ShopCollection = ({ match }) => {
     },
   })
 
-  const collectionParams = (x) => {
-    if (x) {
-      handleFilters([x], 'collectionId')
+  useEffect(() => {
+    dispatch(getCollections())
+    if (match.params.collection && !loading) {
+      handleFilters([match.params.collection], 'collectionId')
     } else {
       dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
     }
-  }
-
-  useEffect(() => {
-    collectionParams(match.params.collection)
+    return () => {
+      setFilter({
+        limit: 24,
+        skip: 0,
+        filters: {
+          collectionId: [],
+          price: [],
+          categoryId: [],
+          condition: [],
+        },
+      })
+    }
   }, [match.params.collection])
 
   const conditions = [
@@ -53,22 +62,6 @@ const ShopCollection = ({ match }) => {
     },
   ]
 
-  useEffect(() => {
-    dispatch(getCollections())
-    // dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
-    return () => {
-      setFilter({})
-    }
-    // eslint-disable-next-line
-  }, [])
-
-  const handleFilters = (filters, category) => {
-    const newFilters = { ...filter.filters }
-    newFilters[category] = filters
-
-    showFilteredResults(newFilters)
-  }
-
   const showFilteredResults = (filters) => {
     dispatch(getProductsToShop(0, filter.limit, filters)).then(() => {
       setFilter({
@@ -77,6 +70,13 @@ const ShopCollection = ({ match }) => {
         filters: filters,
       })
     })
+  }
+
+  const handleFilters = (filters, category) => {
+    const newFilters = { ...filter.filters }
+    newFilters[category] = filters
+
+    showFilteredResults(newFilters)
   }
 
   const loadMoreCards = () => {

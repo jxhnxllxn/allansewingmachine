@@ -27,7 +27,10 @@ export const userLoginReducer = (state = initialState, action) => {
   }
 }
 
-export const userDetailsReducer = (state = { user: {} }, action) => {
+export const userDetailsReducer = (
+  state = { loading: true, user: {} },
+  action
+) => {
   switch (action.type) {
     case AuthActionTypes.USER_DETAILS_REQUEST:
       return { ...state, loading: true }
@@ -36,7 +39,7 @@ export const userDetailsReducer = (state = { user: {} }, action) => {
     case AuthActionTypes.USER_DETAILS_FAIL:
       return { loading: false, error: action.payload }
     case AuthActionTypes.USER_DETAILS_RESET:
-      return { user: {} }
+      return { loading: true, user: {} }
     default:
       return state
   }

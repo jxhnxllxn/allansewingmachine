@@ -12,6 +12,22 @@ const initialState = {
   orderHistory: [],
 }
 
+export const orderHistoryReducer = (state = {}, action) => {
+  switch (action.type) {
+    case OrderActionTypes.ORDER_HISTORY_REQUEST:
+      return { loading: true }
+    case OrderActionTypes.ORDER_HISTORY_SUCCESS:
+      return {
+        loading: false,
+        ...action.payload,
+      }
+    case OrderActionTypes.ORDER_HISTORY_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
 export default function (state = initialState, action) {
   const { type, payload } = action
   switch (type) {

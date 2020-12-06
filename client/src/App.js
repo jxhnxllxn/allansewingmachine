@@ -5,7 +5,6 @@ import { gsap } from 'gsap'
 //redux
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserDetails } from './redux/user/user-action'
-import landingAnimation from './utils/animations/landingAnimation'
 import useResponsiveVH from './utils/hooks/useResponsiveVH'
 
 import Auth from './components/hoc/auth'
@@ -17,9 +16,12 @@ const Shop = lazy(() => import('./pages/shop'))
 const ProductPreview = lazy(() => import('./pages/product-preview'))
 const Cart = lazy(() => import('./pages/cart'))
 const Checkout = lazy(() => import('./pages/checkout'))
+
+const Login = lazy(() => import('./pages/login'))
+const Register = lazy(() => import('./pages/register'))
+
 const Admin = lazy(() => import('./pages/admin/admin'))
-const UserDashboard = lazy(() => import('./pages/dashboard'))
-const UpdateProfile = lazy(() => import('./pages/update_profile'))
+const User = lazy(() => import('./pages/user/user'))
 
 const SideNav = lazy(() => import('./layout/sidenav'))
 
@@ -34,8 +36,6 @@ const App = () => {
     gsap.to('body', { css: { visibility: 'visible' } })
 
     window.onbeforeunload = () => window.scrollTo(0, 0)
-
-    landingAnimation()
 
     if (localStorage.getItem('userInfo') && user.isAuthenticated) {
       dispatch(getUserDetails())
@@ -59,23 +59,15 @@ const App = () => {
               exact
             />
 
-            <Route path='/user/cart' component={Auth(Cart, null)} exact />
-            <Route
-              path='/user/checkout'
-              component={Auth(Checkout, null)}
-              exact
-            />
+            <Route path='/login' component={Auth(Login, false)} exact />
 
-            <Route
-              path='/user/dashboard'
-              component={Auth(UserDashboard, true)}
-              exact
-            />
-            <Route
-              path='/user/user_profile'
-              exact
-              component={Auth(UpdateProfile, true)}
-            />
+            <Route path='/register' component={Auth(Register, false)} exact />
+
+            <Route path='/cart' component={Auth(Cart, null)} exact />
+
+            <Route path='/checkout' component={Auth(Checkout, null)} exact />
+
+            <Route path='/user' component={Auth(User, true, true)} />
 
             <Route path='/admin' component={Auth(Admin, true, true)} />
 

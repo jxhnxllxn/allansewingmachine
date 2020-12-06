@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from 'react'
 import SideNavLayout from './sidenav-layout'
 import Loading from '../components/loading'
-import AuthSideNav from '../pages/sidenav-auth'
+import SideNavSetting from '../components/sidenav-setting'
 import SideNavCart from '../components/sidenav-cart'
-const SignIn = lazy(() => import('../components/sidenav-sign-in'))
+const SignIn = lazy(() => import('../pages/login'))
 
 const Sidenav = ({ sidenavRef, activeMenuIcons }) => {
   const components = (x) => {
@@ -23,7 +23,7 @@ const Sidenav = ({ sidenavRef, activeMenuIcons }) => {
       case 'person':
         return (
           <Suspense fallback={<Loading />}>
-            <AuthSideNav />
+            <SideNavSetting />
           </Suspense>
         )
       default:

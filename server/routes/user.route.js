@@ -25,7 +25,7 @@ router.post('/uploadimage', protect, authorize('admin'), uploadimage)
 router.post('/deleteimage', protect, authorize('admin'), deleteimage)
 router.post('/forgotpassword', forgotPassword)
 router.put('/resetpassword/:resettoken', resetPassword)
-router.put('/updatedetail/', protect, updateDetails)
-router.put('/updatepassword/', protect, updatePassword)
+router.put('/updatedetail', protect, updateDetails)
+router.put('/updatepassword', protect, updatePassword)
 
 module.exports = router

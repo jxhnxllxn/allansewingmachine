@@ -10,20 +10,12 @@ const SideNavSetting = () => {
   }
   const links = [
     {
-      name: 'Personal information',
-      linkTo: '/user/info',
+      name: 'Dashboard',
+      linkTo: '/user/dashboard',
     },
     {
-      name: 'History purchased',
-      linkTo: '/user/history-purchased',
-    },
-    {
-      name: 'Track Orders',
-      linkTo: '/user/track-orders',
-    },
-    {
-      name: 'Security & Login',
-      linkTo: '/user/security',
+      name: 'Update user info',
+      linkTo: '/user/profile-update',
     },
     {
       name: 'Legal & Policies',
@@ -35,17 +27,17 @@ const SideNavSetting = () => {
     },
   ]
   return (
-    <div className='ssetting'>
-      <ul className='ssetting__link'>
+    <div className='sidenav_setting'>
+      <ul className='sidenav_setting__link'>
         {links.map((i, key) => (
           <li key={key}>
             <Link to={i.linkTo}>{i.name}</Link>
           </li>
         ))}
         <li>
-          <span onClick={handleLogout} className='ssetting__logout'>
+          <Link onClick={() => handleLogout()} to='/'>
             Logout
-          </span>
+          </Link>
         </li>
       </ul>
     </div>

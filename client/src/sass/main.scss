@@ -9,20 +9,24 @@
 // 1 - LAYOUT
 @import './1\ -\ layout/footer';
 @import './1\ -\ layout/sidenav-layout';
-@import './1\ -\ layout/sidebar';
+@import './1\ -\ layout/sidenav-left';
 @import './1\ -\ layout/header';
 @import './1\ -\ layout/layout';
-@import './1\ -\ layout/user';
 @import './1\ -\ layout/nav';
 
 // 2 - PAGES
-@import './2\ -\ pages/cart';
-@import './2\ -\ pages/checkout';
-@import './2\ -\ pages/dashboard';
 @import './2\ -\ pages/home';
-@import './2\ -\ pages/product-preview';
 @import './2\ -\ pages/shop';
 @import './2\ -\ pages/cart';
+@import './2\ -\ pages/checkout';
+@import './2\ -\ pages/product-preview';
+
+// 2 - PAGES/USER
+@import './2\ -\ pages/user/user';
+@import './2\ -\ pages/user/dashboard';
+@import './2\ -\ pages/user/profile-update';
+
+// 2 - PAGES/ADMIN
 @import './2\ -\ pages/admin/admin';
 @import './2\ -\ pages/admin/collection-preview';
 @import './2\ -\ pages/admin/collection';
@@ -33,7 +37,6 @@
 @import './2\ -\ pages/auth-wrapper';
 
 // 3 - COMPONENTS
-
 @import './3\ -\ components/carousel/arrow';
 @import './3\ -\ components/carousel/slider';
 @import './3\ -\ components/carousel/slide';

@@ -2,6 +2,7 @@
   padding: 0.5rem 0;
   .list {
     &__items {
+      cursor: pointer;
       @include flexAlignItemCenter;
       position: relative;
       .icon {
@@ -25,6 +26,9 @@
           font-weight: 400;
           @include flexAlignItemCenter;
           justify-content: space-between;
+          input {
+            cursor: pointer;
+          }
         }
       }
     }

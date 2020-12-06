@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 
 import { selectCartItemsCount } from '../redux/cart/cart-selectors'
 import { toggleMenuIcons } from '../redux/ui/ui-actions'
@@ -24,8 +24,12 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
   const cartIconRef = useRef()
   const sidenavRef = useRef()
   const searchIconRef = useRef()
+  const history = useHistory()
   const menuIconRef = useRef()
   const itemCount = useSelector((state) => selectCartItemsCount(state))
+  const isAuthenticated = useSelector(
+    ({ userLogin }) => userLogin.isAuthenticated
+  )
 
   const [activeMenuIcons, setActiveMenuIcons] = useState('')
 
@@ -42,8 +46,16 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
     toggleScrollbar(isNavMenuIconsHidden)
   }
 
+  const togglePersonNav = () => {
+    if (isAuthenticated) {
+      toggleSideNav('person')
+    } else {
+      history.push('/login')
+    }
+  }
+
   useOutsideClick(
-    [sidenavRef, cartIconRef, personIconRef, searchIconRef],
+    [],
     [isNavMenuIconsHidden],
     () => isNavMenuIconsHidden && toggleSideNav()
   )
@@ -94,7 +106,7 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
                   <SearchIcon />
                 </div>
               </li>
-              <li ref={personIconRef} onClick={() => toggleSideNav('person')}>
+              <li ref={personIconRef} onClick={() => togglePersonNav()}>
                 <div className='icon icon--person'>
                   <PersonIcon />
                 </div>

@@ -3,20 +3,27 @@
   top: 0;
   right: 0;
   z-index: 102;
-  width: 40vw;
+  width: 30vw;
   height: 100vh;
   background-color: $background;
   overflow-x: hidden;
   @include customScroll;
   border-left: 2px solid $border;
   border-top: 1px solid $border;
+  @include media('<tablet') {
+    width: 50vw;
+  }
+  @include media('<phone') {
+    width: 100vw;
+  }
   &__header {
-    padding-top: 1rem;
+    margin-top: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   &__main {
+    min-height: 60%;
     margin-bottom: 4rem;
     display: flex;
     align-items: center;

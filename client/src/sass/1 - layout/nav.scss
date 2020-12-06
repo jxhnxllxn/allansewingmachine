@@ -14,16 +14,19 @@
     // position: relative;
     .nav__logo {
       position: fixed;
-      top: 1rem;
+      top: 0.8rem;
       display: flex;
       flex-direction: column;
       // mix-blend-mode: difference;
-      color: $black;
+      color: $black--secondary;
       line-height: 1;
       .allan {
         font-weight: 700;
-        font-family: $font-brand;
-        font-size: 140%;
+        text-transform: lowercase;
+        font-weight: bolder;
+        letter-spacing: 0;
+        font-size: 180%;
+        color: $black;
       }
     }
     .nav__listTop {

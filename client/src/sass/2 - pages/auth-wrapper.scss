@@ -1,9 +1,17 @@
 .authWrapper {
+  @include container;
   display: flex;
   flex-direction: column;
-  text-transform: lowercase;
-  margin: 3rem 2rem 1rem 2rem;
   position: relative;
+  form {
+    width: 50%;
+    @include media('<tablet') {
+      width: 70%;
+    }
+    @include media('<phone') {
+      width: 100%;
+    }
+  }
   h2 {
     font-family: $font-brand;
     font-weight: 500;
@@ -14,8 +22,15 @@
     color: $black--secondary;
   }
   span {
-    padding: 1.5rem 0;
+    padding: 0 0 2rem 2rem;
     color: rgba($black, 0.7);
     color: $black--secondary;
+  }
+  p {
+    padding: 2rem 0;
+    font-weight: 300;
+    a {
+      text-decoration: underline;
+    }
   }
 }

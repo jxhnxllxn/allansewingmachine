@@ -13,7 +13,7 @@ import {
   productReviewCreateReducer,
   productTopRatedReducer,
 } from './product/product-reducer'
-import order from './order/order-reducer'
+import { orderHistoryReducer } from './order/order-reducer'
 import ui from './ui/ui-reducer'
 
 export default combineReducers({
@@ -34,8 +34,9 @@ export default combineReducers({
   productReviewCreate: productReviewCreateReducer,
   productTopRated: productTopRatedReducer,
 
+  orderHistory: orderHistoryReducer,
+
   collection,
   cart,
-  order,
   ui,
 })

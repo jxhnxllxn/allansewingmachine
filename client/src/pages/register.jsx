@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { register } from '../redux/user/user-action'
-import MyButton from './button'
-import FormField from './form-field'
+import MyButton from '../components/button'
+import FormField from '../components/form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
 
 const SignUp = ({ history }) => {
@@ -121,10 +121,10 @@ const SignUp = ({ history }) => {
   }
 
   return (
-    <div className='authWrapper card'>
-      <h2>Register</h2>
+    <div className='authWrapper'>
+      <h1 className='heading-primary'>Register</h1>
       <span>Sign up with your email and password</span>
-      <form onSubmit={(e) => submitForm(e)}>
+      <form onSubmit={(e) => submitForm(e)} className='card'>
         <FormField
           id={'name'}
           formData={formField.formData.name}
@@ -151,6 +151,9 @@ const SignUp = ({ history }) => {
           title='Sign Up'
           value='Submit'
         />
+        <p>
+          Owned an account ? Login <Link to='/login'>here</Link>
+        </p>
       </form>
 
       {formField.formError ? (

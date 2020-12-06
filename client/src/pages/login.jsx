@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/user/user-action'
-import MyButton from './button'
-import FormField from './form-field'
+import MyButton from '../components/button'
+import FormField from '../components/form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
-import Loading from './loading'
+import Loading from '../components/loading'
+import { Link } from 'react-router-dom'
 const SignIn = () => {
   const dispatch = useDispatch()
 
@@ -81,10 +82,10 @@ const SignIn = () => {
   }
 
   return (
-    <div className='authWrapper card'>
-      <h2>Sign in</h2>
+    <div className='authWrapper'>
+      <h1 className='heading-primary'>Sign in</h1>
       <span>Sign in with your email and password</span>
-      <form onSubmit={(e) => submitForm(e)}>
+      <form onSubmit={(e) => submitForm(e)} className='card'>
         <FormField
           id={'email'}
           formData={formField.formData.email}
@@ -106,6 +107,10 @@ const SignIn = () => {
             value='Submit'
           />
         )}
+
+        <p>
+          Don't have an account ? Register <Link to='/register'>here</Link>
+        </p>
       </form>
 
       {formField.formError ? (

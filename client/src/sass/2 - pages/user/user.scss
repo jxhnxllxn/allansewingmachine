@@ -1,0 +1,8 @@
+.user {
+  padding-top: 1rem;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  column-gap: 2rem;
+  @include container;
+  position: relative;
+}

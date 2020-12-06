@@ -9,18 +9,16 @@
     margin: 0.3rem 0 1rem 0;
     border: 2px solid $border;
     width: 100%;
-    border-radius: 0.5rem;
-    letter-spacing: 2px;
+    border-radius: 0.3rem;
   }
   .formfield--textarea {
     height: 51px;
   }
   .error_label {
-    color: rgba($red, 0.8);
     font-size: 80%;
-    border: 2px solid $border;
+    border: 1px solid red;
     padding: 0.4rem;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
     position: absolute;
     bottom: 0.5rem;
     right: 1rem;

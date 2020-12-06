@@ -1,0 +1,23 @@
+.dashboard_user {
+  &__detail {
+    padding: 2rem 2rem 7rem 2rem;
+    .detail {
+      display: flex;
+      position: relative;
+      padding: 0.5rem 0;
+      align-items: center;
+      justify-content: flex-start;
+      label {
+        width: 15%;
+      }
+      span {
+        width: 85%;
+        font-size: 120%;
+        font-weight: 300;
+      }
+    }
+    .action_button {
+      padding-top: 2rem;
+    }
+  }
+}

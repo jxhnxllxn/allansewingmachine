@@ -2,7 +2,7 @@ import { OrderActionTypes } from './order-constants'
 import axios from 'axios'
 
 export const addOrder = (data) => {
-  const request = axios.post('/api/order', data).then((res) => res.data)
+  const request = axios.post('/order', data).then((res) => res.data)
   return {
     type: OrderActionTypes.ADD_ORDER,
     payload: request,
@@ -10,7 +10,7 @@ export const addOrder = (data) => {
 }
 
 export const getAllOrder = () => {
-  const request = axios.get('/api/order').then((res) => res.data)
+  const request = axios.get('/order').then((res) => res.data)
   return {
     type: OrderActionTypes.GET_ALL_ORDER,
     payload: request,
@@ -18,7 +18,7 @@ export const getAllOrder = () => {
 }
 
 export const getSingleOrder = (id) => {
-  const request = axios.get(`/api/order/${id}`).then((res) => res.data)
+  const request = axios.get(`/order/${id}`).then((res) => res.data)
   return {
     type: OrderActionTypes.GET_SINGLE_ORDER,
     payload: request,
@@ -27,7 +27,7 @@ export const getSingleOrder = (id) => {
 
 export const getPendingOrder = () => {
   const request = axios
-    .get('/api/order?status=pending&page=1&limit=20')
+    .get('/order?status=pending&page=1&limit=20')
     .then((res) => res.data)
   return {
     type: OrderActionTypes.GET_PENDING_ORDERS,
@@ -37,7 +37,7 @@ export const getPendingOrder = () => {
 
 export const getProcessedOrder = () => {
   const request = axios
-    .get('/api/order?status=processed&page=1&limit=20')
+    .get('/order?status=processed&page=1&limit=20')
     .then((res) => res.data)
   return {
     type: OrderActionTypes.GET_PROCESSED_ORDERS,
@@ -47,7 +47,7 @@ export const getProcessedOrder = () => {
 
 export const getCanceledOrder = () => {
   const request = axios
-    .get('/api/order?status=canceled&page=1&limit=20')
+    .get('/order?status=canceled&page=1&limit=20')
     .then((res) => res.data)
   return {
     type: OrderActionTypes.GET_CANCELED_ORDERS,
@@ -56,7 +56,7 @@ export const getCanceledOrder = () => {
 }
 
 export const getDashboardAdmin = () => {
-  const request = axios.get('/api/order/dashboard').then((res) => res.data)
+  const request = axios.get('/order/dashboard').then((res) => res.data)
   return {
     type: OrderActionTypes.GET_DASHBOARD_ADMIN,
     payload: request,
@@ -64,23 +64,47 @@ export const getDashboardAdmin = () => {
 }
 
 export const searchCharacter = (i) => {
-  const request = axios.get(`/api/order/search/${i}`).then((res) => res.data)
+  const request = axios.get(`/order/search/${i}`).then((res) => res.data)
   return {
     type: OrderActionTypes.SEARCH_CHARACTER,
     payload: request,
   }
 }
 
-export const getOrderHistory = () => {
-  const request = axios.get('/api/order/order-history').then((res) => res.data)
-  return {
-    type: OrderActionTypes.GET_ORDER_HISTORY,
-    payload: request,
+export const getOrderHistory = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: OrderActionTypes.ORDER_HISTORY_REQUEST,
+    })
+    const {
+      userLogin: { token },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
+    const { data } = await axios.get('/order/order-history', config)
+    dispatch({
+      type: OrderActionTypes.ORDER_HISTORY_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: OrderActionTypes.ORDER_HISTORY_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    })
   }
 }
 
 export const getPaypalScript = () => {
-  const request = axios.get('/api/config/paypal').then((res) => res.data)
+  const request = axios.get('/config/paypal').then((res) => res.data)
   return {
     type: OrderActionTypes.GET_PAYPAL_SCRIPT,
     payload: request,

@@ -101,21 +101,21 @@ export const updateUserProfile = (dataToSubmit) => async (
 ) => {
   try {
     dispatch({
-      type: AuthActionTypes.SER_UPDATE_PROFILE_REQUEST,
+      type: AuthActionTypes.USER_UPDATE_PROFILE_REQUEST,
     })
 
     const {
-      userLogin: { userInfo },
+      userLogin: { token },
     } = getState()
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
 
-    const { data } = await axios.get('/user/updatedetail', dataToSubmit, config)
+    const { data } = await axios.put('/user/updatedetail', dataToSubmit, config)
     dispatch({
       type: AuthActionTypes.USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -212,11 +212,9 @@ export const deleteUser = (id) => async (dispatch, getState) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
   dispatch({ type: AuthActionTypes.USER_LOGOUT })
-  // dispatch({ type: AuthActionTypes.USER_DETAILS_RESET })
+  dispatch({ type: AuthActionTypes.USER_DETAILS_RESET })
   // dispatch({ type: AuthActionTypes.ORDER_LIST_MY_RESET })
   // dispatch({ type: AuthActionTypes.USER_LIST_RESET })
-
-  document.location.href = '/'
 }
 
 //   updatepassword

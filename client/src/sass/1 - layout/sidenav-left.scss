@@ -1,0 +1,18 @@
+.sidenavLeft {
+  font-size: 100%;
+  &__logo {
+    .nav__logo {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &__list {
+    border-radius: 0.5rem;
+    border: 2px solid $border;
+    padding: 1rem;
+    li {
+      display: block;
+      padding: 1rem 0;
+    }
+  }
+}

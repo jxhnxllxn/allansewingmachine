@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import FormField from '../components/form-field'
+import FormField from '../../components/form-field'
 import {
   update,
   generateData,
   isFormValid,
   populateFields,
-} from '../utils/helper/form-action'
+} from '../../utils/helper/form-action'
 import { useEffect } from 'react'
-import { updateUserProfile, updatePassword } from '../redux/user/user-action'
+import { updateUserProfile, updatePassword } from '../../redux/user/user-action'
 import { useDispatch, useSelector } from 'react-redux'
+import MyButton from '../../components/button'
 
 const UpdatePersonalNfo = () => {
   const dispatch = useDispatch()
@@ -20,12 +21,12 @@ const UpdatePersonalNfo = () => {
     formData: {
       currentPassword: {
         element: 'input',
-        label: 'Current password',
         value: '',
         config: {
           name: 'current_Password_input',
           type: 'password',
           autoComplete: 'on',
+          placeholder: 'Current password',
         },
         validation: {
           required: false,
@@ -36,12 +37,12 @@ const UpdatePersonalNfo = () => {
       },
       newPassword: {
         element: 'input',
-        label: 'Password',
         value: '',
         config: {
           name: 'new_password_input',
           type: 'password',
           autoComplete: 'on',
+          placeholder: 'New password',
         },
         validation: {
           required: false,
@@ -52,12 +53,12 @@ const UpdatePersonalNfo = () => {
       },
       confirmPassword: {
         element: 'input',
-        label: 'Confirm password',
         value: '',
         config: {
           name: 'confirm_password_input',
           type: 'password',
           autoComplete: 'on',
+          placeholder: 'Confirm new password',
         },
         validation: {
           required: false,
@@ -76,11 +77,11 @@ const UpdatePersonalNfo = () => {
     formData: {
       name: {
         element: 'input',
-        label: 'Full Name',
         value: '',
         config: {
           name: 'name_input',
           type: 'text',
+          placeholder: 'Full name',
         },
         validation: {
           required: true,
@@ -91,11 +92,11 @@ const UpdatePersonalNfo = () => {
       },
       contact: {
         element: 'input',
-        label: 'Contact No.',
         value: '',
         config: {
           name: 'contact_input',
           type: 'text',
+          placeholder: 'Contact No.',
         },
         validation: {
           required: true,
@@ -106,11 +107,11 @@ const UpdatePersonalNfo = () => {
       },
       unit: {
         element: 'input',
-        label: 'Unit/House no.',
         value: '',
         config: {
           name: 'unit_input',
           type: 'text',
+          placeholder: 'Unit/House No.',
         },
         validation: {
           required: true,
@@ -121,11 +122,11 @@ const UpdatePersonalNfo = () => {
       },
       street: {
         element: 'input',
-        label: 'Street',
         value: '',
         config: {
           name: 'street_input',
           type: 'text',
+          placeholder: 'Street',
         },
         validation: {
           required: true,
@@ -136,11 +137,11 @@ const UpdatePersonalNfo = () => {
       },
       city: {
         element: 'input',
-        label: 'City',
         value: '',
         config: {
           name: 'city_input',
           type: 'text',
+          placeholder: 'City',
         },
         validation: {
           required: true,
@@ -151,11 +152,11 @@ const UpdatePersonalNfo = () => {
       },
       state: {
         element: 'input',
-        label: 'State / Province',
         value: '',
         config: {
           name: 'state_input',
           type: 'text',
+          placeholder: 'State / Province',
         },
         validation: {
           required: true,
@@ -166,11 +167,11 @@ const UpdatePersonalNfo = () => {
       },
       zipcode: {
         element: 'input',
-        label: 'Postal/Zip code',
         value: '',
         config: {
           name: 'zipcode_input',
           type: 'text',
+          placeholder: 'Postal/Zip code',
         },
         validation: {
           required: true,
@@ -181,12 +182,12 @@ const UpdatePersonalNfo = () => {
       },
       country: {
         element: 'input',
-        label: 'Country',
-        value: '',
+        value: 'Philippines',
         config: {
           name: 'country_input',
           type: 'text',
           disabled: true,
+          placeholder: 'Country',
         },
         validation: {
           required: true,
@@ -197,11 +198,11 @@ const UpdatePersonalNfo = () => {
       },
       email: {
         element: 'input',
-        label: 'Email',
         value: '',
         config: {
           name: 'email_input',
           type: 'email',
+          placeholder: 'Email',
         },
         validation: {
           required: true,
@@ -243,21 +244,21 @@ const UpdatePersonalNfo = () => {
 
     if (formIsValid) {
       dispatch(updateUserProfile(dataToSubmit))
-        .then((res) => {
-          if (res.payload.success) {
-            setFormField({
-              ...formField,
-              formSuccess: true,
-            })
-          }
-        })
-        .catch((err) => {
-          setFormField({
-            ...formField,
-            formError: true,
-            formErrorMessage: err.response.data.error,
-          })
-        })
+      // .then((res) => {
+      //   if (res.payload.success) {
+      //     setFormField({
+      //       ...formField,
+      //       formSuccess: true,
+      //     })
+      //   }
+      // })
+      // .catch((err) => {
+      //   setFormField({
+      //     ...formField,
+      //     formError: true,
+      //     formErrorMessage: err.response.data.error,
+      //   })
+      // })
     } else {
       setFormField({
         ...formField,
@@ -337,63 +338,61 @@ const UpdatePersonalNfo = () => {
   }, [])
 
   return (
-    <div>
-      <form onSubmit={(event) => submitForm(event)}>
-        <h2>Personal information</h2>
-        <div className='form_block_two'>
-          <FormField
-            id={'name'}
-            formData={formField.formData.name}
-            change={(element) => updateForm(element)}
-          />
-          <FormField
-            id={'email'}
-            formData={formField.formData.email}
-            change={(element) => updateForm(element)}
-          />
-          <FormField
-            id={'contact'}
-            formData={formField.formData.contact}
-            change={(element) => updateForm(element)}
-          />
-          <h4>Address</h4>
-          <FormField
-            id={'country'}
-            formData={formField.formData.country}
-            change={(element) => updateForm(element)}
-          />
-          <FormField
-            id={'unit'}
-            formData={formField.formData.unit}
-            change={(element) => updateForm(element)}
-          />
-          <FormField
-            id={'street'}
-            formData={formField.formData.street}
-            change={(element) => updateForm(element)}
-          />
-          <FormField
-            id={'city'}
-            formData={formField.formData.city}
-            change={(element) => updateForm(element)}
-          />
-          <FormField
-            id={'state'}
-            formData={formField.formData.state}
-            change={(element) => updateForm(element)}
-          />
-          <FormField
-            id={'zipcode'}
-            formData={formField.formData.zipcode}
-            change={(element) => updateForm(element)}
-          />
-          <button onClick={(event) => submitForm(event)}>
-            Update personal info
-          </button>
-        </div>
+    <div className='profile_update'>
+      <h2 className='heading-secondary'>update info</h2>
+      <form onSubmit={(event) => submitForm(event)} className='form_block'>
+        <h4>Info</h4>
+
+        <FormField
+          id={'name'}
+          formData={formField.formData.name}
+          change={(element) => updateForm(element)}
+        />
+        <FormField
+          id={'email'}
+          formData={formField.formData.email}
+          change={(element) => updateForm(element)}
+        />
+        <FormField
+          id={'contact'}
+          formData={formField.formData.contact}
+          change={(element) => updateForm(element)}
+        />
+        <h4>Address</h4>
+        <FormField
+          id={'country'}
+          formData={formField.formData.country}
+          change={(element) => updateForm(element)}
+        />
+        <FormField
+          id={'unit'}
+          formData={formField.formData.unit}
+          change={(element) => updateForm(element)}
+        />
+        <FormField
+          id={'street'}
+          formData={formField.formData.street}
+          change={(element) => updateForm(element)}
+        />
+        <FormField
+          id={'city'}
+          formData={formField.formData.city}
+          change={(element) => updateForm(element)}
+        />
+        <FormField
+          id={'state'}
+          formData={formField.formData.state}
+          change={(element) => updateForm(element)}
+        />
+        <FormField
+          id={'zipcode'}
+          formData={formField.formData.zipcode}
+          change={(element) => updateForm(element)}
+        />
+        <MyButton type={'submit'} title={'Update profile'} />
       </form>
 
-      <div>
+      <div className='form_message'>
         {formField.formSuccess ? (
           <div className='form_success'>Success</div>
         ) : null}
@@ -402,27 +401,39 @@ const UpdatePersonalNfo = () => {
         ) : null}
       </div>
 
-      <form onSubmit={(event) => submitFormPassword(event)}>
-        <h4>Update password</h4>
-        <FormField
-          id={'currentPassword'}
-          formData={password.formData.currentPassword}
-          change={(element) => updateFormPassword(element)}
-        />
-        <FormField
-          id={'newPassword'}
-          formData={password.formData.newPassword}
-          change={(element) => updateFormPassword(element)}
-        />
-        <FormField
-          id={'confirmPassword'}
-          formData={password.formData.confirmPassword}
-          change={(element) => updateFormPassword(element)}
-        />
-        <button onClick={(event) => submitFormPassword(event)}>
-          Update password
-        </button>
+      <form
+        onSubmit={(event) => submitFormPassword(event)}
+        className='form_block'
+      >
+        <h1 className='heading-secondary'>Update Password</h1>
+        <div className='form_block'>
+          <FormField
+            id={'currentPassword'}
+            formData={password.formData.currentPassword}
+            change={(element) => updateFormPassword(element)}
+          />
+          <FormField
+            id={'newPassword'}
+            formData={password.formData.newPassword}
+            change={(element) => updateFormPassword(element)}
+          />
+          <FormField
+            id={'confirmPassword'}
+            formData={password.formData.confirmPassword}
+            change={(element) => updateFormPassword(element)}
+          />
+          <MyButton type={'submit'} title={'Update password'} />
+        </div>
       </form>
+
+      <div className='form_message'>
+        {formField.formSuccess ? (
+          <div className='form_success'>Success</div>
+        ) : null}
+        {formField.formError ? (
+          <div className='error_label'>{formField.formErrorMessage}</div>
+        ) : null}
+      </div>
 
       <div>
         {password.formSuccess ? (

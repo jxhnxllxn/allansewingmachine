@@ -21,7 +21,7 @@ export const productListHomeReducer = (
 }
 
 export const productListShopReducer = (
-  state = { toShop: [], toShopSize: 0 },
+  state = { loading: true, toShop: [], toShopSize: 0 },
   action
 ) => {
   const { type, payload } = action
