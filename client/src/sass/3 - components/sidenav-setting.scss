@@ -1,22 +1,15 @@
 .sidenav_setting {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: center;
-
+  letter-spacing: 2px;
   &__link {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    color: $black--secondary;
-    font-weight: 500;
     text-transform: capitalize;
     li {
       a {
-        display: block;
-        padding: 1rem;
+        font-size: 85%;
+        font-weight: 700;
+        padding: 1.5rem;
         display: block;
         @include underlineOnHover;
+        text-align: center;
       }
     }
   }

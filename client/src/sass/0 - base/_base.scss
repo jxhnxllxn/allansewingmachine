@@ -10,10 +10,7 @@
 html {
   overflow-x: hidden;
   font-size: 80%;
-  width: calc(100vw - 5px);
-  @include media('<tablet') {
-    width: 100vw;
-  }
+
   @include respond(sm) {
     font-size: 92.5%;
   }
@@ -32,6 +29,10 @@ body {
   overflow: hidden;
   min-height: 100%;
   background-color: $background;
+  width: calc(100vw - 1rem);
+  @include media('<tablet') {
+    width: 100%;
+  }
   // letter-spacing: 2px;
   // &::before {
   //   content: "Allan";
@@ -61,7 +62,7 @@ html {
 .card {
   background-color: $background;
   border: 1px solid $border;
-  padding: 1.5rem;
+  padding: 3rem;
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
 }

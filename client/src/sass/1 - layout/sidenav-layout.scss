@@ -1,9 +1,9 @@
 .sidenav {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   z-index: 102;
-  width: 30vw;
+  width: 40vw;
   height: 100vh;
   background-color: $background;
   overflow-x: hidden;
@@ -11,7 +11,7 @@
   border-left: 2px solid $border;
   border-top: 1px solid $border;
   @include media('<tablet') {
-    width: 50vw;
+    width: 70vw;
   }
   @include media('<phone') {
     width: 100vw;
@@ -24,9 +24,6 @@
   }
   &__main {
     min-height: 60%;
-    margin-bottom: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    margin: 0 auto 4rem auto;
   }
 }

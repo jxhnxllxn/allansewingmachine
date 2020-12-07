@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux'
 
 export default function (ComposedClass, reload, adminRoute) {
   const AuthenticationCheck = (props) => {
-    const userLoginState = useSelector(({ userLogin }) => userLogin)
-    const { isAdmin, isAuthenticated } = userLoginState
+    const userAuthState = useSelector(({ userAuth }) => userAuth)
+    const { isAdmin, isAuthenticated } = userAuthState
 
     useEffect(() => {
       if (!isAuthenticated) {
         if (reload === true) {
-          props.history.push('/signin')
+          props.history.push('/login')
         }
       } else {
         if (adminRoute && !isAdmin) {
@@ -29,7 +29,7 @@ export default function (ComposedClass, reload, adminRoute) {
 
     return (
       <>
-        <ComposedClass {...props} />
+        <ComposedClass {...props} {...userAuthState} />
       </>
     )
   }

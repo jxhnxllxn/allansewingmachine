@@ -14,18 +14,24 @@ const {
 
 const router = express.Router()
 
-const { protect, authorize } = require('../middlewares/auth.middleware')
+const { protect, admin } = require('../middlewares/auth.middleware')
 
-router.post('/register', register)
+router.route('/').post(register)
+//getAllUsers
+
+router
+  .route('/profile')
+  .get(protect, getUserProfile)
+  .put(protect, updateDetails)
+
 router.post('/login', login)
-router.get('/profile', protect, getUserProfile)
 router.get('/logout', logout)
 
-router.post('/uploadimage', protect, authorize('admin'), uploadimage)
-router.post('/deleteimage', protect, authorize('admin'), deleteimage)
-router.post('/forgotpassword', forgotPassword)
+router.post('/uploadimage', protect, admin, uploadimage)
+router.post('/deleteimage', protect, admin, deleteimage)
+
+router.route('/password').post(forgotPassword).put(protect, updatePassword)
+
 router.put('/resetpassword/:resettoken', resetPassword)
-router.put('/updatedetail', protect, updateDetails)
-router.put('/updatepassword', protect, updatePassword)
 
 module.exports = router

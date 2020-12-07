@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductsToShop } from '../redux/product/product-action'
-import { getCollections } from '../redux/collection/collection-action'
 
 import LoadMoreCards from '../components/load-more'
 import CollapseCheckbox from '../components/collapse-checkbox'
@@ -12,10 +11,9 @@ import { useHistory } from 'react-router-dom'
 const ShopCollection = ({ match }) => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const productListShopState = useSelector(
-    ({ productListShop }) => productListShop
-  )
-  const { toShopSize, toShop, loading, error } = productListShopState
+  const productState = useSelector(({ product }) => product)
+  const { loading, productToShop, productToShopSize, error } = productState
+
   const collectionState = useSelector(({ collection }) => collection)
   const { collections } = collectionState
 
@@ -31,7 +29,6 @@ const ShopCollection = ({ match }) => {
   })
 
   useEffect(() => {
-    dispatch(getCollections())
     if (match.params.collection && !loading) {
       handleFilters([match.params.collection], 'collectionId')
     } else {
@@ -82,7 +79,7 @@ const ShopCollection = ({ match }) => {
   const loadMoreCards = () => {
     let skip = filter.skip + filter.limit
     dispatch(
-      getProductsToShop(skip, filter.limit, filter.filters, toShop)
+      getProductsToShop(skip, filter.limit, filter.filters, productToShop)
     ).then(() => {
       setFilter({
         ...filter,
@@ -148,8 +145,8 @@ const ShopCollection = ({ match }) => {
         ) : (
           <LoadMoreCards
             limit={filter.limit}
-            size={toShopSize}
-            products={toShop}
+            size={productToShopSize}
+            products={productToShop}
             loadMore={() => loadMoreCards()}
           />
         )}

@@ -4,12 +4,14 @@
   flex-direction: column;
   position: relative;
   form {
-    width: 50%;
+    margin: 0 0 2rem 8rem;
+    width: 25rem;
     @include media('<tablet') {
       width: 70%;
     }
     @include media('<phone') {
       width: 100%;
+      margin: 0 0 2rem 0rem;
     }
   }
   h2 {
@@ -22,7 +24,7 @@
     color: $black--secondary;
   }
   span {
-    padding: 0 0 2rem 2rem;
+    padding: 0.5rem 0 2rem 4rem;
     color: rgba($black, 0.7);
     color: $black--secondary;
   }

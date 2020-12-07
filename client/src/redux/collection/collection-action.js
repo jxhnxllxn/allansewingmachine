@@ -3,85 +3,97 @@ import { CollectionActionTypes } from './collection-constants'
 
 export const getCollections = () => async (dispatch) => {
   try {
+    dispatch({
+      type: CollectionActionTypes.COLLECTION_REQUEST,
+    })
+
     const { data } = await axios.get('/collection')
+
     dispatch({
-      type: CollectionActionTypes.GET_COLLECTIONS,
+      type: CollectionActionTypes.GET_COLLECTIONS_SUCCESS,
       payload: data,
     })
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
     dispatch({
-      type: CollectionActionTypes.ERROR_COLLECTION,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      type: CollectionActionTypes.COLLECTION_FAIL,
+      payload: message,
     })
   }
 }
 
-export const addCollection = (dataToSubmit) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.token}`,
-    },
-  }
-
+export const addCollection = (dataToSubmit) => async (dispatch, getState) => {
   try {
+    dispatch({
+      type: CollectionActionTypes.COLLECTION_REQUEST,
+    })
+
+    const {
+      userLogin: { token },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
     const { data } = await axios.post('/collection', dataToSubmit, config)
+
     dispatch({
-      type: CollectionActionTypes.ADD_COLLECTION,
+      type: CollectionActionTypes.POST_COLLECTION_SUCCESS,
       payload: data,
     })
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
     dispatch({
-      type: CollectionActionTypes.ERROR_COLLECTION,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.data.error
-          : error.message,
+      type: CollectionActionTypes.COLLECTION_FAIL,
+      payload: message,
     })
   }
 }
 
-export const deleteCollection = (dataToDelete) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.token}`,
-    },
-  }
+export const deleteCollection = (dataToDelete) => async (
+  dispatch,
+  getState
+) => {
   try {
-    const { data } = await axios.delete(`/collection/${dataToDelete}`, config)
     dispatch({
-      type: CollectionActionTypes.DELETE_COLLECTION,
+      type: CollectionActionTypes.COLLECTION_REQUEST,
+    })
+
+    const {
+      userLogin: { token },
+    } = getState()
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
+    const { data } = await axios.delete(`/collection/${dataToDelete}`, config)
+
+    dispatch({
+      type: CollectionActionTypes.DELETE_COLLECTION_SUCCESS,
       payload: data,
     })
   } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
     dispatch({
-      type: CollectionActionTypes.ERROR_COLLECTION,
-      payload:
-        error.response && error.response.data.error
-          ? error.response.error
-          : error.message,
+      type: CollectionActionTypes.COLLECTION_FAIL,
+      payload: message,
     })
   }
 }
-
-// export const getCollections = () => async (dispatch) => {
-//   try {
-//     const { data } = await axios.get('/collection?select=name')
-//     dispatch({
-//       type: ProductActionTypes.GET_COLLECTIONS,
-//       payload: data,
-//     })
-//   } catch (error) {
-//     dispatch({
-//       type: ProductActionTypes.ERROR_PRODUCT,
-//       payload:
-//         error.response && error.response.data.error
-//           ? error.response.data.error
-//           : error.message,
-//     })
-//   }
-// }

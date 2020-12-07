@@ -7,12 +7,13 @@
   &__items {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 3rem;
-    row-gap: 3rem;
+    row-gap: 2rem;
+    column-gap: 2rem;
     justify-content: center;
-    transition: ease-out 0.3s;
     @include media('<tablet') {
       grid-template-columns: repeat(2, 1fr);
+      row-gap: 0.5rem;
+      column-gap: 0.5rem;
     }
 
     .collection__item {
@@ -21,11 +22,19 @@
       position: relative;
       border: 1px solid $border;
       justify-content: center;
+      border-radius: 0.3rem;
       &:hover {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
         opacity: 1;
         & .collection__image {
           transform: scale(1.1);
+        }
+        & .collection__content {
+          background-color: transparent;
+          .collection__subtitle {
+            -webkit-text-fill-color: rgba($background, 1);
+            -webkit-text-stroke-color: $black--secondary;
+          }
         }
       }
       .collection__image {
@@ -35,22 +44,33 @@
         max-width: 400px;
         background-repeat: no-repeat;
         backface-visibility: none;
+        border-radius: 0.3rem;
       }
       .collection__content {
-        height: 3rem;
+        // height: 3rem;
+        transition: transform 0.5s cubic-bezier(0.25, 0.45, 0.45, 0.95);
         padding: 0 0.5rem;
         display: flex;
-        align-items: center;
-        background-color: $background;
-        opacity: 1;
+        align-items: flex-end;
+        flex-wrap: wrap;
         position: absolute;
         box-shadow: $black;
         bottom: 0;
         letter-spacing: 3px;
-        color: $black--secondary;
+        border-radius: 0.3rem;
+        height: 100%;
+        width: 100%;
+        background-color: rgba($black, 0.3);
         .collection__subtitle {
           margin-bottom: 6px;
-          font-size: 100%;
+          font-size: 2rem;
+          color: $black;
+          -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+          -webkit-text-stroke-width: 1px;
+          -webkit-text-stroke-color: rgba($black--secondary, 0.8);
+          @include media('<tablet') {
+            font-size: 2rem;
+          }
         }
       }
     }

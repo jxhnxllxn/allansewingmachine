@@ -1,13 +1,12 @@
 import React from 'react'
 import { selectCartItems, selectCartTotal } from '../redux/cart/cart-selectors'
 import CartItem from './sidenav-cart-item'
-import { Link, useHistory } from 'react-router-dom'
-import { ReactComponent as CartIcon } from '../assets/icons/shopping-bag.svg'
-import { ReactComponent as RightIcon } from '../assets/icons/arrow-right.svg'
+import { useHistory } from 'react-router-dom'
 import addComma from '../utils/helper/add-comma'
 import { selectNavMenuIconsHidden } from '../redux/ui/ui-selector'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
+import MyButton from '../components/button'
 
 const SideNavCart = ({ cartMenuRef }) => {
   const total = useSelector((state) => selectCartTotal(state))
@@ -16,28 +15,8 @@ const SideNavCart = ({ cartMenuRef }) => {
   const isNavMenuIconsHidden = useSelector((state) =>
     selectNavMenuIconsHidden(state)
   )
-
-  const viewCart = () => {
-    history.push('/checkout')
-  }
-
-  const cartItemList = () => (
-    <div>
-      {cartItems.map((i) => (
-        <CartItem key={i._id} item={i} />
-      ))}
-      <div className='sidenav-cart__footer'>
-        <div className='sidenav-cart__total'>
-          <span>Total </span>
-          <span>Php {addComma(total)}</span>
-        </div>
-        <div className='sidenav-cart_button' onClick={viewCart}>
-          <h3>Checkout</h3>
-          <RightIcon />
-        </div>
-      </div>
-    </div>
-  )
+  const cartItemList = () =>
+    cartItems.map((i) => <CartItem key={i._id} item={i} />)
 
   useEffect(() => {
     return history.listen(() => {
@@ -47,18 +26,54 @@ const SideNavCart = ({ cartMenuRef }) => {
 
   return (
     <div className='sidenav-cart' ref={cartMenuRef}>
-      <h2 className='sidenav-cart__header'>Your Cart</h2>
-      <div className='sidenav-cart__items'>
-        {cartItems.length ? (
-          cartItemList()
-        ) : (
-          <div className='sidenav-cart__emptymsg'>
-            <p>Your cart is Empty</p>
-            <Link to='/shop'>Shop Now</Link>
-            <span className='sidenav-cart__link'></span>
+      {cartItems.length > 0 ? (
+        <>
+          <table className='sidenav-cart__table'>
+            <caption>
+              <h1 className='heading-secondary'>Your Cart</h1>
+            </caption>
+            <tbody>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th></th>
+                <th>Price</th>
+                <th></th>
+                <th>Sub Total</th>
+              </tr>
+              {cartItems.length > 0 && cartItemList()}
+            </tbody>
+          </table>
+          <div className='sidenav-cart__total'>
+            <h2>
+              Total: <small>Php </small>
+              {addComma(total)}
+            </h2>
           </div>
-        )}
-      </div>
+
+          <MyButton
+            addStyle={{
+              display: 'block',
+              textAlign: 'center',
+              margin: '2rem 0',
+              padding: '1rem 0',
+              fontSize: '1rem',
+              textTransform: 'uppercase',
+              fontWeight: '700',
+            }}
+            type={'default'}
+            linkTo={'/checkout'}
+            title={'Checkout'}
+          />
+        </>
+      ) : (
+        <div className='sidenav-cart__emptymsg'>
+          <p>Your cart is Empty</p>
+          <MyButton linkTo={'/shop'} title={'Shop Now'} type={'default'} />
+          <span className='sidenav-cart__link'></span>
+        </div>
+      )}
     </div>
   )
 }

@@ -7,19 +7,20 @@
   position: relative;
   font-size: 95%;
   &__toolbar {
-    // background-color: $white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0px 4px rgba(0, 0, 0, 0.1);
     grid-column: 1 / -1;
     align-self: center;
     padding: 1rem;
-    border-radius: 0.5rem;
-    border: 2px solid $border;
+    border-radius: 0.3rem;
+    margin-bottom: 2rem;
+    // border: 1px solid $border;
   }
   &__filter {
     margin-right: 1rem;
-    border-radius: 0.5rem;
     .shop__filterblock {
-      border-radius: 0.5rem;
-      border: 2px solid $border;
+      border-radius: 0.3rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0px 4px rgba(0, 0, 0, 0.1);
+      // border: 1px solid $border;
       padding: 1rem;
       margin-bottom: 1rem;
     }

@@ -7,7 +7,11 @@ const MyButton = (props) => {
     switch (props.type) {
       case 'default':
         template = (
-          <Link className='btn btn--link' to={props.linkTo}>
+          <Link
+            className='btn btn--link'
+            style={{ ...props.addStyle }}
+            to={props.linkTo}
+          >
             {props.title}
           </Link>
         )

@@ -23,6 +23,13 @@ a {
   font-weight: bolder;
   letter-spacing: -5px;
   line-height: 1;
+
+  @include media('<tablet') {
+    font-size: 4rem;
+  }
+  @include media('<phone') {
+    font-size: 3rem;
+  }
 }
 
 .heading-secondary {
@@ -30,6 +37,9 @@ a {
   color: $black--secondary;
   text-transform: uppercase;
   font-weight: bolder;
-  letter-spacing: -3px;
+  letter-spacing: 0;
   line-height: 1;
+  // -webkit-text-fill-color: $background; /* Will override color (regardless of order) */
+  // -webkit-text-stroke-width: 1px;
+  // -webkit-text-stroke-color: $black--secondary;
 }

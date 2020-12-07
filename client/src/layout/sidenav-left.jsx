@@ -14,14 +14,16 @@ const SidenavLeft = ({ sideNavLink }) => {
         {sideNavLink.map((i) => (
           <li key={i.name}>
             <NavLink exact to={i.linkTo}>
-              {i.name}
+              <span>{i.name}</span>
             </NavLink>
           </li>
         ))}
 
-        <button onClick={() => handleLogout()} className='btn btn--primary'>
-          Logout
-        </button>
+        <li>
+          <Link onClick={() => handleLogout()} to='/'>
+            <span>Logout</span>
+          </Link>
+        </li>
       </ul>
     </div>
   )

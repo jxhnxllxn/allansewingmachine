@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { logout } from '../redux/user/user-action'
 
 const SideNavSetting = () => {
@@ -31,12 +31,14 @@ const SideNavSetting = () => {
       <ul className='sidenav_setting__link'>
         {links.map((i, key) => (
           <li key={key}>
-            <Link to={i.linkTo}>{i.name}</Link>
+            <NavLink to={i.linkTo}>
+              <span>{i.name}</span>
+            </NavLink>
           </li>
         ))}
         <li>
           <Link onClick={() => handleLogout()} to='/'>
-            Logout
+            <span>Logout</span>
           </Link>
         </li>
       </ul>

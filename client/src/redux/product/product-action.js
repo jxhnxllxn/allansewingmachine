@@ -4,7 +4,7 @@ import { ProductActionTypes } from './product-constants'
 // user
 export const getProductDetail = (id) => async (dispatch) => {
   try {
-    dispatch({ type: ProductActionTypes.PRODUCT_DETAILS_REQUEST })
+    dispatch({ type: ProductActionTypes.PRODUCT_REQUEST })
 
     const { data } = await axios.get(`/product/${id}`)
 
@@ -14,7 +14,7 @@ export const getProductDetail = (id) => async (dispatch) => {
     })
   } catch (error) {
     dispatch({
-      type: ProductActionTypes.ERROR_PRODUCT,
+      type: ProductActionTypes.PRODUCT_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
@@ -32,7 +32,7 @@ export const clearProductDetail = () => {
 
 export const getProductsToHome = () => async (dispatch) => {
   try {
-    dispatch({ type: ProductActionTypes.PRODUCT_LIST_HOME_REQUEST })
+    dispatch({ type: ProductActionTypes.PRODUCT_REQUEST })
 
     const { data } = await axios.get('/product/home')
     dispatch({
@@ -41,7 +41,7 @@ export const getProductsToHome = () => async (dispatch) => {
     })
   } catch (error) {
     dispatch({
-      type: ProductActionTypes.PRODUCT_LIST_HOME_FAIL,
+      type: ProductActionTypes.PRODUCT_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
@@ -63,7 +63,7 @@ export const getProductsToShop = (
   }
 
   try {
-    dispatch({ type: ProductActionTypes.PRODUCT_LIST_SHOP_REQUEST })
+    dispatch({ type: ProductActionTypes.PRODUCT_REQUEST })
     const data = await axios.post(`/product/shop`, dataToSubmit).then((res) => {
       let newState = [...previousState, ...res.data.articles]
       return {
@@ -77,7 +77,7 @@ export const getProductsToShop = (
     })
   } catch (error) {
     dispatch({
-      type: ProductActionTypes.PRODUCT_LIST_SHOP_FAIL,
+      type: ProductActionTypes.PRODUCT_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
@@ -88,7 +88,7 @@ export const getProductsToShop = (
 
 export const addProduct = (dataToSubmit) => async (dispatch) => {
   try {
-    dispatch({ type: ProductActionTypes.PRODUCT_CREATE_REQUEST })
+    dispatch({ type: ProductActionTypes.PRODUCT_REQUEST })
     const { data } = await axios.post('/product', dataToSubmit)
     dispatch({
       type: ProductActionTypes.PRODUCT_CREATE_SUCCESS,
@@ -96,7 +96,7 @@ export const addProduct = (dataToSubmit) => async (dispatch) => {
     })
   } catch (error) {
     dispatch({
-      type: ProductActionTypes.PRODUCT_CREATE_FAIL,
+      type: ProductActionTypes.PRODUCT_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error
@@ -107,7 +107,7 @@ export const addProduct = (dataToSubmit) => async (dispatch) => {
 
 export const deleteProduct = (data) => async (dispatch) => {
   try {
-    dispatch({ type: ProductActionTypes.PRODUCT_DELETE_REQUEST })
+    dispatch({ type: ProductActionTypes.PRODUCT_REQUEST })
     const { data } = await axios.delete(`/product/${data}`)
     dispatch({
       type: ProductActionTypes.PRODUCT_DELETE_SUCCESS,
@@ -115,7 +115,7 @@ export const deleteProduct = (data) => async (dispatch) => {
     })
   } catch (error) {
     dispatch({
-      type: ProductActionTypes.PRODUCT_DELETE_FAIL,
+      type: ProductActionTypes.PRODUCT_FAIL,
       payload:
         error.response && error.response.data.error
           ? error.response.data.error

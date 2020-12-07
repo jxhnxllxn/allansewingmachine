@@ -28,7 +28,7 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
   const menuIconRef = useRef()
   const itemCount = useSelector((state) => selectCartItemsCount(state))
   const isAuthenticated = useSelector(
-    ({ userLogin }) => userLogin.isAuthenticated
+    ({ userAuth: { isAuthenticated } }) => isAuthenticated
   )
 
   const [activeMenuIcons, setActiveMenuIcons] = useState('')
@@ -55,7 +55,7 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
   }
 
   useOutsideClick(
-    [],
+    [sidenavRef],
     [isNavMenuIconsHidden],
     () => isNavMenuIconsHidden && toggleSideNav()
   )
@@ -129,7 +129,7 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
               {links[0].map((x, i) => (
                 <li key={i}>
                   <NavLink exact={x.exact} to={x.linkTo}>
-                    {x.name}
+                    <span>{x.name}</span>
                   </NavLink>
                 </li>
               ))}

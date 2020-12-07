@@ -11,7 +11,7 @@ import { updateUserProfile, updatePassword } from '../../redux/user/user-action'
 import { useDispatch, useSelector } from 'react-redux'
 import MyButton from '../../components/button'
 
-const UpdatePersonalNfo = () => {
+const ProfileUpdate = () => {
   const dispatch = useDispatch()
   const currentUser = useSelector(({ userDetails }) => userDetails.user)
   const [password, setPassword] = useState({
@@ -340,7 +340,7 @@ const UpdatePersonalNfo = () => {
   return (
     <div className='profile_update'>
       <h2 className='heading-secondary'>update info</h2>
-      <form onSubmit={(event) => submitForm(event)} className='form_block'>
+      <form onSubmit={(event) => submitForm(event)} className='form_block card'>
         <h4>Info</h4>
 
         <FormField
@@ -401,11 +401,12 @@ const UpdatePersonalNfo = () => {
         ) : null}
       </div>
 
+      <h1 className='heading-secondary'>Update Password</h1>
+
       <form
         onSubmit={(event) => submitFormPassword(event)}
-        className='form_block'
+        className='form_block card'
       >
-        <h1 className='heading-secondary'>Update Password</h1>
         <div className='form_block'>
           <FormField
             id={'currentPassword'}
@@ -446,4 +447,4 @@ const UpdatePersonalNfo = () => {
     </div>
   )
 }
-export default UpdatePersonalNfo
+export default ProfileUpdate

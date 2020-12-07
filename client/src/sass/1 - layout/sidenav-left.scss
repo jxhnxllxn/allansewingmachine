@@ -1,5 +1,6 @@
 .sidenavLeft {
   font-size: 100%;
+  letter-spacing: 2px;
   &__logo {
     .nav__logo {
       display: flex;
@@ -9,10 +10,13 @@
   &__list {
     border-radius: 0.5rem;
     border: 2px solid $border;
-    padding: 1rem;
+    font-size: 85%;
     li {
-      display: block;
-      padding: 1rem 0;
+      a {
+        margin: 1.5rem;
+        display: block;
+        @include underlineOnHover;
+      }
     }
   }
 }

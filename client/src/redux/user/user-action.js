@@ -61,11 +61,11 @@ export const register = (dataToSubmit) => async (dispatch) => {
 export const getUserDetails = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: AuthActionTypes.USER_DETAILS_REQUEST,
+      type: AuthActionTypes.USER_REQUEST,
     })
 
     const {
-      userLogin: { token },
+      userAuth: { token },
     } = getState()
 
     const config = {
@@ -89,7 +89,7 @@ export const getUserDetails = () => async (dispatch, getState) => {
       dispatch(logout())
     }
     dispatch({
-      type: AuthActionTypes.USER_DETAILS_FAIL,
+      type: AuthActionTypes.USER_FAIL,
       payload: message,
     })
   }
@@ -101,11 +101,11 @@ export const updateUserProfile = (dataToSubmit) => async (
 ) => {
   try {
     dispatch({
-      type: AuthActionTypes.USER_UPDATE_PROFILE_REQUEST,
+      type: AuthActionTypes.USER_REQUEST,
     })
 
     const {
-      userLogin: { token },
+      userAuth: { token },
     } = getState()
 
     const config = {
@@ -115,7 +115,7 @@ export const updateUserProfile = (dataToSubmit) => async (
       },
     }
 
-    const { data } = await axios.put('/user/updatedetail', dataToSubmit, config)
+    const { data } = await axios.put('/user/profile', dataToSubmit, config)
     dispatch({
       type: AuthActionTypes.USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -131,7 +131,7 @@ export const updateUserProfile = (dataToSubmit) => async (
       dispatch(logout())
     }
     dispatch({
-      type: AuthActionTypes.USER_UPDATE_PROFILE_FAIL,
+      type: AuthActionTypes.USER_FAIL,
       payload: message,
     })
   }
@@ -140,7 +140,7 @@ export const updateUserProfile = (dataToSubmit) => async (
 export const listUsers = () => async (dispatch, getState) => {
   try {
     dispatch({
-      type: AuthActionTypes.USER_LIST_REQUEST,
+      type: AuthActionTypes.USER_REQUEST,
     })
 
     const {
@@ -168,7 +168,7 @@ export const listUsers = () => async (dispatch, getState) => {
       dispatch(logout())
     }
     dispatch({
-      type: AuthActionTypes.USER_LIST_FAIL,
+      type: AuthActionTypes.USER_FAIL,
       payload: message,
     })
   }
@@ -177,7 +177,7 @@ export const listUsers = () => async (dispatch, getState) => {
 export const deleteUser = (id) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: AuthActionTypes.USER_DELETE_REQUEST,
+      type: AuthActionTypes.USER_REQUEST,
     })
 
     const {
@@ -202,7 +202,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
       dispatch(logout())
     }
     dispatch({
-      type: AuthActionTypes.USER_DELETE_FAIL,
+      type: AuthActionTypes.USER_FAIL,
       payload: message,
     })
   }
@@ -222,7 +222,7 @@ export const logout = () => (dispatch) => {
 export const updatePassword = (dataToSubmit) => async (dispatch, getState) => {
   try {
     dispatch({
-      type: AuthActionTypes.USER_UPDATE_PASSWORD_REQUEST,
+      type: AuthActionTypes.USER_REQUEST,
     })
 
     const {
@@ -254,7 +254,7 @@ export const updatePassword = (dataToSubmit) => async (dispatch, getState) => {
       dispatch(logout())
     }
     dispatch({
-      type: AuthActionTypes.USER_UPDATE_PASSWORD_FAIL,
+      type: AuthActionTypes.USER_FAIL,
       payload: message,
     })
   }

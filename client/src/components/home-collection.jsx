@@ -1,8 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
-const Collection = ({ collections }) => {
+const Collection = () => {
   const history = useHistory()
+  const collectionState = useSelector(({ collection }) => collection)
+  const { collections, loading } = collectionState
+
   const renderCardImage = (images) => {
     if (images.length > 0) {
       return `/images/collections/${images}`
@@ -32,7 +36,7 @@ const Collection = ({ collections }) => {
         />
 
         <div className='collection__content'>
-          <h1 className='collection__subtitle'>{i.name}</h1>
+          <h2 className='collection__subtitle heading-secondary'>{i.name}</h2>
         </div>
       </div>
     ))

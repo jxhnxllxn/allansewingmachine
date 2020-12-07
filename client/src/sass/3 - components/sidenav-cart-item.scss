@@ -1,63 +1,25 @@
 .sidenav-cart-item {
-   height: 5rem;
-   position: relative;
-   @include flexAlignItemCenter;
-   border-top: 1px solid $border;
-   color: $black;
-   justify-content: space-between;
+  height: 4rem;
+  &__remove_button {
+    cursor: pointer;
+    font-size: 200%;
+    font-weight: 700;
+  }
 
-   &__name {
-      max-width: 8rem;
-   }
-   &__calc {
-      @include flexAlignItemCenter;
-      .sidenav-cart-item__quantity {
-         input[type="number"] {
-            width: 3rem;
-            outline: none;
-            border: none;
-            margin-right: 5px;
-            padding: 1rem 0 1rem 1rem;
-            box-shadow: inset 0px 0px 52px 0px rgba(#c3c3c3, 0.1);
-            color: #696969;
-            &::-webkit-inner-spin-button,
-            &::-webkit-outer-spin-button {
-               opacity: 0.5;
-               height: 2rem;
-            }
-         }
+  &__quantity {
+    input[type='number'] {
+      padding: 0 0.5rem;
+      width: 3rem;
+      outline: none;
+      border: none;
+      box-shadow: inset 0px 0px 52px 0px rgba(#a59e9e, 0.1);
+      color: #696969;
+      height: 3rem;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        opacity: 0.5;
+        height: 2rem;
       }
-   }
-   &__price {
-      border: 1px solid $border;
-      color: $black;
-      padding: 0.2rem;
-      margin: 0rem 2rem 0 0.5rem;
-      border-radius: 2px;
-      span:first-child() {
-         font-size: 80%;
-         margin-right: 2px;
-      }
-      span:last-child() {
-         font-size: 1rem;
-      }
-      &:hover {
-         background-color: rgba($black--secondary, 1);
-         color: $background;
-      }
-      @include media("<tablet") {
-         margin: 0 1rem 0 0.5rem;
-         font-size: 0.9rem;
-      }
-   }
-   &__remove_button {
-      position: absolute;
-      padding: 0.3rem;
-      top: 0;
-      right: 0;
-      cursor: pointer;
-      &:hover {
-         color: $red;
-      }
-   }
+    }
+  }
 }

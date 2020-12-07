@@ -41,7 +41,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 exports.getUserProfile = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user._id).populate('orders')
   if (user) {
-    res.status(200).json({ user })
+    res.status(200).json({ data: user })
   } else {
     return next(new errorResponse('User not found', 404))
   }

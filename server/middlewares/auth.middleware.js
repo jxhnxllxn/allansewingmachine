@@ -18,7 +18,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
 
   //Make  sure token exist
   if (!token) {
-    return next(new ErrorResponse('Not Authorize to access this route', 401))
+    return next(new ErrorResponse('Not authorized, no token', 401))
   }
 
   try {
@@ -28,21 +28,30 @@ exports.protect = asyncHandler(async (req, res, next) => {
     req.user = await User.findById(decoded.id).select('-password')
     next()
   } catch (error) {
-    return next(new ErrorResponse('Not Authorize to access this route', 401))
+    return next(new ErrorResponse('Not authorized, token failed', 401))
   }
 })
 
 //Grant access to specific roles
-exports.authorize = (...roles) => {
+// exports.authorize = (...roles) => {
+//   return (req, res, next) => {
+//     if (!roles.includes(req.user.role)) {
+//       return next(
+//         new ErrorResponse(
+//           `User role ${req.user.role} is not authorized to access this route`,
+//           403
+//         )
+//       )
+//     }
+//     next()
+//   }
+// }
+
+exports.admin = () => {
   return (req, res, next) => {
-    if (!roles.includes(req.user.role)) {
-      return next(
-        new ErrorResponse(
-          `User role ${req.user.role} is not authorized to access this route`,
-          403
-        )
-      )
+    if (req.user && req.user.isAdmin) {
+      next()
     }
-    next()
+    return next(new ErrorResponse('Not authorized as an admin', 403))
   }
 }

@@ -16,6 +16,11 @@ const sendTokenResponse = (user, statusCode, res) => {
 
   res.status(statusCode).cookie('token', token, options).json({
     token,
+    name: user.name,
+    email: user.email,
+    isAdmin: user.isAdmin,
+    contact: user.contact,
+    address: user.address,
     isAuthenticated: true,
   })
 }

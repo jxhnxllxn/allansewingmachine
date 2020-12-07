@@ -1,5 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="1.3rem" height="1.3rem" viewBox="0 0 24 24" strokeWidth="2" stroke="#fff"   fill="none" strokeLinecap="round" strokeLinejoin="round">
-    <path stroke="none" d="M0 0h24v24H0z"/>
-    <circle cx="12" cy="7" r="4" />
-    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 339.18 409">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #343535;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 25px;
+      }
+    </style>
+  </defs>
+  <ellipse class="cls-1" cx="169.59" cy="117.23" rx="87.27" ry="104.73" />
+  <path class="cls-1"
+    d="M326.68,396.5H12.5A122.18,122.18,0,0,1,134.68,274.32H204.5A122.18,122.18,0,0,1,326.68,396.5Z" />
 </svg>

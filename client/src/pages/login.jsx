@@ -9,8 +9,8 @@ import { Link } from 'react-router-dom'
 const SignIn = () => {
   const dispatch = useDispatch()
 
-  const userLoginState = useSelector(({ userLogin }) => userLogin)
-  const { error, loading } = userLoginState
+  const userState = useSelector(({ userAuth }) => userAuth)
+  const { error, loading } = userState
 
   const [formField, setFormField] = useState({
     formError: false,

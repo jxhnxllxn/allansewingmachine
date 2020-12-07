@@ -2,12 +2,13 @@
   padding: 1rem 0;
   @include container;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
   align-items: flex-start;
   justify-content: space-between;
   column-gap: 2rem;
   .billing {
     transition: ease 3s;
+    padding: 1rem 0;
   }
 
   .additional_info {
@@ -15,60 +16,60 @@
   }
 }
 
-table {
-  margin-top: 2rem;
+table.orderDetail {
+  font-weight: 500;
+  margin: 2rem 0;
   border-spacing: 0;
   padding-top: 1.5rem;
-  // border-top: $light-border;
   width: 100%;
   line-height: 1.75rem;
-  // color: rgba($color-dark, 1);
   font-size: 0.9rem;
-
   thead {
     tr {
       th {
         padding-bottom: 0.5rem;
-        //   border-bottom: $dark-border;
       }
     }
   }
 
-  // thead th:first-of-type {
-  //   text-align: left;
-  // }
+  thead th:first-of-type {
+    text-align: left;
+  }
 
-  // thead tr th:nth-of-type(2),
-  // tbody tr td:nth-of-type(2),
-  // tfoot tr td:nth-of-type(2) {
-  //   text-align: right;
-  // }
+  thead tr th:nth-of-type(2),
+  tbody tr td:nth-of-type(2),
+  tfoot tr td:nth-of-type(2) {
+    text-align: right;
+  }
 
   tbody {
     tr {
       td {
         text-transform: capitalize;
+      }
+      bdi {
+        color: rgba($black, 1);
         font-weight: 600;
       }
 
       &:first-of-type {
         td {
-          padding-top: 0.5rem;
+          padding-top: 1rem;
         }
       }
 
-      // &:nth-last-child(2) {
-      //   td {
-      //     padding-bottom: 0.5rem;
-      //   }
-      // }
+      &:nth-last-child(2) {
+        td {
+          padding-bottom: 1rem;
+        }
+      }
 
-      // &:last-of-type {
-      //   td {
-      //     // border-top: $dark-border;
-      //     padding: 0.5rem 0;
-      //   }
-      // }
+      &:last-of-type {
+        td {
+          // border-top: $dark-border;
+          padding: 1rem 0;
+        }
+      }
     }
   }
 
@@ -89,10 +90,12 @@ table {
             justify-content: flex-end;
             font-size: 0.8rem;
             opacity: 0.75;
-
+            label {
+              font-weight: 500;
+              color: $black;
+            }
             input {
-              transform: translateY(0.1rem);
-              margin-left: 0.25rem;
+              margin-left: 0.5rem;
             }
           }
         }
@@ -103,20 +106,23 @@ table {
       td,
       th {
         padding: 0.5rem 0;
-        //   border-top: $dark-border;
+        border-top: 1px solid $border;
         text-transform: capitalize;
         font-weight: 600;
       }
 
-      // bdi {
-      //   color: rgba($color-dark, 1);
-      // }
+      bdi {
+        color: rgba($black, 1);
+      }
     }
   }
 }
 
 ul.payment-options {
-  margin: 2rem 0;
+  margin: 1.5rem 0 2rem 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid $border;
+  font-weight: 500;
   li {
     margin: 1rem 0;
     display: flex;

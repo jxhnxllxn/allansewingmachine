@@ -40,8 +40,8 @@
           padding: 1.2rem;
           .icon {
             svg {
-              stroke: $black--secondary;
-              stroke-width: 2px;
+              height: 1.6rem;
+              width: 1.6rem;
             }
           }
         }
@@ -51,8 +51,8 @@
   &__bottom {
     color: $black--secondary;
     background-color: $background;
-    border-top: 2px solid $border;
-    border-bottom: 2px solid $border;
+    border-top: 1px solid $border;
+    border-bottom: 1px solid $border;
     overflow: hidden;
     .nav__listBottom {
       ul {

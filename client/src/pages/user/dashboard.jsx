@@ -1,22 +1,21 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUserDetails } from '../../redux/user/user-action'
 import MyButton from '../../components/button'
 import UserHistoryBlock from '../../components/history-block'
 import Loading from '../../components/loading'
+import { getOrderHistory } from '../../redux/order/order-action'
 
 const UserDashboard = () => {
   const dispatch = useDispatch()
-  const userDetailsState = useSelector(({ userDetails }) => userDetails)
-  const { loading, user } = userDetailsState
+  const userAuthState = useSelector(({ userAuth }) => userAuth)
+  const { loading, name, email, contact, address } = userAuthState
 
   useEffect(() => {
-    dispatch(getUserDetails())
+    dispatch(getOrderHistory())
   }, [])
 
   return (
     <div>
-      {console.log(userDetailsState)}
       <div className='dashboard_user'>
         <h1 className='heading-secondary'>User information</h1>
         {loading ? (
@@ -25,22 +24,21 @@ const UserDashboard = () => {
           <div className='dashboard_user__detail'>
             <div className='detail'>
               <label>Name:</label>
-              <span>{user.name}</span>
+              <p>{name}</p>
             </div>
             <div className='detail'>
               <label>Email:</label>
-              <span>{user.email}</span>
+              <p>{email}</p>
             </div>
             <div className='detail'>
               <label>Contact:</label>
-              <span>{user.contact}</span>
+              <p>{contact}</p>
             </div>
             <div className='detail'>
               <label>Address:</label>
-              <span>
-                {user.address.unit}, {user.address.street}, {user.address.city},
-                {user.address.state}
-              </span>
+              <p>
+                {address.unit}, {address.street},{address.city},{address.state}
+              </p>
             </div>
             <div className='action_button'>
               <MyButton

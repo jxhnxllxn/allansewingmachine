@@ -170,7 +170,7 @@ const OrderDetail = () => {
   return (
     <form onSubmit={(e) => submitForm(e)}>
       <div className='additional_info card'>
-        <h3 className='heading-secondary'>Additional Information</h3>
+        <h3>Additional Information</h3>
 
         <FormField
           id={'additionalInfo'}
@@ -181,7 +181,7 @@ const OrderDetail = () => {
       <div className='payment_method card'>
         <h3>Your order</h3>
 
-        <table>
+        <table className='orderDetail'>
           <thead>
             <tr>
               <th>Product</th>
@@ -201,7 +201,9 @@ const OrderDetail = () => {
             ))}
             <tr>
               <td>subtotal</td>
-              <td className='total-pr'>Php {addComma(total)}.00</td>
+              <td>
+                <bdi>Php {addComma(total)}.00</bdi>
+              </td>
             </tr>
           </tbody>
           <tfoot>
@@ -254,7 +256,7 @@ const OrderDetail = () => {
           </tfoot>
         </table>
 
-        <h2 className='payment-header'>Payment method</h2>
+        <h3 className='payment-header'>Payment method</h3>
 
         <ul className='payment-options'>
           <li>

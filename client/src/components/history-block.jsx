@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react'
 import { useState } from 'react'
-import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { getOrderHistory } from '../redux/order/order-action'
 // import moment from 'moment';
 
 // {moment(product.dateOfPurchase).format("MM-DD-YYYY")}
@@ -10,10 +8,6 @@ import { getOrderHistory } from '../redux/order/order-action'
 const UserHistoryBlock = () => {
   const dispatch = useDispatch()
   const [orderHistory, setOrderHistory] = useState([])
-
-  useEffect(() => {
-    dispatch(getOrderHistory())
-  }, [dispatch])
 
   const renderBlocks = () =>
     orderHistory
