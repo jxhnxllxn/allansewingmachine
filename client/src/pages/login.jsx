@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
 const SignIn = () => {
   const dispatch = useDispatch()
 
-  const userState = useSelector(({ userAuth }) => userAuth)
+  const userState = useSelector(({ user }) => user)
   const { error, loading } = userState
 
   const [formField, setFormField] = useState({

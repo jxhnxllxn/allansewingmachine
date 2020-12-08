@@ -13,8 +13,8 @@ import MyButton from '../../components/button'
 
 const ProfileUpdate = () => {
   const dispatch = useDispatch()
-  const userAuthState = useSelector(({ userAuth }) => userAuth)
-  const { loading, error, address, contact, email, name } = userAuthState
+  const userState = useSelector(({ user }) => user)
+  const { loading, error, address, contact, email, name } = userState
 
   const [password, setPassword] = useState({
     formError: false,
@@ -271,23 +271,23 @@ const ProfileUpdate = () => {
     }
   }
 
-  useEffect(() => {
-    setTimeout(() => {
-      setFormField((f) => ({
-        ...f,
-        formSuccess: false,
-      }))
-    }, 2000)
-  }, [formField.formSuccess])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setFormField((f) => ({
+  //       ...f,
+  //       formSuccess: false,
+  //     }))
+  //   }, 2000)
+  // }, [formField.formSuccess])
 
-  useEffect(() => {
-    setTimeout(() => {
-      setPassword((p) => ({
-        ...p,
-        formSuccess: false,
-      }))
-    }, 2000)
-  }, [password.formSuccess])
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setPassword((p) => ({
+  //       ...p,
+  //       formSuccess: false,
+  //     }))
+  //   }, 2000)
+  // }, [password.formSuccess])
 
   useEffect(() => {
     const user = {
@@ -306,6 +306,9 @@ const ProfileUpdate = () => {
       ...formField,
       formData: newFormData,
     })
+    return () => {
+      setFormField({})
+    }
     // eslint-disable-next-line
   }, [])
 

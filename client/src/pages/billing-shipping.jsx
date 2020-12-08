@@ -12,8 +12,8 @@ import MyButton from '../components/button'
 import FormField from '../components/form-field'
 
 const BillingShipping = ({ isAuthenticated }) => {
-  const userAuthState = useSelector(({ userAuth }) => userAuth)
-  const { loading, error, address, contact, email, name } = userAuthState
+  const userState = useSelector(({ user }) => user)
+  const { loading, error, address, contact, email, name } = userState
 
   const dispatch = useDispatch()
   const [formField, setFormField] = useState({

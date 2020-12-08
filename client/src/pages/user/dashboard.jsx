@@ -7,8 +7,8 @@ import { getOrderHistory } from '../../redux/order/order-action'
 
 const UserDashboard = () => {
   const dispatch = useDispatch()
-  const userAuthState = useSelector(({ userAuth }) => userAuth)
-  const { loading, name, email, contact, address } = userAuthState
+  const userState = useSelector(({ user }) => user)
+  const { loading, name, email, contact, address } = userState
 
   useEffect(() => {
     dispatch(getOrderHistory())

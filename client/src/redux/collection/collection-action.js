@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { CollectionActionTypes } from './collection-constants'
+import authAxios from '../../utils/helper/authAxios'
 
 export const getCollections = () => async (dispatch) => {
   try {
@@ -25,24 +26,13 @@ export const getCollections = () => async (dispatch) => {
   }
 }
 
-export const addCollection = (dataToSubmit) => async (dispatch, getState) => {
+export const addCollection = (dataToSubmit) => async (dispatch) => {
   try {
     dispatch({
       type: CollectionActionTypes.COLLECTION_REQUEST,
     })
 
-    const {
-      userLogin: { token },
-    } = getState()
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const { data } = await axios.post('/collection', dataToSubmit, config)
+    const { data } = await authAxios.post('/collection', dataToSubmit)
 
     dispatch({
       type: CollectionActionTypes.POST_COLLECTION_SUCCESS,
@@ -60,27 +50,13 @@ export const addCollection = (dataToSubmit) => async (dispatch, getState) => {
   }
 }
 
-export const deleteCollection = (dataToDelete) => async (
-  dispatch,
-  getState
-) => {
+export const deleteCollection = (dataToDelete) => async (dispatch) => {
   try {
     dispatch({
       type: CollectionActionTypes.COLLECTION_REQUEST,
     })
 
-    const {
-      userLogin: { token },
-    } = getState()
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const { data } = await axios.delete(`/collection/${dataToDelete}`, config)
+    const { data } = await authAxios.delete(`/collection/${dataToDelete}`)
 
     dispatch({
       type: CollectionActionTypes.DELETE_COLLECTION_SUCCESS,

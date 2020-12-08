@@ -28,7 +28,7 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
   const menuIconRef = useRef()
   const itemCount = useSelector((state) => selectCartItemsCount(state))
   const isAuthenticated = useSelector(
-    ({ userAuth: { isAuthenticated } }) => isAuthenticated
+    ({ user: { isAuthenticated } }) => isAuthenticated
   )
 
   const [activeMenuIcons, setActiveMenuIcons] = useState('')

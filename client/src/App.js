@@ -41,6 +41,12 @@ const App = () => {
     window.onbeforeunload = () => window.scrollTo(0, 0)
   }, [])
 
+  useEffect(() => {
+    if (localStorage.access_token) {
+      dispatch(getUserDetails())
+    }
+  }, [])
+
   return (
     <Layout>
       <Switch>

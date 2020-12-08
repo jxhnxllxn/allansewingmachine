@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { AuthActionTypes } from './user-constants'
+import authAxios from '../../utils/helper/authAxios'
 
 //Login User
 export const login = (dataToSubmit) => async (dispatch) => {
@@ -15,7 +16,7 @@ export const login = (dataToSubmit) => async (dispatch) => {
       payload: data,
     })
 
-    localStorage.setItem('userInfo', JSON.stringify(data))
+    localStorage.setItem('access_token', JSON.stringify(data.token))
   } catch (error) {
     dispatch({
       type: AuthActionTypes.USER_LOGIN_FAIL,
@@ -46,7 +47,7 @@ export const register = (dataToSubmit) => async (dispatch) => {
       payload: data,
     })
 
-    localStorage.setItem('userInfo', JSON.stringify(data))
+    localStorage.setItem('access_token', JSON.stringify(data.token))
   } catch (error) {
     dispatch({
       type: AuthActionTypes.USER_REGISTER_FAIL,
@@ -58,23 +59,13 @@ export const register = (dataToSubmit) => async (dispatch) => {
   }
 }
 
-export const getUserDetails = () => async (dispatch, getState) => {
+export const getUserDetails = () => async (dispatch) => {
   try {
     dispatch({
-      type: AuthActionTypes.USER_REQUEST,
+      type: AuthActionTypes.USER_DETAILS_REQUEST,
     })
 
-    const {
-      userAuth: { token },
-    } = getState()
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-    const { data } = await axios.get('/user/profile', config)
+    const { data } = await authAxios.get('/user/profile')
 
     dispatch({
       type: AuthActionTypes.USER_DETAILS_SUCCESS,
@@ -89,33 +80,19 @@ export const getUserDetails = () => async (dispatch, getState) => {
       dispatch(logout())
     }
     dispatch({
-      type: AuthActionTypes.USER_FAIL,
+      type: AuthActionTypes.USER_DETAILS_FAIL,
       payload: message,
     })
   }
 }
 
-export const updateUserProfile = (dataToSubmit) => async (
-  dispatch,
-  getState
-) => {
+export const updateUserProfile = (dataToSubmit) => async (dispatch) => {
   try {
     dispatch({
       type: AuthActionTypes.USER_REQUEST,
     })
 
-    const {
-      userAuth: { token },
-    } = getState()
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const { data } = await axios.put('/user/profile', dataToSubmit, config)
+    const { data } = await authAxios.put('/user/profile', dataToSubmit)
     dispatch({
       type: AuthActionTypes.USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
@@ -137,23 +114,13 @@ export const updateUserProfile = (dataToSubmit) => async (
   }
 }
 
-export const listUsers = () => async (dispatch, getState) => {
+export const listUsers = () => async (dispatch) => {
   try {
     dispatch({
       type: AuthActionTypes.USER_REQUEST,
     })
 
-    const {
-      userAuth: { token },
-    } = getState()
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const { data } = await axios.get(`/user`, config)
+    const { data } = await authAxios.get(`/user`)
 
     dispatch({
       type: AuthActionTypes.USER_LIST_SUCCESS,
@@ -174,23 +141,13 @@ export const listUsers = () => async (dispatch, getState) => {
   }
 }
 
-export const deleteUser = (id) => async (dispatch, getState) => {
+export const deleteUser = (id) => async (dispatch) => {
   try {
     dispatch({
       type: AuthActionTypes.USER_REQUEST,
     })
 
-    const {
-      userAuth: { token },
-    } = getState()
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    await axios.delete(`/users/${id}`, config)
+    await authAxios.delete(`/users/${id}`)
 
     dispatch({ type: AuthActionTypes.USER_DELETE_SUCCESS })
   } catch (error) {
@@ -219,24 +176,13 @@ export const logout = () => (dispatch) => {
 
 //   updatepassword
 
-export const updatePassword = (dataToSubmit) => async (dispatch, getState) => {
+export const updatePassword = (dataToSubmit) => async (dispatch) => {
   try {
     dispatch({
       type: AuthActionTypes.USER_REQUEST,
     })
 
-    const {
-      userAuth: { token },
-    } = getState()
-
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const { data } = await axios.put('/user/password', dataToSubmit, config)
+    const { data } = await authAxios.put('/user/password', dataToSubmit)
     dispatch({
       type: AuthActionTypes.USER_UPDATE_PASSWORD_SUCCESS,
       payload: data,

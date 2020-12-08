@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux'
 
 export default function (ComposedClass, reload, adminRoute) {
   const AuthenticationCheck = (props) => {
-    const userAuthState = useSelector(({ userAuth }) => userAuth)
-    const { isAdmin, isAuthenticated } = userAuthState
+    const userState = useSelector(({ user }) => user)
+    const { isAdmin, isAuthenticated } = userState
 
     useEffect(() => {
       if (!isAuthenticated) {
@@ -29,7 +29,7 @@ export default function (ComposedClass, reload, adminRoute) {
 
     return (
       <>
-        <ComposedClass {...props} {...userAuthState} />
+        <ComposedClass {...props} {...userState} />
       </>
     )
   }

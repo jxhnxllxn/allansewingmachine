@@ -12,25 +12,14 @@ const initialState = {
   orderHistory: [],
 }
 
-export const orderHistoryReducer = (state = {}, action) => {
-  switch (action.type) {
-    case OrderActionTypes.ORDER_HISTORY_REQUEST:
-      return { loading: true }
-    case OrderActionTypes.ORDER_HISTORY_SUCCESS:
-      return {
-        loading: false,
-        ...action.payload,
-      }
-    case OrderActionTypes.ORDER_HISTORY_FAIL:
-      return { loading: false, error: action.payload }
-    default:
-      return state
-  }
-}
-
-export default function (state = initialState, action) {
-  const { type, payload } = action
+const order = (state = initialState, { type, payload }) => {
   switch (type) {
+    case OrderActionTypes.ORDER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
+
     case OrderActionTypes.GET_ALL_ORDER:
     case OrderActionTypes.GET_CANCELED_ORDERS:
     case OrderActionTypes.GET_PROCESSED_ORDERS:
@@ -55,18 +44,14 @@ export default function (state = initialState, action) {
         loading: false,
         countDash: payload.count,
       }
+
     case OrderActionTypes.GET_ORDER_HISTORY:
       return {
         ...state,
         loading: false,
         orderHistory: [payload.data],
       }
-    case OrderActionTypes.GET_PAYPAL_SCRIPT:
-      return {
-        ...state,
-        loading: false,
-        paypalScript: payload,
-      }
+
     case OrderActionTypes.CLEAN_ORDER:
       return {}
 
@@ -74,3 +59,5 @@ export default function (state = initialState, action) {
       return state
   }
 }
+
+export default order

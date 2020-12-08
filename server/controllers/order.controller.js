@@ -98,6 +98,7 @@ exports.addOrder = (req, res, next) => {
   let orderDetail = {
     user: req.user._id,
     name: req.user.name,
+    shippingAddress: req.user.address,
     paymentId: req.body.paymentData.paymentID,
     product: req.body.orderDetail.orders,
     additionalInfo: req.body.orderDetail.additionalInfo,

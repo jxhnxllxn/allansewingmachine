@@ -3,31 +3,21 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addOrder } from '../redux/order/order-action'
 import { clearCart } from '../redux/cart/cart-action'
 import { update, generateData, resetFields } from '../utils/helper/form-action'
-import {
-  selectCartItems,
-  selectCartItemsCount,
-  selectCartTotal,
-} from '../redux/cart/cart-selectors'
+import { selectCartItems, selectCartTotal } from '../redux/cart/cart-selectors'
 import addComma from '../utils/helper/add-comma'
 
 import Paypal from '../components/paypal'
 import MyButton from '../components/button'
 import FormField from '../components/form-field'
 import Modal from '../components/modal'
-import { useHistory } from 'react-router-dom'
 
 const OrderDetail = () => {
   const dispatch = useDispatch()
   const modalRef = useRef()
-  const history = useHistory()
-  const cartCount = useSelector((state) => selectCartItemsCount(state))
-  useEffect(() => {
-    if (cartCount <= 0) {
-      history.push('/user/dashboard')
-    }
-  }, [cartCount, history])
+
   const cartItems = useSelector((state) => selectCartItems(state))
   const total = useSelector((state) => selectCartTotal(state))
+
   const [formField, setFormField] = useState({
     formError: false,
     formErrorMessage: [],
@@ -115,6 +105,8 @@ const OrderDetail = () => {
       ...orderDetail,
     }
 
+    console.log({ ...dataToSubmit, ...orderDetail })
+
     dispatch(
       addOrder({
         orderDetail: data,
@@ -138,23 +130,23 @@ const OrderDetail = () => {
         paymentData: data,
       })
     )
-      .then((res) => {
-        if (res.payload.success) {
-          resetFieldHandler()
-        } else {
-          setFormField({
-            ...formField,
-            formSuccess: false,
-          })
-        }
-      })
-      .catch((err) => {
-        setFormField({
-          ...formField,
-          formError: true,
-          formErrorMessage: err.response.data.error,
-        })
-      })
+    // .then((res) => {
+    //   if (res.payload.success) {
+    //     resetFieldHandler()
+    //   } else {
+    //     setFormField({
+    //       ...formField,
+    //       formSuccess: false,
+    //     })
+    //   }
+    // })
+    // .catch((err) => {
+    //   setFormField({
+    //     ...formField,
+    //     formError: true,
+    //     formErrorMessage: err.response.data.error,
+    //   })
+    // })
   }
 
   return (

@@ -1,12 +1,13 @@
 import { OrderActionTypes } from './order-constants'
-import axios from 'axios'
+import authAxios from '../../utils/helper/authAxios'
 
 export const addOrder = (dataToAdd) => async (dispatch) => {
   try {
     dispatch({
       type: OrderActionTypes.ORDER_REQUEST,
     })
-    const { data } = await axios.post('/order', dataToAdd)
+    console.log(dataToAdd)
+    const { data } = await authAxios.post('/order', dataToAdd)
     dispatch({
       type: OrderActionTypes.ADD_ORDER,
       payload: data,
@@ -28,7 +29,7 @@ export const getAllOrder = () => async (dispatch) => {
       type: OrderActionTypes.ORDER_REQUEST,
     })
 
-    const { data } = await axios.get('/order')
+    const { data } = await authAxios.get('/order')
     dispatch({
       type: OrderActionTypes.GET_ALL_ORDER,
       payload: data,
@@ -50,7 +51,7 @@ export const getSingleOrder = (id) => async (dispatch) => {
       type: OrderActionTypes.ORDER_REQUEST,
     })
 
-    const { data } = await axios.get(`/order/${id}`)
+    const { data } = await authAxios.get(`/order/${id}`)
 
     dispatch({
       type: OrderActionTypes.GET_SINGLE_ORDER,
@@ -72,7 +73,9 @@ export const getPendingOrder = () => async (dispatch) => {
     dispatch({
       type: OrderActionTypes.ORDER_REQUEST,
     })
-    const { data } = await axios.get('/order?status=pending&page=1&limit=20')
+    const { data } = await authAxios.get(
+      '/order?status=pending&page=1&limit=20'
+    )
     dispatch({
       type: OrderActionTypes.GET_PENDING_ORDERS,
       payload: data,
@@ -93,7 +96,9 @@ export const getProcessedOrder = () => async (dispatch) => {
     dispatch({
       type: OrderActionTypes.ORDER_REQUEST,
     })
-    const { data } = await axios.get('/order?status=processed&page=1&limit=20')
+    const { data } = await authAxios.get(
+      '/order?status=processed&page=1&limit=20'
+    )
     dispatch({
       type: OrderActionTypes.GET_PROCESSED_ORDERS,
       payload: data,
@@ -114,7 +119,9 @@ export const getCanceledOrder = () => async (dispatch) => {
     dispatch({
       type: OrderActionTypes.ORDER_REQUEST,
     })
-    const { data } = await axios.get('/order?status=canceled&page=1&limit=20')
+    const { data } = await authAxios.get(
+      '/order?status=canceled&page=1&limit=20'
+    )
     dispatch({
       type: OrderActionTypes.GET_CANCELED_ORDERS,
       payload: data,
@@ -135,7 +142,7 @@ export const getDashboardAdmin = () => async (dispatch) => {
     dispatch({
       type: OrderActionTypes.ORDER_REQUEST,
     })
-    const { data } = await axios.get('/order/dashboard')
+    const { data } = await authAxios.get('/order/dashboard')
     dispatch({
       type: OrderActionTypes.GET_DASHBOARD_ADMIN,
       payload: data,
@@ -156,7 +163,7 @@ export const searchCharacter = (i) => async (dispatch) => {
     dispatch({
       type: OrderActionTypes.ORDER_REQUEST,
     })
-    const { data } = await axios.get(`/order/search/${i}`)
+    const { data } = await authAxios.get(`/order/search/${i}`)
     dispatch({
       type: OrderActionTypes.SEARCH_CHARACTER,
       payload: data,
@@ -172,30 +179,20 @@ export const searchCharacter = (i) => async (dispatch) => {
   }
 }
 
-export const getOrderHistory = () => async (dispatch, getState) => {
+export const getOrderHistory = () => async (dispatch) => {
   try {
     dispatch({
-      type: OrderActionTypes.ORDER_HISTORY_REQUEST,
+      type: OrderActionTypes.ORDER_REQUEST,
     })
-    const {
-      userLogin: { token },
-    } = getState()
 
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-
-    const { data } = await axios.get('/order/order-history', config)
+    const { data } = await authAxios.get('/order/order-history')
     dispatch({
       type: OrderActionTypes.GET_ORDER_HISTORY,
       payload: data,
     })
   } catch (error) {
     dispatch({
-      type: OrderActionTypes.ORDER_HISTORY_FAIL,
+      type: OrderActionTypes.ORDER_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
