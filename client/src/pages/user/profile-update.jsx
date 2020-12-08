@@ -13,7 +13,9 @@ import MyButton from '../../components/button'
 
 const ProfileUpdate = () => {
   const dispatch = useDispatch()
-  const currentUser = useSelector(({ userDetails }) => userDetails.user)
+  const userAuthState = useSelector(({ userAuth }) => userAuth)
+  const { loading, error, address, contact, email, name } = userAuthState
+
   const [password, setPassword] = useState({
     formError: false,
     formErrorMessage: [],
@@ -244,21 +246,6 @@ const ProfileUpdate = () => {
 
     if (formIsValid) {
       dispatch(updateUserProfile(dataToSubmit))
-      // .then((res) => {
-      //   if (res.payload.success) {
-      //     setFormField({
-      //       ...formField,
-      //       formSuccess: true,
-      //     })
-      //   }
-      // })
-      // .catch((err) => {
-      //   setFormField({
-      //     ...formField,
-      //     formError: true,
-      //     formErrorMessage: err.response.data.error,
-      //   })
-      // })
     } else {
       setFormField({
         ...formField,
@@ -276,21 +263,6 @@ const ProfileUpdate = () => {
 
     if (formIsValid) {
       dispatch(updatePassword(dataToSubmit))
-        .then((res) => {
-          if (res.payload.success) {
-            setPassword({
-              ...password,
-              formSuccess: true,
-            })
-          }
-        })
-        .catch((err) => {
-          setPassword({
-            ...password,
-            formError: true,
-            formErrorMessage: err.response.data.error,
-          })
-        })
     } else {
       setPassword({
         ...password,
@@ -319,15 +291,15 @@ const ProfileUpdate = () => {
 
   useEffect(() => {
     const user = {
-      city: currentUser.address.city,
-      country: currentUser.address.country,
-      state: currentUser.address.state,
-      street: currentUser.address.street,
-      unit: currentUser.address.unit,
-      zipcode: currentUser.address.zipcode,
-      contact: currentUser.contact,
-      email: currentUser.email,
-      name: currentUser.name,
+      city: address.city,
+      country: address.country,
+      state: address.state,
+      street: address.street,
+      unit: address.unit,
+      zipcode: address.zipcode,
+      contact: contact,
+      email: email,
+      name: name,
     }
     const newFormData = populateFields(formField.formData, user)
     setFormField({

@@ -24,7 +24,7 @@ const CollapseCheckbox = ({
   }, [])
 
   useEffect(() => {
-    if (initialState && state.checked.length > 0) {
+    if (initialState) {
       handleFilters(state.checked)
     }
   }, [state.checked])

@@ -125,11 +125,7 @@ exports.updateDetails = asyncHandler(async (req, res, next) => {
     runValidators: true,
   })
 
-  res.status(200).json({
-    success: true,
-    data: user,
-    isAdmin: user.role,
-  })
+  sendTokenResponse(user, 200, res)
 })
 
 // @desc    Update user detail

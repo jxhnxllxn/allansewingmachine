@@ -12,8 +12,8 @@ import MyButton from '../components/button'
 import FormField from '../components/form-field'
 
 const BillingShipping = ({ isAuthenticated }) => {
-  const userState = useSelector(({ user }) => user)
-  const { userDetail, loading, error } = userState
+  const userAuthState = useSelector(({ userAuth }) => userAuth)
+  const { loading, error, address, contact, email, name } = userAuthState
 
   const dispatch = useDispatch()
   const [formField, setFormField] = useState({
@@ -197,15 +197,15 @@ const BillingShipping = ({ isAuthenticated }) => {
   useEffect(() => {
     if (isAuthenticated && !loading) {
       const userData = {
-        city: userDetail.address.city,
-        country: userDetail.address.country,
-        state: userDetail.address.state,
-        street: userDetail.address.street,
-        unit: userDetail.address.unit,
-        zipcode: userDetail.address.zipcode,
-        contact: userDetail.contact,
-        email: userDetail.email,
-        name: userDetail.name,
+        city: address.city,
+        country: address.country,
+        state: address.state,
+        street: address.street,
+        unit: address.unit,
+        zipcode: address.zipcode,
+        contact: contact,
+        email: email,
+        name: name,
       }
       const newFormData = populateFields(formField.formData, userData)
       setFormField({
@@ -245,27 +245,28 @@ const BillingShipping = ({ isAuthenticated }) => {
     let formIsValid = isFormValid(formField.formData, 'billing')
     if (formIsValid) {
       if (isAuthenticated) {
-        dispatch(updateUserProfile(dataToSubmit)).then((res) => {
-          if (res.payload.success) {
-            setFormField({
-              ...formField,
-              formSuccess: true,
-            })
+        dispatch(updateUserProfile(dataToSubmit))
+        // .then((res) => {
+        //   if (res.payload.success) {
+        //     setFormField({
+        //       ...formField,
+        //       formSuccess: true,
+        //     })
 
-            setTimeout(() => {
-              setFormField({
-                ...formField,
-                formSuccess: false,
-              })
-            }, 5000)
-          } else {
-            setFormField({
-              ...formField,
-              formError: true,
-              formErrorMessage: res.payload.error,
-            })
-          }
-        })
+        //     setTimeout(() => {
+        //       setFormField({
+        //         ...formField,
+        //         formSuccess: false,
+        //       })
+        //     }, 5000)
+        //   } else {
+        //     setFormField({
+        //       ...formField,
+        //       formError: true,
+        //       formErrorMessage: res.payload.error,
+        //     })
+        //   }
+        // })
 
         // .catch((err) => {
         //   setFormField({
@@ -276,35 +277,35 @@ const BillingShipping = ({ isAuthenticated }) => {
         // })
       } else {
         dispatch(register(dataToSubmit))
-          .then((res) => {
-            if (res.payload.success) {
-              setFormField({
-                ...formField,
-                formSuccess: true,
-              })
+        // .then((res) => {
+        //   if (res.payload.success) {
+        //     setFormField({
+        //       ...formField,
+        //       formSuccess: true,
+        //     })
 
-              setTimeout(() => {
-                setFormField({
-                  ...formField,
-                  formSuccess: false,
-                })
-              }, 5000)
-            } else {
-              setFormField({
-                ...formField,
-                formError: true,
-                formErrorMessage: res.payload.error,
-              })
-            }
-          })
+        //     setTimeout(() => {
+        //       setFormField({
+        //         ...formField,
+        //         formSuccess: false,
+        //       })
+        //     }, 5000)
+        //   } else {
+        //     setFormField({
+        //       ...formField,
+        //       formError: true,
+        //       formErrorMessage: res.payload.error,
+        //     })
+        //   }
+        // })
 
-          .catch((err) => {
-            setFormField({
-              ...formField,
-              formError: true,
-              formErrorMessage: err.response.data.error,
-            })
-          })
+        // .catch((err) => {
+        //   setFormField({
+        //     ...formField,
+        //     formError: true,
+        //     formErrorMessage: err.response.data.error,
+        //   })
+        // })
       }
     } else {
       setFormField({ ...formField, formError: true })

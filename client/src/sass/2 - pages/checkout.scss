@@ -106,7 +106,7 @@ table.orderDetail {
       td,
       th {
         padding: 0.5rem 0;
-        border-top: 1px solid $border;
+        border-top: 1px solid $black--secondary;
         text-transform: capitalize;
         font-weight: 600;
       }
@@ -119,7 +119,7 @@ table.orderDetail {
 }
 
 ul.payment-options {
-  margin: 1.5rem 0 2rem 1rem;
+  // margin: 1.5rem 0 2rem 1rem;
   padding-bottom: 1rem;
   border-bottom: 1px solid $border;
   font-weight: 500;

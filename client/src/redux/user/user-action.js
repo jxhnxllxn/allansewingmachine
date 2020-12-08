@@ -144,16 +144,16 @@ export const listUsers = () => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userAuth: { token },
     } = getState()
 
     const config = {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
 
-    const { data } = await axios.get(`/api/user`, config)
+    const { data } = await axios.get(`/user`, config)
 
     dispatch({
       type: AuthActionTypes.USER_LIST_SUCCESS,
@@ -181,16 +181,16 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userAuth: { token },
     } = getState()
 
     const config = {
       headers: {
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
 
-    await axios.delete(`/api/users/${id}`, config)
+    await axios.delete(`/users/${id}`, config)
 
     dispatch({ type: AuthActionTypes.USER_DELETE_SUCCESS })
   } catch (error) {
@@ -226,21 +226,17 @@ export const updatePassword = (dataToSubmit) => async (dispatch, getState) => {
     })
 
     const {
-      userLogin: { userInfo },
+      userAuth: { token },
     } = getState()
 
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
+        Authorization: `Bearer ${token}`,
       },
     }
 
-    const { data } = await axios.put(
-      '/user/updatepassword',
-      dataToSubmit,
-      config
-    )
+    const { data } = await axios.put('/user/password', dataToSubmit, config)
     dispatch({
       type: AuthActionTypes.USER_UPDATE_PASSWORD_SUCCESS,
       payload: data,

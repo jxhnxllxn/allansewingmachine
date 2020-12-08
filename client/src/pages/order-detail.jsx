@@ -120,17 +120,7 @@ const OrderDetail = () => {
         orderDetail: data,
         paymentData: paymentId,
       })
-    ).then((res) => {
-      if (res.payload.success) {
-        resetFieldHandler()
-      } else {
-        setFormField({
-          ...formField,
-          formSuccess: false,
-          formErrorMessage: res.payload.data,
-        })
-      }
-    })
+    )
   }
 
   const transactionError = (data) => {

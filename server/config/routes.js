@@ -46,19 +46,19 @@ module.exports = (app) => {
   app.use('/api/product', product)
   app.use('/api/order', order)
 
-  app.use(
-    fileUpload({
-      useTempFiles: true,
+  app.get('/api/config/paypal', (req, res) =>
+    res.send({
+      clientId:
+        process.env.NODE_ENV === 'production'
+          ? process.env.PAYPAL_PRODUCTION
+          : process.env.PAYPAL_SANDBOX,
+      currency: process.env.PAYPAL_CURRENCY,
     })
   )
 
-  app.get('/api/config/paypal', (req, res) =>
-    res.send({
-      env: process.env.PAYPAL_ENV,
-      currency: process.env.PAYPAL_CURRENCY,
-      locale: process.env.PAYPAL_LOCALE,
-      sandbox: process.env.PAYPAL_SANDBOX,
-      production: process.env.PAYPAL_PRODUCTION,
+  app.use(
+    fileUpload({
+      useTempFiles: true,
     })
   )
 
