@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { NavLink, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import { selectCartItemsCount } from '../redux/cart/cart-selectors'
 import { toggleMenuIcons } from '../redux/ui/ui-actions'
@@ -17,6 +17,7 @@ import toggleScrollbar from '../utils/animations/toggleScrollbar'
 import useOutsideClick from '../utils/hooks/useOutsideClick'
 
 import SideNav from './sidenav'
+import NavLinks from './navlinks'
 
 const Nav = ({ isNavMenuIconsHidden, mTop }) => {
   const dispatch = useDispatch()
@@ -125,15 +126,7 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
 
         <div className='nav__bottom'>
           <div className='nav__listBottom'>
-            <ul>
-              {links[0].map((x, i) => (
-                <li key={i}>
-                  <NavLink exact={x.exact} to={x.linkTo}>
-                    <span>{x.name}</span>
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+            <NavLinks links={links[0]} />
           </div>
         </div>
       </nav>

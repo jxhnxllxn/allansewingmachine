@@ -1,18 +1,17 @@
 .checkout_wrapper {
   padding: 1rem 0;
-  @include container;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
-  align-items: flex-start;
-  justify-content: space-between;
-  column-gap: 2rem;
-  .billing {
-    transition: ease 3s;
-    padding: 1rem 0;
-  }
 
-  .additional_info {
-    margin-bottom: 1rem;
+  @include container;
+  .checkout {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+    align-items: flex-start;
+    justify-content: space-between;
+    column-gap: 2rem;
+    row-gap: 2rem;
+    .additional_info {
+      margin-bottom: 2rem;
+    }
   }
 }
 

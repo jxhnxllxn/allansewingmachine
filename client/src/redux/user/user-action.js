@@ -167,7 +167,7 @@ export const deleteUser = (id) => async (dispatch) => {
 
 //logout
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('userInfo')
+  localStorage.removeItem('access_token')
   dispatch({ type: AuthActionTypes.USER_LOGOUT })
   dispatch({ type: AuthActionTypes.USER_DETAILS_RESET })
   // dispatch({ type: AuthActionTypes.ORDER_LIST_MY_RESET })

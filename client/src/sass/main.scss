@@ -9,7 +9,6 @@
 // 1 - LAYOUT
 @import './1\ -\ layout/footer';
 @import './1\ -\ layout/sidenav-layout';
-@import './1\ -\ layout/sidenav-left';
 @import './1\ -\ layout/header';
 @import './1\ -\ layout/layout';
 @import './1\ -\ layout/nav';
@@ -43,6 +42,7 @@
 @import './3\ -\ components/carousel/slider-content';
 
 @import './3\ -\ components/alert';
+@import './3\ -\ components/navlinks';
 @import './3\ -\ components/backdrop';
 @import './3\ -\ components/button';
 @import './3\ -\ components/sidenav-cart-item';
@@ -54,7 +54,6 @@
 @import './3\ -\ components/modal';
 @import './3\ -\ components/product';
 @import './3\ -\ components/sidenav-auth';
-@import './3\ -\ components/sidenav-setting';
 @import './3\ -\ components/slider';
 
 @import './3\ -\ components/table';

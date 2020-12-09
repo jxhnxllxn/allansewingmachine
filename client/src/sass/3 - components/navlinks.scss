@@ -1,0 +1,11 @@
+.navlinks {
+  letter-spacing: 2px;
+  font-size: 85%;
+  li {
+    a {
+      padding: 1rem;
+      display: block;
+      @include underlineOnHover;
+    }
+  }
+}

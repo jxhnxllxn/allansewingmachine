@@ -1,47 +1,49 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { Link, NavLink } from 'react-router-dom'
-import { logout } from '../redux/user/user-action'
+import NavLinks from '../layout/navlinks'
 
 const SideNavSetting = () => {
-  const dispatch = useDispatch()
-  const handleLogout = () => {
-    dispatch(logout())
-  }
   const links = [
     {
       name: 'Dashboard',
       linkTo: '/user/dashboard',
+      exact: true,
     },
     {
-      name: 'Update user info',
-      linkTo: '/user/profile-update',
+      name: 'User information',
+      linkTo: '/user/profile',
+      exact: true,
+    },
+    {
+      name: 'History purchased',
+      linkTo: '/user/history',
+      exact: true,
     },
     {
       name: 'Legal & Policies',
       linkTo: '/legal&polices',
+      exact: true,
     },
     {
       name: 'Help',
       linkTo: '/help',
+      exact: true,
+    },
+    {
+      name: 'Logout',
+      linkTo: '/logout',
+      exact: true,
     },
   ]
   return (
     <div className='sidenav_setting'>
-      <ul className='sidenav_setting__link'>
-        {links.map((i, key) => (
-          <li key={key}>
-            <NavLink to={i.linkTo}>
-              <span>{i.name}</span>
-            </NavLink>
-          </li>
-        ))}
-        <li>
-          <Link onClick={() => handleLogout()} to='/'>
-            <span>Logout</span>
-          </Link>
-        </li>
-      </ul>
+      <NavLinks
+        links={links}
+        addStyle={{
+          textAlign: 'center',
+          padding: '2rem 0',
+        }}
+      />
     </div>
   )
 }

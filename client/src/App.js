@@ -25,7 +25,7 @@ const Register = lazy(() => import('./pages/register'))
 const AdminIndex = lazy(() => import('./pages/admin/_index'))
 const UserIndex = lazy(() => import('./pages/user/_index'))
 
-const SideNav = lazy(() => import('./layout/sidenav'))
+const Logout = lazy(() => import('./components/loadingScreen'))
 
 const App = () => {
   useResponsiveVH()
@@ -70,13 +70,17 @@ const App = () => {
 
             <Route path='/cart' component={Auth(Cart, null)} exact />
 
-            <Route path='/checkout' component={Auth(Checkout, null)} exact />
+            <Route
+              path='/checkout'
+              component={Auth(Checkout, true, true)}
+              exact
+            />
 
             <Route path='/user' component={Auth(UserIndex, true, true)} />
 
             <Route path='/admin' component={Auth(AdminIndex, true, true)} />
 
-            <Route path='/sidenav' component={SideNav} />
+            <Route path='/Logout' component={Auth(Logout, true, true)} />
           </Suspense>
         </ErrorBoundary>
       </Switch>

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Loading from '../../components/loading'
-import SideNav from '../../layout/sidenav-left'
+import SideNav from '../../layout/navlinks'
 
 const Dashboard = lazy(() => import('./dashboard'))
 const Collection = lazy(() => import('./collection'))

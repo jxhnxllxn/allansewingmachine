@@ -1,12 +1,10 @@
 import React, { Fragment } from 'react'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 // import moment from 'moment';
 
 // {moment(product.dateOfPurchase).format("MM-DD-YYYY")}
 
-const UserHistoryBlock = () => {
-  const dispatch = useDispatch()
+const UserHistory = () => {
   const [orderHistory, setOrderHistory] = useState([])
 
   const renderBlocks = () =>
@@ -48,7 +46,12 @@ const UserHistoryBlock = () => {
         })
       : null
 
-  return <div className='history_blocks'>{renderBlocks()}</div>
+  return (
+    <div className='history_blocks'>
+      <h1 className='heading-secondary'>History</h1>
+      {renderBlocks()}
+    </div>
+  )
 }
 
-export default UserHistoryBlock
+export default UserHistory

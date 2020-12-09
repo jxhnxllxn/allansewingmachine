@@ -7,14 +7,22 @@ import Loading from './loading'
 const Paypal = (props) => {
   const dispatch = useDispatch()
   const [sdkReady, setSdkReady] = useState(false)
-  const [currency, setcurrency] = useState('')
-  const paypalConfigState = useSelector(({ paypalConfig }) => paypalConfig)
+  const [paypalConfig, setpaypalConfig] = useState({ loading: true })
+
+  useEffect(() => {
+    async function getPaypalConfig() {
+      await Axios.get('/config/paypal').then((res) =>
+        setpaypalConfig({ loading: false, ...res.data })
+      )
+    }
+    getPaypalConfig()
+    return () => {}
+  }, [])
 
   const addPayPalScript = async () => {
-    const { data } = await Axios.get('/config/paypal')
     const script = document.createElement('script')
     script.type = 'text/javascript'
-    script.src = `https://www.paypal.com/sdk/js?client-id=${data.clientId}`
+    script.src = `https://www.paypal.com/sdk/js?client-id=${paypalConfig.clientId}`
     script.async = true
     script.onload = () => {
       setSdkReady(true)
@@ -28,6 +36,9 @@ const Paypal = (props) => {
     } else {
       setSdkReady(true)
     }
+    return () => {
+      setSdkReady(false)
+    }
   }, [])
 
   return (
@@ -35,7 +46,7 @@ const Paypal = (props) => {
       {sdkReady ? (
         <PayPalButton
           amount={props.toPay}
-          currency={currency}
+          currency={paypalConfig.currency}
           onSuccess={(details, data) => {
             alert('Transaction completed by ' + details.payer.name.given_name)
             return fetch('/paypal-transaction-complete', {
