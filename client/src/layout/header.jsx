@@ -1,18 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { useThrottle } from '../utils/hooks/useThrottle'
-
 import useNavScrollAnimation from '../utils/animations/useScrollAnimation'
-
-import { selectNavMenuIconsHidden } from '../redux/ui/ui-selector'
-
 import Nav from './nav'
-import { useSelector } from 'react-redux'
-
 const Header = () => {
-  const isNavMenuIconsHidden = useSelector((state) =>
-    selectNavMenuIconsHidden(state)
-  )
   const headerRef = useRef()
   const tl = gsap.timeline()
   const [tl__header] = useState(tl)
@@ -41,7 +32,7 @@ const Header = () => {
 
   return (
     <header className='header' ref={headerRef}>
-      <Nav isNavMenuIconsHidden={isNavMenuIconsHidden} />
+      <Nav />
     </header>
   )
 }

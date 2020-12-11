@@ -1,11 +1,11 @@
 import { AuthActionTypes } from './user-constants'
 
 const userInfoFromStorage = localStorage.getItem('userInfo')
-  ? JSON.parse(localStorage.getItem('userInfo'))
+  ? JSON.parse(localStorage.getItem('access_token'))
   : null
 
 const initialState = {
-  ...userInfoFromStorage,
+  token: userInfoFromStorage,
 }
 
 const user = (state = initialState, action) => {

@@ -45,7 +45,7 @@ const App = () => {
     if (localStorage.access_token) {
       dispatch(getUserDetails())
     }
-  }, [])
+  }, [localStorage.access_token])
 
   return (
     <Layout>
@@ -70,17 +70,13 @@ const App = () => {
 
             <Route path='/cart' component={Auth(Cart, null)} exact />
 
-            <Route
-              path='/checkout'
-              component={Auth(Checkout, true, true)}
-              exact
-            />
+            <Route path='/checkout' component={Auth(Checkout, true)} exact />
 
-            <Route path='/user' component={Auth(UserIndex, true, true)} />
+            <Route path='/user' component={Auth(UserIndex, true)} />
 
             <Route path='/admin' component={Auth(AdminIndex, true, true)} />
 
-            <Route path='/Logout' component={Auth(Logout, true, true)} />
+            <Route path='/Logout' component={Auth(Logout, true)} />
           </Suspense>
         </ErrorBoundary>
       </Switch>

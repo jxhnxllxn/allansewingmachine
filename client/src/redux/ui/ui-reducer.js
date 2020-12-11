@@ -1,23 +1,21 @@
 const initialState = {
-  navIconsMenuIsOpen: false,
-  navMenuIsOpen: false,
-  loadingScreenActive: false,
+  sideNavIconIsOpen: false,
 }
 
 const uiReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case 'TOGGLE_MENU_ICONS':
+    case 'TOGGLE_SIDENAV_ICON':
       return {
-        navIconsMenuIsOpen: !state.navIconsMenuIsOpen,
+        sideNavIconIsOpen: !state.sideNavIconIsOpen,
       }
-    case 'TOGGLE_NAV_MENU':
-      return {
-        navMenuIsOpen: !state.navMenuIsOpen,
-      }
-    case 'TOGGLE_LOADING_SCREEN':
-      return {
-        loadingScreenActive: !state.loadingScreenActive,
-      }
+    // case 'TOGGLE_NAV_MENU':
+    //   return {
+    //     navMenuIsOpen: !state.navMenuIsOpen,
+    //   }
+    // case 'TOGGLE_LOADING_SCREEN':
+    //   return {
+    //     loadingScreenActive: !state.loadingScreenActive,
+    //   }
     default:
       return state
   }

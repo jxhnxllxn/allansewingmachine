@@ -97,8 +97,6 @@ export const updateUserProfile = (dataToSubmit) => async (dispatch) => {
       type: AuthActionTypes.USER_UPDATE_PROFILE_SUCCESS,
       payload: data,
     })
-
-    localStorage.setItem('userInfo', JSON.stringify(data))
   } catch (error) {
     const message =
       error.response && error.response.data.message

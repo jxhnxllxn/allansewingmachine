@@ -6,12 +6,22 @@ const LoadingScreen = ({ loading, location }) => {
   const dispatch = useDispatch()
   const loadingScreenActive = useSelector(({ ui }) => ui.loadingScreenActive)
   useEffect(() => {
-    if (location.pathname === '/logout') {
+    if (location && location.pathname === '/logout') {
       dispatch(logout())
     }
   }, [])
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: 'black',
+        position: 'absolute',
+        top: '0',
+        left: '0',
+        height: '100vh',
+        width: '100vw',
+        zIndex: '99999',
+      }}
+    >
       <h1 className='heading-primary'>Loading</h1>
     </div>
   )

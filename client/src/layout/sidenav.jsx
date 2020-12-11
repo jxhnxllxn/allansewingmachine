@@ -1,41 +1,26 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import SideNavLayout from './sidenav-layout'
-import Loading from '../components/loading'
 import SideNavSetting from '../components/sidenav-setting'
 import SideNavCart from '../components/sidenav-cart'
-const SignIn = lazy(() => import('../pages/login'))
+import SideNavSearch from '../components/sidenav-search'
 
 const Sidenav = ({ sidenavRef, activeMenuIcons }) => {
   const components = (x) => {
     switch (x) {
       case 'search':
-        return (
-          <Suspense fallback={<Loading />}>
-            <SignIn />
-          </Suspense>
-        )
+        return <SideNavSearch />
       case 'cart':
-        return (
-          <Suspense fallback={<Loading />}>
-            <SideNavCart />
-          </Suspense>
-        )
+        return <SideNavCart />
       case 'person':
-        return (
-          <Suspense fallback={<Loading />}>
-            <SideNavSetting />
-          </Suspense>
-        )
+        return <SideNavSetting />
       default:
         return null
     }
   }
 
   return (
-    <SideNavLayout>
-      <div className='sidenav__main' ref={sidenavRef}>
-        {components(activeMenuIcons)}
-      </div>
+    <SideNavLayout sidenavRef={sidenavRef}>
+      <div className='sidenav__main'>{components(activeMenuIcons)}</div>
     </SideNavLayout>
   )
 }

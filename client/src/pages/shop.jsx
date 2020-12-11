@@ -15,7 +15,7 @@ const ShopCollection = ({ match }) => {
   const { loading, productToShop, productToShopSize, error } = productState
 
   const collectionState = useSelector(({ collection }) => collection)
-  const { collections } = collectionState
+  const { collections, loading: loadingCollection } = collectionState
 
   const [filter, setFilter] = useState({
     limit: 24,
@@ -31,8 +31,6 @@ const ShopCollection = ({ match }) => {
   useEffect(() => {
     if (match.params.collection && !loading) {
       handleFilters([match.params.collection], 'collectionId')
-    } else {
-      dispatch(getProductsToShop(filter.skip, filter.limit, filter.filters))
     }
     return () => {
       setFilter({
@@ -108,11 +106,10 @@ const ShopCollection = ({ match }) => {
 
   return (
     <div className='shop'>
-      {console.log(filter)}
       <div className='shop__toolbar'>Shop / Industrial / 4threads</div>
       <div className='shop__filter'>
         <div className='shop__filterblock'>
-          {collections &&
+          {!loadingCollection &&
             collections.map((i) => (
               <CollapseCheckbox
                 key={i._id}

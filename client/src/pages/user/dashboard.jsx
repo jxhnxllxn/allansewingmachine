@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
-import MyButton from '../../components/button'
-import Loading from '../../components/loading'
 
 const UserDashboard = () => {
-  const userState = useSelector(({ user }) => user)
-  const { loading, name, email, contact, address } = userState
+  const name = useSelector(({ user }) => user.name)
 
   return (
     <div>

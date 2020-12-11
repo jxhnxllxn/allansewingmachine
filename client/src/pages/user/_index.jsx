@@ -2,7 +2,7 @@ import React, { lazy, Suspense, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import Loading from '../../components/loading'
-import NavLinks from '../../layout/navlinks'
+import NavLinks from '../../components/navlinks'
 import { getOrderHistory } from '../../redux/order/order-action'
 
 const Dashboard = lazy(() => import('./dashboard'))

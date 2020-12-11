@@ -1,14 +1,15 @@
 .footer-wrapper {
-  font-size: 85%;
   color: $black--secondary;
   .footer {
     &__credits {
-      @include flexAlignItemCenter;
-      justify-content: center;
-      flex-direction: column;
-      padding: 2rem 0;
+      text-align: center;
+      padding: 1rem 0;
       span {
-        font-size: 90%;
+        display: block;
+        font-size: 85%;
+        a {
+          text-decoration: underline;
+        }
       }
     }
   }

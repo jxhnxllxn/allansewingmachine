@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { ReactComponent as UpIcon } from '../assets/icons/chevron-up.svg'
 
@@ -13,15 +13,6 @@ const CollapseCheckbox = ({
     opened: false,
     checked: [],
   })
-
-  useEffect(() => {
-    if (initialState) {
-      setstate({
-        ...state,
-        opened: initialState,
-      })
-    }
-  }, [])
 
   useEffect(() => {
     if (initialState) {

@@ -1,6 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import NavLinks from '../layout/navlinks'
+import NavLinks from './navlinks'
 
 const SideNavSetting = () => {
   const links = [
@@ -35,15 +34,21 @@ const SideNavSetting = () => {
       exact: true,
     },
   ]
+  const handleCloseNav = () => {
+    document.getElementById('toggleSideNav').click()
+  }
   return (
     <div className='sidenav_setting'>
-      <NavLinks
-        links={links}
-        addStyle={{
-          textAlign: 'center',
-          padding: '2rem 0',
-        }}
-      />
+      <h1 className='heading-secondary'>Setting</h1>
+      <div onClick={() => handleCloseNav()}>
+        <NavLinks
+          links={links}
+          addStyle={{
+            textAlign: 'center',
+            padding: '2rem 0',
+          }}
+        />
+      </div>
     </div>
   )
 }

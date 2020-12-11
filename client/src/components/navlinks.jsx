@@ -1,11 +1,11 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-const NavLinks = ({ links, addStyle }) => {
+const NavLinks = ({ links, addStyle, runAction }) => {
   return (
     <ul className='navlinks' style={{ ...addStyle }}>
       {links.map((i) => (
         <li key={i.name}>
-          <NavLink exact to={i.linkTo} exact={i.exact}>
+          <NavLink to={i.linkTo} exact={i.exact}>
             <span>{i.name}</span>
           </NavLink>
         </li>

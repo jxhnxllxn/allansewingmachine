@@ -5,9 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 import { selectCartItemsCount } from '../redux/cart/cart-selectors'
-import { toggleMenuIcons } from '../redux/ui/ui-actions'
+import { toggleSideNavIcon } from '../redux/ui/ui-actions'
 
-import { ReactComponent as MenuIcon } from '../assets/icons/menu.svg'
 import { ReactComponent as PersonIcon } from '../assets/icons/person.svg'
 import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.svg'
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg'
@@ -17,17 +16,14 @@ import toggleScrollbar from '../utils/animations/toggleScrollbar'
 import useOutsideClick from '../utils/hooks/useOutsideClick'
 
 import SideNav from './sidenav'
-import NavLinks from './navlinks'
+import NavLinks from '../components/navlinks'
 
-const Nav = ({ isNavMenuIconsHidden, mTop }) => {
+const Nav = () => {
   const dispatch = useDispatch()
-  const personIconRef = useRef()
-  const cartIconRef = useRef()
   const sidenavRef = useRef()
-  const searchIconRef = useRef()
   const history = useHistory()
-  const menuIconRef = useRef()
   const itemCount = useSelector((state) => selectCartItemsCount(state))
+  const sideNavIconIsOpen = useSelector(({ ui }) => ui.sideNavIconIsOpen)
   const isAuthenticated = useSelector(
     ({ user: { isAuthenticated } }) => isAuthenticated
   )
@@ -36,15 +32,15 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
 
   const tl = gsap.timeline()
   const [tl__sidenav] = useState(tl)
-  useSidenavAnimation(tl__sidenav, mTop)
+  useSidenavAnimation(tl__sidenav)
 
   const toggleSideNav = (x) => {
-    if (!isNavMenuIconsHidden) {
+    toggleScrollbar(sideNavIconIsOpen)
+    if (!sideNavIconIsOpen) {
       setActiveMenuIcons(x)
     }
-    dispatch(toggleMenuIcons())
-    tl__sidenav.reversed(isNavMenuIconsHidden)
-    toggleScrollbar(isNavMenuIconsHidden)
+    dispatch(toggleSideNavIcon())
+    tl__sidenav.reversed(sideNavIconIsOpen)
   }
 
   const togglePersonNav = () => {
@@ -57,8 +53,8 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
 
   useOutsideClick(
     [sidenavRef],
-    [isNavMenuIconsHidden],
-    () => isNavMenuIconsHidden && toggleSideNav()
+    [sideNavIconIsOpen],
+    () => sideNavIconIsOpen && toggleSideNav()
   )
 
   const links = [
@@ -99,21 +95,21 @@ const Nav = ({ isNavMenuIconsHidden, mTop }) => {
             <span className='allan'>Allan</span>
             <span>Sewing Machines</span>
           </div>
-          <div></div>
+          <div id='toggleSideNav'></div>
           <div className='nav__listTop'>
             <ul>
-              <li ref={searchIconRef} onClick={() => toggleSideNav('search')}>
+              <li onClick={() => toggleSideNav('search')}>
                 <div className='icon icon--search'>
                   <SearchIcon />
                 </div>
               </li>
-              <li ref={personIconRef} onClick={() => togglePersonNav()}>
+              <li onClick={() => togglePersonNav()}>
                 <div className='icon icon--person'>
                   <PersonIcon />
                 </div>
               </li>
-              <li ref={cartIconRef} onClick={() => toggleSideNav('cart')}>
-                <div className='icon icon--bag' id='toggleIconCart'>
+              <li onClick={() => toggleSideNav('cart')}>
+                <div className='icon icon--bag'>
                   <ShoppingBagIcon />
                   <span className='icon__count'>
                     {itemCount > 0 && itemCount}

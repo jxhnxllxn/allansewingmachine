@@ -11,6 +11,8 @@
     border: 2px solid $border;
     width: 100%;
     border-radius: 0.3rem;
+    background-color: transparent;
+    font-family: $font-primary;
   }
   .formfield--textarea {
     height: 51px;

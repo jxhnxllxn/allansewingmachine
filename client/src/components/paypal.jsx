@@ -31,7 +31,7 @@ const Paypal = (props) => {
   }
 
   useEffect(() => {
-    if (!window.paypal) {
+    if (!window.paypal && !paypalConfig.loading) {
       addPayPalScript()
     } else {
       setSdkReady(true)
