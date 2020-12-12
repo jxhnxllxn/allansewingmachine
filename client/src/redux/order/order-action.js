@@ -1,17 +1,22 @@
 import { OrderActionTypes } from './order-constants'
 import authAxios from '../../utils/helper/authAxios'
 
+import { clearCart } from '../cart/cart-action'
+
 export const addOrder = (dataToAdd) => async (dispatch) => {
   try {
     dispatch({
       type: OrderActionTypes.ORDER_REQUEST,
     })
-    console.log(dataToAdd)
+
     const { data } = await authAxios.post('/order', dataToAdd)
+
     dispatch({
       type: OrderActionTypes.ADD_ORDER,
       payload: data,
     })
+
+    dispatch(clearCart())
   } catch (error) {
     dispatch({
       type: OrderActionTypes.ORDER_FAIL,

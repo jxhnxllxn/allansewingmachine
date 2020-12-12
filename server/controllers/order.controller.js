@@ -92,64 +92,41 @@ exports.getOrderHistory = asyncHandler(async (req, res, next) => {
 // @desc    Add Orders
 // @route   GET /api/order/:orderId/orders
 // @access  Private
-exports.addOrder = (req, res, next) => {
-  req.body.user = req.user.id
+exports.addOrder = asyncHandler(async (req, res, next) => {
   console.log(req.user)
-  let orderDetail = {
-    user: req.user._id,
-    name: req.user.name,
-    shippingAddress: req.user.address,
-    paymentId: req.body.paymentData.paymentID,
-    product: req.body.orderDetail.orders,
-    additionalInfo: req.body.orderDetail.additionalInfo,
-    shipping: req.body.orderDetail.shipping,
-    total: req.body.orderDetail.total,
-  }
-  // let order = await Order.findById(req.params.id);
-  // //Make sure user is ordered owner
-  // if(order.user.toString() !== req.user.id && req.user.role === 'admin'){
-  //     return next(
-  //         new errorResponse(`User ${req.params.id} is not authorized to add this order`,401)
-  //     );
-  // }
 
-  //to be continued
-  Order.create(orderDetail, (err, order) => {
-    if (err) return res.json({ success: false, data: err })
-    let products = []
-    order.product.forEach((item) => {
-      products.push({
-        id: item._id,
-        quantity: item.quantity,
-        available: item.available,
-      })
-    })
+  const order = await Order.create({ user: req.user._id, ...req.body })
 
-    async.eachSeries(
-      products,
-      (item, callback) => {
-        Product.updateMany(
-          { _id: item.id },
-          {
-            $inc: {
-              sold: item.quantity,
-              available: -item.quantity,
-            },
-          },
-          { new: false },
-          callback
-        )
-      },
-      (err) => {
-        if (err) return res.json({ success: false, data: err })
-        // sendEmail(user.email,user.name,null,"purchase",transactionData)
-        res.status(200).json({
-          success: true,
-        })
-      }
-    )
+  let products = []
+
+  order.orderItems.forEach((i) => {
+    products.push({ id: i._id, quantity: i.quantity })
   })
-}
+
+  async.forEach(
+    products,
+    (i, callback) => {
+      Product.updateMany(
+        { _id: i.id },
+        {
+          $inc: {
+            sold: i.quantity,
+            available: -i.quantity,
+          },
+        },
+        { new: false },
+        callback
+      )
+    },
+    (err) => {
+      if (err) return next(new errorResponse('Error updating quantity'), 500)
+      res.status(200).json({
+        success: true,
+        data: order,
+      })
+    }
+  )
+})
 
 // @desc   Update Order
 // @route   GET /api/order/:orderId/orders

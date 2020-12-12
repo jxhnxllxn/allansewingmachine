@@ -14,13 +14,23 @@ import MyButton from '../components/button'
 import FormField from '../components/form-field'
 import Paypal from '../components/paypal'
 import { addOrder } from '../redux/order/order-action'
+import Loading from '../components/loading'
+import { useHistory } from 'react-router-dom'
 
 const Checkout = ({ isAuthenticated }) => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const userState = useSelector(({ user }) => user)
+  const { loading, address, contact, email, name } = userState
   const cartItems = useSelector((state) => selectCartItems(state))
   const total = useSelector((state) => selectCartTotal(state))
-  const { loading, error, address, contact, email, name } = userState
+  const loadingOrder = useSelector(({ order }) => order.loading)
+
+  useEffect(() => {
+    if (cartItems.length <= 0) {
+      history.push('/')
+    }
+  }, [cartItems])
 
   const [formField, setFormField] = useState({
     formError: false,
@@ -169,7 +179,6 @@ const Checkout = ({ isAuthenticated }) => {
   })
 
   useEffect(() => {
-    console.log(cartItems)
     if (!loading && isAuthenticated) {
       const userData = {
         city: address.city,
@@ -206,25 +215,7 @@ const Checkout = ({ isAuthenticated }) => {
     e.preventDefault()
     let dataToSubmit = generateData(formField.formData, 'billing')
     let formIsValid = isFormValid(formField.formData, 'billing')
-    console.log(dataToSubmit.zipcode)
     if (formIsValid) {
-      console.log({
-        name: dataToSubmit.name,
-        contact: dataToSubmit.contact,
-        additionalInfo: dataToSubmit.additionalInfo,
-        shippingAddress: {
-          unit: dataToSubmit.unit,
-          street: dataToSubmit.street,
-          city: dataToSubmit.city,
-          state: dataToSubmit.state,
-          country: dataToSubmit.country,
-          zipcode: dataToSubmit.zipcode,
-        },
-        orderItems: cartItems,
-        shippingMethod: orderOption.shippingOption,
-        paymentMethod: orderOption.paymentOption,
-        totalPrice: addFee(),
-      })
       const finalDataToSubmit = {
         name: dataToSubmit.name,
         contact: dataToSubmit.contact,
@@ -237,7 +228,13 @@ const Checkout = ({ isAuthenticated }) => {
           country: dataToSubmit.country,
           zipcode: dataToSubmit.zipcode,
         },
-        orderItems: cartItems,
+        orderItems: cartItems.map((i) => ({
+          product: i._id,
+          name: i.name,
+          quantity: i.quantity,
+          price: i.price,
+        })),
+
         shippingMethod: orderOption.shippingOption,
         paymentMethod: orderOption.paymentOption,
         totalPrice: addFee(),
@@ -250,7 +247,7 @@ const Checkout = ({ isAuthenticated }) => {
 
   const [orderOption, setOrderOption] = useState({
     shippingOption: 'flat_rate',
-    paymentOption: 'viaPaypal',
+    paymentOption: 'cash_on_delivery',
   })
 
   const handlerOrderOptions = (e) => {
@@ -443,6 +440,21 @@ const Checkout = ({ isAuthenticated }) => {
                 <input
                   type='radio'
                   name='paymentOption'
+                  id='cash_on_delivery'
+                  onChange={handlerOrderOptions}
+                  checked={orderOption.paymentOption === 'cash_on_delivery'}
+                  value='cash_on_delivery'
+                />
+                <label htmlFor=''>Cash on delivery</label>
+                <div className='po-box'>
+                  <p>Pay with cash upon delivery.</p>
+                </div>
+              </li>
+
+              <li>
+                <input
+                  type='radio'
+                  name='paymentOption'
                   id='direct_bank_transfer'
                   onChange={handlerOrderOptions}
                   checked={orderOption.paymentOption === 'direct_bank_transfer'}
@@ -459,6 +471,7 @@ const Checkout = ({ isAuthenticated }) => {
                   </p>
                 </div>
               </li>
+
               <li>
                 <input
                   type='radio'
@@ -476,20 +489,7 @@ const Checkout = ({ isAuthenticated }) => {
                   </p>
                 </div>
               </li>
-              <li>
-                <input
-                  type='radio'
-                  name='paymentOption'
-                  id='cash_on_delivery'
-                  onChange={handlerOrderOptions}
-                  checked={orderOption.paymentOption === 'cash_on_delivery'}
-                  value='cash_on_delivery'
-                />
-                <label htmlFor=''>Cash on delivery</label>
-                <div className='po-box'>
-                  <p>Pay with cash upon delivery.</p>
-                </div>
-              </li>
+
               <li>
                 <input
                   type='radio'
@@ -534,6 +534,8 @@ const Checkout = ({ isAuthenticated }) => {
                 transactionCanceled={(data) => transactionCanceled(data)}
                 transactionSuccess={(data) => transactionSuccess(data)}
               />
+            ) : loadingOrder ? (
+              <Loading />
             ) : (
               <MyButton
                 runAction={(e) => submitForm(e)}

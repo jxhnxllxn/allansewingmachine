@@ -105,10 +105,12 @@ export const addProduct = (dataToSubmit) => async (dispatch) => {
   }
 }
 
-export const deleteProduct = (data) => async (dispatch) => {
+export const deleteProduct = (dataToSubmit) => async (dispatch) => {
   try {
     dispatch({ type: ProductActionTypes.PRODUCT_REQUEST })
-    const { data } = await axios.delete(`/product/${data}`)
+
+    const { data } = await axios.delete(`/product/${dataToSubmit}`)
+
     dispatch({
       type: ProductActionTypes.PRODUCT_DELETE_SUCCESS,
       payload: data,

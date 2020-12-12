@@ -13,12 +13,6 @@ const SideNavCart = () => {
   const cartItemList = () =>
     cartItems.map((i) => <CartItem key={i._id} item={i} />)
 
-  // useEffect(() => {
-  //   return history.listen(() => {
-  //     isNavMenuIconsHidden && document.getElementById('toggleIconCart').click()
-  //   })
-  // }, [history, isNavMenuIconsHidden])
-
   const handleCloseC = () => {
     document.getElementById('toggleSideNav').click()
     history.push('/checkout')

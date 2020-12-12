@@ -6,7 +6,7 @@ import addComma from '../utils/helper/add-comma'
 const SideNavCartItem = ({ item }) => {
   const dispatch = useDispatch()
 
-  const [quantity, setQuantity] = useState(item.quantity)
+  const [quantity, setQuantity] = useState(0)
 
   const quantityChange = (e) => {
     setQuantity(e.target.value)
@@ -17,7 +17,7 @@ const SideNavCartItem = ({ item }) => {
   }
   useEffect(() => {
     setQuantity(item.quantity)
-  }, [])
+  }, [item])
 
   useEffect(
     () => {

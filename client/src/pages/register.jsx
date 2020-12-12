@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { register } from '../redux/user/user-action'
 import MyButton from '../components/button'
 import FormField from '../components/form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
+import Loading from '../components/loading'
 
-const SignUp = ({ history }) => {
+const SignUp = () => {
   const dispatch = useDispatch()
+  const userState = useSelector(({ user }) => user)
+  const { error, loading } = userState
   const [formField, setFormField] = useState({
     formError: false,
     formSuccess: '',
@@ -100,21 +103,6 @@ const SignUp = ({ history }) => {
 
     if (formIsValid) {
       dispatch(register(dataToSubmit))
-        .then((res) => {
-          if (res.payload.success) {
-            if (res.payload.isAdmin) {
-              history.push('/admin')
-            } else {
-              history.push('/cart')
-            }
-          } else {
-            setFormField({ ...formField, formError: true })
-          }
-        })
-        .catch((err) => {
-          console.log(err)
-          setFormField({ ...formField, formError: true })
-        })
     } else {
       setFormField({ ...formField, formError: true })
     }
@@ -145,19 +133,26 @@ const SignUp = ({ history }) => {
           formData={formField.formData.confirmPassword}
           change={(element) => updateForm(element)}
         />
-        <MyButton
-          runAction={(e) => submitForm(e)}
-          type='submit'
-          title='Sign Up'
-          value='Submit'
-        />
+        {loading ? (
+          <Loading />
+        ) : (
+          <MyButton
+            runAction={(e) => submitForm(e)}
+            type='submit'
+            title='Sign Up'
+            value='Submit'
+          />
+        )}
+
         <p>
           Owned an account ? Login <Link to='/login'>here</Link>
         </p>
       </form>
 
       {formField.formError ? (
-        <div className='error_label'>Please check your data</div>
+        <div className='error_label'>Please check your credential</div>
+      ) : error ? (
+        <div className='error_label'>{error}</div>
       ) : null}
     </div>
   )

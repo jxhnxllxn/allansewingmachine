@@ -1,7 +1,7 @@
 import { OrderActionTypes } from './order-constants'
 
 const initialState = {
-  loading: true,
+  loading: false,
   orders: [],
   countDash: {
     pendingCount: 0,

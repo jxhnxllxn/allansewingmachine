@@ -1,16 +1,10 @@
 import { useEffect } from 'react'
-const useCartToggleAnimation = (tl) => {
+const useSideNavToggleAnimation = (tl) => {
   useEffect(() => {
-    tl
-      // .to('.nav__listBottom ul li', {
-      //   autoAlpha: 0,
-      //   x: -100,
-      //   ease: 'power5.in',
-      //   stagger: {
-      //     amount: 0.2,
-      //   },
-      // })
-
+    tl.to('html', {
+      duration: 0,
+      css: { overflowY: 'hidden' },
+    })
       .from('.sidenav', {
         x: '200',
         duration: 0.3,
@@ -22,4 +16,4 @@ const useCartToggleAnimation = (tl) => {
   }, [])
 }
 
-export default useCartToggleAnimation
+export default useSideNavToggleAnimation
