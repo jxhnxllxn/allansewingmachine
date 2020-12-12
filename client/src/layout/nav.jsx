@@ -1,18 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { useDispatch, useSelector } from 'react-redux'
-
 import { useHistory } from 'react-router-dom'
-
 import { selectCartItemsCount } from '../redux/cart/cart-selectors'
 import { toggleSideNavIcon } from '../redux/ui/ui-actions'
-
 import { ReactComponent as PersonIcon } from '../assets/icons/person.svg'
 import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.svg'
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg'
-
 import useSidenavAnimation from '../utils/animations/useSidenavAnimation'
-import toggleScrollbar from '../utils/animations/toggleScrollbar'
 import useOutsideClick from '../utils/hooks/useOutsideClick'
 
 import SideNav from './sidenav'
@@ -35,7 +30,6 @@ const Nav = () => {
   useSidenavAnimation(tl__sidenav)
 
   const toggleSideNav = (x) => {
-    toggleScrollbar(sideNavIconIsOpen)
     if (!sideNavIconIsOpen) {
       setActiveMenuIcons(x)
     }

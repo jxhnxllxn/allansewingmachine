@@ -15,9 +15,9 @@ const SideNavCartItem = ({ item }) => {
   const handleClearItem = () => {
     dispatch(clearItem(item))
   }
-  // useEffect(() => {
-  //   setQuantity(item.quantity)
-  // }, [])
+  useEffect(() => {
+    setQuantity(item.quantity)
+  }, [])
 
   useEffect(
     () => {
@@ -26,7 +26,7 @@ const SideNavCartItem = ({ item }) => {
       }
     },
     // eslint-disable-next-line
-    [dispatch, quantity]
+    [quantity]
   )
 
   return (

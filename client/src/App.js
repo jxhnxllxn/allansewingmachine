@@ -24,7 +24,6 @@ const Register = lazy(() => import('./pages/register'))
 
 const AdminIndex = lazy(() => import('./pages/admin/_index'))
 const UserIndex = lazy(() => import('./pages/user/_index'))
-
 const Logout = lazy(() => import('./components/loadingScreen'))
 
 const App = () => {
@@ -34,17 +33,18 @@ const App = () => {
   useEffect(() => {
     dispatch(getProductsToHome())
     dispatch(getCollections())
-
     //prevent flashing
     gsap.to('body', { css: { visibility: 'visible' } })
-
     window.onbeforeunload = () => window.scrollTo(0, 0)
+
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
     if (localStorage.access_token) {
       dispatch(getUserDetails())
     }
+    // eslint-disable-next-line
   }, [localStorage.access_token])
 
   return (

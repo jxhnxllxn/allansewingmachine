@@ -169,6 +169,7 @@ const Checkout = ({ isAuthenticated }) => {
   })
 
   useEffect(() => {
+    console.log(cartItems)
     if (!loading && isAuthenticated) {
       const userData = {
         city: address.city,
@@ -205,13 +206,43 @@ const Checkout = ({ isAuthenticated }) => {
     e.preventDefault()
     let dataToSubmit = generateData(formField.formData, 'billing')
     let formIsValid = isFormValid(formField.formData, 'billing')
+    console.log(dataToSubmit.zipcode)
     if (formIsValid) {
       console.log({
-        ...dataToSubmit,
+        name: dataToSubmit.name,
+        contact: dataToSubmit.contact,
+        additionalInfo: dataToSubmit.additionalInfo,
+        shippingAddress: {
+          unit: dataToSubmit.unit,
+          street: dataToSubmit.street,
+          city: dataToSubmit.city,
+          state: dataToSubmit.state,
+          country: dataToSubmit.country,
+          zipcode: dataToSubmit.zipcode,
+        },
+        orderItems: cartItems,
         shippingMethod: orderOption.shippingOption,
         paymentMethod: orderOption.paymentOption,
         totalPrice: addFee(),
       })
+      const finalDataToSubmit = {
+        name: dataToSubmit.name,
+        contact: dataToSubmit.contact,
+        additionalInfo: dataToSubmit.additionalInfo,
+        shippingAddress: {
+          unit: dataToSubmit.unit,
+          street: dataToSubmit.street,
+          city: dataToSubmit.city,
+          state: dataToSubmit.state,
+          country: dataToSubmit.country,
+          zipcode: dataToSubmit.zipcode,
+        },
+        orderItems: cartItems,
+        shippingMethod: orderOption.shippingOption,
+        paymentMethod: orderOption.paymentOption,
+        totalPrice: addFee(),
+      }
+      dispatch(addOrder(finalDataToSubmit))
     } else {
       setFormField({ ...formField, formError: true })
     }
@@ -337,8 +368,10 @@ const Checkout = ({ isAuthenticated }) => {
                       {i.name} &times; {i.quantity}
                     </td>
                     <td>
-                      Php{' '}
-                      {addComma(parseFloat(i.quantity * i.price).toFixed(2))}
+                      <p>
+                        Php
+                        {addComma(parseFloat(i.quantity * i.price).toFixed(2))}
+                      </p>
                     </td>
                   </tr>
                 ))}
