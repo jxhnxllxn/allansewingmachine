@@ -2,7 +2,6 @@
   position: fixed;
   top: 0;
   right: 0;
-  z-index: 102;
   width: 500px;
   height: 100%;
   background-color: $background;
@@ -30,7 +29,7 @@
     cursor: pointer;
   }
   &__main {
-    min-height: 70%;
+    min-height: 65%;
     margin: 0 auto 4rem auto;
     padding: 1rem;
     text-align: center;

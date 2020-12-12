@@ -20,6 +20,7 @@ const MyButton = (props) => {
         template = (
           <button
             className='btn btn--button'
+            style={{ ...props.addStyle }}
             onClick={() => {
               props.runAction()
             }}

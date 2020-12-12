@@ -45,7 +45,7 @@ const SideNavSetting = () => {
           links={links}
           addStyle={{
             textAlign: 'center',
-            padding: '2rem 0',
+            padding: '1rem 0',
           }}
         />
       </div>

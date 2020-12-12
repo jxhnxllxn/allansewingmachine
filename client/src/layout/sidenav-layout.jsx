@@ -1,10 +1,8 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import ArrowTitle from '../assets/images/arrow-title-1.png'
 import Footer from '../layout/footer'
 
 const SideNavLayout = ({ children, sidenavRef }) => {
-  const dispatch = useDispatch()
   const handleCloseNav = () => {
     document.getElementById('toggleSideNav').click()
   }

@@ -4,8 +4,10 @@ import CartItem from './sidenav-cart-item'
 import addComma from '../utils/helper/add-comma'
 import { useSelector } from 'react-redux'
 import MyButton from '../components/button'
+import { useHistory } from 'react-router-dom'
 
 const SideNavCart = () => {
+  const history = useHistory()
   const total = useSelector((state) => selectCartTotal(state))
   const cartItems = useSelector((state) => selectCartItems(state))
   const cartItemList = () =>
@@ -16,6 +18,15 @@ const SideNavCart = () => {
   //     isNavMenuIconsHidden && document.getElementById('toggleIconCart').click()
   //   })
   // }, [history, isNavMenuIconsHidden])
+
+  const handleCloseC = () => {
+    document.getElementById('toggleSideNav').click()
+    history.push('/checkout')
+  }
+  const handleCloseS = () => {
+    document.getElementById('toggleSideNav').click()
+    history.push('/shop')
+  }
 
   return (
     <div className='sidenav-cart'>
@@ -53,15 +64,19 @@ const SideNavCart = () => {
               fontWeight: '700',
               float: 'right',
             }}
-            type={'default'}
-            linkTo={'/checkout'}
+            runAction={() => handleCloseC()}
+            type={'primary'}
             title={'Checkout'}
           />
         </>
       ) : (
         <div className='sidenav-cart__emptymsg'>
           <p>Your cart is Empty</p>
-          <MyButton linkTo={'/shop'} title={'Shop Now'} type={'default'} />
+          <MyButton
+            runAction={() => handleCloseS()}
+            title={'Shop Now'}
+            type={'primary'}
+          />
           <span className='sidenav-cart__link'></span>
         </div>
       )}
