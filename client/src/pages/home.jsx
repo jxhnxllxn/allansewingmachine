@@ -16,7 +16,7 @@ const Home = () => {
       {loading ? (
         <Loading />
       ) : error ? (
-        <Alert />
+        <h1>{error}</h1>
       ) : (
         <>
           <HomeCollection />

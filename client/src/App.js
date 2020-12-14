@@ -1,9 +1,9 @@
-import React, { lazy, Suspense, useEffect } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import { gsap } from 'gsap'
 
 //redux
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { getProductsToHome } from './redux/product/product-action'
 import useResponsiveVH from './utils/hooks/useResponsiveVH'
 
@@ -28,6 +28,7 @@ const Logout = lazy(() => import('./components/loadingScreen'))
 
 const App = () => {
   useResponsiveVH()
+  const token = useSelector(({ user }) => user.token)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -41,11 +42,11 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    if (localStorage.access_token) {
+    if (token) {
       dispatch(getUserDetails())
     }
     // eslint-disable-next-line
-  }, [localStorage.access_token])
+  }, [])
 
   return (
     <Layout>

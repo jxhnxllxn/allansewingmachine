@@ -26,32 +26,31 @@ exports.protect = asyncHandler(async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET)
     // console.log(decoded);
     req.user = await User.findById(decoded.id).select('-password')
+
+    const userData = await User.findById(decoded.id).select('-password')
     next()
   } catch (error) {
-    return next(new ErrorResponse('Not authorized, token failed', 401))
+    if (error.name === 'TokenExpiredError') {
+      return next(new ErrorResponse('Session timed out.', 403))
+    } else if (error.name === 'JsonWebTokenError') {
+      return next(new ErrorResponse('Invalid Token.', 401))
+    } else {
+      return next(new ErrorResponse({ error }, 400))
+    }
   }
 })
 
-//Grant access to specific roles
-// exports.authorize = (...roles) => {
-//   return (req, res, next) => {
-//     if (!roles.includes(req.user.role)) {
-//       return next(
-//         new ErrorResponse(
-//           `User role ${req.user.role} is not authorized to access this route`,
-//           403
-//         )
-//       )
-//     }
-//     next()
-//   }
-// }
-
-exports.admin = () => {
+// Grant access to specific roles
+exports.authorize = (...roles) => {
   return (req, res, next) => {
-    if (req.user && req.user.isAdmin) {
-      next()
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new ErrorResponse(
+          `User role ${req.user.role} is not authorized to access this route`,
+          403
+        )
+      )
     }
-    return next(new ErrorResponse('Not authorized as an admin', 403))
+    next()
   }
 }

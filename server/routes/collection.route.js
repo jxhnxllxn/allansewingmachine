@@ -13,17 +13,17 @@ const advanceResults = require('../middlewares/advaceResult.middleware')
 
 const router = express.Router()
 
-const { protect, admin } = require('../middlewares/auth.middleware')
+const { protect, authorize } = require('../middlewares/auth.middleware')
 
 router
   .route('/')
   .get(advanceResults(Collection, ['categories']), getCollections)
-  .post(protect, admin, createCollection)
+  .post(protect, authorize('admin'), createCollection)
 
 router
   .route('/:id')
   .get(getCollection)
-  .put(protect, admin, updateCollection)
-  .delete(protect, admin, deleteCollection)
+  .put(protect, authorize('admin'), updateCollection)
+  .delete(protect, authorize('admin'), deleteCollection)
 
 module.exports = router

@@ -7,6 +7,13 @@ const User = require('../models/User.model')
 const cloudinary = require('cloudinary')
 const fs = require('fs')
 
+// @desc    Get current all user
+// @route   POST /api/auth/me
+// @access  Private
+exports.getAllUser = asyncHandler(async (req, res, next) => {
+  res.status(200).json(res.advanceResults)
+})
+
 // @desc    Login User
 // @route   POST /api/auth/login
 // @access  Public

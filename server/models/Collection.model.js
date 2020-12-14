@@ -1,4 +1,7 @@
 const mongoose = require('mongoose')
+const slug = require('mongoose-slug-generator')
+
+mongoose.plugin(slug)
 
 const collectionSchema = new mongoose.Schema(
   {
@@ -8,6 +11,7 @@ const collectionSchema = new mongoose.Schema(
       unique: [1, 'Collection name must be unique'],
       maxlength: 100,
     },
+    slug: { type: String, slug: 'name' },
     images: {
       type: String,
       default: 'noImage.jpg',

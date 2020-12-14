@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/user/user-action'
 
-const LoadingScreen = ({ loading, location }) => {
+const LoadingScreen = ({ location, message }) => {
   const dispatch = useDispatch()
-  const loadingScreenActive = useSelector(({ ui }) => ui.loadingScreenActive)
+  const loading = useSelector(({ user }) => user.loading)
   useEffect(() => {
     if (location && location.pathname === '/logout') {
       dispatch(logout())
@@ -22,7 +22,7 @@ const LoadingScreen = ({ loading, location }) => {
         zIndex: '99999',
       }}
     >
-      <h1 className='heading-primary'>Loading</h1>
+      <h1 className='heading-primary'>{message}</h1>
     </div>
   )
 }

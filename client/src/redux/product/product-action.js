@@ -50,6 +50,28 @@ export const getProductsToHome = () => async (dispatch) => {
   }
 }
 
+// PRODUCT_LIST_BY_COLLECTION_SUCCESS
+export const getProductsByCollection = (slug) => async (dispatch) => {
+  try {
+    dispatch({ type: ProductActionTypes.PRODUCT_REQUEST })
+
+    const { data } = await axios.get(`/product/shop/${slug}`)
+
+    dispatch({
+      type: ProductActionTypes.PRODUCT_LIST_HOME_SUCCESS,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: ProductActionTypes.PRODUCT_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}
+
 export const getProductsToShop = (
   skip,
   limit,

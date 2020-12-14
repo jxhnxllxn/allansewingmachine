@@ -1,6 +1,6 @@
 import { AuthActionTypes } from './user-constants'
 
-const userInfoFromStorage = localStorage.getItem('userInfo')
+const userInfoFromStorage = localStorage.getItem('access_token')
   ? JSON.parse(localStorage.getItem('access_token'))
   : null
 

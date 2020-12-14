@@ -32,18 +32,6 @@ const ShopCollection = ({ match }) => {
     if (match.params.collection && !loading) {
       handleFilters([match.params.collection], 'collectionId')
     }
-    return () => {
-      setFilter({
-        limit: 24,
-        skip: 0,
-        filters: {
-          collectionId: [],
-          price: [],
-          categoryId: [],
-          condition: [],
-        },
-      })
-    }
   }, [match.params.collection])
 
   const conditions = [
@@ -70,7 +58,6 @@ const ShopCollection = ({ match }) => {
   const handleFilters = (filters, category) => {
     const newFilters = { ...filter.filters }
     newFilters[category] = filters
-
     showFilteredResults(newFilters)
   }
 

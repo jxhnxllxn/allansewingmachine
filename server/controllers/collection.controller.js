@@ -120,7 +120,6 @@ exports.deleteCollection = asyncHandler(async (req, res, next) => {
 // @access    Private
 exports.createCollection = asyncHandler(async (req, res, next) => {
   const collection = await Collection.create(req.body)
-
   res.status(200).json({
     success: true,
     data: collection,

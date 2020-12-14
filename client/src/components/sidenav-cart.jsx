@@ -26,10 +26,8 @@ const SideNavCart = () => {
     <div className='sidenav-cart'>
       {cartItems.length > 0 ? (
         <>
+          <h1 className='heading-secondary'>Cart</h1>
           <table className='sidenav-cart__table'>
-            <caption>
-              <h1 className='heading-secondary'>Cart</h1>
-            </caption>
             <tbody>
               <tr>
                 <th>Name</th>
@@ -43,15 +41,14 @@ const SideNavCart = () => {
           </table>
           <div className='sidenav-cart__total'>
             <h2>
-              <small>Total: Php </small>
-              {addComma(total)}
+              <small>Total: </small>
+              Php {addComma(total)}
             </h2>
           </div>
 
           <MyButton
             addStyle={{
-              textAlign: 'center',
-              margin: '2rem 1rem',
+              margin: '0 1rem',
               padding: '.5rem',
               fontSize: '1rem',
               textTransform: 'uppercase',
@@ -64,15 +61,21 @@ const SideNavCart = () => {
           />
         </>
       ) : (
-        <div className='sidenav-cart__emptymsg'>
-          <p>Your cart is Empty</p>
+        <>
+          <h1 className='heading-secondary'>Empty Cart</h1>
           <MyButton
+            addStyle={{
+              margin: '2rem 1rem',
+              padding: '.5rem',
+              fontSize: '1rem',
+              textTransform: 'uppercase',
+              fontWeight: '700',
+            }}
             runAction={() => handleCloseS()}
             title={'Shop Now'}
             type={'primary'}
           />
-          <span className='sidenav-cart__link'></span>
-        </div>
+        </>
       )}
     </div>
   )

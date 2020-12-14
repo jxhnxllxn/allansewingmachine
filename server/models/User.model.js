@@ -18,6 +18,11 @@ const UserSchema = new mongoose.Schema(
         'Valid email is required',
       ],
     },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
     address: {
       unit: {
         type: String,
@@ -48,11 +53,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       default: '',
     },
-    isAdmin: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
+
     password: {
       type: String,
       required: [true, 'Please add a password'],

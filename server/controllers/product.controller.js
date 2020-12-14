@@ -52,6 +52,28 @@ exports.getProductsToShop = asyncHandler(async (req, res, next) => {
   })
 })
 
+// @desc    get product by collection slug
+// @route   GET /api/products
+// @route   GET /api/shop/:slug
+// @access  Public
+exports.getProductsByCollection = asyncHandler(async (req, res, next) => {
+  const collection = await Collection.find({ slug: req.params.slug })
+
+  if (!data) {
+    return next(
+      new errorResponse(`No collection  with the id of ${req.params.slug}`),
+      404
+    )
+  }
+
+  const product = await Product.findById(collection.productId)
+
+  res.status(200).json({
+    success: product,
+    data,
+  })
+})
+
 // @desc    get all Products
 // @route   GET /api/products
 // @route   GET /api//products
@@ -86,16 +108,26 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
 // @access  Private
 
 exports.addProduct = asyncHandler(async (req, res, next) => {
-  // req.body.category = req.params.categoryId;
+  req.body.category = req.params.categoryId
+  req.body.collection = req.params.collectionId
 
-  // const category = await Category.findById(req.params.categoryId);
+  const category = await Category.findById(req.params.categoryId)
+  const collection = await Collection.findById(req.params.collectionId)
 
-  // if(!category){
-  //     return next(
-  //         new errorResponse(`No Category  with the id of ${req.params.categoryId}`),
-  //         404
-  //     );
-  // }
+  if (!category) {
+    return next(
+      new errorResponse(`No Category  with the id of ${req.params.categoryId}`),
+      404
+    )
+  }
+  if (!collection) {
+    return next(
+      new errorResponse(
+        `No Collection  with the id of ${req.params.collectionId}`
+      ),
+      404
+    )
+  }
 
   const product = await Product.create(req.body)
 

@@ -14,15 +14,18 @@ const sendTokenResponse = (user, statusCode, res) => {
     options.secure = true
   }
 
-  res.status(statusCode).cookie('token', token, options).json({
-    token,
-    name: user.name,
-    email: user.email,
-    isAdmin: user.isAdmin,
-    contact: user.contact,
-    address: user.address,
-    isAuthenticated: true,
-  })
+  res
+    .status(statusCode)
+    .cookie('token', token, options)
+    .json({
+      token,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.role === 'admin',
+      contact: user.contact,
+      address: user.address,
+      isAuthenticated: true,
+    })
 }
 
 module.exports = sendTokenResponse

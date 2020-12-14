@@ -10,8 +10,11 @@ const advanceResults = require('../middlewares/advaceResult.middleware')
 
 const router = express.Router()
 
-const { protect, admin } = require('../middlewares/auth.middleware')
+const { protect, authorize } = require('../middlewares/auth.middleware')
 
-router.route('/').get(getCategories).post(protect, admin('admin'), addCategory)
+router
+  .route('/')
+  .get(getCategories)
+  .post(protect, authorize('admin'), addCategory)
 
 module.exports = router

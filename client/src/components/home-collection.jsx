@@ -1,8 +1,9 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 const Collection = () => {
+  const dispatch = useDispatch()
   const history = useHistory()
   const collectionState = useSelector(({ collection }) => collection)
   const { collections, loading } = collectionState
@@ -25,7 +26,7 @@ const Collection = () => {
       <div
         className='collection__item'
         key={i._id}
-        onClick={() => handleClick(i._id)}
+        onClick={() => handleClick(i.slug)}
       >
         <div
           className='collection__image'

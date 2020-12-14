@@ -15,22 +15,22 @@ const Order = require('../models/Order.model')
 
 const router = express.Router({ mergeParams: true })
 
-const { protect, admin } = require('../middlewares/auth.middleware')
+const { protect, authorize } = require('../middlewares/auth.middleware')
 
 router
   .route('/')
-  .get(protect, admin, advanceResults(Order, ['user']), getOrders)
+  .get(protect, authorize('admin'), advanceResults(Order, ['user']), getOrders)
   .post(protect, addOrder)
 
-router.route('/search/:i').get(protect, admin, searchIndex)
+router.route('/search/:i').get(protect, authorize('admin'), searchIndex)
 
-router.route('/dashboard').get(protect, admin, dashboardAdmin)
+router.route('/dashboard').get(protect, authorize('admin'), dashboardAdmin)
 
 router.route('/order-history').get(protect, getOrderHistory)
 
 router
   .route('/:id')
-  .get(protect, admin, getOrder)
+  .get(protect, authorize('admin'), getOrder)
   .put(protect, updateOrder)
   .delete(protect, deleteOrder)
 
