@@ -28,6 +28,12 @@ export const addOrder = (dataToAdd) => async (dispatch) => {
   }
 }
 
+export const successBuyFalse = () => {
+  return {
+    type: OrderActionTypes.SUCCESS_BUY_FALSE,
+  }
+}
+
 export const getAllOrder = () => async (dispatch) => {
   try {
     dispatch({

@@ -83,10 +83,7 @@ exports.getOrderHistory = asyncHandler(async (req, res, next) => {
       404
     )
   }
-  res.status(200).json({
-    success: true,
-    data: order,
-  })
+  res.status(200).json(order)
 })
 
 // @desc    Add Orders

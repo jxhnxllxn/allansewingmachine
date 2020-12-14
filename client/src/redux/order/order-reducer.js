@@ -56,6 +56,12 @@ const order = (state = initialState, { type, payload }) => {
     case OrderActionTypes.CLEAN_ORDER:
       return {}
 
+    case OrderActionTypes.SUCCESS_BUY_FALSE:
+      return {
+        ...state,
+        successBuy: false,
+      }
+
     default:
       return state
   }

@@ -1,10 +1,8 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import Loading from '../../components/loading'
 import addComma from '../../utils/helper/add-comma'
 import moment from 'moment'
-
-// {moment(product.dateOfPurchase).format("MM-DD-YYYY")}
 
 const UserHistory = () => {
   const orderState = useSelector(({ order }) => order)
@@ -20,8 +18,8 @@ const UserHistory = () => {
       ) : (
         Object.keys(orderHistory).map((key, index) => {
           return (
-            <>
-              <table key={index}>
+            <div key={index}>
+              <table>
                 <thead>
                   <tr>
                     <th>Order number</th>
@@ -33,15 +31,13 @@ const UserHistory = () => {
                 </thead>
                 <tbody>
                   {orderHistory[key]['orderItems'].map((data, i) => (
-                    <Fragment key={i}>
-                      <tr>
-                        <td>{i + 1}</td>
-                        <td>{data.name}</td>
-                        <td>{data.quantity}</td>
-                        <td>Php {addComma(data.price)}</td>
-                        <td>Php {addComma(data.price * data.quantity)}</td>
-                      </tr>
-                    </Fragment>
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{data.name}</td>
+                      <td>{data.quantity}</td>
+                      <td>Php {addComma(data.price)}</td>
+                      <td>Php {addComma(data.price * data.quantity)}</td>
+                    </tr>
                   ))}
                 </tbody>
               </table>
@@ -52,7 +48,7 @@ const UserHistory = () => {
               <h5>
                 Total purchased: Php {addComma(orderHistory[key]['totalPrice'])}
               </h5>
-            </>
+            </div>
           )
         })
       )}

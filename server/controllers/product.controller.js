@@ -82,10 +82,7 @@ exports.getProduct = asyncHandler(async (req, res, next) => {
       404
     )
   }
-  res.status(200).json({
-    success: true,
-    data: product,
-  })
+  res.status(200).json(product)
 })
 
 // @desc    Add Products
