@@ -15,8 +15,8 @@ exports.getProductToHome = asyncHandler(async (req, res, next) => {
   })
 })
 
-// @desc    get product by arrival
-// @route   GET /api/products
+// @desc    get product to shop
+// @route   GET /api/products/
 // @route   GET /api/category/:categoryId/products
 // @access  Public
 exports.getProductsToShop = asyncHandler(async (req, res, next) => {
@@ -33,10 +33,17 @@ exports.getProductsToShop = asyncHandler(async (req, res, next) => {
           $lte: req.body.filters[key][1],
           $gte: req.body.filters[key][0],
         }
+      } else if (key === 'collection') {
       } else {
         findArgs[key] = req.body.filters[key]
       }
     }
+  }
+
+  const collection = await Collection.findOne({ slug: req.body.collection })
+
+  if (collection) {
+    findArgs['collectionId'] = collection._id
   }
 
   findArgs['publish'] = true
@@ -49,28 +56,6 @@ exports.getProductsToShop = asyncHandler(async (req, res, next) => {
   res.status(200).json({
     size: data.length,
     articles: data,
-  })
-})
-
-// @desc    get product by collection slug
-// @route   GET /api/products
-// @route   GET /api/shop/:slug
-// @access  Public
-exports.getProductsByCollection = asyncHandler(async (req, res, next) => {
-  const collection = await Collection.find({ slug: req.params.slug })
-
-  if (!data) {
-    return next(
-      new errorResponse(`No collection  with the id of ${req.params.slug}`),
-      404
-    )
-  }
-
-  const product = await Product.findById(collection.productId)
-
-  res.status(200).json({
-    success: product,
-    data,
   })
 })
 
@@ -140,7 +125,6 @@ exports.addProduct = asyncHandler(async (req, res, next) => {
 // @desc   Update Product
 // @route   GET /api/category/:categoryId/products
 // @access  Private
-
 exports.updateProduct = asyncHandler(async (req, res, next) => {
   let category = await Product.findById(req.params.id)
 

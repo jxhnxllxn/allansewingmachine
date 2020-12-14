@@ -16,17 +16,17 @@ const collections = [
   },
   {
     name: 'Scissors & Cutter',
-    name: 'scissors-&-cutter',
+    slug: 'scissors-&-cutter',
     images: 'scissors.jpg',
   },
   {
     name: 'Accesories',
-    name: 'accesories',
+    slug: 'accesories',
     images: 'accesories.jpg',
   },
   {
     name: 'Needles',
-    name: 'needles',
+    slug: 'needles',
     images: 'needles.jpg',
   },
 ]

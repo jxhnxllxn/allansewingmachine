@@ -1,12 +1,11 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 const Collection = () => {
-  const dispatch = useDispatch()
   const history = useHistory()
   const collectionState = useSelector(({ collection }) => collection)
-  const { collections, loading } = collectionState
+  const { collections } = collectionState
 
   const renderCardImage = (images) => {
     if (images.length > 0) {
@@ -16,8 +15,8 @@ const Collection = () => {
     }
   }
 
-  const handleClick = (name) => {
-    history.push(`shop/${name}`)
+  const handleClick = (slug) => {
+    history.push(`/shop/${slug}`)
   }
 
   const collectionItem = () =>

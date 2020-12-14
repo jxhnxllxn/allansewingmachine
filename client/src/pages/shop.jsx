@@ -6,10 +6,11 @@ import { getProductsToShop } from '../redux/product/product-action'
 import LoadMoreCards from '../components/load-more'
 import CollapseCheckbox from '../components/collapse-checkbox'
 import Loading from '../components/loading'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 const ShopCollection = ({ match }) => {
   const dispatch = useDispatch()
+  const location = useLocation()
   const history = useHistory()
   const productState = useSelector(({ product }) => product)
   const { loading, productToShop, productToShopSize, error } = productState
@@ -20,19 +21,30 @@ const ShopCollection = ({ match }) => {
   const [filter, setFilter] = useState({
     limit: 24,
     skip: 0,
+    collection: '',
     filters: {
-      collectionId: [],
       price: [],
       categoryId: [],
-      condition: [],
     },
   })
 
   useEffect(() => {
-    if (match.params.collection && !loading) {
-      handleFilters([match.params.collection], 'collectionId')
+    if (location.pathname !== '/shop')
+      setFilter({
+        ...filter,
+        collection: match.params.collection,
+      })
+  }, [location])
+
+  useEffect(() => {
+    if (location.pathname === '/shop' && productToShop.length > 0) {
+      return
+    } else {
+      dispatch(
+        getProductsToShop(0, filter.limit, filter.collection, filter.filters)
+      )
     }
-  }, [match.params.collection])
+  }, [filter])
 
   const conditions = [
     {
@@ -46,12 +58,10 @@ const ShopCollection = ({ match }) => {
   ]
 
   const showFilteredResults = (filters) => {
-    dispatch(getProductsToShop(0, filter.limit, filters)).then(() => {
-      setFilter({
-        ...filter,
-        skip: 0,
-        filters: filters,
-      })
+    setFilter({
+      ...filter,
+      skip: 0,
+      filters: filters,
     })
   }
 
@@ -64,7 +74,13 @@ const ShopCollection = ({ match }) => {
   const loadMoreCards = () => {
     let skip = filter.skip + filter.limit
     dispatch(
-      getProductsToShop(skip, filter.limit, filter.filters, productToShop)
+      getProductsToShop(
+        skip,
+        filter.limit,
+        filter.collection,
+        filter.filters,
+        productToShop
+      )
     ).then(() => {
       setFilter({
         ...filter,
@@ -72,27 +88,26 @@ const ShopCollection = ({ match }) => {
       })
     })
   }
-  const handleOpened = (id) => {
-    if (id === match.params.collection) {
+  const handleOpened = (slug) => {
+    if (slug === match.params.collection) {
       setFilter({
         limit: 24,
         skip: 0,
+        collection: '',
         filters: {
-          collectionId: [],
           price: [],
           categoryId: [],
-          condition: [],
         },
       })
-
       history.push('/shop')
     } else {
-      history.push(`/shop/${id}`)
+      history.push(`/shop/${slug}`)
     }
   }
 
   return (
     <div className='shop'>
+      {console.log(filter)}
       <div className='shop__toolbar'>Shop / Industrial / 4threads</div>
       <div className='shop__filter'>
         <div className='shop__filterblock'>
@@ -100,10 +115,10 @@ const ShopCollection = ({ match }) => {
             collections.map((i) => (
               <CollapseCheckbox
                 key={i._id}
-                handleOpened={() => handleOpened(i._id)}
+                handleOpened={() => handleOpened(i.slug)}
                 title={i.name}
                 list={i.categories}
-                initialState={match.params.collection === i._id}
+                initialState={match.params.collection === i.slug}
                 handleFilters={(filters) =>
                   handleFilters(filters, 'categoryId')
                 }

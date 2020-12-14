@@ -8,7 +8,6 @@ const {
   deleteProduct,
   getProductsToShop,
   getProductToHome,
-  getProductsByCollection,
 } = require('../controllers/product.controller')
 const advanceResults = require('../middlewares/advaceResult.middleware')
 const Product = require('../models/Product.model')
@@ -23,7 +22,6 @@ router
   .post(protect, authorize('admin'), addProduct)
 
 router.route('/shop').post(getProductsToShop)
-router.route('/shop/:name').get(getProductsByCollection)
 router.route('/home').get(getProductToHome)
 
 router

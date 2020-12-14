@@ -35,8 +35,6 @@ authAxios.interceptors.response.use(
       return authAxios(originalRequest)
     }
 
-    console.log(err.response.data)
-
     return Promise.reject(err)
   }
 )
