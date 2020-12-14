@@ -29,6 +29,12 @@ const Checkout = ({ isAuthenticated }) => {
   const orderState = useSelector(({ order }) => order)
   const { loading: loadingOrder } = orderState
 
+  useEffect(() => {
+    if (cartItems <= 0) {
+      history.push('/user/dashboard')
+    }
+  }, [cartItems])
+
   const [formField, setFormField] = useState({
     formError: false,
     formErrorMessage: [],
@@ -208,14 +214,6 @@ const Checkout = ({ isAuthenticated }) => {
     })
   }
 
-  const openModal = () => {
-    modalRef.current.openModal()
-  }
-
-  const closeModal = () => {
-    modalRef.current.closeModal()
-  }
-
   const submitForm = (e) => {
     e.preventDefault()
     let dataToSubmit = generateData(formField.formData, 'billing')
@@ -244,9 +242,7 @@ const Checkout = ({ isAuthenticated }) => {
         paymentMethod: orderOption.paymentOption,
         totalPrice: addFee(),
       }
-      dispatch(addOrder(finalDataToSubmit)).then(() => {
-        openModal()
-      })
+      dispatch(addOrder(finalDataToSubmit))
     } else {
       setFormField({ ...formField, formError: true })
     }
@@ -283,68 +279,273 @@ const Checkout = ({ isAuthenticated }) => {
     )
   }
 
-  const handleRtoS = () => {
-    document.getElementById('toggleSideNav').click()
-    history.push('/shop')
-  }
-
   return (
     <div className='checkout_wrapper'>
       <h1 className='heading-primary'>Checkout</h1>
-      {cartItems.length <= 0 ? (
-        <div className='cart_empty'>
-          <h1 className='heading-secondary'>Cart empty</h1>
-          <MyButton
-            runAction={() => handleRtoS()}
-            title={'Shop Now'}
-            type={'primary'}
+      <form onSubmit={(e) => submitForm(e)} className='checkout'>
+        <div className='billing card'>
+          <h3>Billing and Shipping</h3>
+          <FormField
+            id={'name'}
+            formData={formField.formData.name}
+            change={(element) => updateForm(element)}
           />
+          <FormField
+            id={'contact'}
+            formData={formField.formData.contact}
+            change={(element) => updateForm(element)}
+          />
+          <h4>Address</h4>
+          <FormField
+            id={'country'}
+            formData={formField.formData.country}
+            change={(element) => updateForm(element)}
+          />
+          <FormField
+            id={'unit'}
+            formData={formField.formData.unit}
+            change={(element) => updateForm(element)}
+          />
+          <FormField
+            id={'street'}
+            formData={formField.formData.street}
+            change={(element) => updateForm(element)}
+          />
+          <FormField
+            id={'city'}
+            formData={formField.formData.city}
+            change={(element) => updateForm(element)}
+          />
+          <FormField
+            id={'state'}
+            formData={formField.formData.state}
+            change={(element) => updateForm(element)}
+          />
+          <FormField
+            id={'zipcode'}
+            formData={formField.formData.zipcode}
+            change={(element) => updateForm(element)}
+          />
+
+          {formField.formSuccess ? (
+            <div className='success_label'>
+              <h1>Successfull</h1>
+            </div>
+          ) : null}
+
+          {formField.formError ? (
+            <div className='error_label'>
+              <h1>{formField.formErrorMessage}</h1>
+            </div>
+          ) : null}
         </div>
-      ) : (
-        <form onSubmit={(e) => submitForm(e)} className='checkout'>
-          <div className='billing card'>
-            <h3>Billing and Shipping</h3>
+        <div className='orderDetail_wrap'>
+          <div className='additional_info card'>
+            <h3>Additional Information</h3>
+
             <FormField
-              id={'name'}
-              formData={formField.formData.name}
+              id={'additionalInfo'}
+              formData={formField.formData.additionalInfo}
               change={(element) => updateForm(element)}
             />
-            <FormField
-              id={'contact'}
-              formData={formField.formData.contact}
-              change={(element) => updateForm(element)}
-            />
-            <h4>Address</h4>
-            <FormField
-              id={'country'}
-              formData={formField.formData.country}
-              change={(element) => updateForm(element)}
-            />
-            <FormField
-              id={'unit'}
-              formData={formField.formData.unit}
-              change={(element) => updateForm(element)}
-            />
-            <FormField
-              id={'street'}
-              formData={formField.formData.street}
-              change={(element) => updateForm(element)}
-            />
-            <FormField
-              id={'city'}
-              formData={formField.formData.city}
-              change={(element) => updateForm(element)}
-            />
-            <FormField
-              id={'state'}
-              formData={formField.formData.state}
-              change={(element) => updateForm(element)}
-            />
-            <FormField
-              id={'zipcode'}
-              formData={formField.formData.zipcode}
-              change={(element) => updateForm(element)}
-            />
+          </div>
+
+          <div className='payment_method card'>
+            <h3>Your order</h3>
+
+            <table className='orderDetail'>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.map((i) => (
+                  <tr key={i._id}>
+                    <td>
+                      {i.name} &times; {i.quantity}
+                    </td>
+                    <td>
+                      <p>
+                        Php
+                        {addComma(parseFloat(i.quantity * i.price).toFixed(2))}
+                      </p>
+                    </td>
+                  </tr>
+                ))}
+                <tr>
+                  <td>subtotal</td>
+                  <td>
+                    <bdi>Php {addComma(total)}.00</bdi>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr className='shipping'>
+                  <th>Shipping</th>
+                  <td>
+                    <ul>
+                      <li>
+                        <label htmlFor='flat_rate'>Flat Rate: $10</label>
+                        <input
+                          type='radio'
+                          name='shippingOption'
+                          id='flat_rate'
+                          onChange={handlerOrderOptions}
+                          checked={orderOption.shippingOption === 'flat_rate'}
+                          value='flat_rate'
+                        />
+                      </li>
+                      <li>
+                        <label htmlFor='free_shipping'>Free Shipping</label>
+                        <input
+                          type='radio'
+                          name='shippingOption'
+                          id='free_shipping'
+                          onChange={handlerOrderOptions}
+                          checked={
+                            orderOption.shippingOption === 'free_shipping'
+                          }
+                          value='free_shipping'
+                        />
+                      </li>
+                      <li>
+                        <label htmlFor='local_pickup'>Local Pickup</label>
+                        <input
+                          type='radio'
+                          name='shippingOption'
+                          id='local_pickup'
+                          onChange={handlerOrderOptions}
+                          checked={
+                            orderOption.shippingOption === 'local_pickup'
+                          }
+                          value='local_pickup'
+                        />
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr>
+                  <td>total</td>
+                  <td>
+                    <bdi>Php {addComma(addFee())}.00</bdi>
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <h3 className='payment-header'>Payment method</h3>
+
+            <ul className='payment-options'>
+              <li>
+                <input
+                  type='radio'
+                  name='paymentOption'
+                  id='cash_on_delivery'
+                  onChange={handlerOrderOptions}
+                  checked={orderOption.paymentOption === 'cash_on_delivery'}
+                  value='cash_on_delivery'
+                />
+                <label htmlFor=''>Cash on delivery</label>
+                <div className='po-box'>
+                  <p>Pay with cash upon delivery.</p>
+                </div>
+              </li>
+
+              <li>
+                <input
+                  type='radio'
+                  name='paymentOption'
+                  id='direct_bank_transfer'
+                  onChange={handlerOrderOptions}
+                  checked={orderOption.paymentOption === 'direct_bank_transfer'}
+                  value='direct_bank_transfer'
+                />
+                <label htmlFor='direct_bank_transfer'>
+                  Direct bank transfer
+                </label>
+                <div className='po-box'>
+                  <p>
+                    Make your payment directly into our bank account. Please use
+                    your Order ID as the payment reference. Your order will not
+                    be shipped until the funds have cleared in our account.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <input
+                  type='radio'
+                  name='paymentOption'
+                  id='check_payments'
+                  onChange={handlerOrderOptions}
+                  checked={orderOption.paymentOption === 'check_payments'}
+                  value='check_payments'
+                />
+                <label htmlFor='check_payments'>Check Payments</label>
+                <div className='po-box'>
+                  <p>
+                    Please send a check to Store Name, Store Street, Store Town,
+                    Store State / County, Store Postcode.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <input
+                  type='radio'
+                  name='paymentOption'
+                  id='viaPaypal'
+                  onChange={handlerOrderOptions}
+                  checked={orderOption.paymentOption === 'viaPaypal'}
+                  value='viaPaypal'
+                />
+                <label htmlFor='viaPaypal'>Paypal</label>
+                <div className='po-box'>
+                  <img
+                    src='https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg'
+                    alt='PayPal acceptance mark'
+                  />
+                  <p>
+                    Pay via PayPal; you can pay with your credit card if you
+                    don’t have a PayPal account.
+                  </p>
+                </div>
+              </li>
+            </ul>
+
+            <div className='agreement' style={{ marginBottom: '1rem' }}>
+              <input
+                id='agreement'
+                type='checkbox'
+                name='agreement'
+                //   checked={userAgreed}
+                //   onChange={() => setUserAgreed(!userAgreed)}
+              />
+
+              <label htmlFor='agreement'>
+                I have read and agree to the webiste terms and conditions *
+              </label>
+            </div>
+
+            {orderOption.paymentOption === 'viaPaypal' ? (
+              <Paypal
+                toPay={addFee()}
+                transactionError={(data) => transactionError(data)}
+                transactionCanceled={(data) => transactionCanceled(data)}
+                transactionSuccess={(data) => transactionSuccess(data)}
+              />
+            ) : loadingOrder ? (
+              <Loading />
+            ) : (
+              <MyButton
+                runAction={(e) => submitForm(e)}
+                type='submit'
+                title='Place order'
+                value='Submit'
+              />
+            )}
 
             {formField.formSuccess ? (
               <div className='success_label'>
@@ -358,234 +559,8 @@ const Checkout = ({ isAuthenticated }) => {
               </div>
             ) : null}
           </div>
-          <div className='orderDetail_wrap'>
-            <div className='additional_info card'>
-              <h3>Additional Information</h3>
-
-              <FormField
-                id={'additionalInfo'}
-                formData={formField.formData.additionalInfo}
-                change={(element) => updateForm(element)}
-              />
-            </div>
-
-            <div className='payment_method card'>
-              <h3>Your order</h3>
-
-              <table className='orderDetail'>
-                <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cartItems.map((i) => (
-                    <tr key={i._id}>
-                      <td>
-                        {i.name} &times; {i.quantity}
-                      </td>
-                      <td>
-                        <p>
-                          Php
-                          {addComma(
-                            parseFloat(i.quantity * i.price).toFixed(2)
-                          )}
-                        </p>
-                      </td>
-                    </tr>
-                  ))}
-                  <tr>
-                    <td>subtotal</td>
-                    <td>
-                      <bdi>Php {addComma(total)}.00</bdi>
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr className='shipping'>
-                    <th>Shipping</th>
-                    <td>
-                      <ul>
-                        <li>
-                          <label htmlFor='flat_rate'>Flat Rate: $10</label>
-                          <input
-                            type='radio'
-                            name='shippingOption'
-                            id='flat_rate'
-                            onChange={handlerOrderOptions}
-                            checked={orderOption.shippingOption === 'flat_rate'}
-                            value='flat_rate'
-                          />
-                        </li>
-                        <li>
-                          <label htmlFor='free_shipping'>Free Shipping</label>
-                          <input
-                            type='radio'
-                            name='shippingOption'
-                            id='free_shipping'
-                            onChange={handlerOrderOptions}
-                            checked={
-                              orderOption.shippingOption === 'free_shipping'
-                            }
-                            value='free_shipping'
-                          />
-                        </li>
-                        <li>
-                          <label htmlFor='local_pickup'>Local Pickup</label>
-                          <input
-                            type='radio'
-                            name='shippingOption'
-                            id='local_pickup'
-                            onChange={handlerOrderOptions}
-                            checked={
-                              orderOption.shippingOption === 'local_pickup'
-                            }
-                            value='local_pickup'
-                          />
-                        </li>
-                      </ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>total</td>
-                    <td>
-                      <bdi>Php {addComma(addFee())}.00</bdi>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-
-              <h3 className='payment-header'>Payment method</h3>
-
-              <ul className='payment-options'>
-                <li>
-                  <input
-                    type='radio'
-                    name='paymentOption'
-                    id='cash_on_delivery'
-                    onChange={handlerOrderOptions}
-                    checked={orderOption.paymentOption === 'cash_on_delivery'}
-                    value='cash_on_delivery'
-                  />
-                  <label htmlFor=''>Cash on delivery</label>
-                  <div className='po-box'>
-                    <p>Pay with cash upon delivery.</p>
-                  </div>
-                </li>
-
-                <li>
-                  <input
-                    type='radio'
-                    name='paymentOption'
-                    id='direct_bank_transfer'
-                    onChange={handlerOrderOptions}
-                    checked={
-                      orderOption.paymentOption === 'direct_bank_transfer'
-                    }
-                    value='direct_bank_transfer'
-                  />
-                  <label htmlFor='direct_bank_transfer'>
-                    Direct bank transfer
-                  </label>
-                  <div className='po-box'>
-                    <p>
-                      Make your payment directly into our bank account. Please
-                      use your Order ID as the payment reference. Your order
-                      will not be shipped until the funds have cleared in our
-                      account.
-                    </p>
-                  </div>
-                </li>
-
-                <li>
-                  <input
-                    type='radio'
-                    name='paymentOption'
-                    id='check_payments'
-                    onChange={handlerOrderOptions}
-                    checked={orderOption.paymentOption === 'check_payments'}
-                    value='check_payments'
-                  />
-                  <label htmlFor='check_payments'>Check Payments</label>
-                  <div className='po-box'>
-                    <p>
-                      Please send a check to Store Name, Store Street, Store
-                      Town, Store State / County, Store Postcode.
-                    </p>
-                  </div>
-                </li>
-
-                <li>
-                  <input
-                    type='radio'
-                    name='paymentOption'
-                    id='viaPaypal'
-                    onChange={handlerOrderOptions}
-                    checked={orderOption.paymentOption === 'viaPaypal'}
-                    value='viaPaypal'
-                  />
-                  <label htmlFor='viaPaypal'>Paypal</label>
-                  <div className='po-box'>
-                    <img
-                      src='https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg'
-                      alt='PayPal acceptance mark'
-                    />
-                    <p>
-                      Pay via PayPal; you can pay with your credit card if you
-                      don’t have a PayPal account.
-                    </p>
-                  </div>
-                </li>
-              </ul>
-
-              <div className='agreement' style={{ marginBottom: '1rem' }}>
-                <input
-                  id='agreement'
-                  type='checkbox'
-                  name='agreement'
-                  //   checked={userAgreed}
-                  //   onChange={() => setUserAgreed(!userAgreed)}
-                />
-
-                <label htmlFor='agreement'>
-                  I have read and agree to the webiste terms and conditions *
-                </label>
-              </div>
-
-              {orderOption.paymentOption === 'viaPaypal' ? (
-                <Paypal
-                  toPay={addFee()}
-                  transactionError={(data) => transactionError(data)}
-                  transactionCanceled={(data) => transactionCanceled(data)}
-                  transactionSuccess={(data) => transactionSuccess(data)}
-                />
-              ) : loadingOrder ? (
-                <Loading />
-              ) : (
-                <MyButton
-                  runAction={(e) => submitForm(e)}
-                  type='submit'
-                  title='Place order'
-                  value='Submit'
-                />
-              )}
-
-              {formField.formSuccess ? (
-                <div className='success_label'>
-                  <h1>Successfull</h1>
-                </div>
-              ) : null}
-
-              {formField.formError ? (
-                <div className='error_label'>
-                  <h1>{formField.formErrorMessage}</h1>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </form>
-      )}
+        </div>
+      </form>
       <Modal ref={modalRef}>
         <h1 className='heading-secondary'>THANKS</h1>
         <h2 className='heading-secondary'>FOR YOUR PURCHASED</h2>

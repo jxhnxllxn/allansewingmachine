@@ -10,6 +10,7 @@ const initialState = {
     canceledCount: 0,
   },
   orderHistory: [],
+  successBuy: false,
 }
 
 const order = (state = initialState, { type, payload }) => {
@@ -34,7 +35,7 @@ const order = (state = initialState, { type, payload }) => {
     case OrderActionTypes.ADD_ORDER:
       return {
         ...state,
-        orders: [...state.orders, payload.data],
+        successBuy: true,
         loading: false,
       }
 
@@ -49,7 +50,7 @@ const order = (state = initialState, { type, payload }) => {
       return {
         ...state,
         loading: false,
-        orderHistory: [payload.data],
+        orderHistory: payload,
       }
 
     case OrderActionTypes.CLEAN_ORDER:

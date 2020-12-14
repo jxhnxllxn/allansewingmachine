@@ -7,16 +7,7 @@ import LazyLoad from 'react-lazyload'
 import { ReactComponent as CartIcon } from '../assets/icons/shopping-bag.svg'
 import { useHistory } from 'react-router-dom'
 
-const Product = ({
-  _id,
-  name,
-  price,
-  collectionId,
-  sold,
-  stock,
-  images,
-  condition,
-}) => {
+const Product = ({ _id, name, price, sold, stock, images, condition }) => {
   const history = useHistory()
   const renderCardImage = (images) => {
     if (images.length > 0) {
@@ -27,7 +18,7 @@ const Product = ({
   }
 
   const handleLinkTo = () => {
-    history.push(`/shop/${collectionId.name}/${_id}`)
+    history.push(`/shop/collection/${_id}`)
   }
 
   const dispatch = useDispatch()
@@ -37,7 +28,6 @@ const Product = ({
         _id,
         name,
         price,
-        collectionId,
         sold,
         stock,
         images,

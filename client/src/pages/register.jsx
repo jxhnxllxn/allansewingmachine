@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { register } from '../redux/user/user-action'
+import { clearError, register } from '../redux/user/user-action'
 import MyButton from '../components/button'
 import FormField from '../components/form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
@@ -108,10 +108,16 @@ const SignUp = () => {
     }
   }
 
+  useEffect(() => {
+    return () => {
+      setFormField({})
+      dispatch(clearError())
+    }
+  }, [])
+
   return (
     <div className='authWrapper'>
-      <h1 className='heading-primary'>Register</h1>
-      <span>Sign up with your email and password</span>
+      <h1 className='heading-primary'>Sign Up</h1>
       <form onSubmit={(e) => submitForm(e)} className='card'>
         <FormField
           id={'name'}
@@ -141,18 +147,20 @@ const SignUp = () => {
             type='submit'
             title='Sign Up'
             value='Submit'
+            disabled={formField.formError}
           />
         )}
-
+        {console.log(formField.formError)}
         <p>
           Owned an account ? Login <Link to='/login'>here</Link>
         </p>
       </form>
 
-      {formField.formError ? (
-        <div className='error_label'>Please check your credential</div>
-      ) : error ? (
-        <div className='error_label'>{error}</div>
+      {error ? (
+        <div className='error_label'>
+          <h2>ERROR !</h2>
+          <span>{error}</span>
+        </div>
       ) : null}
     </div>
   )

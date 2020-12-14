@@ -23,6 +23,7 @@
 // 2 - PAGES/USER
 @import './2\ -\ pages/user/index';
 @import './2\ -\ pages/user/dashboard';
+@import './2\ -\ pages/user/history';
 @import './2\ -\ pages/user/profile-update';
 
 // 2 - PAGES/ADMIN
@@ -45,15 +46,13 @@
 @import './3\ -\ components/navlinks';
 @import './3\ -\ components/backdrop';
 @import './3\ -\ components/button';
-@import './3\ -\ components/sidenav-cart-item';
-@import './3\ -\ components/sidenav-cart';
 @import './3\ -\ components/cart-item';
+@import './3\ -\ components/cart';
 @import './3\ -\ components/collapse-checkbox';
 @import './3\ -\ components/home-collection';
 @import './3\ -\ components/loading';
 @import './3\ -\ components/modal';
 @import './3\ -\ components/product';
-@import './3\ -\ components/sidenav-auth';
 @import './3\ -\ components/sidenav-search';
 @import './3\ -\ components/slider';
 

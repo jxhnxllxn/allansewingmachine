@@ -1,7 +1,6 @@
 .btn {
   padding: 0.5rem;
   border: 1px solid $border;
-  border-radius: 0.3rem;
   font-weight: 500;
   cursor: pointer;
   text-transform: capitalize;
@@ -9,4 +8,8 @@
   background-color: $black--secondary;
   color: $white;
   display: inline;
+  outline: none;
+  &:disabled {
+    cursor: none;
+  }
 }

@@ -25,7 +25,6 @@ html {
 }
 
 body {
-  // @include customScroll;
   overflow: hidden;
   min-height: 100%;
   background-color: $background;
@@ -33,26 +32,10 @@ body {
   @include media('<tablet') {
     width: 100%;
   }
-  // letter-spacing: 2px;
-  // &::before {
-  //   content: "Allan";
-  //   font-family: $font-brand;
-  //   color: rgba($black, 0.8);
-  //   font-size: 80vh;
-  //   position: fixed;
-  //   font-variant: inherit;
-  //   top: 10%;
-  // }
-  // background-image: linear-gradient(
-  //   to right bottom,
-  //   rgba($background, 1),
-  //   rgba($background--secondary, 1)
-  // );
 }
 
 body,
 html {
-  box-sizing: border-box;
   visibility: hidden;
   user-select: none;
   overscroll-behavior: none;

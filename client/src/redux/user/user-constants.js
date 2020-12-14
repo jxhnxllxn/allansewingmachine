@@ -31,4 +31,6 @@ export const AuthActionTypes = {
   USER_UPDATE_RESET: 'USER_UPDATE_RESET',
 
   USER_FAIL: 'USER_FAIL',
+
+  CLEAR_ERROR: 'CLEAR_ERROR',
 }

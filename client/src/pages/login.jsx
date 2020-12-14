@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from '../redux/user/user-action'
+import { clearError, login } from '../redux/user/user-action'
 import MyButton from '../components/button'
 import FormField from '../components/form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
@@ -58,6 +58,7 @@ const SignIn = () => {
   useEffect(() => {
     return () => {
       setFormField({})
+      dispatch(clearError())
     }
   }, [])
 
@@ -84,7 +85,6 @@ const SignIn = () => {
   return (
     <div className='authWrapper'>
       <h1 className='heading-primary'>Sign in</h1>
-      <span>Sign in with your email and password</span>
       <form onSubmit={(e) => submitForm(e)} className='card'>
         <FormField
           id={'email'}
@@ -105,6 +105,7 @@ const SignIn = () => {
             type='submit'
             title='Sign In'
             value='Submit'
+            disabled={formField.formError}
           />
         )}
 
@@ -113,10 +114,11 @@ const SignIn = () => {
         </p>
       </form>
 
-      {formField.formError ? (
-        <div className='error_label'>Please check your credential</div>
-      ) : error ? (
-        <div className='error_label'>{error}</div>
+      {error ? (
+        <div className='error_label'>
+          <h2>ERROR !</h2>
+          <span>{error}</span>
+        </div>
       ) : null}
     </div>
   )

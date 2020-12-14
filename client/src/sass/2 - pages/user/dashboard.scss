@@ -1,4 +1,27 @@
 .dashboard_user {
+  h1 {
+    span {
+      font-size: 2rem;
+      letter-spacing: 1rem;
+      margin-left: 1rem;
+    }
+  }
+  .success_bought {
+    margin: 2rem;
+    text-align: center;
+    letter-spacing: 3px;
+    word-spacing: 6px;
+    line-height: 1.5;
+    h1 {
+      letter-spacing: 1rem;
+    }
+    h2 {
+      margin-bottom: 2rem;
+    }
+    p {
+      opacity: 0.9;
+    }
+  }
   &__detail {
     padding: 2rem 2rem 7rem 2rem;
     .detail {

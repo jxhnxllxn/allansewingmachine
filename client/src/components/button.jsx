@@ -32,6 +32,7 @@ const MyButton = (props) => {
       case 'submit':
         template = (
           <input
+            disabled={props.disabled}
             className='btn btn--submit'
             type='submit'
             value={props.title}

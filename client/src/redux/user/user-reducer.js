@@ -26,6 +26,8 @@ const user = (state = initialState, action) => {
     case AuthActionTypes.USER_REGISTER_FAIL:
     case AuthActionTypes.USER_DETAILS_FAIL:
       return { loading: false, error: action.payload }
+    case AuthActionTypes.CLEAR_ERROR:
+      return { ...state, error: null }
     case AuthActionTypes.USER_LOGOUT:
       return {}
     default:

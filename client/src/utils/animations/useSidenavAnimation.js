@@ -1,17 +1,12 @@
 import { useEffect } from 'react'
 const useSideNavToggleAnimation = (tl) => {
   useEffect(() => {
-    tl.to('html', {
-      duration: 0,
-      css: { overflowY: 'hidden' },
+    tl.from('.sidenav', {
+      x: '200',
+      duration: 0.3,
+      autoAlpha: 0,
     })
-      .from('.sidenav', {
-        x: '200',
-        duration: 0.3,
-        autoAlpha: 0,
-      })
-
-      .reverse()
+    .reverse()
     // eslint-disable-next-line
   }, [])
 }

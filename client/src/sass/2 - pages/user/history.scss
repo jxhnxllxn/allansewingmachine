@@ -1,0 +1,36 @@
+.history_cart {
+  table {
+    width: 100%;
+    border-top: 1px solid $border;
+    border-bottom: 1px solid $border;
+    margin: 1rem 0;
+    padding: 1rem 0;
+    thead {
+      tr {
+        text-align: start;
+        th {
+          text-align: start;
+          padding: 0.5rem;
+        }
+      }
+    }
+    tbody {
+      font-size: 90%;
+      tr {
+        text-align: start;
+        th {
+          text-align: start;
+          padding: 0.5rem;
+        }
+        td {
+          text-align: start;
+          padding: 0.5rem;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+  h5 {
+    margin-bottom: 5rem;
+  }
+}

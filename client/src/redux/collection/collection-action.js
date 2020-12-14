@@ -16,8 +16,8 @@ export const getCollections = () => async (dispatch) => {
     })
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.error
+        ? error.response.data.error
         : error.message
     dispatch({
       type: CollectionActionTypes.COLLECTION_FAIL,
@@ -40,8 +40,8 @@ export const addCollection = (dataToSubmit) => async (dispatch) => {
     })
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.error
+        ? error.response.data.error
         : error.message
     dispatch({
       type: CollectionActionTypes.COLLECTION_FAIL,
@@ -64,8 +64,8 @@ export const deleteCollection = (dataToDelete) => async (dispatch) => {
     })
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.error
+        ? error.response.data.error
         : error.message
     dispatch({
       type: CollectionActionTypes.COLLECTION_FAIL,

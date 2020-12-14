@@ -1,55 +1,61 @@
 import React, { Fragment } from 'react'
-import { useState } from 'react'
-// import moment from 'moment';
+import { useSelector } from 'react-redux'
+import Loading from '../../components/loading'
+import addComma from '../../utils/helper/add-comma'
+import moment from 'moment'
 
 // {moment(product.dateOfPurchase).format("MM-DD-YYYY")}
 
 const UserHistory = () => {
-  const [orderHistory, setOrderHistory] = useState([])
-
-  const renderBlocks = () =>
-    orderHistory
-      ? Object.keys(orderHistory).map((key, index) => {
-          return (
-            <table key={index}>
-              <thead>
-                <tr>
-                  <th>Order number</th>
-                  <th>Product</th>
-                  <th>Price paid</th>
-                  <th>Quantity</th>
-                  <th>Sub total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orderHistory[key]['product'].map((data, i) => (
-                  <Fragment key={i}>
-                    <tr>
-                      <td>{index + 1}</td>
-                      <td>{data.name}</td>
-                      <td>{data.price}</td>
-                      <td>{data.quantity}</td>
-                      <td>{data.price * data.quantity}</td>
-                    </tr>
-                  </Fragment>
-                ))}
-                <tr>
-                  <td>Date</td>
-                  <td>{orderHistory[key]['createdAt']}</td>
-                  <td></td>
-                  <td>Total</td>
-                  <td>{orderHistory[key]['total']}</td>
-                </tr>
-              </tbody>
-            </table>
-          )
-        })
-      : null
+  const orderState = useSelector(({ order }) => order)
+  const { loading, orderHistory, error } = orderState
 
   return (
-    <div className='history_blocks'>
+    <div className='history_cart'>
       <h1 className='heading-secondary'>History</h1>
-      {renderBlocks()}
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <h1>Error {error}</h1>
+      ) : (
+        Object.keys(orderHistory).map((key, index) => {
+          return (
+            <>
+              <table key={index}>
+                <thead>
+                  <tr>
+                    <th>Order number</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Sub total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {orderHistory[key]['orderItems'].map((data, i) => (
+                    <Fragment key={i}>
+                      <tr>
+                        <td>{i + 1}</td>
+                        <td>{data.name}</td>
+                        <td>{data.quantity}</td>
+                        <td>Php {addComma(data.price)}</td>
+                        <td>Php {addComma(data.price * data.quantity)}</td>
+                      </tr>
+                    </Fragment>
+                  ))}
+                </tbody>
+              </table>
+              <h4>
+                <span>Purchased date:</span>
+                {moment(orderHistory[key]['createdAt']).format('MM-DD-YYYY')}
+              </h4>
+              <h5>
+                Total purchased: Php {addComma(orderHistory[key]['totalPrice'])}
+              </h5>
+            </>
+          )
+        })
+      )}
     </div>
   )
 }

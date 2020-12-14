@@ -35,7 +35,7 @@ export const register = (dataToSubmit) => async (dispatch) => {
       type: AuthActionTypes.USER_REGISTER_REQUEST,
     })
 
-    const { data } = await axios.post('/user/register', dataToSubmit)
+    const { data } = await axios.post('/user', dataToSubmit)
 
     dispatch({
       type: AuthActionTypes.USER_REGISTER_SUCCESS,
@@ -52,8 +52,8 @@ export const register = (dataToSubmit) => async (dispatch) => {
     dispatch({
       type: AuthActionTypes.USER_REGISTER_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error
           : error.message,
     })
   }
@@ -73,8 +73,8 @@ export const getUserDetails = () => async (dispatch) => {
     })
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.error
+        ? error.response.data.error
         : error.message
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
@@ -99,8 +99,8 @@ export const updateUserProfile = (dataToSubmit) => async (dispatch) => {
     })
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.error
+        ? error.response.data.error
         : error.message
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
@@ -126,8 +126,8 @@ export const listUsers = () => async (dispatch) => {
     })
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.error
+        ? error.response.data.error
         : error.message
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
@@ -150,8 +150,8 @@ export const deleteUser = (id) => async (dispatch) => {
     dispatch({ type: AuthActionTypes.USER_DELETE_SUCCESS })
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.error
+        ? error.response.data.error
         : error.message
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
@@ -187,8 +187,8 @@ export const updatePassword = (dataToSubmit) => async (dispatch) => {
     })
   } catch (error) {
     const message =
-      error.response && error.response.data.message
-        ? error.response.data.message
+      error.response && error.response.data.error
+        ? error.response.data.error
         : error.message
     if (message === 'Not authorized, token failed') {
       dispatch(logout())
@@ -198,4 +198,9 @@ export const updatePassword = (dataToSubmit) => async (dispatch) => {
       payload: message,
     })
   }
+}
+
+//logout
+export const clearError = () => (dispatch) => {
+  dispatch({ type: AuthActionTypes.CLEAR_ERROR })
 }

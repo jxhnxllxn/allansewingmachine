@@ -1,61 +1,52 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import addComma from "../utils/helper/add-comma";
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { clearItem, updateQuantity } from '../redux/cart/cart-action'
+import addComma from '../utils/helper/add-comma'
 
-import { clearItem, updateQuantity } from "../redux/cart/cart-action";
+const CartItem = ({ item }) => {
+  const dispatch = useDispatch()
+  const [quantity, setQuantity] = useState(0)
+  const quantityChange = (e) => {
+    setQuantity(e.target.value)
+  }
+  const handleClearItem = () => {
+    dispatch(clearItem(item))
+  }
+  useEffect(() => {
+    setQuantity(item.quantity)
+  }, [item])
 
-const CartItem = (props) => {
-   const dispatch = useDispatch();
-
-   const renderImage = (images) => {
-      if (images.length > 0) {
-         return images[0].url;
-      } else {
-         return "/images/sewer.jpg";
+  useEffect(
+    () => {
+      if (quantity > 0) {
+        dispatch(updateQuantity(item, quantity))
       }
-   };
-   const handleChange = (e) => setQuantity(e.target.value);
-   const handleClearItem = () => {
-      dispatch(clearItem(props.cartItem));
-   };
-   const [quantity, setQuantity] = useState(props.cartItem.quantity);
+    },
+    // eslint-disable-next-line
+    [quantity]
+  )
 
-   useEffect(
-      () => {
-         dispatch(updateQuantity(props.cartItem, quantity));
-      },
-      // eslint-disable-next-line
-      [dispatch, quantity]
-   );
+  return (
+    <tr className='cart-item'>
+      <td className='cart-item__name'>{item.name}</td>
+      <td className='cart-item__quantity'>
+        <input
+          type='number'
+          name='quantity'
+          onChange={quantityChange}
+          value={quantity}
+          min='1'
+        />
+      </td>
+      <td className='cart-item__price'>{addComma(item.price)}</td>
+      <td className='cart-item__subtotal'>
+        {addComma(item.price * item.quantity)}
+      </td>
+      <td className='cart-item__remove_button' onClick={handleClearItem}>
+        &#10005;
+      </td>
+    </tr>
+  )
+}
 
-   return (
-      <div className='checkout-item'>
-         <div className='image-container'>
-            <img src={renderImage(props.cartItem.images)} alt='item' />
-         </div>
-         <span className='name'>{props.cartItem.name}</span>
-
-         <span className='quantity'>
-            <input
-               type='number'
-               name='quantity'
-               value={quantity}
-               onChange={handleChange}
-               min='1'
-            />
-         </span>
-
-         <span className='price'>Php {addComma(props.cartItem.price)}.00</span>
-
-         <span className='sub_total'>
-            Php {addComma(props.cartItem.price * quantity)}.00
-         </span>
-
-         <div className='remove-button' onClick={handleClearItem}>
-            &#10005;
-         </div>
-      </div>
-   );
-};
-
-export default React.memo(CartItem);
+export default React.memo(CartItem)

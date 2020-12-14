@@ -6,7 +6,7 @@ import {
   clearProductDetail,
 } from '../redux/product/product-action'
 import Loading from '../components/loading'
-import DetailsThumb from './detail-thumb'
+import DetailsThumb from '../components/detail-thumb'
 import { useState } from 'react'
 import { addItem } from '../redux/cart/cart-action'
 
@@ -14,10 +14,8 @@ const ProductPreview = (props) => {
   const dispatch = useDispatch()
   const myRef = useRef()
   const [state, setState] = useState({ index: 0 })
-  const productDetailsState = useSelector(
-    ({ productDetails }) => productDetails
-  )
-  const { loading, error, product } = productDetailsState
+  const productState = useSelector(({ product }) => product)
+  const { loading, error, productDetail } = productState
 
   useEffect(() => {
     const id = props.match.params.product
@@ -45,43 +43,41 @@ const ProductPreview = (props) => {
   }
 
   const handleAddItem = () => {
-    dispatch(addItem(product.data))
+    dispatch(addItem(productDetail))
   }
-
-  const productD = () =>
-    !product ? (
-      error && (
-        <div className='error_message'>
-          <h1>{error}</h1>
-        </div>
-      )
-    ) : (
-      <div className='details'>
-        <div className='big_img'>
-          <img src={renderImage(product.data.images)} alt='product images' />
-        </div>
-        <div className='box'>
-          <div className='row'>
-            <h2>{product.data.name}</h2>
-            <span>Php {product.data.price}.00</span>
-          </div>
-          <p>{product.data.description}</p>
-          <DetailsThumb
-            images={product.data.images}
-            tab={handleTab}
-            myRef={myRef}
-          />
-
-          <button className='cart' onClick={handleAddItem}>
-            Add to cart
-          </button>
-        </div>
-      </div>
-    )
 
   return (
     <div className='product_preview_wrapper'>
-      {loading ? <Loading /> : productD()}
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <div className='error_message'>
+          <h1>{error}</h1>
+        </div>
+      ) : (
+        <div className='details'>
+          {console.log(productState)}
+          <div className='big_img'>
+            {/* <img src={renderImage(productDetail.images)} alt='product images' /> */}
+          </div>
+          <div className='box'>
+            <div className='row'>
+              <h2>{productDetail.name}</h2>
+              <span>Php {productDetail.price}.00</span>
+            </div>
+            <p>{productDetail.description}</p>
+            <DetailsThumb
+              images={productDetail.images}
+              tab={handleTab}
+              myRef={myRef}
+            />
+
+            <button className='cart' onClick={handleAddItem}>
+              Add to cart
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

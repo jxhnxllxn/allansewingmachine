@@ -199,8 +199,8 @@ export const getOrderHistory = () => async (dispatch) => {
     dispatch({
       type: OrderActionTypes.ORDER_FAIL,
       payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
+        error.response && error.response.data.error
+          ? error.response.data.error
           : error.message,
     })
   }

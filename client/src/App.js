@@ -16,7 +16,6 @@ import { getCollections } from './redux/collection/collection-action'
 import { getUserDetails } from './redux/user/user-action'
 const Shop = lazy(() => import('./pages/shop'))
 const ProductPreview = lazy(() => import('./pages/product-preview'))
-const Cart = lazy(() => import('./pages/cart'))
 const Checkout = lazy(() => import('./pages/checkout'))
 
 const Login = lazy(() => import('./pages/login'))
@@ -68,8 +67,6 @@ const App = () => {
             <Route path='/login' component={Auth(Login, false)} exact />
 
             <Route path='/register' component={Auth(Register, false)} exact />
-
-            <Route path='/cart' component={Auth(Cart, null)} exact />
 
             <Route path='/checkout' component={Auth(Checkout, true)} exact />
 

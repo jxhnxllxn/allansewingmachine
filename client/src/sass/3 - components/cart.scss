@@ -1,4 +1,4 @@
-.sidenav-cart {
+.cart {
   &__emptymsg {
     margin-top: auto;
     margin-bottom: auto;
@@ -9,7 +9,7 @@
       margin-top: 1rem;
     }
   }
-  table.sidenav-cart__table {
+  table.cart__table {
     width: 100%;
     border-top: 1px solid $border;
     border-bottom: 1px solid $border;

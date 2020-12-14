@@ -12,6 +12,7 @@ import useOutsideClick from '../utils/hooks/useOutsideClick'
 
 import SideNav from './sidenav'
 import NavLinks from '../components/navlinks'
+import toggleScrollbar from '../utils/helper/toggleScrollbar'
 
 const Nav = () => {
   const dispatch = useDispatch()
@@ -30,6 +31,7 @@ const Nav = () => {
   useSidenavAnimation(tl__sidenav)
 
   const toggleSideNav = (x) => {
+    toggleScrollbar(sideNavIconIsOpen)
     if (!sideNavIconIsOpen) {
       setActiveMenuIcons(x)
     }
