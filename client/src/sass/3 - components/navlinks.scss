@@ -3,7 +3,7 @@
   font-size: 85%;
   li {
     a {
-      padding: 1rem;
+      padding: 1rem 0;
       display: block;
       @include underlineOnHover;
     }

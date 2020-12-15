@@ -1,6 +1,5 @@
 .checkout_wrapper {
   padding: 1rem 0;
-  @include container;
   .checkout {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));

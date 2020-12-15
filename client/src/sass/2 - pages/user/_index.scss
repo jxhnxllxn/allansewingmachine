@@ -1,8 +1,20 @@
 .user {
-  padding-top: 1rem;
-  display: grid;
-  grid-template-columns: 25% 75%;
-  column-gap: 2rem;
-  @include container;
-  position: relative;
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  &__links {
+    width: 15%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    // justify-content: flex-end;
+    top: 10rem;
+    text-align: end;
+    padding-right: 1rem;
+    // border-right: 2px solid $border;
+  }
+  &__main {
+    width: 80%;
+    margin-left: 20%;
+  }
 }

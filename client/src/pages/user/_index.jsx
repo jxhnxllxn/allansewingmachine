@@ -42,27 +42,26 @@ const User = ({ match }) => {
   return (
     <div className='user'>
       <div className='user__links'>
-        <NavLinks
-          links={links}
-          addStyle={{
-            border: '2px solid rgb(228, 228, 228)',
-            borderRadius: '.3rem ',
-            padding: '1rem',
-          }}
-        />
+        <NavLinks links={links} />
       </div>
-      <Switch>
-        <Suspense fallback={<Loading />}>
-          <Route path={`${match.path}/dashboard`} component={Dashboard} exact />
-          <Route path={`${match.path}/profile`} component={Profile} exact />
-          <Route
-            path={`${match.path}/profile/update`}
-            component={ProfileUpdate}
-            exact
-          />
-          <Route path={`${match.path}/history`} component={History} exact />
-        </Suspense>
-      </Switch>
+      <div className='user__main'>
+        <Switch>
+          <Suspense fallback={<Loading />}>
+            <Route
+              path={`${match.path}/dashboard`}
+              component={Dashboard}
+              exact
+            />
+            <Route path={`${match.path}/profile`} component={Profile} exact />
+            <Route
+              path={`${match.path}/profile/update`}
+              component={ProfileUpdate}
+              exact
+            />
+            <Route path={`${match.path}/history`} component={History} exact />
+          </Suspense>
+        </Switch>
+      </div>
     </div>
   )
 }

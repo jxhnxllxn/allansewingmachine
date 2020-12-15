@@ -35,8 +35,13 @@ const UserHistory = () => {
                       <td>{i + 1}</td>
                       <td>{data.name}</td>
                       <td>{data.quantity}</td>
-                      <td>Php {addComma(data.price)}</td>
-                      <td>Php {addComma(data.price * data.quantity)}</td>
+                      <td>Php {addComma(parseFloat(data.price).toFixed(2))}</td>
+                      <td>
+                        Php{' '}
+                        {addComma(
+                          parseFloat(data.price * data.quantity).toFixed(2)
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -46,7 +51,10 @@ const UserHistory = () => {
                 {moment(orderHistory[key]['createdAt']).format('MM-DD-YYYY')}
               </h4>
               <h5>
-                Total purchased: Php {addComma(orderHistory[key]['totalPrice'])}
+                Total purchased: Php{' '}
+                {addComma(
+                  parseFloat(orderHistory[key]['totalPrice']).toFixed(2)
+                )}
               </h5>
             </div>
           )

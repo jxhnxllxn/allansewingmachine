@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import { ReactComponent as UpIcon } from '../assets/icons/chevron-up.svg'
 
 const CollapseCheckbox = ({
@@ -7,22 +8,26 @@ const CollapseCheckbox = ({
   list,
   title,
   handleFilters,
-  handleOpened,
+  slug,
 }) => {
-  const [state, setstate] = useState({
-    opened: false,
-    checked: [],
-  })
+  const history = useHistory()
+  const [checked, setchecked] = useState([])
+
+  const handleOpened = () => {
+    if (slug && !initialState) {
+      history.push(`/shop/${slug}`)
+    }
+  }
 
   useEffect(() => {
-    if (initialState && state.checked.length > 0) {
-      handleFilters(state.checked)
+    if (checked.length > 0) {
+      handleFilters(checked)
     }
-  }, [state.checked])
+  }, [checked])
 
   const toggleCheck = (x) => {
-    const currentIndex = state.checked.indexOf(x)
-    const newChecked = [...state.checked]
+    const currentIndex = checked.indexOf(x)
+    const newChecked = [...checked]
 
     if (currentIndex === -1) {
       newChecked.push(x)
@@ -30,15 +35,13 @@ const CollapseCheckbox = ({
       newChecked.splice(currentIndex, 1)
     }
 
-    setstate({
-      ...state,
-      checked: newChecked,
-    })
+    setchecked(newChecked)
   }
 
   return (
     <div className='collapse-checkbox'>
       <div className='list'>
+        {console.log(list)}
         <div className='list__items' onClick={() => handleOpened()}>
           <span className='list__title'>{title}</span>
           <UpIcon className={`icon ${initialState ? 'icon--active' : ''}`} />
@@ -51,7 +54,7 @@ const CollapseCheckbox = ({
                 <input
                   onChange={() => toggleCheck(i._id)}
                   type='checkbox'
-                  checked={state.checked.indexOf(i._id) !== -1}
+                  checked={checked.indexOf(i._id) !== -1}
                 />
               </li>
             ))}

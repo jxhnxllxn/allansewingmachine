@@ -2,12 +2,14 @@
   &__list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    row-gap: 2rem;
-    column-gap: 2rem;
+    row-gap: 1rem;
+    column-gap: 1rem;
     justify-content: center;
-    @include media('<tablet') {
+    @include media('<phone') {
       grid-template-columns: repeat(2, 1fr);
       justify-content: center;
+      row-gap: 0.5rem;
+      column-gap: 0.5rem;
     }
     //   @include media('<phone') {
     //     grid-template-columns: repeat(2, 10rem);

@@ -1,11 +1,4 @@
 .dashboard_user {
-  h1 {
-    span {
-      font-size: 2rem;
-      letter-spacing: 1rem;
-      margin-left: 1rem;
-    }
-  }
   .success_bought {
     margin: 5rem 0;
     text-align: center;
@@ -20,28 +13,6 @@
     }
     p {
       opacity: 0.9;
-    }
-  }
-  &__detail {
-    padding: 2rem 2rem 7rem 2rem;
-    .detail {
-      display: flex;
-      position: relative;
-      padding: 0.5rem 0;
-      align-items: center;
-      justify-content: flex-start;
-      label {
-        width: 15%;
-      }
-      p {
-        font-weight: 300;
-        width: 85%;
-        font-size: 120%;
-        font-weight: 300;
-      }
-    }
-    .action_button {
-      padding-top: 2rem;
     }
   }
 }

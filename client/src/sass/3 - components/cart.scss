@@ -1,7 +1,5 @@
 .cart {
   &__emptymsg {
-    margin-top: auto;
-    margin-bottom: auto;
     h1 {
       -webkit-text-fill-color: $background; /* Will override color (regardless of order) */
       -webkit-text-stroke-width: 1px;
@@ -9,37 +7,32 @@
       margin-top: 1rem;
     }
   }
-  table.cart__table {
+  &__table {
     width: 100%;
     border-top: 1px solid $border;
     border-bottom: 1px solid $border;
-    margin: 1rem 0;
-    padding: 1rem 0;
+    margin: 2rem 0;
+    padding: 2rem 0;
     tbody {
       font-size: 90%;
       tr {
         text-align: start;
         th {
           text-align: start;
-          padding: 0.5rem;
         }
         td {
           text-align: start;
-          padding: 0.5rem;
           font-weight: 500;
+          &:last-child {
+            text-align: end;
+          }
         }
       }
     }
   }
   &__total {
-    text-align: end;
-    padding: 1rem;
     h2 {
-      font-size: 200%;
-      font-weight: 300;
-      small {
-        font-size: 70%;
-      }
+      font-size: 1.5rem;
     }
   }
 }

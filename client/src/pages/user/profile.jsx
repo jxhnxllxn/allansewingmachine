@@ -12,7 +12,7 @@ const UserProfile = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className='dashboard_user__detail'>
+        <div className='user_profile__detail'>
           <div className='detail'>
             <label>Name:</label>
             <p>{name}</p>

@@ -5,7 +5,7 @@ const initialState = {
   collections: [],
 }
 
-export default function (state = initialState, action) {
+export default function collectionReducer(state = initialState, action) {
   const { type, payload } = action
   switch (type) {
     case CollectionActionTypes.COLLECTION_REQUEST:

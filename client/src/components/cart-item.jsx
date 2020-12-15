@@ -40,7 +40,7 @@ const CartItem = ({ item }) => {
       </td>
       <td className='cart-item__price'>{addComma(item.price)}</td>
       <td className='cart-item__subtotal'>
-        {addComma(item.price * item.quantity)}
+        {addComma(parseFloat(item.price * item.quantity).toFixed(2))}
       </td>
       <td className='cart-item__remove_button' onClick={handleClearItem}>
         &#10005;

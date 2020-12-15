@@ -6,12 +6,11 @@ import { getProductsToShop } from '../redux/product/product-action'
 import LoadMoreCards from '../components/load-more'
 import CollapseCheckbox from '../components/collapse-checkbox'
 import Loading from '../components/loading'
-import { useHistory, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 const ShopCollection = ({ match }) => {
   const dispatch = useDispatch()
   const location = useLocation()
-  const history = useHistory()
   const productState = useSelector(({ product }) => product)
   const { loading, productToShop, productToShopSize, error } = productState
 
@@ -88,34 +87,20 @@ const ShopCollection = ({ match }) => {
       })
     })
   }
-  const handleOpened = (slug) => {
-    if (slug === match.params.collection) {
-      setFilter({
-        limit: 24,
-        skip: 0,
-        collection: '',
-        filters: {
-          price: [],
-          categoryId: [],
-        },
-      })
-      history.push('/shop')
-    } else {
-      history.push(`/shop/${slug}`)
-    }
-  }
 
   return (
     <div className='shop'>
-      {console.log(filter)}
-      <div className='shop__toolbar'>Shop / Industrial / 4threads</div>
+      <div className='shop__toolbar'>
+        <Link to='/shop'>Shop / </Link>
+        {location.pathname.split('/')[2]}
+      </div>
       <div className='shop__filter'>
         <div className='shop__filterblock'>
           {!loadingCollection &&
             collections.map((i) => (
               <CollapseCheckbox
                 key={i._id}
-                handleOpened={() => handleOpened(i.slug)}
+                slug={i.slug}
                 title={i.name}
                 list={i.categories}
                 initialState={match.params.collection === i.slug}

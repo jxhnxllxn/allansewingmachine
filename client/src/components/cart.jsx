@@ -35,19 +35,17 @@ const Cart = () => {
         </tbody>
       </table>
       <div className='cart__total'>
-        <h2>
-          <small>Total: </small>
-          Php {addComma(total)}
+        <h2>Total</h2>
+        <h2 className='heading-secondary'>
+          Php {addComma(parseFloat(total).toFixed(2))}
         </h2>
       </div>
 
       <MyButton
         addStyle={{
-          margin: '0 1rem',
-          padding: '.5rem',
+          margin: '1rem 0',
           fontSize: '1rem',
           letterSpacing: '4px',
-          float: 'right',
         }}
         runAction={() => handleCloseC()}
         type={'primary'}

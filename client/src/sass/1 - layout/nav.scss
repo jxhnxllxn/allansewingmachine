@@ -1,12 +1,12 @@
 .nav {
   text-transform: capitalize;
-  font-size: 100%;
   position: relative;
   background-color: $navColor;
   letter-spacing: 2px;
   // background-color: $background--secondary;
   &__top {
     @include container;
+    padding-right: 0;
     justify-content: space-between;
     @include flexAlignItemCenter;
     height: 4rem;
@@ -21,7 +21,7 @@
       color: $black--secondary;
       line-height: 1;
       .allan {
-        font-weight: 700;
+        font-weight: 800;
         text-transform: lowercase;
         font-weight: bolder;
         letter-spacing: 0;
@@ -37,7 +37,8 @@
         li {
           // border-left: 1px solid $border;
           cursor: pointer;
-          padding: 1.2rem;
+          padding: 1rem;
+
           .icon {
             svg {
               height: 1.6rem;
@@ -55,16 +56,17 @@
     border-bottom: 1px solid $border;
     overflow: hidden;
     .nav__listBottom {
+      @include container;
+      padding: 0;
       ul {
         height: 4rem;
-        font-size: 85%;
-        @include container;
         @include flexAlignItemCenter;
         justify-content: flex-end;
+        font-size: 1rem;
+        font-weight: 500;
         li {
-          // border-left: 1px solid $border;
           a {
-            padding: 1.5rem;
+            padding: 1rem;
             display: block;
             @include underlineOnHover;
           }

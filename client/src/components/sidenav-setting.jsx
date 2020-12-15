@@ -41,13 +41,7 @@ const SideNavSetting = () => {
     <div className='sidenav_setting'>
       <h1 className='heading-secondary'>Setting</h1>
       <div onClick={() => handleCloseNav()}>
-        <NavLinks
-          links={links}
-          addStyle={{
-            textAlign: 'center',
-            padding: '1rem 0',
-          }}
-        />
+        <NavLinks links={links} addStyle={{ margin: 0 }} />
       </div>
     </div>
   )

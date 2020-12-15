@@ -1,0 +1,23 @@
+.user_profile {
+  &__detail {
+    padding: 2rem 0;
+    .detail {
+      display: flex;
+      position: relative;
+      padding: 0.5rem 0;
+      align-items: center;
+      justify-content: flex-start;
+      label {
+        width: 15%;
+      }
+      p {
+        width: 85%;
+        font-size: 100%;
+        font-weight: 300;
+      }
+    }
+    .action_button {
+      padding-top: 4rem;
+    }
+  }
+}

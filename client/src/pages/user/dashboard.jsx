@@ -19,9 +19,9 @@ const UserDashboard = () => {
 
   return (
     <div className='dashboard_user'>
-      <h1 className='heading-secondary'>
-        {name.split(' ')[0]}'s <span>dashboard</span>
-      </h1>
+      <div className='dashboard_user__title'>
+        <h1 className='heading-secondary'>{name}'s</h1>
+      </div>
       {successBuy && (
         <div className='success_bought card'>
           <h1 className='heading-primary'>Thanks</h1>

@@ -3,9 +3,13 @@
   grid-template-columns: 25% 75%;
   grid-template-rows: 5rem;
   column-gap: 2rem;
-  @include container;
   position: relative;
   font-size: 95%;
+  @include media('<tablet') {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 5rem;
+    column-gap: 1rem;
+  }
   &__toolbar {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0px 4px rgba(0, 0, 0, 0.1);
     grid-column: 1 / -1;
@@ -24,8 +28,14 @@
       padding: 1rem;
       margin-bottom: 1rem;
     }
+    @include media('<tablet') {
+      display: none;
+    }
   }
   &__products {
     grid-column: 2 / 3;
+    @include media('<tablet') {
+      grid-column: 1/-1;
+    }
   }
 }
