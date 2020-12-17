@@ -1,5 +1,5 @@
-import React, { lazy, Suspense, useEffect, useState } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import React, { lazy, Suspense, useEffect } from 'react'
+import { Switch, Route, useLocation } from 'react-router-dom'
 import { gsap } from 'gsap'
 
 //redux
@@ -14,6 +14,7 @@ import Loading from './components/loading'
 import ErrorBoundary from './utils/hoc/errorBoundary'
 import { getCollections } from './redux/collection/collection-action'
 import { getUserDetails } from './redux/user/user-action'
+
 const Shop = lazy(() => import('./pages/shop'))
 const ProductPreview = lazy(() => import('./pages/product-preview'))
 const Checkout = lazy(() => import('./pages/checkout'))
@@ -24,8 +25,8 @@ const Register = lazy(() => import('./pages/register'))
 const AdminIndex = lazy(() => import('./pages/admin/_index'))
 const UserIndex = lazy(() => import('./pages/user/_index'))
 const Logout = lazy(() => import('./components/loadingScreen'))
-
 const App = () => {
+  const location = useLocation()
   useResponsiveVH()
   const token = useSelector(({ user }) => user.token)
   const dispatch = useDispatch()
@@ -33,12 +34,13 @@ const App = () => {
   useEffect(() => {
     dispatch(getProductsToHome())
     dispatch(getCollections())
-    //prevent flashing
     gsap.to('body', { css: { visibility: 'visible' } })
-    window.onbeforeunload = () => window.scrollTo(0, 0)
-
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    window.onbeforeunload = () => window.scrollTo(0, 0)
+  }, [location])
 
   useEffect(() => {
     if (token) {

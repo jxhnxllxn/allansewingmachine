@@ -9,7 +9,7 @@ const toggleScrollbar = (isO) => {
         css: { overflowY: isO ? 'auto' : 'hidden' },
       })
     },
-    isO ? 800 : 0
+    isO ? 500 : 0
   )
 }
 

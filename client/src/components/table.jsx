@@ -1,80 +1,34 @@
 import React from 'react'
-import { ReactComponent as ArrowLeftIcon } from '../assets/icons/arrow-left.svg'
-import { ReactComponent as ArrowRightIcon } from '../assets/icons/arrow-right.svg'
-import { ReactComponent as ArrowFirstPageIcon } from '../assets/icons/arrow-first-page.svg'
-import { ReactComponent as ArrowLastPageIcon } from '../assets/icons/arrow-last-page.svg'
+import moment from 'moment'
+import addComma from '../utils/helper/add-comma'
 
-const Table = ({tableData,openModal,setSearchTerm}) => {
-    return (
-      <>
+const Table = ({ tableFormat, tableData, openModal }) => {
+  console.log(tableData)
+  return (
+    <table className='crudTable'>
+      <thead>
+        <tr>
+          {tableFormat.tHead.map((x, i) => (
+            <th key={i}>{x}</th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {tableData.map((i) => (
+          <tr key={i._id}>
+            <td>{i.user.name}</td>
+            <td>{i.paymentId}</td>
+            <td>Php {addComma(parseFloat(i.totalPrice).toFixed(2))}</td>
+            <td>{moment(i.createdAt).format('M-D-YYYY')}</td>
 
-<div className="table_header">
-                    <h2>Manage orders</h2>
-                    <div className="filter_pagination">
-                        <input
-                            placeholder="Search Name"
-                            onChange={e => setSearchTerm(e.target.value)}
-                        />
-                        <div className="pagination">
-                            <div className="item_per_page">
-                                <span>Item per page </span>
-                            </div>
-
-                            <div className="arrows">
-                                <ArrowFirstPageIcon />
-                                <ArrowLeftIcon />
-                                <span>6</span>
-                                <ArrowRightIcon />
-                                <ArrowLastPageIcon />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-      {
-        tableData.tData &&
-        <table className="crudTable">
-          <thead>
-            <tr>
-              {
-                tableData.tHead.map((x,i) => (
-                  <th key={i}>{x}</th>
-                ))
-              }
-            </tr>
-          </thead>
-          <tbody>
-              {
-                tableData.tData.map((x,i) => (
-                  <tr key={i}>
-                    <td>{x.name}</td>
-                    <td>{x.paymentId}</td>
-                    <td>{x.total}</td>
-                    <td>{x.createdAt}</td>
-                    <td>{x.status}</td>
-                    <td onClick={() => openModal(x)}>view</td>
-                  </tr>
-                ))
-              }
-          </tbody>
-          <tfoot>
-
-          </tfoot>
-           
-        </table>
-        
-      
-
-      }
-
-      {
-        tableData.tDatakk <= 0 ? 
-          <h1>Sorry, No result.</h1>
-          :null
-      }
-      
-      </>
-        
-    )
+            <td>{i.status}</td>
+            <td onClick={() => openModal(i)}>view</td>
+          </tr>
+        ))}
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+  )
 }
 
 export default Table

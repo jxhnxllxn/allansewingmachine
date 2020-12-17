@@ -1,0 +1,31 @@
+.shop {
+  font-size: 95%;
+  @include media('<tablet') {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 5rem;
+    column-gap: 1rem;
+  }
+  &__content {
+    display: flex;
+    .shop__filter {
+      width: 30%;
+      margin-right: 1rem;
+      .shop__filterblock {
+        border-radius: 0.3rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0px 4px rgba(0, 0, 0, 0.1);
+        // border: 1px solid $border;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      @include media('<tablet') {
+        display: none;
+      }
+    }
+    .shop__products {
+      width: 70%;
+      @include media('<tablet') {
+        width: 100%;
+      }
+    }
+  }
+}

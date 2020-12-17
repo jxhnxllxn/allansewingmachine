@@ -1,67 +1,60 @@
 // 0 - BASE
-@import './0\ -\ base/animations';
-@import './0\ -\ base/variables';
-@import './0\ -\ base/mixins';
-@import './0\ -\ base/breakpoints';
-@import './0\ -\ base/base';
-@import './0\ -\ base/typography';
+@import './0_base/animations';
+@import './0_base/variables';
+@import './0_base/mixins';
+@import './0_base/breakpoints';
+@import './0_base/base';
+@import './0_base/typography';
 
 // 1 - LAYOUT
-@import './1\ -\ layout/footer';
-@import './1\ -\ layout/sidenav-layout';
-@import './1\ -\ layout/header';
-@import './1\ -\ layout/layout';
-@import './1\ -\ layout/nav';
+@import './1_layout/footer';
+@import './1_layout/sidenav-layout';
+@import './1_layout/header';
+@import './1_layout/layout';
+@import './1_layout/nav';
 
 // 2 - PAGES
-@import './2\ -\ pages/home';
-@import './2\ -\ pages/shop';
-@import './2\ -\ pages/checkout';
-@import './2\ -\ pages/product-preview';
+@import './2_pages/home';
+@import './2_pages/shop';
+@import './2_pages/checkout';
+@import './2_pages/product-preview';
 
 // 2 - PAGES/USER
-@import './2\ -\ pages/user/index';
-@import './2\ -\ pages/user/dashboard';
-@import './2\ -\ pages/user/history';
-@import './2\ -\ pages/user/profile';
-@import './2\ -\ pages/user/profile-update';
+@import './2_pages/user/index';
+@import './2_pages/user/dashboard';
+@import './2_pages/user/history';
+@import './2_pages/user/profile';
+@import './2_pages/user/profile-update';
 
 // 2 - PAGES/ADMIN
-@import './2\ -\ pages/admin/index';
-@import './2\ -\ pages/admin/collection-preview';
-@import './2\ -\ pages/admin/collection';
-@import './2\ -\ pages/admin/dashboard';
-@import './2\ -\ pages/admin/order';
-@import './2\ -\ pages/admin/product-add';
-@import './2\ -\ pages/admin/product';
-@import './2\ -\ pages/auth-wrapper';
+@import './2_pages/admin/collection-preview';
+@import './2_pages/admin/collection';
+@import './2_pages/admin/dashboard';
+@import './2_pages/admin/order';
+@import './2_pages/admin/product-add';
+@import './2_pages/admin/product';
+@import './2_pages/auth-wrapper';
 
 // 3 - COMPONENTS
-@import './3\ -\ components/carousel/arrow';
-@import './3\ -\ components/carousel/slider';
-@import './3\ -\ components/carousel/slide';
-@import './3\ -\ components/carousel/slider-content';
 
-@import './3\ -\ components/alert';
-@import './3\ -\ components/navlinks';
-@import './3\ -\ components/backdrop';
-@import './3\ -\ components/button';
-@import './3\ -\ components/cart-item';
-@import './3\ -\ components/cart';
-@import './3\ -\ components/collapse-checkbox';
-@import './3\ -\ components/home-collection';
-@import './3\ -\ components/loading';
-@import './3\ -\ components/modal';
-@import './3\ -\ components/product';
-@import './3\ -\ components/sidenav-search';
-@import './3\ -\ components/slider';
+@import './3_components/alert';
+@import './3_components/navlinks';
+@import './3_components/backdrop';
+@import './3_components/button';
+@import './3_components/cart-item';
+@import './3_components/cart';
+@import './3_components/collapse-checkbox';
+@import './3_components/home-collection';
+@import './3_components/loading';
+@import './3_components/modal';
+@import './3_components/product';
 
-@import './3\ -\ components/table';
-@import './3\ -\ components/card-block-shop';
-@import './3\ -\ components/card-block';
-@import './3\ -\ components/file-upload';
-@import './3\ -\ components/form-field';
-// 4 - CUSTOM
+@import './3_components/shop-toolbar';
+@import './3_components/sidenav-search';
+@import './3_components/slider';
 
-// @import "./4\ -\ custom-input";
-// @import "./4\ -\ custom-textarea";
+@import './3_components/table';
+@import './3_components/card-block-shop';
+@import './3_components/card-block';
+@import './3_components/file-upload';
+@import './3_components/form-field';

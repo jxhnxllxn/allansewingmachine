@@ -16,7 +16,7 @@ export default function authCheck(ComposedClass, reload, adminRoute) {
           props.history.push('/user/dashboard')
         } else {
           if (reload === false && isAdmin) {
-            props.history.push('/admin')
+            props.history.push('/admin/dashboard')
           } else if (reload === false && !isAdmin) {
             props.history.push('/user/dashboard')
           }

@@ -118,6 +118,7 @@ const SignUp = () => {
   return (
     <div className='authWrapper'>
       <h1 className='heading-primary'>Sign Up</h1>
+
       <form onSubmit={(e) => submitForm(e)} className='card'>
         <FormField
           id={'name'}
@@ -154,14 +155,13 @@ const SignUp = () => {
         <p>
           Owned an account ? Login <Link to='/login'>here</Link>
         </p>
+        {error ? (
+          <div className='form_error'>
+            <h2>ERROR !</h2>
+            <span>{error}</span>
+          </div>
+        ) : null}
       </form>
-
-      {error ? (
-        <div className='error_label'>
-          <h2>ERROR !</h2>
-          <span>{error}</span>
-        </div>
-      ) : null}
     </div>
   )
 }

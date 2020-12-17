@@ -21,7 +21,6 @@
       position: relative;
       border: 1px solid $border;
       justify-content: center;
-      border-radius: 0.3rem;
       &:hover {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
         opacity: 1;
@@ -43,7 +42,6 @@
         max-width: 400px;
         background-repeat: no-repeat;
         backface-visibility: none;
-        border-radius: 0.3rem;
       }
       .collection__content {
         // height: 3rem;
@@ -56,7 +54,6 @@
         box-shadow: $black;
         bottom: 0;
         letter-spacing: 3px;
-        border-radius: 0.3rem;
         height: 100%;
         width: 100%;
         background-color: rgba($black, 0.3);

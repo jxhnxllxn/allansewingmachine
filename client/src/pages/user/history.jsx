@@ -35,9 +35,12 @@ const UserHistory = () => {
                       <td>{i + 1}</td>
                       <td>{data.name}</td>
                       <td>{data.quantity}</td>
-                      <td>Php {addComma(parseFloat(data.price).toFixed(2))}</td>
                       <td>
-                        Php{' '}
+                        <span>Php </span>
+                        {addComma(parseFloat(data.price).toFixed(2))}
+                      </td>
+                      <td>
+                        <span>Php </span>
                         {addComma(
                           parseFloat(data.price * data.quantity).toFixed(2)
                         )}

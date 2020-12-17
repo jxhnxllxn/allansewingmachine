@@ -94,46 +94,48 @@ const ShopCollection = ({ match }) => {
         <Link to='/shop'>Shop / </Link>
         {location.pathname.split('/')[2]}
       </div>
-      <div className='shop__filter'>
-        <div className='shop__filterblock'>
-          {!loadingCollection &&
-            collections.map((i) => (
-              <CollapseCheckbox
-                key={i._id}
-                slug={i.slug}
-                title={i.name}
-                list={i.categories}
-                initialState={match.params.collection === i.slug}
-                handleFilters={(filters) =>
-                  handleFilters(filters, 'categoryId')
-                }
-              />
-            ))}
+      <div className='shop__content'>
+        <div className='shop__filter'>
+          <div className='shop__filterblock'>
+            {!loadingCollection &&
+              collections.map((i) => (
+                <CollapseCheckbox
+                  key={i._id}
+                  slug={i.slug}
+                  title={i.name}
+                  list={i.categories}
+                  initialState={match.params.collection === i.slug}
+                  handleFilters={(filters) =>
+                    handleFilters(filters, 'categoryId')
+                  }
+                />
+              ))}
+          </div>
+          <div className='shop__filterblock'>
+            <CollapseCheckbox
+              title='Condition'
+              initialState={true}
+              list={conditions}
+              handleFilters={(filters) => handleFilters(filters, 'condition')}
+            />
+          </div>
         </div>
-        <div className='shop__filterblock'>
-          <CollapseCheckbox
-            title='Condition'
-            initialState={true}
-            list={conditions}
-            handleFilters={(filters) => handleFilters(filters, 'condition')}
-          />
-        </div>
-      </div>
 
-      <div className='shop__products'>
-        <div className='shop__pagination'></div>
-        {loading ? (
-          <Loading />
-        ) : error ? (
-          <h1>{error}</h1>
-        ) : (
-          <LoadMoreCards
-            limit={filter.limit}
-            size={productToShopSize}
-            products={productToShop}
-            loadMore={() => loadMoreCards()}
-          />
-        )}
+        <div className='shop__products'>
+          <div className='shop__pagination'></div>
+          {loading ? (
+            <Loading />
+          ) : error ? (
+            <h1>{error}</h1>
+          ) : (
+            <LoadMoreCards
+              limit={filter.limit}
+              size={productToShopSize}
+              products={productToShop}
+              loadMore={() => loadMoreCards()}
+            />
+          )}
+        </div>
       </div>
     </div>
   )

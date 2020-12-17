@@ -23,7 +23,7 @@ const SideNavCart = () => {
           <h1 className='heading-secondary'>Empty Cart</h1>
           <MyButton
             addStyle={{
-              margin: '2rem 1rem',
+              margin: '2rem 0',
               padding: '.5rem',
               fontSize: '1rem',
               letterSpacing: '4px',

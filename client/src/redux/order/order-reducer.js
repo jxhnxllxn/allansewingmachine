@@ -11,6 +11,7 @@ const initialState = {
   },
   orderHistory: [],
   successBuy: false,
+  errro: '',
 }
 
 const order = (state = initialState, { type, payload }) => {
@@ -28,7 +29,7 @@ const order = (state = initialState, { type, payload }) => {
     case OrderActionTypes.SEARCH_CHARACTER:
       return {
         ...state,
-        orders: [payload.data],
+        orders: payload.data,
         loading: false,
       }
 

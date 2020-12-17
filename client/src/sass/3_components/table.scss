@@ -1,21 +1,19 @@
 .crudTable {
   border-collapse: collapse;
   width: 100%;
+  font-size: 100%;
   thead {
     th {
       padding: 0.8rem 0 0.8rem 0.5rem;
       text-align: left;
-      background-color: $color-royal-2;
+      background-color: $black--secondary;
       color: $color-royal-5;
     }
   }
   tbody {
     tr {
-      &:hover {
-        background-color: $color-royal-3;
-      }
       &:nth-child(even) {
-        background-color: $color-royal-5;
+        background-color: $white;
       }
     }
     td {

@@ -90,10 +90,7 @@ exports.getOrderHistory = asyncHandler(async (req, res, next) => {
 // @route   GET /api/order/:orderId/orders
 // @access  Private
 exports.addOrder = asyncHandler(async (req, res, next) => {
-  console.log(req.user)
-
   const order = await Order.create({ user: req.user._id, ...req.body })
-
   let products = []
 
   order.orderItems.forEach((i) => {

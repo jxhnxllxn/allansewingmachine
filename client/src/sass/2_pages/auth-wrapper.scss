@@ -13,6 +13,7 @@
     z-index: -1;
     top: 0;
   }
+
   form {
     margin-top: 8rem;
     width: 25rem;
@@ -23,11 +24,7 @@
       width: 100%;
       margin: 0 0 2rem 0rem;
     }
-    span {
-      padding: 0.5rem 0 2rem 4rem;
-      color: rgba($black, 0.7);
-      color: $black--secondary;
-    }
+
     p {
       padding: 2rem 0;
       font-weight: 300;
@@ -35,18 +32,12 @@
         text-decoration: underline;
       }
     }
-  }
-  .error_label {
-    text-align: center;
-    margin-top: 2rem;
-    padding: 1rem;
-    letter-spacing: 5px;
-    color: #dc1c13;
-    h2 {
-      margin-bottom: 1rem;
-    }
-    span {
-      opacity: 0.9;
+    .form_error {
+      text-align: start;
+      span {
+        color: $red;
+        letter-spacing: 2px;
+      }
     }
   }
 }
