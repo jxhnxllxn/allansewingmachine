@@ -1,24 +1,29 @@
-.crudTable {
-  border-collapse: collapse;
+.customTable {
   width: 100%;
-  font-size: 100%;
-  thead {
-    th {
-      padding: 0.8rem 0 0.8rem 0.5rem;
-      text-align: left;
-      background-color: $black--secondary;
-      color: $color-royal-5;
-    }
-  }
+  border-top: 1px solid $border;
+  border-bottom: 1px solid $border;
+  margin: 2rem 0;
+  padding: 2rem 0;
   tbody {
+    font-size: 90%;
     tr {
+      height: 4rem;
+      text-align: center;
       &:nth-child(even) {
         background-color: $white;
       }
-    }
-    td {
-      border: 1px solid #ddd;
-      padding: 8px;
+      th {
+        text-align: start;
+        padding: 0.5rem;
+      }
+      td {
+        text-align: start;
+        padding: 0.5rem;
+        font-weight: 500;
+        &:last-child {
+          text-align: end;
+        }
+      }
     }
   }
 }

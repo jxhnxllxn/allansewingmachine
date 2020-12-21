@@ -9,6 +9,7 @@ const {
   dashboardAdmin,
   searchIndex,
   getOrderHistory,
+  getOrderPending,
 } = require('../controllers/order.controller')
 const advanceResults = require('../middlewares/advaceResult.middleware')
 const Order = require('../models/Order.model')
@@ -27,6 +28,7 @@ router.route('/search/:i').get(protect, authorize('admin'), searchIndex)
 router.route('/dashboard').get(protect, authorize('admin'), dashboardAdmin)
 
 router.route('/order-history').get(protect, getOrderHistory)
+router.route('/order-pending').get(protect, getOrderPending)
 
 router
   .route('/:id')

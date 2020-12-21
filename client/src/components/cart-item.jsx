@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import { clearItem, updateQuantity } from '../redux/cart/cart-action'
 import addComma from '../utils/helper/add-comma'
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, history }) => {
   const dispatch = useDispatch()
   const [quantity, setQuantity] = useState(0)
   const quantityChange = (e) => {
@@ -12,6 +12,11 @@ const CartItem = ({ item }) => {
   const handleClearItem = () => {
     dispatch(clearItem(item))
   }
+
+  const handleLinkPreview = (id) => {
+    history.push(`/shop/c/${id}`)
+  }
+
   useEffect(() => {
     setQuantity(item.quantity)
   }, [item])
@@ -28,7 +33,12 @@ const CartItem = ({ item }) => {
 
   return (
     <tr className='cart-item'>
-      <td className='cart-item__name'>{item.name}</td>
+      <td
+        className='cart-item__name'
+        onClick={() => handleLinkPreview(item._id)}
+      >
+        {item.name}
+      </td>
       <td className='cart-item__quantity'>
         <input
           type='number'

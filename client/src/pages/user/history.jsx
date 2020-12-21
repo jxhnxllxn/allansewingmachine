@@ -9,7 +9,7 @@ const UserHistory = () => {
   const { loading, orderHistory, error } = orderState
 
   return (
-    <div className='history_cart'>
+    <div className='history_cart card'>
       <h1 className='heading-secondary'>History</h1>
       {loading ? (
         <Loading />
@@ -54,7 +54,7 @@ const UserHistory = () => {
                 {moment(orderHistory[key]['createdAt']).format('MM-DD-YYYY')}
               </h4>
               <h5>
-                Total purchased: Php{' '}
+                <span>Total purchased: Php </span>
                 {addComma(
                   parseFloat(orderHistory[key]['totalPrice']).toFixed(2)
                 )}

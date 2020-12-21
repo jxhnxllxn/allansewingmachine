@@ -39,7 +39,9 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    window.onbeforeunload = () => window.scrollTo(0, 0)
+    return () => {
+      window.scrollTo(0, 0)
+    }
   }, [location])
 
   useEffect(() => {
@@ -53,18 +55,10 @@ const App = () => {
     <Layout>
       <Switch>
         <ErrorBoundary>
-          <Route exact path='/' component={Auth(Home, null)} />
+          <Route exact path='/' component={Home} />
           <Suspense fallback={<Loading />}>
-            <Route
-              path='/shop/:collection?'
-              component={Auth(Shop, null)}
-              exact
-            />
-            <Route
-              path='/shop/:collection/:product'
-              component={Auth(ProductPreview, null)}
-              exact
-            />
+            <Route path='/shop/:collection?' component={Shop} exact />
+            <Route path='/shop/c/:product' component={ProductPreview} exact />
 
             <Route path='/login' component={Auth(Login, false)} exact />
 

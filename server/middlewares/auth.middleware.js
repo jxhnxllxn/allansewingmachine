@@ -33,7 +33,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     if (error.name === 'TokenExpiredError') {
       return next(new ErrorResponse('Session timed out.', 403))
     } else if (error.name === 'JsonWebTokenError') {
-      return next(new ErrorResponse('Invalid Token.', 401))
+      return next(new ErrorResponse('Not authorized, token failed', 401))
     } else {
       return next(new ErrorResponse({ error }, 400))
     }

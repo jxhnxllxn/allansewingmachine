@@ -18,7 +18,7 @@ const Product = ({ _id, name, price, sold, stock, images, condition }) => {
   }
 
   const handleLinkTo = () => {
-    history.push(`/shop/collection/${_id}`)
+    history.push(`/shop/c/${_id}`)
   }
 
   const dispatch = useDispatch()

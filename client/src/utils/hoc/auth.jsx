@@ -22,9 +22,6 @@ export default function authCheck(ComposedClass, reload, adminRoute) {
           }
         }
       }
-      return () => {
-        window.scrollTo(0, 0)
-      }
     }, [isAuthenticated, isAdmin, props.history])
 
     return (

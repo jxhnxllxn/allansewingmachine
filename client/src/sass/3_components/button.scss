@@ -1,12 +1,12 @@
 .btn {
   padding: 0.5rem;
   border: 1px solid $border;
-  font-weight: 500;
+  font-weight: 800;
   cursor: pointer;
   text-transform: capitalize;
-  letter-spacing: 2px;
   background-color: $black--secondary;
   color: $white;
+  letter-spacing: 2px;
   display: inline;
   outline: none;
   &:disabled {

@@ -6,10 +6,10 @@ import NavLinks from '../../components/navlinks'
 import { getAllOrder, getDashboardAdmin } from '../../redux/order/order-action'
 
 const Dashboard = lazy(() => import('./dashboard'))
-const Collection = lazy(() => import('./collection'))
-const Product = lazy(() => import('./product'))
-const ProductAdd = lazy(() => import('./product-add'))
-const Order = lazy(() => import('./order'))
+// const Collection = lazy(() => import('./collection'))
+// const Product = lazy(() => import('./product'))
+// const ProductAdd = lazy(() => import('./product-add'))
+// const Order = lazy(() => import('./order'))
 
 const Admin = ({ match }) => {
   const dispatch = useDispatch()

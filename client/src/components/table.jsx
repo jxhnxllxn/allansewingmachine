@@ -3,30 +3,38 @@ import moment from 'moment'
 import addComma from '../utils/helper/add-comma'
 
 const Table = ({ tableFormat, tableData, openModal }) => {
-  console.log(tableData)
   return (
-    <table className='crudTable'>
-      <thead>
+    <table className='customTable'>
+      <tbody>
         <tr>
           {tableFormat.tHead.map((x, i) => (
             <th key={i}>{x}</th>
           ))}
         </tr>
-      </thead>
-      <tbody>
-        {tableData.map((i) => (
-          <tr key={i._id}>
-            <td>{i.user.name}</td>
-            <td>{i.paymentId}</td>
-            <td>Php {addComma(parseFloat(i.totalPrice).toFixed(2))}</td>
-            <td>{moment(i.createdAt).format('M-D-YYYY')}</td>
-
-            <td>{i.status}</td>
-            <td onClick={() => openModal(i)}>view</td>
+        {tableData.map((key, index) => (
+          <tr key={index}>
+            {tableFormat.tData.map((y, x) => (
+              <td key={x}>
+                {y === 'totalPrice' ? (
+                  <span>Php {addComma(parseFloat(key[y]).toFixed(2))}</span>
+                ) : y === 'createdAt' ? (
+                  moment(key[y]).format('MM-DD-YYYY')
+                ) : (
+                  key[y]
+                )}
+              </td>
+            ))}
+            <td></td>
           </tr>
         ))}
       </tbody>
-      <tfoot></tfoot>
+      <tfoot>
+        <div className='pagination'>
+          <p>
+            prev<span>5</span>next
+          </p>
+        </div>
+      </tfoot>
     </table>
   )
 }

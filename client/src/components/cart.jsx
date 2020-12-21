@@ -11,7 +11,7 @@ const Cart = () => {
   const total = useSelector((state) => selectCartTotal(state))
   const cartItems = useSelector((state) => selectCartItems(state))
   const cartItemList = () =>
-    cartItems.map((i) => <CartItem key={i._id} item={i} />)
+    cartItems.map((i) => <CartItem key={i._id} item={i} history={history} />)
 
   const handleCloseC = () => {
     document.getElementById('toggleSideNav').click()
@@ -20,8 +20,7 @@ const Cart = () => {
 
   return (
     <div className='cart'>
-      {console.log(cartItems)}
-      <h1 className='heading-secondary'>Cart</h1>
+      <h1 className='heading-secondary'>Your Cart</h1>
       <table className='cart__table'>
         <tbody>
           <tr>
@@ -45,7 +44,6 @@ const Cart = () => {
         addStyle={{
           margin: '1rem 0',
           fontSize: '1rem',
-          letterSpacing: '4px',
         }}
         runAction={() => handleCloseC()}
         type={'primary'}

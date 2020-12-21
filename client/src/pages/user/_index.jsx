@@ -3,7 +3,10 @@ import { useDispatch } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import Loading from '../../components/loading'
 import NavLinks from '../../components/navlinks'
-import { getOrderHistory } from '../../redux/order/order-action'
+import {
+  getOrderHistory,
+  getOrderPending,
+} from '../../redux/order/order-action'
 
 const Dashboard = lazy(() => import('./dashboard'))
 const Profile = lazy(() => import('./profile'))
@@ -36,6 +39,7 @@ const User = ({ match }) => {
   ]
 
   useEffect(() => {
+    dispatch(getOrderPending())
     dispatch(getOrderHistory())
   }, [])
 

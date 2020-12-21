@@ -74,8 +74,26 @@ exports.getOrder = asyncHandler(async (req, res, next) => {
   })
 })
 
+// @desc    get order history
+// @route   GET /api/order/order-history
+// @access  Private
 exports.getOrderHistory = asyncHandler(async (req, res, next) => {
-  const order = await Order.find({ user: req.user._id })
+  const order = await Order.find({ user: req.user._id, status: 'doned' })
+
+  if (!order) {
+    return next(
+      new errorResponse(`No order with the id of ${req.user._id}`),
+      404
+    )
+  }
+  res.status(200).json(order)
+})
+
+// @desc    get order active
+// @route   GET /api/order/order-pending
+// @access  Private
+exports.getOrderPending = asyncHandler(async (req, res, next) => {
+  const order = await Order.find({ user: req.user._id, status: 'pending' })
 
   if (!order) {
     return next(

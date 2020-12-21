@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Cart from '../../components/cart'
+import Table from '../../components/table'
+import ThankYouCard from '../../components/thankYouCard'
 import { selectCartItems } from '../../redux/cart/cart-selectors'
 import { successBuyFalse } from '../../redux/order/order-action'
+import addComma from '../../utils/helper/add-comma'
 
 const UserDashboard = () => {
   const name = useSelector(({ user }) => user.name)
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => selectCartItems(state))
   const orderState = useSelector(({ order }) => order)
-  const { loading, successBuy } = orderState
+  const { loading, successBuy, orderPending } = orderState
 
   useEffect(() => {
     return () => {
@@ -17,23 +20,37 @@ const UserDashboard = () => {
     }
   }, [])
 
+  const tableFormat = {
+    tHead: ['Code', 'Total', 'Date', 'Action'],
+    tData: ['code', 'totalPrice', 'createdAt'],
+    action: {
+      view: '/admin/order',
+      delete: '',
+      edit: '',
+    },
+  }
+
   return (
-    <div className='dashboard_user'>
-      <div className='dashboard_user__title'>
-        <h1 className='heading-secondary'>{name}'s</h1>
+    <div className='dash_user'>
+      <div className='dash_user__success'>
+        {successBuy && <ThankYouCard name={name} />}
       </div>
-      {successBuy && (
-        <div className='success_bought card'>
-          <h1 className='heading-primary'>Thanks</h1>
-          <h2>
-            <i>so much !</i>
-          </h2>
-          <p>We appreciate your</p>
-          <p>most recent purchased and hope you</p>
-          <span>ENJOY YOUR NEW SEWING BUDDY.</span>
+      {cartItems.length > 0 && (
+        <div className='dash_user__cart card'>
+          <Cart />
         </div>
       )}
-      {cartItems.length > 0 && <Cart />}
+      {orderPending.length > 0 && (
+        <div className='dash_user__order card'>
+          <h2 className='heading-secondary'>Active Orders</h2>
+          <Table tableFormat={tableFormat} tableData={orderPending} />
+          <h2>Total</h2>
+          <h2 className='heading-secondary'>
+            <span>Php </span>
+            {addComma(parseFloat(orderPending[0].totalPrice).toFixed(2))}
+          </h2>
+        </div>
+      )}
     </div>
   )
 }

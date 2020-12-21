@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import useDebounce from '../../utils/hooks/useDebounce'
 import Loading from '../../components/loading'
-import CustomTable from '../../components/table'
+import Table from '../../components/table'
 import Modal from '../../components/modal'
 import MyButton from '../../components/button'
 import {
@@ -24,11 +24,10 @@ const Dashboard = () => {
   const modalRef = useRef()
 
   const ordersState = useSelector(({ order }) => order)
-  const { loading, orders, countDash, error } = ordersState
-
-  const [quantity, setQuantity] = useState(5)
+  const { loading, data, countDash, error } = ordersState
 
   const [modalData, setModalData] = useState(null)
+  const [active, setactive] = useState('')
 
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -45,16 +44,20 @@ const Dashboard = () => {
   )
 
   const pendingOrder = () => {
+    setactive('pending')
     dispatch(getPendingOrder())
   }
   const processedOrder = () => {
+    setactive('processed')
     dispatch(getProcessedOrder())
   }
   const canceledOrder = () => {
+    setactive('canceled')
     dispatch(getCanceledOrder())
   }
 
   const allOrder = () => {
+    setactive('all')
     dispatch(getAllOrder())
   }
 
@@ -62,14 +65,14 @@ const Dashboard = () => {
 
   const tableFormat = {
     tHead: ['Name', 'Code', 'Total', 'Date', 'Status', 'Action'],
+
+    tData: ['name', 'code', 'totalPrice', 'createdAt', 'status', 'action'],
     link: {
       view: '/admin/order',
       delete: '',
       edit: '',
     },
   }
-
-  const handleChange = (e) => setQuantity(e.target.value)
 
   const openModal = (data) => {
     setModalData(data)
@@ -80,11 +83,11 @@ const Dashboard = () => {
   }
 
   return (
-    <div className='dashboard_admin'>
+    <div className='dashboard_admin card'>
       <h2 className='heading-secondary'>Order</h2>
       <div className='dashboard_admin__count'>
         <div
-          className={`${orders.active === 'pending' ? 'active' : ''} count`}
+          className={`${active === 'pending' ? 'card' : ''} count`}
           onClick={pendingOrder}
         >
           <span className='badge'>{countDash.pending}</span>
@@ -92,7 +95,7 @@ const Dashboard = () => {
           <h4>Pending</h4>
         </div>
         <div
-          className={`${orders.active === 'processed' ? 'active' : ''} count`}
+          className={`${active === 'processed' ? 'card' : ''} count`}
           onClick={processedOrder}
         >
           <span className='badge'>{countDash.processed}</span>
@@ -100,7 +103,7 @@ const Dashboard = () => {
           <h4>Processed</h4>
         </div>
         <div
-          className={`${orders.active === 'canceled' ? 'active' : ''} count`}
+          className={`${active === 'canceled' ? 'card' : ''} count`}
           onClick={canceledOrder}
         >
           <span className='badge'>{countDash.canceled}</span>
@@ -108,7 +111,7 @@ const Dashboard = () => {
           <h4>Canceled</h4>
         </div>
         <div
-          className={`${orders.active === 'all' ? 'active' : ''} count`}
+          className={`${active === 'all' ? 'card' : ''} count`}
           onClick={allOrder}
         >
           <span className='badge'>{countDash.all}</span>
@@ -119,16 +122,13 @@ const Dashboard = () => {
 
       {loading ? (
         <Loading />
-      ) : error ? (
-        <h1>{error}</h1>
-      ) : (
-        <CustomTable
+      ) : data.length > 0 ? (
+        <Table
           tableFormat={tableFormat}
-          tableData={orders}
+          tableData={data}
           openModal={openModal}
-          setSearchTerm={setSearchTerm}
         />
-      )}
+      ) : null}
 
       <Modal ref={modalRef}>
         {modalData && (

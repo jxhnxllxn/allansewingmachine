@@ -212,6 +212,28 @@ export const getOrderHistory = () => async (dispatch) => {
   }
 }
 
+export const getOrderPending = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: OrderActionTypes.ORDER_REQUEST,
+    })
+
+    const { data } = await authAxios.get('/order/order-pending')
+    dispatch({
+      type: OrderActionTypes.GET_ORDER_PENDING,
+      payload: data,
+    })
+  } catch (error) {
+    dispatch({
+      type: OrderActionTypes.ORDER_FAIL,
+      payload:
+        error.response && error.response.data.error
+          ? error.response.data.error
+          : error.message,
+    })
+  }
+}
+
 export const cleanOrder = () => {
   return {
     type: OrderActionTypes.CLEAN_ORDER,

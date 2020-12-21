@@ -1,7 +1,9 @@
-.load_more_container span {
+.load_more_container {
   cursor: pointer;
-  font-size: 27px;
-  padding: 10px 60px;
+  padding: 3rem;
   display: table;
   margin: 0 auto;
+  h4 {
+    letter-spacing: 4px;
+  }
 }

@@ -164,12 +164,22 @@ export const deleteUser = (id) => async (dispatch) => {
 }
 
 //logout
-export const logout = () => (dispatch) => {
-  localStorage.removeItem('access_token')
-  dispatch({ type: AuthActionTypes.USER_LOGOUT })
-  dispatch({ type: AuthActionTypes.USER_DETAILS_RESET })
-  // dispatch({ type: AuthActionTypes.ORDER_LIST_MY_RESET })
-  // dispatch({ type: AuthActionTypes.USER_LIST_RESET })
+// export const logout = () => (dispatch) => {
+//   localStorage.removeItem('access_token')
+//   dispatch({ type: AuthActionTypes.USER_LOGOUT })
+//   dispatch({ type: AuthActionTypes.USER_DETAILS_RESET })
+//   // dispatch({ type: AuthActionTypes.ORDER_LIST_MY_RESET })
+//   // dispatch({ type: AuthActionTypes.USER_LIST_RESET })
+// }
+
+export const logout = () => async (dispatch) => {
+  try {
+    await authAxios.get('/user/logout')
+    dispatch({ type: AuthActionTypes.USER_LOGOUT })
+    localStorage.removeItem('access_token')
+  } catch (error) {
+    return console.error(error.response.data)
+  }
 }
 
 //   updatepassword

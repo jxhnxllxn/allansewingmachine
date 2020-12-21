@@ -8,11 +8,11 @@ const UserProfile = () => {
   const { loading, name, email, contact, address } = userState
   return (
     <div className='user_profile'>
-      <h1 className='heading-secondary'>Information</h1>
       {loading ? (
         <Loading />
       ) : (
-        <div className='user_profile__detail'>
+        <div className='user_profile__detail card'>
+          <h1 className='heading-secondary'>Information</h1>
           <div className='detail'>
             <label>Name:</label>
             <p>{name}</p>
@@ -34,7 +34,7 @@ const UserProfile = () => {
           <div className='action_button'>
             <MyButton
               type='default'
-              title='Edit account info'
+              title='Update'
               linkTo='/user/profile/update'
             />
           </div>

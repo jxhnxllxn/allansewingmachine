@@ -2,7 +2,7 @@ import { OrderActionTypes } from './order-constants'
 
 const initialState = {
   loading: false,
-  orders: [],
+  data: [],
   countDash: {
     pendingCount: 0,
     allCount: 0,
@@ -10,7 +10,8 @@ const initialState = {
     canceledCount: 0,
   },
   orderHistory: [],
-  successBuy: false,
+  orderPending: [],
+  successBuy: true,
   errro: '',
 }
 
@@ -29,7 +30,7 @@ const order = (state = initialState, { type, payload }) => {
     case OrderActionTypes.SEARCH_CHARACTER:
       return {
         ...state,
-        orders: payload.data,
+        ...payload,
         loading: false,
       }
 
@@ -50,17 +51,30 @@ const order = (state = initialState, { type, payload }) => {
     case OrderActionTypes.GET_ORDER_HISTORY:
       return {
         ...state,
-        loading: false,
         orderHistory: payload,
+        loading: false,
       }
 
     case OrderActionTypes.CLEAN_ORDER:
       return {}
 
+    case OrderActionTypes.GET_ORDER_PENDING:
+      return {
+        ...state,
+        orderPending: payload,
+        loading: false,
+      }
+
     case OrderActionTypes.SUCCESS_BUY_FALSE:
       return {
         ...state,
         successBuy: false,
+      }
+    case OrderActionTypes.ORDER_FAIL:
+      return {
+        ...state,
+        error: payload,
+        loading: false,
       }
 
     default:
