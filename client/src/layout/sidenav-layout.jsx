@@ -12,8 +12,6 @@ const SideNavLayout = ({ children, sidenavRef }) => {
       </div>
 
       <div className='sidenav__main'>{children}</div>
-
-      <Footer />
     </div>
   )
 }

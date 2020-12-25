@@ -30,8 +30,11 @@
         & .collection__content {
           background-color: transparent;
           .collection__subtitle {
-            -webkit-text-fill-color: rgba($background, 1);
-            -webkit-text-stroke-color: $black--secondary;
+            -webkit-text-fill-color: rgba(
+              $black,
+              0.9
+            ); /* Will override color (regardless of order) */
+            -webkit-text-stroke-width: 1px;
           }
         }
       }
@@ -58,11 +61,14 @@
         width: 100%;
         background-color: rgba($black, 0.3);
         .collection__subtitle {
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke-color: $black;
+          -webkit-text-stroke-width: 1px;
           margin-bottom: 6px;
           font-size: 2rem;
           color: $black;
-          -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-          -webkit-text-stroke-width: 1px;
+
+          font-weight: 800;
           -webkit-text-stroke-color: rgba($black--secondary, 0.8);
           @include media('<tablet') {
             font-size: 2rem;

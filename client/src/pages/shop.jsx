@@ -16,7 +16,7 @@ const ShopCollection = ({ match }) => {
   const { collections, loading: loadingCollection } = collectionState
 
   const [filter, setFilter] = useState({
-    limit: 3,
+    limit: 12,
     skip: 0,
     collection: '',
     filters: {

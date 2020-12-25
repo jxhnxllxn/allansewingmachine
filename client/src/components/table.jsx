@@ -28,13 +28,7 @@ const Table = ({ tableFormat, tableData, openModal }) => {
           </tr>
         ))}
       </tbody>
-      <tfoot>
-        <div className='pagination'>
-          <p>
-            prev<span>5</span>next
-          </p>
-        </div>
-      </tfoot>
+      <tfoot></tfoot>
     </table>
   )
 }

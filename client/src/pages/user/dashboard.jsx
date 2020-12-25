@@ -30,6 +30,15 @@ const UserDashboard = () => {
     },
   }
 
+  const total = () => {
+    let total = 0
+    orderPending.map((i) => {
+      let t = parseInt(i.totalPrice)
+      total = total + t
+    })
+    return addComma(parseFloat(total).toFixed(2))
+  }
+
   return (
     <div className='dash_user'>
       <div className='dash_user__success'>
@@ -46,8 +55,7 @@ const UserDashboard = () => {
           <Table tableFormat={tableFormat} tableData={orderPending} />
           <h2>Total</h2>
           <h2 className='heading-secondary'>
-            <span>Php </span>
-            {addComma(parseFloat(orderPending[0].totalPrice).toFixed(2))}
+            <span>Php {total()}</span>
           </h2>
         </div>
       )}

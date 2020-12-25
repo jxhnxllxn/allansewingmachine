@@ -2,16 +2,15 @@
   padding: 0.5rem 0;
   .list {
     &__items {
-      cursor: pointer;
       @include flexAlignItemCenter;
       position: relative;
-      .icon {
-        transition: linear 0.3s;
+      svg {
+        height: 1.5rem;
+        width: 1.5rem;
+
+        cursor: pointer;
         position: absolute;
         right: -0.3rem;
-        &.icon--active {
-          transform: rotate(180deg);
-        }
       }
     }
     &__collapse {
@@ -23,9 +22,10 @@
       ul {
         li {
           padding: 0.5rem 0;
-          font-weight: 400;
+          font-weight: 300;
           @include flexAlignItemCenter;
           justify-content: space-between;
+          font-size: 90%;
           input {
             cursor: pointer;
           }

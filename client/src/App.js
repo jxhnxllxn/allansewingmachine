@@ -28,7 +28,7 @@ const Logout = lazy(() => import('./components/loadingScreen'))
 const App = () => {
   const location = useLocation()
   useResponsiveVH()
-  const token = useSelector(({ user }) => user.token)
+  const isAuthenticated = useSelector(({ user }) => user.isAuthenticated)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -45,11 +45,11 @@ const App = () => {
   }, [location])
 
   useEffect(() => {
-    if (token) {
+    if (localStorage.getItem('access_token')) {
       dispatch(getUserDetails())
     }
     // eslint-disable-next-line
-  }, [])
+  }, [localStorage.getItem('access_token')])
 
   return (
     <Layout>

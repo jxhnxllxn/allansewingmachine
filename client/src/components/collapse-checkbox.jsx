@@ -42,9 +42,9 @@ const CollapseCheckbox = ({
   return (
     <div className='collapse-checkbox'>
       <div className='list'>
-        <div className='list__items' onClick={() => handleOpened()}>
+        <div className='list__items'>
           <h4 className='list__title'>{title}</h4>
-          {!initialState && <UpIcon />}
+          {!initialState && <UpIcon onClick={() => handleOpened()} />}
         </div>
         <div className={`list__collapse ${initialState ? 'active' : ''}`}>
           <ul>

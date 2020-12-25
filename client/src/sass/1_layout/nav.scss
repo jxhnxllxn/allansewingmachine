@@ -22,10 +22,9 @@
       line-height: 1;
       .allan {
         font-weight: 800;
-        text-transform: lowercase;
         font-weight: bolder;
         letter-spacing: 0;
-        font-size: 180%;
+        font-size: 150%;
         color: $black;
       }
     }
@@ -40,9 +39,18 @@
           padding: 1rem;
 
           .icon {
+            position: relative;
+            .icon__count {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              background-color: $background;
+              margin: 0.2rem;
+              font-size: 70%;
+            }
             svg {
-              height: 1.6rem;
-              width: 1.6rem;
+              height: 1.8rem;
+              width: 1.8rem;
             }
           }
         }
@@ -66,20 +74,12 @@
         font-weight: 500;
         li {
           a {
-            padding: 1rem;
+            padding: 0.8rem;
             display: block;
             @include underlineOnHover;
           }
         }
       }
-    }
-  }
-
-  &__icons {
-    @include flexAlignItemCenter;
-    .icon {
-      margin-left: 1rem;
-      cursor: pointer;
     }
   }
 }

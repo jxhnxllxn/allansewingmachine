@@ -11,7 +11,7 @@
     width: 100%;
     border-top: 1px solid $border;
     border-bottom: 1px solid $border;
-    margin: 1rem 0 4rem 0;
+    margin: 1rem 0 1rem 0;
     padding: 1rem 0;
     tbody {
       font-size: 90%;
@@ -23,7 +23,6 @@
         }
         td {
           text-align: start;
-          font-weight: 500;
           &:first-child {
             cursor: pointer;
           }

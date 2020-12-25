@@ -1,8 +1,24 @@
+html {
+  font-size: 62.5%;
+
+  @include respond(sm) {
+    font-size: 92.5%;
+  }
+
+  @include respond(md) {
+    font-size: 95%;
+  }
+
+  @include respond(lg) {
+    font-size: 97.5%;
+  }
+}
+
 body {
   color: $black--secondary;
   font-family: $font-primary;
-  font-weight: 500;
-  font-size: 1rem;
+  font-weight: 300;
+  font-size: 1.1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -19,7 +35,6 @@ a {
   color: $black--secondary;
   text-transform: uppercase;
   font-weight: 800;
-  letter-spacing: -5px;
   line-height: 1;
 
   @include media('<tablet') {
@@ -35,7 +50,6 @@ a {
   color: $black--secondary;
   text-transform: uppercase;
   font-weight: bolder;
-  letter-spacing: 0;
   font-weight: 800;
   // -webkit-text-fill-color: $background; /* Will override color (regardless of order) */
   // -webkit-text-stroke-width: 1px;

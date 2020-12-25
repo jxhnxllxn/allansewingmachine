@@ -17,6 +17,9 @@ import toggleScrollbar from '../utils/helper/toggleScrollbar'
 const Nav = () => {
   const dispatch = useDispatch()
   const sidenavRef = useRef()
+  const cartRef = useRef()
+  const personRef = useRef()
+  const searchRef = useRef()
   const history = useHistory()
   const itemCount = useSelector((state) => selectCartItemsCount(state))
   const sideNavIconIsOpen = useSelector(({ ui }) => ui.sideNavIconIsOpen)
@@ -48,7 +51,7 @@ const Nav = () => {
   }
 
   useOutsideClick(
-    [sidenavRef],
+    [sidenavRef, cartRef, personRef, searchRef],
     [sideNavIconIsOpen],
     () => sideNavIconIsOpen && toggleSideNav()
   )
@@ -94,22 +97,23 @@ const Nav = () => {
           <div id='toggleSideNav'></div>
           <div className='nav__listTop'>
             <ul>
-              <li onClick={() => toggleSideNav('search')}>
-                <div className='icon icon--search'>
-                  <SearchIcon />
-                </div>
-              </li>
-              <li onClick={() => togglePersonNav()}>
-                <div className='icon icon--person'>
-                  <PersonIcon />
-                </div>
-              </li>
-              <li onClick={() => toggleSideNav('cart')}>
+              <li onClick={() => toggleSideNav('cart')} ref={cartRef}>
                 <div className='icon icon--bag'>
                   <ShoppingBagIcon />
                   <span className='icon__count'>
                     {itemCount > 0 && itemCount}
                   </span>
+                </div>
+              </li>
+              <li onClick={() => togglePersonNav()} ref={personRef}>
+                <div className='icon icon--person'>
+                  <PersonIcon />
+                </div>
+              </li>
+
+              <li onClick={() => toggleSideNav('search')} ref={searchRef}>
+                <div className='icon icon--search'>
+                  <SearchIcon />
                 </div>
               </li>
             </ul>

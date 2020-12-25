@@ -1,9 +1,17 @@
 .shop_toolbar {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
   display: flex;
   padding: 1rem;
   border-radius: 0.3rem;
   margin-bottom: 2rem;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0px 4px rgba(0, 0, 0, 0.1);
+  svg {
+    margin: 0 0.2rem;
+    cursor: pointer;
+    height: 2rem;
+    width: 2rem;
+  }
 }

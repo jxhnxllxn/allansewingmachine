@@ -1,9 +1,9 @@
 .sidenav {
   position: fixed;
-  top: 0;
+  top: 4rem;
   right: 0;
-  width: 500px;
-  height: 100%;
+  width: 600px;
+  height: calc(100vh - 4rem);
   background-color: $background;
   overflow-x: hidden;
   @include customScroll;
@@ -17,15 +17,24 @@
   }
 
   &__close {
-    position: fixed;
+    position: sticky;
     top: 1rem;
-    left: 2rem;
-    font-size: 2.5rem;
+    margin-left: 2rem;
+    font-size: 2rem;
     cursor: pointer;
+    display: inline-block;
+    background-color: $background;
+    padding: 0.5rem;
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   &__main {
-    margin: 6rem 0 1rem 0;
-    min-height: 60%;
+    margin: 3rem 0 1rem 0;
+    min-height: 50%;
     padding: 0 1rem;
     // text-align: center;
   }
