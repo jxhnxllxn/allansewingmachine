@@ -1,11 +1,11 @@
 import React from 'react'
-import CardBlockShop from './card-block-shop'
+import CardBlock from './card-block'
 import Loading from './loading'
 const LoadMoreCards = ({ size, products, limit, loadMore, loading }) => {
   return (
     <div>
       <div>
-        <CardBlockShop list={products} />
+        <CardBlock list={products} />
       </div>
       <div className='load_more_container'>
         {loading ? (

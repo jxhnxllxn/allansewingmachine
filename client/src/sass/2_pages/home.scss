@@ -1,2 +1,8 @@
-.home_wrapper {
+.home {
+  &__collections {
+    margin-top: 8rem;
+  }
+  &__products {
+    padding-top: 8rem;
+  }
 }

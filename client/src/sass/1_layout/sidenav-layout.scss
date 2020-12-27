@@ -6,7 +6,6 @@
   height: calc(100vh - 4rem);
   background-color: $background;
   overflow-x: hidden;
-  @include customScroll;
   border-left: 2px solid $border;
   border-top: 1px solid $border;
   @include media('<tablet') {
@@ -19,12 +18,11 @@
   &__close {
     position: sticky;
     top: 1rem;
-    margin-left: 2rem;
+    margin-left: 1rem;
     font-size: 2rem;
     cursor: pointer;
     display: inline-block;
     background-color: $background;
-    padding: 0.5rem;
     border-radius: 50%;
     height: 3rem;
     width: 3rem;
@@ -33,7 +31,7 @@
     justify-content: center;
   }
   &__main {
-    margin: 3rem 0 1rem 0;
+    margin: 2rem 0 1rem 0;
     min-height: 50%;
     padding: 0 1rem;
     // text-align: center;

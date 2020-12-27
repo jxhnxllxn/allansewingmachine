@@ -12,8 +12,11 @@ const CardBlock = ({ list, title }) => {
           <h1 className='heading-primary'>{title}</h1>
         </div>
       ) : null}
-
-      <div className='card-block__product-list'>{renderCard()}</div>
+      {list && list.length > 0 ? (
+        <div className='card-block__list'>{renderCard(list)}</div>
+      ) : (
+        <div className='card-block__noresult'>sorry, no results</div>
+      )}
     </div>
   )
 }

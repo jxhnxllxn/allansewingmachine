@@ -6,6 +6,7 @@ import FormField from '../components/form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
 import Loading from '../components/loading'
 import { Link } from 'react-router-dom'
+import FormError from '../components/form-error'
 const SignIn = () => {
   const dispatch = useDispatch()
 
@@ -21,7 +22,7 @@ const SignIn = () => {
         value: '',
         showlabel: true,
         config: {
-          label: 'Email:',
+          label: 'Email',
           name: 'email_input',
           type: 'email',
           placeholder: 'Enter your email',
@@ -39,7 +40,7 @@ const SignIn = () => {
         value: '',
         showlabel: true,
         config: {
-          label: 'Password:',
+          label: 'Password',
           name: 'password_input',
           type: 'password',
           placeholder: 'Enter your password',
@@ -60,6 +61,7 @@ const SignIn = () => {
       setFormField({})
       dispatch(clearError())
     }
+    // eslint-disable-next-line
   }, [])
 
   const updateForm = (element) => {
@@ -113,12 +115,7 @@ const SignIn = () => {
         <p>
           Don't have an account ? Register <Link to='/register'>here</Link>
         </p>
-        {error ? (
-          <div className='form_error'>
-            <h2>ERROR !</h2>
-            <span>{error}</span>
-          </div>
-        ) : null}
+        {error && <FormError errMsg={error} />}
       </form>
     </div>
   )

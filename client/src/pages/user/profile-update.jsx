@@ -10,6 +10,8 @@ import { useEffect } from 'react'
 import { updateUserProfile, updatePassword } from '../../redux/user/user-action'
 import { useDispatch, useSelector } from 'react-redux'
 import MyButton from '../../components/button'
+import FormError from '../../components/form-error'
+import Loading from '../../components/loading'
 
 const ProfileUpdate = () => {
   const dispatch = useDispatch()
@@ -314,10 +316,8 @@ const ProfileUpdate = () => {
 
   return (
     <div className='profile_update'>
-      <h2 className='heading-secondary'>update info</h2>
       <form onSubmit={(event) => submitForm(event)} className='form_block card'>
-        <h4>Info</h4>
-
+        <h1 className='heading-secondary'>update info</h1>
         <FormField
           id={'name'}
           formData={formField.formData.name}
@@ -367,21 +367,16 @@ const ProfileUpdate = () => {
         <MyButton type={'submit'} title={'Update profile'} />
       </form>
 
-      <div className='form_message'>
-        {formField.formSuccess ? (
-          <div className='form_success'>Success</div>
-        ) : null}
-        {formField.formError ? (
-          <div className='error_label'>{formField.formErrorMessage}</div>
-        ) : null}
+      <div>
+        {password.formSuccess && <div className='form_success'>Success</div>}
+        {loading ? <Loading /> : error ? <FormError errMsg={error} /> : null}
       </div>
-
-      <h1 className='heading-secondary'>Update Password</h1>
 
       <form
         onSubmit={(event) => submitFormPassword(event)}
         className='form_block card'
       >
+        <h1 className='heading-secondary'>Update Password</h1>
         <div className='form_block'>
           <FormField
             id={'currentPassword'}
@@ -402,22 +397,9 @@ const ProfileUpdate = () => {
         </div>
       </form>
 
-      <div className='form_message'>
-        {formField.formSuccess ? (
-          <div className='form_success'>Success</div>
-        ) : null}
-        {formField.formError ? (
-          <div className='error_label'>{formField.formErrorMessage}</div>
-        ) : null}
-      </div>
-
       <div>
-        {password.formSuccess ? (
-          <div className='form_success'>Success</div>
-        ) : null}
-        {password.formError ? (
-          <div className='error_label'>{password.formErrorMessage}</div>
-        ) : null}
+        {password.formSuccess && <div className='form_success'>Success</div>}
+        {password.formError && <FormError errMsg={error} />}
       </div>
     </div>
   )

@@ -6,6 +6,7 @@ const userInfoFromStorage = localStorage.getItem('access_token')
 
 const initialState = {
   token: userInfoFromStorage,
+  loading: false,
 }
 
 const user = (state = initialState, action) => {
@@ -27,7 +28,7 @@ const user = (state = initialState, action) => {
       return { loading: false, error: action.payload }
     case AuthActionTypes.CLEAR_ERROR:
     case AuthActionTypes.USER_DETAILS_FAIL:
-      return { ...state, error: null }
+      return { ...state, error: null, loading: false }
     case AuthActionTypes.USER_LOGOUT:
       return {}
     default:

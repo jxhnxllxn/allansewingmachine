@@ -7,16 +7,17 @@ const HomeSlider = () => {
   const slides = [
     {
       img: '/images/image2.jpg',
-      lineOne: 'Subcon Jobs',
+      lineOne: 'Contact',
       lineTwo:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis ad vitae non, deserunt molestiae repudiandae recusandae asperiores eveniet accusamus fugiat.',
+        'Lorem ipsum ddae recusandae asperiores eveniet accusamus fugiat.',
       linkTitle: 'Contact us',
       linkTo: '/contact',
     },
     {
-      img: '/images/background.png',
+      img: '/images/sewer.jpg',
       lineOne: 'Shop',
-      lineTwo: 'We sell brand new, secondhand and sewing parts',
+      lineTwo:
+        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe nesciunt ipsa, ad rem s',
       linkTitle: 'Shop now',
       linkTo: '/shop',
     },

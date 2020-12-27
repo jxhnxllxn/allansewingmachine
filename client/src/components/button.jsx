@@ -47,7 +47,7 @@ const MyButton = (props) => {
     return template
   }
 
-  return <div className='my_link'>{buttons()}</div>
+  return buttons()
 }
 
 export default MyButton

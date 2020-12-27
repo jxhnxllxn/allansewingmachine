@@ -1,17 +1,28 @@
 .card-block {
-  margin-top: 8rem;
   &__title {
     padding: 2rem 0;
   }
-  &__product-list {
+  &__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-    row-gap: 1rem;
-    column-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    row-gap: 2rem;
+    column-gap: 2rem;
     align-items: flex-start;
     @include media('<tablet') {
+      row-gap: 1rem;
+      column-gap: 1rem;
+    }
+    @include media('<phone') {
+      justify-content: center;
       row-gap: 0.5rem;
       column-gap: 0.5rem;
     }
+  }
+  &__noresult {
+    font-size: 4rem;
+    color: #999592;
+    text-align: center;
+    padding-top: 4rem;
+    position: relative;
   }
 }

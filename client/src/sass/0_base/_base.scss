@@ -16,9 +16,6 @@ body {
   min-height: 70vh;
   background-color: $background;
   width: calc(100vw - 1rem);
-  @include media('<tablet') {
-    width: 100%;
-  }
 }
 
 body,
@@ -31,10 +28,10 @@ html {
 
 .card {
   background-color: $background;
-  border: 1px solid $border;
   padding: 3rem;
-  border-radius: 0.5rem;
+  border-radius: 0.8rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 .main_loader {
   text-align: center;

@@ -36,28 +36,27 @@ const Product = ({ _id, name, price, sold, stock, images, condition }) => {
   }
 
   return (
-    <div className='product-card'>
-      <LazyLoad height={200}>
-        <div
-          className='product-card__photo'
-          style={{
-            background: `url(${renderCardImage(images)})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-          }}
-        ></div>
-      </LazyLoad>
+    <div className='product'>
+      <div className='product-card' onClick={handleLinkTo}>
+        <LazyLoad height={'15rem'}>
+          <img
+            className='product-card__photo'
+            src={renderCardImage(images)}
+            alt={name}
+          />
+        </LazyLoad>
 
-      <div className='product-card__content'>
-        <h2>Php {addComma(price)}.00</h2>
-        <h3 onClick={handleLinkTo}>
-          {name}
-          {condition}
-        </h3>
-        <div className='product-card__actions'>
-          <CartIcon onClick={handleAddItem} />
+        <div className='product-card__content'>
+          <h2>Php {addComma(price)}.00</h2>
+          <h3>
+            {name}
+            {condition}
+          </h3>
         </div>
+      </div>
+
+      <div className='product-card__actions'>
+        <CartIcon onClick={handleAddItem} />
       </div>
     </div>
   )

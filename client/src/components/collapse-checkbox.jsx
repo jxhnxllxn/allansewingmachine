@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import { ReactComponent as UpIcon } from '../assets/icons/chevron-up.svg'
 

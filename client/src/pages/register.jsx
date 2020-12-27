@@ -6,6 +6,7 @@ import MyButton from '../components/button'
 import FormField from '../components/form-field'
 import { update, generateData, isFormValid } from '../utils/helper/form-action'
 import Loading from '../components/loading'
+import FormError from '../components/form-error'
 
 const SignUp = () => {
   const dispatch = useDispatch()
@@ -20,7 +21,7 @@ const SignUp = () => {
         value: '',
         showlabel: true,
         config: {
-          label: 'Name:',
+          label: 'Name',
           name: 'name_input',
           type: 'text',
           placeholder: 'Enter your name',
@@ -37,7 +38,7 @@ const SignUp = () => {
         value: '',
         showlabel: true,
         config: {
-          label: 'Email:',
+          label: 'Email',
           name: 'email_input',
           type: 'email',
           placeholder: 'Enter your email',
@@ -55,7 +56,7 @@ const SignUp = () => {
         value: '',
         showlabel: true,
         config: {
-          label: 'Password:',
+          label: 'Password',
           name: 'password_input',
           type: 'password',
           placeholder: 'Enter your password',
@@ -72,7 +73,7 @@ const SignUp = () => {
         value: '',
         showlabel: true,
         config: {
-          label: 'Confirm password:',
+          label: 'Confirm password',
           name: 'confirm_password_input',
           type: 'password',
           placeholder: 'Confirm your password',
@@ -113,6 +114,7 @@ const SignUp = () => {
       setFormField({})
       dispatch(clearError())
     }
+    // eslint-disable-next-line
   }, [])
 
   return (
@@ -155,12 +157,7 @@ const SignUp = () => {
         <p>
           Owned an account ? Login <Link to='/login'>here</Link>
         </p>
-        {error ? (
-          <div className='form_error'>
-            <h2>ERROR !</h2>
-            <span>{error}</span>
-          </div>
-        ) : null}
+        {error && <FormError errMsg={error} />}
       </form>
     </div>
   )

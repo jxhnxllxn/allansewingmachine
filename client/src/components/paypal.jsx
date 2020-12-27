@@ -1,11 +1,9 @@
 import Axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { PayPalButton } from 'react-paypal-button-v2'
-import { useDispatch, useSelector } from 'react-redux'
 import Loading from './loading'
 
 const Paypal = (props) => {
-  const dispatch = useDispatch()
   const [sdkReady, setSdkReady] = useState(false)
   const [paypalConfig, setpaypalConfig] = useState({ loading: true })
 
@@ -39,6 +37,7 @@ const Paypal = (props) => {
     return () => {
       setSdkReady(false)
     }
+    // eslint-disable-next-line
   }, [])
 
   return (

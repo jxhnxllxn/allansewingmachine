@@ -5,31 +5,42 @@
   align-items: center;
   position: relative;
   h1 {
-    position: absolute;
+    position: fixed;
     font-size: 12rem;
-    // -webkit-text-fill-color: $background; /* Will override color (regardless of order) */
-    // -webkit-text-stroke-width: 1px;
-    // -webkit-text-stroke-color: $black--secondary;
     z-index: -1;
-    top: 0;
+    top: 10rem;
+    @include media('<tablet') {
+      font-size: 7rem;
+    }
+    @include media('<phone') {
+      font-size: 4rem;
+    }
   }
 
   form {
-    margin-top: 8rem;
+    margin-top: 9rem;
     width: 25rem;
     @include media('<tablet') {
-      width: 70%;
+      width: 80%;
+      margin-top: 5rem;
     }
     @include media('<phone') {
       width: 100%;
-      margin: 0 0 2rem 0rem;
+      margin-top: 0;
     }
 
     p {
       padding: 2rem 0;
-      font-weight: 300;
+      font-size: 80%;
+      font-weight: 200;
+      color: $black;
       a {
         text-decoration: underline;
+
+        font-weight: 500;
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
     .form_error {

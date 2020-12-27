@@ -71,27 +71,6 @@
   align-items: center;
 }
 
-@mixin customScroll {
-  /* width */
-  &::-webkit-scrollbar {
-    width: 8px;
-  }
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
-}
-
 @mixin underlineOnHover {
   span {
     position: relative;

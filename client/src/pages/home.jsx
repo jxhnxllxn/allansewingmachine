@@ -10,18 +10,19 @@ const Home = () => {
   const { loading, productToHome, error } = productState
 
   return (
-    <div className='home_wrapper'>
+    <div className='home'>
       <HomeSlider />
-
-      <HomeCollection />
+      <div className='home__collections'>
+        <HomeCollection />
+      </div>
       {loading ? (
         <Loading />
       ) : error ? (
         <h1>{error}</h1>
       ) : (
-        <>
+        <div className='home__products'>
           <CardBlock list={productToHome} title={'Best sellers'} />
-        </>
+        </div>
       )}
     </div>
   )

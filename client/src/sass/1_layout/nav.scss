@@ -1,8 +1,8 @@
 .nav {
   text-transform: capitalize;
   position: relative;
-  background-color: $navColor;
-  letter-spacing: 2px;
+  background-color: $white;
+
   // background-color: $background--secondary;
   &__top {
     @include container;
@@ -20,12 +20,11 @@
       // mix-blend-mode: difference;
       color: $black--secondary;
       line-height: 1;
+      letter-spacing: 0;
+      color: $black;
       .allan {
-        font-weight: 800;
-        font-weight: bolder;
-        letter-spacing: 0;
+        font-weight: 900;
         font-size: 150%;
-        color: $black;
       }
     }
     .nav__listTop {
@@ -46,11 +45,15 @@
               right: 0;
               background-color: $background;
               margin: 0.2rem;
-              font-size: 70%;
+              font-size: 80%;
+              font-weight: 500;
             }
             svg {
               height: 1.8rem;
               width: 1.8rem;
+              &:hover {
+                opacity: 0.8;
+              }
             }
           }
         }
@@ -59,7 +62,6 @@
   }
   &__bottom {
     color: $black--secondary;
-    background-color: $background;
     border-top: 1px solid $border;
     border-bottom: 1px solid $border;
     overflow: hidden;
@@ -75,6 +77,10 @@
         li {
           a {
             padding: 0.8rem;
+            @include media('<phone') {
+              padding: 0.5rem;
+              font-size: 80%;
+            }
             display: block;
             @include underlineOnHover;
           }

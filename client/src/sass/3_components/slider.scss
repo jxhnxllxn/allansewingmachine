@@ -6,25 +6,18 @@
     position: relative;
     .featured_action {
       position: absolute;
-      top: 20%;
+      bottom: 5%;
       right: 5%;
-      padding: 1rem;
-
+      padding: 4rem;
+      color: $whitesmoke;
       border-radius: 0.3rem;
-      // background-image: linear-gradient(
-      //   to right bottom,
-      //   rgba($color-royal-4, 0.8),
-      //   rgba($color-royal-5, 0.8)
-      // );
-
       .featured_tag {
         animation-duration: 3s;
-        max-width: 20rem;
-        text-align: end;
         padding: 1rem;
         h1 {
           margin-bottom: 1rem;
           font-size: 3rem;
+          word-wrap: break-word;
         }
         h2 {
           margin-bottom: 2rem;
@@ -35,7 +28,7 @@
 }
 
 .slider_wrapper {
-  width: 100vw;
+  width: 100%;
   position: relative;
   .mySlide {
     display: none;

@@ -1,12 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../components/loading'
 import addComma from '../../utils/helper/add-comma'
 import moment from 'moment'
+import { getOrderHistory } from '../../redux/order/order-action'
 
 const UserHistory = () => {
+  const dispatch = useDispatch()
   const orderState = useSelector(({ order }) => order)
   const { loading, orderHistory, error } = orderState
+
+  useEffect(() => {
+    if (orderHistory.lenght === 0) {
+      dispatch(getOrderHistory())
+    }
+  }, [orderHistory])
 
   return (
     <div className='history_cart card'>

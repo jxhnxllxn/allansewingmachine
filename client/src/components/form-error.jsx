@@ -2,8 +2,9 @@ import React from 'react'
 
 const FormError = ({ errMsg }) => {
   return (
-    <div className='form_error card'>
-      <h2>{errMsg}</h2>
+    <div>
+      <h2>ERROR !</h2>
+      <h3 className='form_error'>{errMsg}</h3>
     </div>
   )
 }

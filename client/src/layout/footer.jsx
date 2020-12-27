@@ -16,7 +16,11 @@ const Footer = () => {
         <span>Allan Sewing Machines</span>
         <span>
           &copy;{new Date().getFullYear()}{' '}
-          <a href='https://github.com/jhhhn' target='_blank'>
+          <a
+            href='https://github.com/jhhhn'
+            target='_blank'
+            rel='noreferrer noopener'
+          >
             jhhhn
           </a>
         </span>

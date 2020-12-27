@@ -125,6 +125,7 @@ ul.payment-options {
     display: flex;
     position: relative;
     flex-wrap: wrap;
+    align-items: center;
 
     input[type='radio'] {
       margin-right: 0.5rem;
@@ -133,8 +134,8 @@ ul.payment-options {
         & + label + div.po-box {
           opacity: 1;
           max-height: 10rem;
-          margin-top: 1rem;
-          padding: 1rem;
+          margin-top: 0.5rem;
+          padding: 0.5rem 0;
           transition: margin-top 0.3s ease-out, max-height 0.5s ease-out,
             opacity 0.3s ease 0.1s;
         }
@@ -146,6 +147,8 @@ ul.payment-options {
       height: auto;
       opacity: 0;
       max-height: 0;
+      font-weight: 200;
+      font-size: 80%;
       pointer-events: none;
       &:last-of-type {
         img {

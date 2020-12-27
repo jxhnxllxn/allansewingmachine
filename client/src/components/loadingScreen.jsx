@@ -1,28 +1,36 @@
 import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { logout } from '../redux/user/user-action'
+import Loading from './loading'
 
-const LoadingScreen = ({ location, message }) => {
+const LoadingScreen = ({ location }) => {
   const dispatch = useDispatch()
-  const loading = useSelector(({ user }) => user.loading)
   useEffect(() => {
-    if (location && location.pathname === '/logout') {
-      dispatch(logout())
-    }
+    setTimeout(() => {
+      if (location && location.pathname === '/logout') {
+        dispatch(logout())
+      }
+    }, 3000)
+
+    // eslint-disable-next-line
   }, [])
   return (
     <div
       style={{
-        backgroundColor: 'black',
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        height: '100vh',
-        width: '100vw',
+        backgroundColor: '#ffffff',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
         zIndex: '99999',
+        opacity: '0.8',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
-      <h1 className='heading-primary'>{message}</h1>
+      <Loading />
     </div>
   )
 }

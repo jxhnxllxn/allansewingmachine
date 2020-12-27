@@ -33,6 +33,7 @@ const Checkout = ({ isAuthenticated }) => {
     if (cartItems <= 0) {
       history.push('/user/dashboard')
     }
+    // eslint-disable-next-line
   }, [cartItems])
 
   const [formField, setFormField] = useState({

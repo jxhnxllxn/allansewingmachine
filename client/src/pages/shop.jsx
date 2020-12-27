@@ -55,6 +55,7 @@ const ShopCollection = ({ match }) => {
         getProductsToShop(0, filter.limit, filter.collection, filter.filters)
       )
     }
+    // eslint-disable-next-line
   }, [match.params.collection])
 
   const showFilteredResults = (filters) => {

@@ -10,21 +10,20 @@ import useResponsiveVH from './utils/hooks/useResponsiveVH'
 import Auth from './utils/hoc/auth'
 import Home from './pages/home'
 import Layout from './layout/_layout'
-import Loading from './components/loading'
 import ErrorBoundary from './utils/hoc/errorBoundary'
 import { getCollections } from './redux/collection/collection-action'
 import { getUserDetails } from './redux/user/user-action'
+import LoadingScreen from './components/loadingScreen'
 
 const Shop = lazy(() => import('./pages/shop'))
 const ProductPreview = lazy(() => import('./pages/product-preview'))
 const Checkout = lazy(() => import('./pages/checkout'))
-
 const Login = lazy(() => import('./pages/login'))
 const Register = lazy(() => import('./pages/register'))
-
 const AdminIndex = lazy(() => import('./pages/admin/_index'))
 const UserIndex = lazy(() => import('./pages/user/_index'))
 const Logout = lazy(() => import('./components/loadingScreen'))
+
 const App = () => {
   const location = useLocation()
   useResponsiveVH()
@@ -45,7 +44,7 @@ const App = () => {
   }, [location])
 
   useEffect(() => {
-    if (localStorage.getItem('access_token')) {
+    if (localStorage.getItem('access_token') && !isAuthenticated) {
       dispatch(getUserDetails())
     }
     // eslint-disable-next-line
@@ -56,7 +55,7 @@ const App = () => {
       <Switch>
         <ErrorBoundary>
           <Route exact path='/' component={Home} />
-          <Suspense fallback={<Loading />}>
+          <Suspense fallback={<LoadingScreen />}>
             <Route path='/shop/:collection?' component={Shop} exact />
             <Route path='/shop/c/:product' component={ProductPreview} exact />
 

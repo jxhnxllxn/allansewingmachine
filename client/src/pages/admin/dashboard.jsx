@@ -7,7 +7,7 @@ import MyButton from '../../components/button'
 import {
   getAllOrder,
   getCanceledOrder,
-  getDashboardAdmin,
+  // getDashboardAdmin,
   getPendingOrder,
   getProcessedOrder,
   searchCharacter,

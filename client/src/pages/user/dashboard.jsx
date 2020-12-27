@@ -4,7 +4,10 @@ import Cart from '../../components/cart'
 import Table from '../../components/table'
 import ThankYouCard from '../../components/thankYouCard'
 import { selectCartItems } from '../../redux/cart/cart-selectors'
-import { successBuyFalse } from '../../redux/order/order-action'
+import {
+  getOrderPending,
+  successBuyFalse,
+} from '../../redux/order/order-action'
 import addComma from '../../utils/helper/add-comma'
 
 const UserDashboard = () => {
@@ -12,13 +15,17 @@ const UserDashboard = () => {
   const dispatch = useDispatch()
   const cartItems = useSelector((state) => selectCartItems(state))
   const orderState = useSelector(({ order }) => order)
-  const { loading, successBuy, orderPending } = orderState
+  const { successBuy, orderPending } = orderState
 
   useEffect(() => {
+    if (orderPending.length === 0) {
+      dispatch(getOrderPending())
+    }
     return () => {
       dispatch(successBuyFalse())
     }
-  }, [])
+    // eslint-disable-next-line
+  }, [orderPending])
 
   const tableFormat = {
     tHead: ['Code', 'Total', 'Date', 'Action'],
@@ -34,7 +41,7 @@ const UserDashboard = () => {
     let total = 0
     orderPending.map((i) => {
       let t = parseInt(i.totalPrice)
-      total = total + t
+      return (total = total + t)
     })
     return addComma(parseFloat(total).toFixed(2))
   }

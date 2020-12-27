@@ -1,16 +1,19 @@
 html {
-  font-size: 62.5%;
-
-  @include respond(sm) {
+  font-size: 90.5%;
+  @include media('>phone') {
     font-size: 92.5%;
   }
 
-  @include respond(md) {
-    font-size: 95%;
+  @include media('>tablet') {
+    font-size: 94%;
   }
 
-  @include respond(lg) {
-    font-size: 97.5%;
+  @include media('>desktop') {
+    font-size: 96.5%;
+  }
+
+  @include media('>LGdesktop') {
+    font-size: 98%;
   }
 }
 
@@ -49,7 +52,6 @@ a {
   font-size: 2rem;
   color: $black--secondary;
   text-transform: uppercase;
-  font-weight: bolder;
   font-weight: 800;
   // -webkit-text-fill-color: $background; /* Will override color (regardless of order) */
   // -webkit-text-stroke-width: 1px;

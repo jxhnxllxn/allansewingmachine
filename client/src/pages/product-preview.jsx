@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   getProductDetail,
@@ -7,23 +7,29 @@ import {
 } from '../redux/product/product-action'
 import Loading from '../components/loading'
 import DetailsThumb from '../components/detail-thumb'
-import { useState } from 'react'
 import { addItem } from '../redux/cart/cart-action'
+import MyButton from '../components/button'
+import { useHistory } from 'react-router-dom'
 
 const ProductPreview = (props) => {
   const dispatch = useDispatch()
+
+  const history = useHistory()
   const myRef = useRef()
   const [state, setState] = useState({ index: 0 })
   const productState = useSelector(({ product }) => product)
   const { loading, error, productDetail } = productState
 
   useEffect(() => {
+    console.log(history)
     const id = props.match.params.product
     dispatch(getProductDetail(id))
+
     return () => {
       dispatch(clearProductDetail())
     }
-  }, [dispatch, props.match.params.product])
+    // eslint-disable-next-line
+  }, [props.match.params.product])
 
   const handleTab = (index) => {
     setState({ index: index })
@@ -35,10 +41,10 @@ const ProductPreview = (props) => {
   }
 
   const renderImage = (images) => {
-    if (images.length > 0) {
+    if (images && images.length > 0) {
       return images[state.index].url
     } else {
-      return '/images/slide2.jpg'
+      return '/images/sewer.jpg'
     }
   }
 
@@ -48,6 +54,7 @@ const ProductPreview = (props) => {
 
   return (
     <div className='product_preview_wrapper'>
+      {console.warn(productState.productDetail)}
       {loading ? (
         <Loading />
       ) : error ? (
@@ -56,25 +63,27 @@ const ProductPreview = (props) => {
         </div>
       ) : (
         <div className='details'>
-          {console.log(productState)}
           <div className='big_img'>
-            {/* <img src={renderImage(productDetail.images)} alt='product images' /> */}
+            <img src={renderImage(productDetail.images)} alt='product images' />
           </div>
           <div className='box'>
-            <div className='row'>
+            <div>
               <h2>{productDetail.name}</h2>
-              <span>Php {productDetail.price}.00</span>
+              <h3>Php {productDetail.price}.00</h3>
             </div>
             <p>{productDetail.description}</p>
+
             <DetailsThumb
               images={productDetail.images}
               tab={handleTab}
               myRef={myRef}
             />
 
-            <button className='cart' onClick={handleAddItem}>
-              Add to cart
-            </button>
+            <MyButton
+              type={'primary'}
+              title={'Add to Cart'}
+              runAction={handleAddItem}
+            />
           </div>
         </div>
       )}
