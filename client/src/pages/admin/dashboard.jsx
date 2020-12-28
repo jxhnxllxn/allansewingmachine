@@ -7,7 +7,7 @@ import MyButton from '../../components/button'
 import {
   getAllOrder,
   getCanceledOrder,
-  // getDashboardAdmin,
+  getDashboardAdmin,
   getPendingOrder,
   getProcessedOrder,
   searchCharacter,
@@ -32,6 +32,14 @@ const Dashboard = () => {
   const [searchTerm, setSearchTerm] = useState('')
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000)
+
+  useEffect(() => {
+    if (data.length === 0) {
+      dispatch(getDashboardAdmin())
+      dispatch(getAllOrder())
+    }
+    // eslint-disable-next-line
+  }, [])
 
   useEffect(
     () => {
@@ -65,8 +73,7 @@ const Dashboard = () => {
 
   const tableFormat = {
     tHead: ['Name', 'Code', 'Total', 'Date', 'Status', 'Action'],
-
-    tData: ['name', 'code', 'totalPrice', 'createdAt', 'status', 'action'],
+    tData: ['user.name', 'code', 'totalPrice', 'createdAt', 'status', 'action'],
     link: {
       view: '/admin/order',
       delete: '',

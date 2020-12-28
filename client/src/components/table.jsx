@@ -11,14 +11,16 @@ const Table = ({ tableFormat, tableData, openModal }) => {
             <th key={i}>{x}</th>
           ))}
         </tr>
-        {tableData.map((key, index) => (
-          <tr key={index}>
+        {tableData.map((key, i) => (
+          <tr key={i}>
             {tableFormat.tData.map((y, x) => (
               <td key={x}>
                 {y === 'totalPrice' ? (
                   <span>Php {addComma(parseFloat(key[y]).toFixed(2))}</span>
                 ) : y === 'createdAt' ? (
                   moment(key[y]).format('MM-DD-YYYY')
+                ) : y === 'user.name' ? (
+                  key.user.name
                 ) : (
                   key[y]
                 )}
@@ -28,7 +30,11 @@ const Table = ({ tableFormat, tableData, openModal }) => {
           </tr>
         ))}
       </tbody>
-      <tfoot></tfoot>
+      <tfoot>
+        <caption>
+          <h3></h3>
+        </caption>
+      </tfoot>
     </table>
   )
 }

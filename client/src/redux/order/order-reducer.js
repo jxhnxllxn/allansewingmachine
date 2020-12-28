@@ -12,7 +12,7 @@ const initialState = {
   orderHistory: [],
   orderPending: [],
   successBuy: true,
-  errro: '',
+  error: '',
 }
 
 const order = (state = initialState, { type, payload }) => {

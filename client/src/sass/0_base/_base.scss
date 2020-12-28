@@ -16,6 +16,17 @@ body {
   min-height: 70vh;
   background-color: $background;
   width: calc(100vw - 1rem);
+  background: #ece9e6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom,
+    #ffffff,
+    #ece9e6
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to bottom,
+    #ffffff,
+    #ece9e6
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 body,
@@ -29,7 +40,7 @@ html {
 .card {
   background-color: $background;
   padding: 3rem;
-  border-radius: 0.8rem;
+  border-radius: 0.3rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }

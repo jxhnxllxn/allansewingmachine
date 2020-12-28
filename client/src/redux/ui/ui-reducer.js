@@ -8,14 +8,7 @@ const uiReducer = (state = initialState, { type, payload }) => {
       return {
         sideNavIconIsOpen: !state.sideNavIconIsOpen,
       }
-    // case 'TOGGLE_NAV_MENU':
-    //   return {
-    //     navMenuIsOpen: !state.navMenuIsOpen,
-    //   }
-    // case 'TOGGLE_LOADING_SCREEN':
-    //   return {
-    //     loadingScreenActive: !state.loadingScreenActive,
-    //   }
+
     default:
       return state
   }

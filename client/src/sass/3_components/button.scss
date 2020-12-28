@@ -10,6 +10,6 @@
   display: inline;
   outline: none;
   &:disabled {
-    cursor: none;
+    cursor: unset;
   }
 }

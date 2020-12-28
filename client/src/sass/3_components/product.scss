@@ -19,6 +19,7 @@
 
     .product-card__photo {
       transition: ease 0.3s;
+      border-radius: 0.3rem;
       backface-visibility: hidden;
       max-height: 15rem;
       width: 100%;

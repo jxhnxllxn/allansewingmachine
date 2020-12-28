@@ -29,6 +29,7 @@
     "express-async-handler": "^1.1.4",
     "express-fileupload": "^1.2.0",
     "express-mongo-sanitize": "^2.0.0",
+    "googleapis": "^66.0.0",
     "helmet": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.28",

@@ -1,10 +1,8 @@
-import React, { lazy, Suspense, useEffect } from 'react'
+import React, { lazy, Suspense } from 'react'
 import { useDispatch } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import Loading from '../../components/loading'
 import NavLinks from '../../components/navlinks'
-import { getAllOrder, getDashboardAdmin } from '../../redux/order/order-action'
-
 const Dashboard = lazy(() => import('./dashboard'))
 // const Collection = lazy(() => import('./collection'))
 // const Product = lazy(() => import('./product'))
@@ -12,14 +10,6 @@ const Dashboard = lazy(() => import('./dashboard'))
 // const Order = lazy(() => import('./order'))
 
 const Admin = ({ match }) => {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getDashboardAdmin())
-    dispatch(getAllOrder())
-    // eslint-disable-next-line
-  }, [])
-
   const links = [
     {
       name: 'Dashboard',

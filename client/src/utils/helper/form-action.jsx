@@ -37,13 +37,11 @@ export const update = (element, formData, formName) => {
   newElement.value = element.event.target.value
 
   //onchange validate
-
   let validData = validate(newElement, formData)
   newElement.valid = validData[0]
   newElement.validationMessage = validData[1]
 
   //on blur validate
-
   //   if (element.blur) {
   //     let validData = validate(newElement, formData)
   //     newElement.valid = validData[0]

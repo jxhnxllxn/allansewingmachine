@@ -36,7 +36,7 @@ const Product = ({ _id, name, price, sold, stock, images, condition }) => {
   }
 
   return (
-    <div className='product'>
+    <div className='product card'>
       <div className='product-card' onClick={handleLinkTo}>
         <LazyLoad height={'15rem'}>
           <img
