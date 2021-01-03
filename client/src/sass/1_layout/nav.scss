@@ -1,5 +1,6 @@
 .nav {
   text-transform: capitalize;
+  border-bottom: 1px solid $border;
   position: relative;
   background: #ece9e6; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -16,66 +17,8 @@
   background-attachment: fixed;
 
   &__top {
-    @include container;
-    padding-right: 0;
-    justify-content: space-between;
-    @include flexAlignItemCenter;
-    height: 4rem;
-    overflow: hidden;
-    // position: relative;
-    .nav__logo {
-      position: fixed;
-      top: 0.8rem;
-      display: flex;
-      flex-direction: column;
-      // mix-blend-mode: difference;
-      color: $black--secondary;
-      line-height: 1;
-      letter-spacing: 0;
-      color: $black;
-      .allan {
-        font-weight: 900;
-        font-size: 150%;
-      }
-    }
-    .nav__listTop {
-      ul {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        li {
-          // border-left: 1px solid $border;
-          cursor: pointer;
-          padding: 1rem;
-
-          .icon {
-            position: relative;
-            .icon__count {
-              position: absolute;
-              bottom: 0;
-              right: 0;
-              background-color: $background;
-              margin: 0.2rem;
-              font-size: 80%;
-              font-weight: 500;
-            }
-            svg {
-              height: 1.8rem;
-              width: 1.8rem;
-              &:hover {
-                opacity: 0.8;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  &__bottom {
     color: $black--secondary;
-    border-top: 1px solid $border;
     border-bottom: 1px solid $border;
-    overflow: hidden;
     .nav__listBottom {
       @include container;
       padding: 0;
@@ -94,6 +37,58 @@
             }
             display: block;
             @include underlineOnHover;
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    @include container;
+    padding-right: 0;
+    justify-content: space-between;
+    @include flexAlignItemCenter;
+    height: 4rem;
+    .nav__logo {
+      position: fixed;
+      top: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      color: $black--secondary;
+      line-height: 1;
+      color: $black;
+      .allan {
+        font-weight: 900;
+        font-size: 150%;
+      }
+    }
+    .nav__listTop {
+      ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        li {
+          cursor: pointer;
+          padding: 1rem;
+
+          .icon {
+            position: relative;
+            .icon__count {
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              background-color: $white;
+              margin: 0.2rem;
+              font-size: 80%;
+              font-weight: 500;
+            }
+            svg {
+              height: 1.8rem;
+              width: 1.8rem;
+              &:hover {
+                opacity: 0.8;
+              }
+            }
           }
         }
       }

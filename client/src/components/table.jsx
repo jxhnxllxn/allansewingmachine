@@ -30,11 +30,7 @@ const Table = ({ tableFormat, tableData, openModal }) => {
           </tr>
         ))}
       </tbody>
-      <tfoot>
-        <caption>
-          <h3></h3>
-        </caption>
-      </tfoot>
+      <tfoot></tfoot>
     </table>
   )
 }

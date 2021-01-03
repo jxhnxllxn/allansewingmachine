@@ -69,6 +69,7 @@ const order = (state = initialState, { type, payload }) => {
       return {
         ...state,
         successBuy: false,
+        loading: false,
       }
     case OrderActionTypes.ORDER_FAIL:
       return {

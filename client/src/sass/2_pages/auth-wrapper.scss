@@ -1,14 +1,12 @@
 .authWrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
-  position: relative;
+  height: 100%;
   h1 {
-    position: fixed;
     font-size: 12rem;
     z-index: -1;
-    top: 10rem;
     @include media('<tablet') {
       font-size: 7rem;
     }
@@ -18,7 +16,8 @@
   }
 
   form {
-    margin-top: 9rem;
+    margin-top: 8rem;
+    position: absolute;
     width: 25rem;
     @include media('<tablet') {
       width: 80%;
@@ -47,7 +46,6 @@
       text-align: start;
       span {
         color: $red;
-        letter-spacing: 2px;
       }
     }
   }

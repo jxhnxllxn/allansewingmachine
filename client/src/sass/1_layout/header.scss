@@ -1,11 +1,7 @@
 .header {
   z-index: 102;
   position: fixed;
-  top: 0;
+  top: 0rem;
   left: 0;
   right: 0;
-  width: calc(100vw - 1rem);
-  @include media('<tablet') {
-    width: 100%;
-  }
 }

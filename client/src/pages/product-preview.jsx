@@ -53,7 +53,7 @@ const ProductPreview = (props) => {
   }
 
   return (
-    <div className='product_preview_wrapper'>
+    <div className='product_preview_wrapper page'>
       {console.warn(productState.productDetail)}
       {loading ? (
         <Loading />

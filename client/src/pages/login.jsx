@@ -7,7 +7,7 @@ import { update, generateData, isFormValid } from '../utils/helper/form-action'
 import Loading from '../components/loading'
 import { Link } from 'react-router-dom'
 import FormError from '../components/form-error'
-const SignIn = () => {
+const Login = () => {
   const dispatch = useDispatch()
 
   const userState = useSelector(({ user }) => user)
@@ -120,4 +120,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default Login

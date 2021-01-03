@@ -49,6 +49,7 @@ const UserDashboard = () => {
   return (
     <div className='dash_user'>
       <div className='dash_user__success'>
+        <ThankYouCard name={name} />
         {successBuy && <ThankYouCard name={name} />}
       </div>
       {cartItems.length > 0 && (

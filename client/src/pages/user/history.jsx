@@ -11,18 +11,21 @@ const UserHistory = () => {
   const { loading, orderHistory, error } = orderState
 
   useEffect(() => {
-    if (orderHistory.lenght === 0) {
+    if (orderHistory.length === 0) {
       dispatch(getOrderHistory())
     }
-  }, [orderHistory])
+  }, [])
 
   return (
     <div className='history_cart card'>
       <h1 className='heading-secondary'>History</h1>
+
       {loading ? (
         <Loading />
       ) : error ? (
         <h1>Error {error}</h1>
+      ) : orderHistory.length === 0 ? (
+        <h1>No history purchased</h1>
       ) : (
         Object.keys(orderHistory).map((key, index) => {
           return (

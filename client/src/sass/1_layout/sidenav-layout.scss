@@ -1,9 +1,9 @@
 .sidenav {
   position: fixed;
-  top: 4rem;
+  top: 0;
   right: 0;
   width: 600px;
-  height: calc(100vh - 4rem);
+  height: 100vh;
   background-color: $background;
   overflow-x: hidden;
   border-left: 2px solid $border;

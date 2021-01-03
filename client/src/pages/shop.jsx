@@ -6,8 +6,9 @@ import { getProductsToShop } from '../redux/product/product-action'
 import LoadMoreCards from '../components/load-more'
 import CollapseCheckbox from '../components/collapse-checkbox'
 import ShopToolbar from '../components/shop-toolbar'
+import Loading from '../components/loading'
 
-const ShopCollection = ({ match }) => {
+const Shop = ({ match }) => {
   const dispatch = useDispatch()
   const productState = useSelector(({ product }) => product)
   const { loading, productToShop, productToShopSize, error } = productState
@@ -50,11 +51,14 @@ const ShopCollection = ({ match }) => {
           filter.filters
         )
       )
-    } else {
+    } else if (productToShopSize === 0) {
       dispatch(
         getProductsToShop(0, filter.limit, filter.collection, filter.filters)
       )
+    } else {
+      return
     }
+
     // eslint-disable-next-line
   }, [match.params.collection])
 
@@ -131,14 +135,15 @@ const ShopCollection = ({ match }) => {
         </div>
 
         <div className='shop__products'>
-          {error ? (
+          {loading ? (
+            <Loading />
+          ) : error ? (
             <h1>{error}</h1>
           ) : (
             <LoadMoreCards
               limit={filter.limit}
               size={productToShopSize}
               products={productToShop}
-              loading={loading}
               loadMore={() => loadMoreCards()}
             />
           )}
@@ -148,4 +153,4 @@ const ShopCollection = ({ match }) => {
   )
 }
 
-export default ShopCollection
+export default Shop

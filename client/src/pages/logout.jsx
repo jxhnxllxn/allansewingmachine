@@ -1,16 +1,14 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { logout } from '../redux/user/user-action'
-import Loading from './loading'
+import Loading from '../components/loading'
 
-const LoadingScreen = ({ location }) => {
+const Logout = ({ location }) => {
   const dispatch = useDispatch()
   useEffect(() => {
-    setTimeout(() => {
-      if (location && location.pathname === '/logout') {
-        dispatch(logout())
-      }
-    }, 3000)
+    if (location && location.pathname === '/logout') {
+      dispatch(logout())
+    }
 
     // eslint-disable-next-line
   }, [])
@@ -21,4 +19,4 @@ const LoadingScreen = ({ location }) => {
   )
 }
 
-export default LoadingScreen
+export default Logout

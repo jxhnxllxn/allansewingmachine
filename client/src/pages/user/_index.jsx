@@ -1,14 +1,24 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Loading from '../../components/loading'
 import NavLinks from '../../components/navlinks'
 
-const Dashboard = lazy(() => import('./dashboard'))
-const Profile = lazy(() => import('./profile'))
-const ProfileUpdate = lazy(() => import('./profile-update'))
-const History = lazy(() => import('./history'))
+import Dashboard from './dashboard'
+import Profile from './profile'
+import ProfileUpdate from './profile-update'
+import History from './history'
 
 const User = ({ match }) => {
+  const routes = [
+    { path: `${match.path}/dashboard`, component: Dashboard, exact: true },
+    { path: `${match.path}/profile`, component: Profile, exact: true },
+    {
+      path: `${match.path}/profile/update`,
+      component: ProfileUpdate,
+      exact: true,
+    },
+    { path: `${match.path}/history`, component: History, exact: true },
+  ]
+
   const links = [
     {
       name: 'Dashboard',
@@ -33,26 +43,15 @@ const User = ({ match }) => {
   ]
 
   return (
-    <div className='user'>
+    <div className='user page'>
       <div className='user__links'>
         <NavLinks links={links} />
       </div>
       <div className='user__main'>
         <Switch>
-          <Suspense fallback={<Loading />}>
-            <Route
-              path={`${match.path}/dashboard`}
-              component={Dashboard}
-              exact
-            />
-            <Route path={`${match.path}/profile`} component={Profile} exact />
-            <Route
-              path={`${match.path}/profile/update`}
-              component={ProfileUpdate}
-              exact
-            />
-            <Route path={`${match.path}/history`} component={History} exact />
-          </Suspense>
+          {routes.map(({ path, component, exact = true }) => (
+            <Route exact={exact} path={path} component={component} key={path} />
+          ))}
         </Switch>
       </div>
     </div>

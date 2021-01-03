@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import { gsap } from 'gsap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { selectCartItemsCount } from '../redux/cart/cart-selectors'
@@ -7,12 +6,10 @@ import { toggleSideNavIcon } from '../redux/ui/ui-actions'
 import { ReactComponent as PersonIcon } from '../assets/icons/person.svg'
 import { ReactComponent as ShoppingBagIcon } from '../assets/icons/shopping-bag.svg'
 import { ReactComponent as SearchIcon } from '../assets/icons/search.svg'
-import useSidenavAnimation from '../utils/animations/useSidenavAnimation'
 import useOutsideClick from '../utils/hooks/useOutsideClick'
 
 import SideNav from './sidenav'
 import NavLinks from '../components/navlinks'
-import toggleScrollbar from '../utils/helper/toggleScrollbar'
 
 const Nav = () => {
   const dispatch = useDispatch()
@@ -29,17 +26,11 @@ const Nav = () => {
 
   const [activeMenuIcons, setActiveMenuIcons] = useState('')
 
-  const tl = gsap.timeline()
-  const [tl__sidenav] = useState(tl)
-  useSidenavAnimation(tl__sidenav)
-
   const toggleSideNav = (x) => {
-    toggleScrollbar(sideNavIconIsOpen)
     if (!sideNavIconIsOpen) {
       setActiveMenuIcons(x)
     }
     dispatch(toggleSideNavIcon())
-    tl__sidenav.reversed(sideNavIconIsOpen)
   }
 
   const togglePersonNav = () => {
@@ -90,6 +81,12 @@ const Nav = () => {
     <>
       <nav className='nav'>
         <div className='nav__top'>
+          <div className='nav__listBottom'>
+            <NavLinks links={links[0]} />
+          </div>
+        </div>
+
+        <div className='nav__bottom'>
           <div className='nav__logo'>
             <span className='allan'>Allan</span>
             <span>Sewing Machines</span>
@@ -117,12 +114,6 @@ const Nav = () => {
                 </div>
               </li>
             </ul>
-          </div>
-        </div>
-
-        <div className='nav__bottom'>
-          <div className='nav__listBottom'>
-            <NavLinks links={links[0]} />
           </div>
         </div>
       </nav>

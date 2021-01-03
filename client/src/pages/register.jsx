@@ -8,7 +8,7 @@ import { update, generateData, isFormValid } from '../utils/helper/form-action'
 import Loading from '../components/loading'
 import FormError from '../components/form-error'
 
-const SignUp = () => {
+const Register = () => {
   const dispatch = useDispatch()
   const userState = useSelector(({ user }) => user)
   const { error, loading } = userState
@@ -163,4 +163,4 @@ const SignUp = () => {
   )
 }
 
-export default SignUp
+export default Register

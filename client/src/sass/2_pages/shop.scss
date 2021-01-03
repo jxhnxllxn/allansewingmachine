@@ -1,5 +1,4 @@
 .shop {
-  font-size: 95%;
   @include media('<tablet') {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 5rem;

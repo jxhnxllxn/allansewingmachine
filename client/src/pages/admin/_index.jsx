@@ -1,15 +1,12 @@
-import React, { lazy, Suspense } from 'react'
-import { useDispatch } from 'react-redux'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
-import Loading from '../../components/loading'
 import NavLinks from '../../components/navlinks'
-const Dashboard = lazy(() => import('./dashboard'))
-// const Collection = lazy(() => import('./collection'))
-// const Product = lazy(() => import('./product'))
-// const ProductAdd = lazy(() => import('./product-add'))
-// const Order = lazy(() => import('./order'))
+import Dashboard from './dashboard'
 
 const Admin = ({ match }) => {
+  const routes = [
+    { path: `${match.path}/dashboard`, component: Dashboard, exact: true },
+  ]
   const links = [
     {
       name: 'Dashboard',
@@ -54,31 +51,15 @@ const Admin = ({ match }) => {
     },
   ]
   return (
-    <div className='user'>
+    <div className='user page'>
       <div className='user__links'>
         <NavLinks links={links} />
       </div>
       <div className='user__main'>
         <Switch>
-          <Suspense fallback={<Loading />}>
-            <Route
-              path={`${match.path}/dashboard`}
-              component={Dashboard}
-              exact
-            />
-            {/* <Route path={`${match.path}/product`} component={Product} exact /> */}
-            {/* <Route
-            path={`${match.path}/product/add`}
-            component={ProductAdd}
-            exact
-          />
-          <Route
-            path={`${match.path}/collection`}
-            component={Collection}
-            exact
-          />
-          <Route path={`${match.path}/order/:id`} component={Order} exact /> */}
-          </Suspense>
+          {routes.map(({ path, component, exact = true }) => (
+            <Route exact={exact} path={path} component={component} key={path} />
+          ))}
         </Switch>
       </div>
     </div>
