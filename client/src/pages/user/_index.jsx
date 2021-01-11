@@ -28,11 +28,21 @@ const User = ({ match }) => {
     {
       name: 'User information',
       linkTo: '/user/profile',
-      exact: false,
+      exact: true,
     },
     {
       name: 'History purchased',
       linkTo: '/user/history',
+      exact: true,
+    },
+    {
+      name: 'Legal & Policies',
+      linkTo: '/legal&polices',
+      exact: true,
+    },
+    {
+      name: 'Help',
+      linkTo: '/help',
       exact: true,
     },
     {
@@ -43,7 +53,7 @@ const User = ({ match }) => {
   ]
 
   return (
-    <div className='user page'>
+    <div className='user'>
       <div className='user__links'>
         <NavLinks links={links} />
       </div>

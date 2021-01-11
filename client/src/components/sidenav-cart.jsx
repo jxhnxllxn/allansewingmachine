@@ -11,7 +11,7 @@ const SideNavCart = () => {
 
   const handleCloseS = () => {
     document.getElementById('toggleSideNav').click()
-    history.push('/shop')
+    history.push('/product')
   }
 
   return (

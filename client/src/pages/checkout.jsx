@@ -44,7 +44,9 @@ const Checkout = ({ isAuthenticated }) => {
       name: {
         element: 'input',
         value: '',
+        showlabel: true,
         config: {
+          label: 'Name',
           name: 'name_input',
           placeholder: 'Name',
           type: 'text',
@@ -59,7 +61,9 @@ const Checkout = ({ isAuthenticated }) => {
       contact: {
         element: 'input',
         value: '',
+        showlabel: true,
         config: {
+          label: 'Contact no',
           name: 'contact_input',
           placeholder: 'Contact no',
           type: 'text',
@@ -74,7 +78,9 @@ const Checkout = ({ isAuthenticated }) => {
       unit: {
         element: 'input',
         value: '',
+        showlabel: true,
         config: {
+          label: 'Unit',
           name: 'unit_input',
           placeholder: 'Unit/House no:',
           type: 'text',
@@ -89,7 +95,9 @@ const Checkout = ({ isAuthenticated }) => {
       street: {
         element: 'input',
         value: '',
+        showlabel: true,
         config: {
+          label: 'Street',
           name: 'street_input',
           placeholder: 'Street',
           type: 'text',
@@ -104,7 +112,9 @@ const Checkout = ({ isAuthenticated }) => {
       city: {
         element: 'input',
         value: '',
+        showlabel: true,
         config: {
+          label: 'City',
           name: 'city_input',
           placeholder: 'City',
           type: 'text',
@@ -119,7 +129,9 @@ const Checkout = ({ isAuthenticated }) => {
       state: {
         element: 'input',
         value: '',
+        showlabel: true,
         config: {
+          label: 'State',
           name: 'state_input',
           placeholder: 'State / Province',
           type: 'text',
@@ -134,7 +146,9 @@ const Checkout = ({ isAuthenticated }) => {
       zipcode: {
         element: 'input',
         value: '',
+        showlabel: true,
         config: {
+          label: 'Zipcode',
           name: 'zipcode_input',
           placeholder: 'Postal/Zip code',
           type: 'text',
@@ -148,8 +162,10 @@ const Checkout = ({ isAuthenticated }) => {
       },
       country: {
         element: 'input',
-        value: 'Philippines',
+        value: 'Philippines Only',
+        showlabel: true,
         config: {
+          label: 'Country',
           name: 'country_input',
           placeholder: 'Country',
           type: 'text',
@@ -285,7 +301,7 @@ const Checkout = ({ isAuthenticated }) => {
       <h1 className='heading-primary'>Checkout</h1>
       <form onSubmit={(e) => submitForm(e)} className='checkout'>
         <div className='billing card'>
-          <h3>Billing and Shipping</h3>
+          <h3>Contact</h3>
           <FormField
             id={'name'}
             formData={formField.formData.name}
@@ -296,7 +312,7 @@ const Checkout = ({ isAuthenticated }) => {
             formData={formField.formData.contact}
             change={(element) => updateForm(element)}
           />
-          <h4>Address</h4>
+          <h3 style={{ paddingTop: '3rem' }}>Address</h3>
           <FormField
             id={'country'}
             formData={formField.formData.country}

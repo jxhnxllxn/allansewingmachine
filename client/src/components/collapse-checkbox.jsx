@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { ReactComponent as UpIcon } from '../assets/icons/chevron-up.svg'
 
 const CollapseCheckbox = ({
   initialState,
@@ -14,7 +13,7 @@ const CollapseCheckbox = ({
 
   const handleOpened = () => {
     if (slug && !initialState) {
-      history.push(`/shop/${slug}`)
+      history.push(`/product/${slug}`)
     }
   }
 
@@ -41,9 +40,11 @@ const CollapseCheckbox = ({
   return (
     <div className='collapse-checkbox'>
       <div className='list'>
-        <div className='list__items'>
+        <div
+          className={`list__items ${initialState ? 'active' : ''}`}
+          onClick={() => handleOpened()}
+        >
           <h4 className='list__title'>{title}</h4>
-          {!initialState && <UpIcon onClick={() => handleOpened()} />}
         </div>
         <div className={`list__collapse ${initialState ? 'active' : ''}`}>
           <ul>

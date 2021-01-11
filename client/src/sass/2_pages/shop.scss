@@ -1,29 +1,28 @@
 .shop {
-  @include media('<tablet') {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 5rem;
-    column-gap: 1rem;
-  }
+  grid-column: full-start/full-end;
+
   &__content {
-    display: flex;
+    display: grid;
+    grid-template-columns: 20rem 1fr;
+    column-gap: 3rem;
+    @include media('<tablet') {
+      grid-template-columns: 1fr;
+    }
     .shop__filter {
-      width: 30%;
-      margin-right: 2rem;
       .shop__filterblock {
-        background-color: $white;
-        border-radius: 0.3rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-        padding: 1rem;
         margin-bottom: 3rem;
+        border-radius: 0.3rem;
+        // background-color: $dark-2;
       }
       @include media('<tablet') {
         display: none;
       }
     }
     .shop__products {
-      width: 70%;
+      padding-left: 3rem;
       @include media('<tablet') {
         width: 100%;
+        padding: 0;
       }
     }
   }

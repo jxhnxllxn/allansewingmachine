@@ -1,0 +1,54 @@
+.sidebar {
+  background-color: $dark-2;
+  height: 100vh;
+  position: fixed;
+  width: 3rem;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  justify-content: space-around;
+  @include media('<tablet') {
+    display: none;
+  }
+  &__icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .icon {
+      padding: 0.2rem;
+    }
+  }
+  &__contact {
+    text-align: center;
+    text-orientation: mixed;
+    writing-mode: vertical-lr;
+    display: flex;
+    align-items: center;
+    span {
+      transform: rotate(180deg);
+      font-size: 0.7rem;
+    }
+    .icon {
+      padding: 0.2rem;
+      transform: rotate(-45deg);
+    }
+  }
+  &__email {
+    text-align: center;
+    text-orientation: mixed;
+    writing-mode: vertical-lr;
+    display: flex;
+    align-items: center;
+    span {
+      transform: rotate(180deg);
+      font-size: 0.7rem;
+    }
+    .icon {
+      padding: 0.2rem;
+      transform: rotate(-45deg);
+    }
+  }
+}

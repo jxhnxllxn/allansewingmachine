@@ -1,16 +1,19 @@
-import React, { useEffect } from 'react'
-import Header from './header'
+import React, { useEffect, useState } from 'react'
+import Nav from './nav'
 import Footer from './footer'
 import { useThrottle } from '../utils/hooks/useThrottle'
+import Sidebar from './sidebar'
 
 const Layout = ({ children }) => {
   let lastScrollTop = 0
+  const [toggle, settoggle] = useState(false)
+
   const scrollFunction = () => {
-    const st = window.scrollY
+    const st = document.body.scrollTop
     if (st > lastScrollTop) {
-      console.log('up')
+      settoggle(true)
     } else {
-      console.log('down')
+      settoggle(false)
     }
 
     lastScrollTop = st
@@ -28,9 +31,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header />
+      <Sidebar />
+      <Nav toggle={toggle} />
       <main className='page'>{children}</main>
-      <Footer />
     </>
   )
 }

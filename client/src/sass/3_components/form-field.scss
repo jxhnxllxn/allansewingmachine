@@ -2,27 +2,37 @@
   margin: 0.5rem 0;
   position: relative;
   .label_inputs {
-    color: $black--secondary;
-    font-weight: 500;
+    color: $white-2;
+    font-weight: 200;
   }
   .formfield {
-    font-weight: 200;
-    padding: 0.5rem;
-    margin: 0.3rem 0 1rem 0;
-    border: 1px solid $border;
+    font-weight: 500;
+    padding: 0.8rem;
+    margin: 0.5rem 0 1rem 0;
+    border: none;
+    border-radius: 0.3rem;
     width: 100%;
     font-family: $font-primary;
+    background-color: $white-2;
+    color: $dark-2;
+    &:focus {
+      background-color: $white;
+      color: $dark-1;
+    }
   }
   .formfield--textarea {
-    height: 51px;
+    height: 7rem;
   }
   .error_label {
-    font-size: 70%;
+    font-size: 0.8rem;
     color: $red;
     position: absolute;
-    bottom: 0.4rem;
-    right: 0.5rem;
+    bottom: 0.2rem;
+    right: -0.8rem;
     font-weight: 500;
-    background-color: $background;
+    border: 1px solid $white-2;
+    background-color: $white;
+    border-radius: 0.3rem;
+    padding: 0.3rem 0.8rem;
   }
 }

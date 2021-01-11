@@ -1,20 +1,18 @@
 .customTable {
   width: 100%;
-  border-top: 1px solid $border;
-  border-bottom: 1px solid $border;
+  border-top: 1px solid $dark-1;
+  border-bottom: 1px solid $dark-1;
   margin: 2rem 0;
   padding: 2rem 0;
   tbody {
-    font-size: 90%;
+    font-size: 0.9rem;
     tr {
       height: 4rem;
       text-align: center;
-      &:nth-child(even) {
-        background-color: $white;
-      }
       th {
         text-align: start;
         padding: 0.5rem;
+        color: $white-2;
       }
       td {
         text-align: start;

@@ -1,27 +1,6 @@
-html {
-  font-size: 90.5%;
-  @include media('>phone') {
-    font-size: 92.5%;
-  }
-
-  @include media('>tablet') {
-    font-size: 94%;
-  }
-
-  @include media('>desktop') {
-    font-size: 96.5%;
-  }
-
-  @include media('>LGdesktop') {
-    font-size: 98%;
-  }
-}
-
 body {
-  color: $black--secondary;
+  color: $white;
   font-family: $font-primary;
-  font-weight: 300;
-  font-size: 1.1rem;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -34,8 +13,8 @@ a {
 }
 
 .heading-primary {
-  font-size: 5rem;
-  color: $black--secondary;
+  font-size: 4rem;
+  color: $primary;
   text-transform: uppercase;
   font-weight: 800;
   line-height: 1;
@@ -50,10 +29,7 @@ a {
 
 .heading-secondary {
   font-size: 2rem;
-  color: $black--secondary;
+  color: $primary;
   text-transform: uppercase;
   font-weight: 800;
-  // -webkit-text-fill-color: $background; /* Will override color (regardless of order) */
-  // -webkit-text-stroke-width: 1px;
-  // -webkit-text-stroke-color: $black--secondary;
 }

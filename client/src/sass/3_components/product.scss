@@ -1,11 +1,12 @@
 .product {
-  padding: 1rem;
+  background-color: $dark-2;
+  border-radius: 0.3rem;
+  overflow: hidden;
   // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 0px 4px rgba(0, 0, 0, 0.1);
   .product-card {
     display: flex;
     justify-content: space-between;
     flex-direction: column;
-    background-color: $background;
     cursor: pointer;
     line-height: 1.5;
     &:hover {
@@ -19,35 +20,38 @@
 
     .product-card__photo {
       transition: ease 0.3s;
-      border-radius: 0.3rem;
-      backface-visibility: hidden;
       max-height: 15rem;
       width: 100%;
       object-fit: cover;
     }
 
     &__content {
+      padding: 1rem;
       padding-bottom: 0.5rem;
       h2 {
-        font-size: 100%;
+        font-size: 0.9rem;
         font-weight: 500;
+        color: $primary;
       }
 
       h3 {
-        font-size: 80%;
-        font-weight: 300;
+        font-size: 0.8rem;
+        font-weight: 200;
         backface-visibility: hidden;
         border: none;
+        color: $white-2;
       }
     }
     &__actions {
+      padding: 1rem;
       margin-top: 1rem;
       svg {
         cursor: pointer;
         height: 1.5rem;
         width: 1.5rem;
+        stroke: $white-2;
         &:hover {
-          opacity: 0.8;
+          stroke: $white;
         }
       }
     }

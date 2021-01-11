@@ -16,17 +16,15 @@ import Register from './pages/register'
 import Checkout from './pages/checkout'
 import ProductPreview from './pages/product-preview'
 import Shop from './pages/shop'
-import NotFound from './pages/notfound'
 import Logout from './pages/logout'
 import Loading from './components/loading'
-import { CSSTransition, TransitionGroup } from 'react-transition-group'
 
 const AdminIndex = lazy(() => import('./pages/admin/_index'))
 const UserIndex = lazy(() => import('./pages/user/_index'))
 
 const App = () => {
-  const location = useLocation()
   useResponsiveVH()
+  const { pathname } = useLocation()
   const isAuthenticated = useSelector(({ user }) => user.isAuthenticated)
   const dispatch = useDispatch()
 
@@ -37,10 +35,8 @@ const App = () => {
   }, [])
 
   useEffect(() => {
-    return () => {
-      window.scrollTo(0, 0)
-    }
-  }, [location])
+    document.body.scrollTo(0, 0)
+  }, [pathname])
 
   useEffect(() => {
     if (localStorage.getItem('access_token') && !isAuthenticated) {
@@ -54,8 +50,8 @@ const App = () => {
       <Switch>
         <ErrorBoundary>
           <Route path='/' component={Home} exact />
-          <Route path='/shop/:collection?' component={Shop} exact />
-          <Route path='/shop/c/:product' component={ProductPreview} exact />
+          <Route path='/product/:collection?' component={Shop} exact />
+          <Route path='/product/c/:product' component={ProductPreview} exact />
           <Route path='/login' component={Auth(Login, false)} exact />
           <Route path='/register' component={Auth(Register, false)} exact />
           <Route path='/checkout' component={Auth(Checkout, true)} exact />

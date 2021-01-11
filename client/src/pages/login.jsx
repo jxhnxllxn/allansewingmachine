@@ -86,8 +86,7 @@ const Login = () => {
 
   return (
     <div className='authWrapper'>
-      <h1 className='heading-primary'>Sign in</h1>
-
+      <h1>Sign in</h1>
       <form onSubmit={(e) => submitForm(e)} className='card'>
         <FormField
           id={'email'}
@@ -116,6 +115,7 @@ const Login = () => {
         </p>
         {error && <FormError errMsg={error} />}
       </form>
+      <div></div>
     </div>
   )
 }

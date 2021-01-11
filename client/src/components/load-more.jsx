@@ -1,12 +1,16 @@
 import React from 'react'
 import CardBlock from './card-block'
-const LoadMoreCards = ({ size, products, limit, loadMore }) => {
+import Loading from './loading'
+const LoadMoreCards = ({ size, products, limit, loadMore, loading }) => {
   return (
     <>
-      <CardBlock list={products} />
+      <CardBlock list={products} loading={loading} />
       <div className='load_more_container'>
-        {size > 0 && size >= limit && (
-          <h4 onClick={() => loadMore()}>Load more</h4>
+        {loading ? (
+          <Loading />
+        ) : (
+          size > 0 &&
+          size >= limit && <h4 onClick={() => loadMore()}>Load more</h4>
         )}
       </div>
     </>

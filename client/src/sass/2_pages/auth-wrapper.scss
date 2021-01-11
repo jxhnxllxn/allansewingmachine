@@ -1,41 +1,35 @@
 .authWrapper {
-  display: flex;
-  flex-direction: column;
-  // justify-content: center;
-  align-items: center;
-  height: 100%;
-  h1 {
-    font-size: 12rem;
-    z-index: -1;
-    @include media('<tablet') {
-      font-size: 7rem;
-    }
-    @include media('<phone') {
-      font-size: 4rem;
-    }
+  grid-column: full-start/full-end;
+  display: grid;
+  align-items: flex-start;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: min-content;
+  @include media('<tablet') {
+    grid-template-columns: 1fr;
   }
-
+  h1 {
+    grid-column: 1/-1;
+    padding: 1rem 0;
+    text-transform: capitalize;
+    font-size: 3rem;
+    color: $primary;
+  }
   form {
-    margin-top: 8rem;
-    position: absolute;
-    width: 25rem;
-    @include media('<tablet') {
-      width: 80%;
-      margin-top: 5rem;
-    }
-    @include media('<phone') {
-      width: 100%;
-      margin-top: 0;
-    }
+    width: 30rem;
+    // @include media('<tablet') {
+    //   width: 80%;
+    // }
+    // @include media('<phone') {
+    //   width: 100%;
+    // }
 
     p {
       padding: 2rem 0;
-      font-size: 80%;
+      font-size: 0.9rem;
       font-weight: 200;
-      color: $black;
+      color: $white-2;
       a {
         text-decoration: underline;
-
         font-weight: 500;
         &:hover {
           opacity: 0.8;

@@ -1,8 +1,19 @@
 .thank_you {
   line-height: 2;
   margin-bottom: 4rem;
+  h3 {
+    span {
+      font-weight: 500;
+      color: $primary;
+    }
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+  }
   p {
     text-indent: 3rem;
-    font-weight: 200;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    word-spacing: 2px;
   }
 }

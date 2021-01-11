@@ -9,20 +9,22 @@
   }
   &__table {
     width: 100%;
-    border-top: 1px solid $border;
-    border-bottom: 1px solid $border;
+    border-top: 1px solid $dark-2;
+    border-bottom: 1px solid $dark-2;
     margin: 1rem 0 1rem 0;
     padding: 1rem 0;
     @include media('<tablet') {
-      font-size: 80%;
+      font-size: 0.95rem;
     }
     tbody {
-      font-size: 90%;
+      font-size: 0.9rem;
       tr {
         height: 4rem;
         text-align: start;
         th {
           text-align: start;
+          font-weight: 500;
+          color: $white-2;
         }
         td {
           text-align: start;

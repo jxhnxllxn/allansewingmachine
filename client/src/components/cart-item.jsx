@@ -14,7 +14,7 @@ const CartItem = ({ item, history }) => {
   }
 
   const handleLinkPreview = (id) => {
-    history.push(`/shop/c/${id}`)
+    history.push(`/product/c/${id}`)
   }
 
   useEffect(() => {

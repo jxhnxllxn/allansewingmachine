@@ -55,8 +55,8 @@ const Nav = () => {
         exact: true,
       },
       {
-        name: 'Shop',
-        linkTo: '/shop',
+        name: 'Product',
+        linkTo: '/product',
         exact: false,
       },
       {
@@ -80,41 +80,34 @@ const Nav = () => {
   return (
     <>
       <nav className='nav'>
-        <div className='nav__top'>
-          <div className='nav__listBottom'>
-            <NavLinks links={links[0]} />
-          </div>
+        <div className='nav__brand'>
+          <span className='allan'>Allan</span>
         </div>
-
-        <div className='nav__bottom'>
-          <div className='nav__logo'>
-            <span className='allan'>Allan</span>
-            <span>Sewing Machines</span>
-          </div>
+        <div className='nav__links'>
+          <NavLinks links={links[0]} />
+        </div>
+        <div className='nav__icons'>
           <div id='toggleSideNav'></div>
-          <div className='nav__listTop'>
-            <ul>
-              <li onClick={() => toggleSideNav('cart')} ref={cartRef}>
-                <div className='icon icon--bag'>
-                  <ShoppingBagIcon />
-                  <span className='icon__count'>
-                    {itemCount > 0 && itemCount}
-                  </span>
-                </div>
-              </li>
-              <li onClick={() => togglePersonNav()} ref={personRef}>
-                <div className='icon icon--person'>
-                  <PersonIcon />
-                </div>
-              </li>
-
-              <li onClick={() => toggleSideNav('search')} ref={searchRef}>
-                <div className='icon icon--search'>
-                  <SearchIcon />
-                </div>
-              </li>
-            </ul>
-          </div>
+          <ul>
+            <li onClick={() => toggleSideNav('cart')} ref={cartRef}>
+              <div className='icon icon--bag'>
+                <ShoppingBagIcon />
+                <span className='icon__count'>
+                  {itemCount > 0 && itemCount}
+                </span>
+              </div>
+            </li>
+            <li onClick={() => toggleSideNav('search')} ref={searchRef}>
+              <div className='icon icon--search'>
+                <SearchIcon />
+              </div>
+            </li>
+            <li onClick={() => togglePersonNav()} ref={personRef}>
+              <div className='icon icon--person'>
+                <PersonIcon />
+              </div>
+            </li>
+          </ul>
         </div>
       </nav>
       <SideNav sidenavRef={sidenavRef} activeMenuIcons={activeMenuIcons} />

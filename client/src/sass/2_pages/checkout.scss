@@ -1,11 +1,13 @@
 .checkout_wrapper {
-  padding: 1rem 0;
+  grid-column: full-start/full-end;
+
   .checkout {
+    padding: 2rem 0;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     align-items: flex-start;
     justify-content: space-between;
-    column-gap: 2rem;
+    column-gap: 4rem;
     row-gap: 2rem;
     .additional_info {
       margin-bottom: 2rem;
@@ -14,8 +16,7 @@
 }
 
 table.orderDetail {
-  font-weight: 500;
-  margin: 2rem 0;
+  margin-bottom: 2rem;
   border-spacing: 0;
   padding-top: 1.5rem;
   width: 100%;
@@ -45,8 +46,7 @@ table.orderDetail {
         text-transform: capitalize;
       }
       bdi {
-        color: rgba($black, 1);
-        font-weight: 600;
+        font-weight: 500;
       }
 
       &:first-of-type {
@@ -79,7 +79,6 @@ table.orderDetail {
 
       td {
         text-align: right;
-
         ul {
           li {
             display: flex;
@@ -89,7 +88,6 @@ table.orderDetail {
             opacity: 0.75;
             label {
               font-weight: 500;
-              color: $black;
             }
             input {
               margin-left: 0.5rem;
@@ -103,13 +101,12 @@ table.orderDetail {
       td,
       th {
         padding: 0.5rem 0;
-        border-top: 1px solid $black--secondary;
+        border-top: 1px solid $dark-1;
         text-transform: capitalize;
-        font-weight: 600;
+        font-weight: 500;
       }
 
       bdi {
-        color: rgba($black, 1);
       }
     }
   }
@@ -126,6 +123,7 @@ ul.payment-options {
     position: relative;
     flex-wrap: wrap;
     align-items: center;
+    font-size: 0.9rem;
 
     input[type='radio'] {
       margin-right: 0.5rem;
@@ -147,8 +145,8 @@ ul.payment-options {
       height: auto;
       opacity: 0;
       max-height: 0;
-      font-weight: 200;
-      font-size: 80%;
+      font-weight: 300;
+      font-size: 0.8rem;
       pointer-events: none;
       &:last-of-type {
         img {

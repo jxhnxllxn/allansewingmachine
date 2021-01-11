@@ -1,4 +1,5 @@
 .home {
+  grid-column: full-start/full-end;
   &__collections {
     margin-top: 8rem;
   }

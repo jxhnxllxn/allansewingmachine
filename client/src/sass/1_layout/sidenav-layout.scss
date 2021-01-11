@@ -2,12 +2,12 @@
   position: fixed;
   top: 0;
   right: 0;
-  width: 600px;
   height: 100vh;
-  background-color: $background;
+  width: 40rem;
+  z-index: 103;
+  background-color: $dark-1;
+  border-left: 1px solid $dark-2;
   overflow-x: hidden;
-  border-left: 2px solid $border;
-  border-top: 1px solid $border;
   @include media('<tablet') {
     width: 80%;
   }
@@ -19,10 +19,9 @@
     position: sticky;
     top: 1rem;
     margin-left: 1rem;
-    font-size: 2rem;
     cursor: pointer;
     display: inline-block;
-    background-color: $background;
+    background-color: $dark-2;
     border-radius: 50%;
     height: 3rem;
     width: 3rem;

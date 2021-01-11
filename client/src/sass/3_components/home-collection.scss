@@ -53,14 +53,13 @@
         bottom: 0;
         height: 100%;
         width: 100%;
-        background-color: rgba($black, 0.3);
+        background-color: rgba($dark-1, 0.3);
         .collection__subtitle {
           margin-bottom: 6px;
           font-size: 2rem;
-          color: $black--secondary;
           opacity: 0.9;
           font-weight: 800;
-          -webkit-text-stroke-color: rgba($black--secondary, 0.8);
+          color: $dark-1;
           @include media('<tablet') {
             font-size: 2rem;
           }

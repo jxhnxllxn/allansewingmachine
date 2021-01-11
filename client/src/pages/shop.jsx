@@ -135,9 +135,7 @@ const Shop = ({ match }) => {
         </div>
 
         <div className='shop__products'>
-          {loading ? (
-            <Loading />
-          ) : error ? (
+          {error ? (
             <h1>{error}</h1>
           ) : (
             <LoadMoreCards

@@ -1,19 +1,21 @@
 .cart-item {
   &__remove_button {
     cursor: pointer;
-    font-size: 150%;
-    font-weight: 700;
+    font-size: 1.5rem;
+    font-weight: 500;
   }
 
   &__quantity {
     input[type='number'] {
-      padding: 0 0.5rem;
+      padding: 0 0.3rem 0 0.5rem;
       width: 3rem;
       outline: none;
       border: none;
-      box-shadow: inset 0px 0px 52px 0px rgba(#a59e9e, 0.1);
-      color: #696969;
+      box-shadow: inset 0px 0px 52px 0px rgba($dark-1, 0.1);
+      color: $white;
       height: 3rem;
+      font-size: 0.8rem;
+      background-color: $dark-1;
       &::-webkit-inner-spin-button,
       &::-webkit-outer-spin-button {
         opacity: 0.5;

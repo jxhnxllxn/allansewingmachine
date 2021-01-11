@@ -4,7 +4,7 @@ const NavScrollAnimation = (tl) => {
   useEffect(() => {
     tl.from('.header', {
       duration: 0.5,
-      x: '200',
+      css: { top: '-4rem' },
     })
     // eslint-disable-next-line
   }, [])

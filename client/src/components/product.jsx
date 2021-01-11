@@ -18,7 +18,7 @@ const Product = ({ _id, name, price, sold, stock, images, condition }) => {
   }
 
   const handleLinkTo = () => {
-    history.push(`/shop/c/${_id}`)
+    history.push(`/product/c/${_id}`)
   }
 
   const dispatch = useDispatch()
@@ -36,7 +36,7 @@ const Product = ({ _id, name, price, sold, stock, images, condition }) => {
   }
 
   return (
-    <div className='product card'>
+    <div className='product'>
       <div className='product-card' onClick={handleLinkTo}>
         <LazyLoad height={'15rem'}>
           <img

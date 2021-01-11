@@ -8,7 +8,7 @@ const ShopToolbar = () => {
   return (
     <div>
       <div className='shop_toolbar'>
-        <Link to='/shop'>
+        <Link to='/product'>
           Shop / <span>{location.pathname.split('/')[2]}</span>{' '}
         </Link>
         <div>

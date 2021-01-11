@@ -16,7 +16,7 @@ const Collection = () => {
   }
 
   const handleClick = (slug) => {
-    history.push(`/shop/${slug}`)
+    history.push(`/product/${slug}`)
   }
 
   const collectionItem = () =>
@@ -36,17 +36,15 @@ const Collection = () => {
         />
 
         <div className='collection__content'>
-          <h2 className='collection__subtitle heading-secondary'>{i.name}</h2>
+          <h2 className='collection__subtitle'>{i.name}</h2>
         </div>
       </div>
     ))
 
   return (
     <div className='collection'>
-      <div className='collection__title'>
-        <h1 className='heading-primary'>Sewing Collections</h1>
-      </div>
-      <div className='collection__items'>{collectionItem()}</div>
+      <h1 className='heading-primary'>Our Collections</h1>
+      <section className='collection__items'>{collectionItem()}</section>
     </div>
   )
 }

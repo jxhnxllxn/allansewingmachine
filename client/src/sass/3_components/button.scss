@@ -1,15 +1,20 @@
 .btn {
-  padding: 0.5rem;
-  border: 1px solid $border;
+  padding: 0.8rem 1rem;
+  border: none;
   font-weight: 500;
   cursor: pointer;
   text-transform: capitalize;
-  background-color: $black--secondary;
-  color: $white;
-  letter-spacing: 1px;
+  color: $dark-1;
+  font-size: 1rem;
   display: inline;
   outline: none;
+  border-radius: 0.3rem;
+  background-color: $primary;
+  font-family: $font-primary;
   &:disabled {
     cursor: unset;
+  }
+  &:hover {
+    color: $dark-2;
   }
 }

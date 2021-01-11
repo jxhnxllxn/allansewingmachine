@@ -51,7 +51,7 @@ const Admin = ({ match }) => {
     },
   ]
   return (
-    <div className='user page'>
+    <div className='user'>
       <div className='user__links'>
         <NavLinks links={links} />
       </div>

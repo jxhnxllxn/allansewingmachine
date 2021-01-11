@@ -119,8 +119,7 @@ const Register = () => {
 
   return (
     <div className='authWrapper'>
-      <h1 className='heading-primary'>Sign Up</h1>
-
+      <h1>Sign Up</h1>
       <form onSubmit={(e) => submitForm(e)} className='card'>
         <FormField
           id={'name'}
@@ -137,11 +136,7 @@ const Register = () => {
           formData={formField.formData.password}
           change={(element) => updateForm(element)}
         />
-        <FormField
-          id={'confirmPassword'}
-          formData={formField.formData.confirmPassword}
-          change={(element) => updateForm(element)}
-        />
+
         {loading ? (
           <Loading />
         ) : (
@@ -159,6 +154,7 @@ const Register = () => {
         </p>
         {error && <FormError errMsg={error} />}
       </form>
+      <div></div>
     </div>
   )
 }

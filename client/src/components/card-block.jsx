@@ -12,7 +12,7 @@ const CardBlock = ({ list, title }) => {
       )}
 
       {list && list.length > 0 ? (
-        <div className='card-block__list'>{renderCard(list)}</div>
+        <section className='card-block__list'>{renderCard(list)}</section>
       ) : (
         <div className='card-block__noresult'>sorry, no results</div>
       )}

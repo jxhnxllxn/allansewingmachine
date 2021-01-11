@@ -1,9 +1,10 @@
 .product_preview_wrapper {
+  grid-column: full-start/full-end;
   .details {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    border: 1px solid $border;
+    border: 1px solid $dark-2;
     .big_img {
       max-width: 500px;
       min-width: 290px;

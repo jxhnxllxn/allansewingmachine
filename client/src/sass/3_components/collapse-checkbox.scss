@@ -1,18 +1,20 @@
 .collapse-checkbox {
-  padding: 0.5rem 0;
   .list {
+    color: $white-2;
+    &:hover {
+      color: $white;
+    }
     &__items {
-      @include flexAlignItemCenter;
       position: relative;
+      padding: 1rem 0;
+      display: block;
+      cursor: pointer;
       .list__title {
-        font-weight: 500;
+        font-weight: 200;
+        font-size: 1rem;
       }
-      svg {
-        height: 1.5rem;
-        width: 1.5rem;
-        cursor: pointer;
-        position: absolute;
-        right: -0.3rem;
+      &.active {
+        color: $white;
       }
     }
     &__collapse {
@@ -27,13 +29,15 @@
       }
       ul {
         li {
-          padding: 0.5rem 0;
-          @include flexAlignItemCenter;
+          padding: 0.5rem 0 0.5rem 2rem;
+          font-size: 0.9rem;
+          display: flex;
+          align-items: center;
           justify-content: space-between;
-          font-size: 90%;
+          color: $white-2;
           input {
             cursor: pointer;
-            margin-left: 0.5rem;
+            margin-left: 2rem;
           }
         }
       }

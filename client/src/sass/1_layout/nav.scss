@@ -1,93 +1,70 @@
 .nav {
+  z-index: 102;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
   text-transform: capitalize;
-  border-bottom: 1px solid $border;
-  position: relative;
-  background: #ece9e6; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom,
-    #ffffff,
-    #ece9e6
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #ffffff,
-    #ece9e6
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  height: 3rem;
+  margin-left: 3rem;
+  background-color: $dark-1;
+  padding: 3rem 0;
+  @include media('<tablet') {
+    margin: 0;
+  }
+  &__brand {
+    .allan {
+      display: block;
+      font-weight: 900;
+      font-size: 1.5rem;
+    }
+  }
 
-  background-attachment: fixed;
-
-  &__top {
-    color: $black--secondary;
-    border-bottom: 1px solid $border;
-    .nav__listBottom {
-      @include container;
-      padding: 0;
-      ul {
-        height: 4rem;
-        @include flexAlignItemCenter;
-        justify-content: flex-end;
-        font-size: 1rem;
-        font-weight: 500;
-        li {
-          a {
-            padding: 0.8rem;
-            @include media('<phone') {
-              padding: 0.5rem;
-              font-size: 80%;
-            }
-            display: block;
-            @include underlineOnHover;
+  &__links {
+    margin-left: 2rem;
+    ul {
+      display: flex;
+      align-items: center;
+      li {
+        a {
+          padding: 2rem;
+          @include media('<phone') {
+            padding: 0.5rem;
           }
+          display: block;
+          // @include underlineOnHover;
         }
       }
     }
   }
 
-  &__bottom {
-    @include container;
-    padding-right: 0;
-    justify-content: space-between;
-    @include flexAlignItemCenter;
-    height: 4rem;
-    .nav__logo {
-      position: fixed;
-      top: 0.8rem;
+  &__icons {
+    justify-self: flex-end;
+    align-self: center;
+    ul {
       display: flex;
-      flex-direction: column;
-      color: $black--secondary;
-      line-height: 1;
-      color: $black;
-      .allan {
-        font-weight: 900;
-        font-size: 150%;
-      }
-    }
-    .nav__listTop {
-      ul {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        li {
-          cursor: pointer;
-          padding: 1rem;
-
-          .icon {
-            position: relative;
-            .icon__count {
-              position: absolute;
-              bottom: 0;
-              right: 0;
-              background-color: $white;
-              margin: 0.2rem;
-              font-size: 80%;
-              font-weight: 500;
-            }
-            svg {
-              height: 1.8rem;
-              width: 1.8rem;
-              &:hover {
-                opacity: 0.8;
-              }
+      align-items: flex-end;
+      li {
+        cursor: pointer;
+        padding-left: 1rem;
+        .icon {
+          position: relative;
+          .icon__count {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: $dark-1;
+            margin: 0.2rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+          }
+          svg {
+            height: 1.7rem;
+            width: 1.7rem;
+            stroke: $white-2;
+            &:hover {
+              stroke: $white;
             }
           }
         }

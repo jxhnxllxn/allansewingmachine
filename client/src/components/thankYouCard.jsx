@@ -3,7 +3,9 @@ import React from 'react'
 const ThankYouCard = ({ name }) => {
   return (
     <div className='thank_you card'>
-      <h3>Dear {name},</h3>
+      <h3>
+        Dear <span>{name},</span>
+      </h3>
       <br />
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima vitae
@@ -16,7 +18,7 @@ const ThankYouCard = ({ name }) => {
       <br />
       <h3>
         Thank you,
-        <br /> Allan Sewing Machines
+        <br /> <span>Allan Sewing Machines</span>
       </h3>
     </div>
   )

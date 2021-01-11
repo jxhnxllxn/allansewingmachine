@@ -36,8 +36,8 @@
 }
 
 @mixin container {
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 10px;
+  padding-left: 10px;
   margin-right: auto;
   margin-left: auto;
 
@@ -48,15 +48,8 @@
     width: 970px;
   }
   @media (min-width: 1200px) {
-    width: 1170px;
+    width: 1180px;
   }
-}
-
-@mixin container-fluid {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
 }
 
 @mixin absCenter {
@@ -77,13 +70,14 @@
     &:after {
       transition: all 0.3s;
       content: '';
-      @include absCenter;
+      position: absolute;
+      bottom: -0.3rem;
+      left: 0;
       width: 0;
-      left: 0px;
-      height: 1px;
+      height: 2px;
       transform-origin: left;
       transform: translateY(-50%);
-      background: $black;
+      background: $white-2;
     }
   }
 
@@ -91,7 +85,6 @@
     span {
       &:after {
         transform-origin: right;
-        transform: translateY(-50%);
         width: 100%;
       }
     }
@@ -100,7 +93,7 @@
   &.active {
     span {
       &:after {
-        width: 100%;
+        width: 0.8rem;
       }
     }
   }

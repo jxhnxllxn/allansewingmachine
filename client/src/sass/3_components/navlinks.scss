@@ -1,11 +1,18 @@
 .navlinks {
-  font-size: 85%;
-  font-weight: 500;
+  font-size: 0.95rem;
+  font-weight: 200;
+  color: $white-2;
   li {
     a {
       padding: 1rem 0;
       display: block;
-      @include underlineOnHover;
+      // @include underlineOnHover;
+      &:hover {
+        color: $white;
+      }
+      &.active {
+        color: $white;
+      }
     }
   }
 }
